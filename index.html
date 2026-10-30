@@ -1,0 +1,1139 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Plano de 30 minutos por dia até o vestibular Fatec: questões comentadas, as 10 últimas provas oficiais com correção e os padrões de questões e redação.">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Fatec 30">
+<meta name="theme-color" content="#f3f5f9" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0d111e" media="(prefers-color-scheme: dark)">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="icon" type="image/png" href="icon-180.png">
+<style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Fatec em 30 minutos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&family=Schibsted+Grotesk:wght@400;500;600;700;800&display=swap">
+<style>
+/* Layout: uma coluna de celular (máx. 560px). Linguagem do caderno de prova: cartão-resposta com bolinhas, marca-texto amarelo na pista, caneta azul. */
+:root{
+  --paper:#f3f5f9; --card:#ffffff; --ink:#141b31; --muted:#5a637d; --line:#d7dce8;
+  --pen:#2340c9; --pen-soft:#e5e9fb; --on-pen:#ffffff;
+  --mark:#ffe04f; --mark-ink:#141b31;
+  --ok:#17804a; --ok-soft:#e1f3e8; --bad:#c0352b; --bad-soft:#fbe7e5;
+  --shadow:rgba(35,64,201,.22);
+  --f-ui:"Schibsted Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-read:"Literata", Georgia, "Times New Roman", serif;
+  --f-mono:"IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#0d111e; --card:#151b2d; --ink:#e8ebf4; --muted:#99a2bc; --line:#29314a;
+    --pen:#95a8ff; --pen-soft:#1e2852; --on-pen:#0d111e;
+    --mark:#5f500e; --mark-ink:#fff4c4;
+    --ok:#52c98d; --ok-soft:#12301f; --bad:#ff8174; --bad-soft:#3b1a17;
+    --shadow:rgba(0,0,0,.55); color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0d111e; --card:#151b2d; --ink:#e8ebf4; --muted:#99a2bc; --line:#29314a;
+  --pen:#95a8ff; --pen-soft:#1e2852; --on-pen:#0d111e;
+  --mark:#5f500e; --mark-ink:#fff4c4;
+  --ok:#52c98d; --ok-soft:#12301f; --bad:#ff8174; --bad-soft:#3b1a17;
+  --shadow:rgba(0,0,0,.55); color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--paper);color:var(--ink);font-family:var(--f-ui);font-size:16px;line-height:1.5}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--paper)}
+a{color:var(--pen)}
+.wrap{max-width:560px;margin:0 auto;padding-left:max(16px, env(safe-area-inset-left,0px));padding-right:max(16px, env(safe-area-inset-right,0px));padding-block:20px 120px;display:flex;flex-direction:column;gap:18px}
+h1,h2,h3{text-wrap:balance;margin:0}
+p{margin:0}
+.eyebrow{font-family:var(--f-mono);font-size:.72rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.hero{display:flex;flex-direction:column;gap:6px;padding-top:4px}
+.hero h1{font-size:clamp(2.6rem,12vw,3.5rem);font-weight:800;letter-spacing:-.03em;line-height:1}
+.hero h1 .n{color:var(--pen);font-variant-numeric:tabular-nums}
+.hero .sub{color:var(--muted);font-size:1rem}
+.hero .sub2{font-size:.95rem;margin-top:4px}
+.h1-sm{font-size:1.6rem;font-weight:800;letter-spacing:-.02em;line-height:1.15}
+.h-sm{font-size:1.02rem;font-weight:700}
+.meta{color:var(--muted);font-size:.9rem}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.today-card{border:1.5px solid var(--pen);box-shadow:0 14px 30px -22px var(--shadow)}
+.today-card h2{font-size:1.35rem;font-weight:700;line-height:1.2}
+.done-line{color:var(--ok);font-weight:600}
+.primary{appearance:none;border:0;background:var(--pen);color:var(--on-pen);font:600 1rem/1.2 var(--f-ui);padding:14px 18px;border-radius:12px;width:100%;min-height:48px;cursor:pointer}
+.primary:disabled{opacity:.4;cursor:default}
+.primary.small{width:auto;min-height:44px;padding:10px 16px}
+.ghost{display:inline-flex;align-items:center;justify-content:center;gap:6px;background:transparent;color:var(--pen);border:1.5px solid var(--pen);font:600 1rem/1.2 var(--f-ui);padding:12px 16px;border-radius:12px;min-height:46px;text-decoration:none;cursor:pointer;width:100%}
+.link{appearance:none;background:none;border:0;padding:6px 0;color:var(--pen);font:600 .95rem var(--f-ui);text-decoration:underline;text-underline-offset:3px;cursor:pointer;align-self:flex-start}
+.danger{color:var(--bad)}
+:focus-visible{outline:3px solid var(--pen);outline-offset:2px}
+small{font-size:.78rem;color:var(--muted);font-weight:500}
+
+/* calendário */
+.cal-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:6px 12px}
+.legend{display:flex;flex-wrap:wrap;gap:10px;font-size:.75rem;color:var(--muted);align-items:center}
+.lg{display:inline-block;width:12px;height:12px;border-radius:3px;border:1px solid var(--line);margin-right:4px;vertical-align:-2px}
+.lg.done{background:var(--pen);border-color:var(--pen)}
+.lg.today{outline:2px solid var(--ink);outline-offset:0}
+.lg.exam{background:var(--mark);border-color:transparent}
+.cal{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:5px}
+.wh{font:600 .68rem var(--f-mono);color:var(--muted);text-align:center}
+.d{aspect-ratio:1;max-width:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:8px;border:1px solid var(--line);font:500 .8rem var(--f-mono);color:var(--muted);font-variant-numeric:tabular-nums;line-height:1}
+.d.out{border-color:transparent}
+.d.done{background:var(--pen);border-color:var(--pen);color:var(--on-pen)}
+.d.miss{opacity:.45}
+.d.today{outline:2px solid var(--ink);outline-offset:1px;color:var(--ink)}
+.d.done.today{color:var(--on-pen)}
+.d.exam{background:var(--mark);color:var(--mark-ink);border-color:transparent;font-weight:700}
+.d[data-m]::after{content:attr(data-m);font-size:.5rem;letter-spacing:.04em;margin-top:2px;text-transform:uppercase}
+
+.tip .tiptx{font-family:var(--f-read);font-size:1.05rem;line-height:1.55}
+.steps{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.steps li{display:flex;gap:10px;align-items:flex-start}
+.steps input{width:22px;height:22px;flex:none;margin:2px 0 0;accent-color:var(--pen)}
+.steps label{min-width:0}
+
+/* questão */
+.qbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--paper);display:flex;align-items:center;gap:12px;padding-block:10px;border-bottom:1px solid var(--line)}
+.qprog{flex:1;min-width:0;display:flex;flex-direction:column;gap:4px;font:600 .78rem var(--f-mono);color:var(--muted)}
+.track{height:8px;background:var(--line);border-radius:99px;overflow:hidden}
+.track i{display:block;height:100%;background:var(--pen);border-radius:99px}
+.timer{font:600 .9rem var(--f-mono);font-variant-numeric:tabular-nums;color:var(--ink);min-width:4.5em;text-align:right}
+.q{display:flex;flex-direction:column;gap:14px}
+.chip{display:inline-block;font:600 .64rem var(--f-mono);letter-spacing:.06em;background:var(--mark);color:var(--mark-ink);padding:2px 6px;border-radius:4px;vertical-align:1px}
+.texto{margin:0;font-family:var(--f-read);font-size:1.03rem;line-height:1.65;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;overflow-wrap:anywhere}
+.enun{font-weight:600;font-size:1.05rem}
+mark{color:var(--mark-ink);background-color:transparent;background-image:linear-gradient(var(--mark),var(--mark));background-repeat:no-repeat;background-size:100% 100%;padding:0 .12em;border-radius:.15em;-webkit-box-decoration-break:clone;box-decoration-break:clone;animation:sweep .8s ease-out both}
+@keyframes sweep{from{background-size:0% 100%}to{background-size:100% 100%}}
+.alts{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.alt{appearance:none;width:100%;display:flex;gap:12px;align-items:flex-start;text-align:left;background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:12px;padding:12px;font:inherit;font-size:.98rem;cursor:pointer}
+.alt:disabled{cursor:default}
+.bub{flex:none;width:30px;height:30px;border-radius:50%;border:1.5px solid var(--muted);display:grid;place-items:center;font:600 .85rem var(--f-mono)}
+.atx{min-width:0;padding-top:4px}
+.alt.sel{border-color:var(--pen);background:var(--pen-soft)}
+.alt.sel .bub{background:var(--pen);border-color:var(--pen);color:var(--on-pen)}
+.alt.right{border-color:var(--ok);background:var(--ok-soft)}
+.alt.right .bub{background:var(--ok);border-color:var(--ok);color:var(--on-pen)}
+.alt.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.alt.wrong .bub{background:var(--bad);border-color:var(--bad);color:var(--on-pen)}
+.alt.dim{opacity:.6}
+.fb{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:6px}
+.fb h3{font:600 .72rem var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-top:10px;display:flex;align-items:center;gap:8px}
+.verdict{display:flex;align-items:center;gap:10px;font-weight:700;font-size:1.1rem}
+.dot{flex:none;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;color:var(--on-pen);background:var(--ok);font-size:.9rem}
+.is-bad .dot{background:var(--bad)}
+.caiu{background:var(--bad-soft);padding:8px 10px;border-radius:8px;font-size:.92rem}
+.sw{display:inline-block;width:18px;height:10px;background:var(--mark);border-radius:2px}
+.end h1{font-size:3rem;font-weight:800;letter-spacing:-.02em}
+.reslist{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.reslist li{display:flex;gap:8px;align-items:baseline}
+.reslist .ok b{color:var(--ok)} .reslist .bad b{color:var(--bad)}
+
+/* provas */
+.eds{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.ed{appearance:none;width:100%;text-align:left;background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:14px;padding:14px 16px;font:inherit;display:flex;flex-direction:column;gap:3px;cursor:pointer}
+.ed-top{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.ed-top b{font-size:1.05rem}
+.ed-tema{font-size:.95rem}
+.ed-prog{font:500 .78rem var(--f-mono);color:var(--muted)}
+.links{display:flex;flex-direction:column;gap:6px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip-btn{appearance:none;border:1px solid var(--line);background:var(--card);color:var(--ink);font:600 .85rem var(--f-mono);padding:8px 12px;border-radius:99px;cursor:pointer;min-height:40px}
+.chip-btn.done{color:var(--ok)}
+.chip-btn.on{background:var(--pen);border-color:var(--pen);color:var(--on-pen)}
+.cartao-head{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.crows{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.crow{display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.crow:last-child{border-bottom:0}
+.qn{font:600 .9rem var(--f-mono);width:1.7em;font-variant-numeric:tabular-nums}
+.qs{font:500 .68rem var(--f-mono);color:var(--muted);width:3.4em;text-transform:uppercase;letter-spacing:.03em}
+.bubs{display:flex;gap:6px}
+.bub-btn{appearance:none;width:36px;height:36px;border-radius:50%;border:1.5px solid var(--muted);background:transparent;color:var(--ink);font:600 .82rem var(--f-mono);cursor:pointer;padding:0}
+.bub-btn:disabled{cursor:default}
+.bub-btn.sel{background:var(--pen);border-color:var(--pen);color:var(--on-pen)}
+.bub-btn.right{background:var(--ok);border-color:var(--ok);color:var(--on-pen)}
+.bub-btn.wrong{background:var(--bad);border-color:var(--bad);color:var(--on-pen)}
+.crow.is-bad .qn{color:var(--bad)} .crow.is-ok .qn{color:var(--ok)}
+.anul{font:500 .7rem var(--f-mono);color:var(--muted)}
+.big-score{font-size:2.6rem;font-weight:800;line-height:1;font-variant-numeric:tabular-nums}
+.big-score span{font-size:1.1rem;font-weight:600;color:var(--muted)}
+.tipline{font-size:.92rem;border-left:3px solid var(--mark);padding-left:10px}
+
+/* padrões e progresso */
+.tiles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.tile{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:2px}
+.tile b{font-size:1.8rem;font-weight:800;font-variant-numeric:tabular-nums;line-height:1.1}
+.tile span{color:var(--muted);font-size:.85rem}
+.letras{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px}
+.lt{border:1px solid var(--line);border-radius:10px;padding:8px 4px;text-align:center;display:flex;flex-direction:column}
+.lt b{font:600 1.1rem var(--f-mono)} .lt span{font:500 .8rem var(--f-mono);color:var(--muted)}
+.bars{display:flex;flex-direction:column;gap:12px}
+.bar-top{display:flex;justify-content:space-between;gap:8px;font-size:.92rem}
+.num{font-family:var(--f-mono);font-size:.8rem;color:var(--muted);white-space:nowrap}
+.tbl-wrap{overflow-x:auto;margin:0 -4px}
+.tbl{width:100%;border-collapse:collapse;font-size:.88rem;min-width:420px}
+.tbl th{font:600 .68rem var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);text-align:left;padding:6px 4px;border-bottom:1px solid var(--line)}
+.tbl td{padding:8px 4px;border-bottom:1px solid var(--line);vertical-align:top}
+.tbl td:first-child{font-family:var(--f-mono);font-size:.78rem;white-space:nowrap}
+.list{margin:0;padding-left:1.15em;display:flex;flex-direction:column;gap:6px}
+details{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:0 16px}
+summary{cursor:pointer;padding:13px 0;font-weight:700;list-style:none;display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font-family:var(--f-mono);color:var(--muted)}
+details[open] summary::after{content:"−"}
+summary small{margin-left:auto}
+details > ul{margin:0 0 14px;padding-left:1.15em;display:flex;flex-direction:column;gap:5px;font-size:.95rem}
+.plain{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.plain li{display:flex;justify-content:space-between;gap:10px}
+
+/* navegação */
+.nav{position:fixed;left:0;right:0;bottom:0;z-index:6;background:var(--card);border-top:1px solid var(--line);padding-top:8px;padding-bottom:calc(8px + env(safe-area-inset-bottom,0px));padding-left:max(12px, env(safe-area-inset-left,0px));padding-right:max(12px, env(safe-area-inset-right,0px))}
+.nav .in{max-width:560px;margin:0 auto;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px}
+.nav button{appearance:none;border:0;background:transparent;color:var(--muted);font:600 .85rem var(--f-ui);padding:10px 4px;border-radius:10px;cursor:pointer;min-height:44px}
+.nav button[aria-current="page"]{background:var(--pen-soft);color:var(--pen)}
+@media (prefers-reduced-motion: reduce){mark{animation:none}}
+</style>
+
+</head>
+<body>
+<main id="app" class="wrap"></main>
+<nav id="nav" class="nav" aria-label="Seções">
+  <div class="in">
+    <button data-tab="hoje">Hoje</button>
+    <button data-tab="provas">Provas</button>
+    <button data-tab="padroes">Padrões</button>
+    <button data-tab="progresso">Progresso</button>
+  </div>
+</nav>
+
+<script>
+document.documentElement.lang = 'pt-BR';
+
+const EXAM_KEY = '2026-12-13';
+const SITE = 'https://vestibular.fatec.sp.gov.br/provas-gabaritos/';
+const S3 = 'https://fatweb.s3.amazonaws.com/vestibularfatec/gabarito/';
+const L = 'ABCDE';
+const DIAS = ['domingo','segunda-feira','terça-feira','quarta-feira','quinta-feira','sexta-feira','sábado'];
+const MES = ['jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez'];
+const MAT = {X:'Multidisciplinar',P:'Português',M:'Matemática',F:'Física',Q:'Química',B:'Biologia',H:'História',G:'Geografia',I:'Inglês',R:'Raciocínio lógico'};
+const ABR = {X:'Multi',P:'Port',M:'Mat',F:'Fís',Q:'Quí',B:'Bio',H:'Hist',G:'Geo',I:'Ing',R:'Lóg','-':''};
+const AREAS = ['Português','Matemática','Multidisciplinar','Física','Química','Biologia','História','Geografia','Inglês','Raciocínio lógico'];
+const NA_PROVA = {'Português':8,'Matemática':8,'Multidisciplinar':9,'Física':5,'Química':5,'Biologia':5,'História':5,'Geografia':5,'Inglês':5,'Raciocínio lógico':5};
+
+// Gabaritos oficiais (k = resposta, "-" = anulada) e matéria de cada questão (s), lidos dos PDFs do site do vestibular.
+const EDS = [
+  {id:'2026-2',nome:'2º sem. 2026',data:'28/06/2026',tema:'Futebol e esporte',red:'O papel do futebol no combate aos preconceitos',pid:'202626241',g:'Gabarito',
+   k:'DCBEECDBDAEBBADEBDCADDBBCBCBCDDEACEADCBDEBCDADDBCAEEACACBCBD',s:'BBBBBXMMMMMMMMXGGGGGXQQQQQXIIIIIXFFFFFXHHHHHXRRRRRXPPPPPPPPX'},
+  {id:'2026-1',nome:'1º sem. 2026',data:'14/12/2025',tema:'Tecnologia e ciência',red:'Tecnologia contra a desinformação e a favor da ciência',pid:'202619102',g:'Gabarito',
+   k:'CABCECAAEBEDCBEEBBEDBACECABDEDDABCCAEDEEBCDCDADCAEEEAAADBDAB',s:'BBBBBXFFFFFXGGGGGXXHHHHHIIIXIIMMMMMMMMXQQQXQQRRRRRXPPPPPPXPP'},
+  {id:'2025-2',nome:'2º sem. 2025',data:'',tema:'Economia verde e sustentabilidade',red:'Tecnologia e economia sustentável',pid:'202528719',g:'Gabarito',
+   k:'CEEDDDECCEAADCAACDCECECBDCEADEBBADADEEABBDBEBDCCECDDEBEDAEBD',s:'PPPXHBBGQXHXQMFIXBGXRXHGFHIRRPXXMIMMRGHQQBBRMPPPPPPMMXQIIMMF'},
+  {id:'2024-2',nome:'2º sem. 2024',data:'30/06/2024',tema:'América Latina',red:'Como superar a exploração da América Latina',pid:'202426517',g:'Gabarito_retificado',
+   k:'BDEEDCEDDAEBDBACDDEDECCDDEADEADDEEDCADAECBDCCECBAEDACE',s:'HMRBHFGFXMXGIIQQQQBBXRMFBPPMXRGBQPPIGRFBHFGMHXXPIIXRXH'},
+  {id:'2024-1',nome:'1º sem. 2024',data:'07/01/2024',tema:'Arte',red:'A importância da representatividade na arte',pid:'202415903',g:'Gabarito',
+   k:'DCCADCDDACAEABEADDEACEEDEDBADEAEDCBDDCCAEDDBDDAEAEDEBC',s:'RHBXGMXIIXRXMMQQBXFIIIPPXMHRHGGFBRGHBHQQFQBRFFMXXGPPPX'},
+  {id:'2023-2',nome:'2º sem. 2023',data:'25/06/2023',tema:'Alimentação',red:'Como combater a insegurança alimentar',pid:'202327519',g:'Gabarito',
+   k:'CDBABDEAEEDDCECAEBDEECBBECCEEBADECDEAA-BACABCEBBDDAEBE',s:'HBXBFXBGIIHMFHMMMRHRPPXPHIIIPMQQQBRXXRXXQBQXGGFFFGXGRP'},
+  {id:'2023-1',nome:'1º sem. 2023',data:'08/01/2023',tema:'Ciência e tecnologia',red:'Mercado de trabalho e a 4ª Revolução Industrial',pid:'202315287',g:'Gabarito',
+   k:'DEBADACDCEDADCCBDCBCADBDBDEEADEBCBEEACADDBECDCCBBCDBBC',s:'XHGRBXHMMQQPGBXBQBHXXFBIIRXPGIHFFMXFGRXPGMMIIXQFRRHQPP'},
+  {id:'2022-2',nome:'2º sem. 2022',data:'',tema:'Desigualdades e Agenda 2030',red:'Desigualdade de gênero no mercado de trabalho',pid:'202228712',g:'Gabarito',
+   k:'BCDBBCCBECCCAEDABBCBECABBDEBBEECBCEEDAABCCDEEEDABCCEDD',s:'XBHMXXBQQRXRRXIIFHGMGMHGRPPPXBGFFGQBBMFXQQHXIRMFIIXHPP'},
+  {id:'2020-1',nome:'1º sem. 2020',data:'',tema:'Trabalho e empreendedorismo',red:'Empreendedorismo no Brasil do século XXI',pid:'202016520',g:'Gabarito-retificado',
+   k:'ACDABDACBECBEEDADCABCDCBDAEEBBDCBDDAECBDBDEEAECBCE--BD',s:'IGPFHBQMMRRRRRHHHHHQQQQQIIIIIMMMMMFFFFFGGGGGBBBBBP--PP'},
+  {id:'2019-2',nome:'2º sem. 2019',data:'30/06/2019',tema:'Tecnologia e informação',red:'Como transformar opinião em conhecimento',pid:'201928914',g:'Gabarito',
+   k:'DCDEADDBECABDCBCCDEABEBEDBECEDBAD-BCCBEEBEBDDBEBBBCBDE',s:'XXXXXXXXXRRRRRHHHHHQQQQQIIIIIMMMMMFFFFFGGGGGBBBBBPPPPP'}
+];
+const SUNDAY_ED = '2026-1'; // a prova de dezembro mais recente: 6 domingos x 10 questões = prova inteira
+
+const DICA_MAT = {
+  P:'Volte ao texto e ache a palavra que prova a resposta. Tirinha, charge, provérbio e comparação de dois textos aparecem em quase toda prova.',
+  M:'Escreva os dados antes da conta e confira a unidade pedida. As fórmulas costumam vir no enunciado.',
+  X:'Separe as duas matérias da questão e resolva uma parte de cada vez.',
+  F:'Anote as grandezas com unidade (km/h, W, s) e converta antes de calcular.',
+  Q:'Confira se a equação está balanceada e use as massas molares que o enunciado dá.',
+  B:'Muitas questões explicam o conceito no próprio texto. Releia o texto antes das alternativas.',
+  H:'Grande parte é "segundo o texto". Use as datas para eliminar alternativas de outra época.',
+  G:'Leia mapas e gráficos pelo título e pela legenda primeiro.',
+  I:'A pergunta vem em português. Ache no texto só o trecho que ela pede e cuidado com falsos cognatos.',
+  R:'Faça uma tabelinha ou um desenho. Use primeiro as certezas, depois as negações.'
+};
+
+const PADROES = [
+  ['Português',8,['Interpretação e comparação de dois textos ("ao se compararem os textos...")','Tirinha, charge e meme: linguagem verbal e não verbal, humor e finalidade','Provérbio que combina com uma ideia (caiu em 2026/1 e em 2026/2)','Figuras de linguagem: ironia, conotação, comparação','Pronome que retoma um termo do texto','Substituir termos destacados "correta e respectivamente"','Verbos: tempo, modo, imperativo; função sintática (sujeito)','Objetivo e gênero do texto']],
+  ['Matemática',8,['Probabilidade (aparece em quase toda prova)','Porcentagem e leitura de gráfico','Média e estatística básica','Geometria: área, circunferência, volume da esfera','Trigonometria com seno e cosseno dados no enunciado','Funções: exponencial, logaritmo (pH), 2º grau em trajetória','Progressões (PA e PG) e contagem (placas, fatorial)','As fórmulas quase sempre vêm escritas na questão']],
+  ['Multidisciplinar',9,['Juntam duas matérias dentro do tema central da prova','Fuso horário: Geografia + Matemática (2024/2 e 2026/2)','Gráfico ou quadro + cálculo de porcentagem','Texto em inglês sobre ciência ou meio ambiente','Cartazes e imagens históricas + interpretação']],
+  ['Física',5,['Velocidade média e conversão de unidades','Energia: cinética, elétrica em placa de aparelho, kWh','Ondas: c = λ · f','Calor: Q = m · c · Δθ','Gases: pressão, volume e temperatura','Queda e lançamento "desprezando a resistência do ar"']],
+  ['Química',5,['Equação química e balanceamento','Combustão e emissão de CO₂','Cálculo de massa com mol','Separação de misturas','Porcentagem em massa e concentração (mg/L)','Meia-vida','Funções orgânicas em fórmulas estruturais']],
+  ['Biologia',5,['Doenças e prevenção: tuberculose, verminoses, parasitas','Fisiologia: respiração, fermentação, hormônios, sangue ABO','Genética: heredograma','Ecologia: espécie invasora, controle biológico, cadeia alimentar','Soro x vacina (picada de cobra caiu em 2025/2)','Biotecnologia e fotossíntese']],
+  ['História',5,['Brasil: Era Vargas, café no Vale do Paraíba, indígenas e colonização, ditadura militar','Geral: Revolução Industrial, Belle Époque, Guerra Fria, Antiguidade, Idade Média','Muitas perguntas são "segundo o texto": a leitura resolve boa parte']],
+  ['Geografia',5,['População e urbanização: IBGE, favelas, envelhecimento','Clima, chuvas e intemperismo','Economia verde e economia circular','Geopolítica: Guerra Fria, conflitos territoriais','Indústria e ferrovias em São Paulo','Hemisférios, fusos e pontos cardeais']],
+  ['Inglês',5,['Perguntas em português sobre texto em inglês','Sentido de uma palavra no contexto: must, like, despite, in fact','Pronome que retoma (it, its, they)','Humor de tirinha ou charge','Gênero do texto: resenha, campanha, notícia']],
+  ['Raciocínio lógico',5,['Sequências de letras, números e figuras','Lógica: todos/nenhum, se... então, conclusão verdadeira','Associação "quem é quem" com pistas','Analogias (caiu em 2026/2)','Rotação de figuras e contagem com regras']]
+];
+
+const TIPS = [
+  'Leia o comando antes do texto. Nas 10 últimas provas, mais de 1 em cada 4 questões manda responder "de acordo com o texto": a resposta está lá.',
+  'A Fatec quase nunca pede a alternativa INCORRETA: a palavra apareceu só 3 vezes nas 10 provas. Procure sempre a correta.',
+  'Toda prova tem um tema central, e a redação é sobre ele. Leia a proposta de redação logo no começo e anote ideias enquanto faz as questões.',
+  'Erro não desconta ponto: só os acertos contam. Nunca deixe questão em branco.',
+  'Calculadora é proibida na prova. Faça as contas à mão nos treinos também.',
+  'As fórmulas costumam vir no enunciado. Você não precisa decorar; precisa saber substituir os valores.',
+  'Em cada prova recente, de 8 a 10 textos servem para mais de uma questão. Leia com calma uma vez e use nas duas.',
+  'Alternativa com "sempre", "nunca", "todos" ou "somente" costuma exagerar. Confira no texto.',
+  'A resposta certa costuma dizer o que o texto diz, com outras palavras.',
+  'Se você precisou de informação de fora do texto para justificar, cuidado: pode ser extrapolação.',
+  'Unidades: minutos ÷ 60 = horas; W ÷ 1 000 = kW; cm ÷ 100 000 = km.',
+  'Troque o conectivo por "mas", "porque" ou "portanto" para descobrir a relação de sentido.',
+  'Gráfico ou tabela: leia título, eixos e unidade antes dos números.',
+  'Travou numa questão? Marque, pule e volte depois. Não deixe uma difícil roubar o tempo de três fáceis.',
+  'Em Inglês, as perguntas vêm em português. Leia a pergunta primeiro e procure no texto só o trecho que ela pede.',
+  'Revise os erros: entender por que errou vale mais que fazer questão nova.'
+];
+
+const TEMAS = [
+  'Como a inteligência artificial pode ajudar, e não atrapalhar, os estudos dos jovens?',
+  'Como preparar as cidades brasileiras para eventos climáticos extremos?',
+  'Qual é o papel do ensino técnico no desenvolvimento do interior paulista?',
+  'Como proteger a saúde mental dos jovens nas redes sociais?',
+  'Como garantir direitos a quem trabalha por aplicativos?',
+  'Como a tecnologia pode ampliar o acesso à saúde no Brasil?',
+  'Como o esporte pode diminuir as desigualdades sociais?'
+];
+
+const FOCO = {
+  1:{nome:'Português e Matemática',areas:['Português','Matemática']},
+  2:{nome:'Ciências da Natureza e lógica',areas:['Física','Química','Biologia','Raciocínio lógico']},
+  3:{nome:'Humanas e Inglês',areas:['História','Geografia','Inglês']},
+  4:{nome:'Multidisciplinares e leitura',areas:['Multidisciplinar','Português']},
+  5:{nome:'Matemática, Física e lógica',areas:['Matemática','Física','Raciocínio lógico']}
+};
+
+// Questões inéditas no estilo Fatec. ⟦…⟧ marca a pista, que aparece grifada depois da resposta.
+// c = índice da certa; o = manter a ordem (alternativas numéricas); ar = [índice da pegadinha, explicação].
+const Q = [
+{id:'por1',a:'Português',t:'Interpretação',
+ x:`A cidade acorda antes do sol. Às cinco da manhã, o ponto de ônibus já reúne trabalhadores que enfrentam duas horas de trajeto até o centro. Para eles, ⟦o tempo perdido no transporte não aparece no contracheque, mas cobra seu preço no corpo e na convivência com a família⟧. Discutir mobilidade urbana, portanto, não é falar apenas de asfalto e de veículos: é falar de quem fica sem tempo para viver.`,
+ q:`A principal crítica feita no texto é que`,
+ al:[`o tempo gasto no deslocamento gera um custo pessoal que não é reconhecido.`,`o preço da passagem de ônibus é alto demais para os trabalhadores.`,`os trabalhadores deveriam morar mais perto do centro da cidade.`,`novas obras de asfalto resolveriam o problema da mobilidade urbana.`,`os ônibus começam a circular cedo demais.`],c:0,
+ p:`O texto diz que o tempo no transporte "não aparece no contracheque" (ninguém paga por ele), "mas cobra seu preço no corpo e na convivência com a família" (custo pessoal). A alternativa certa junta essas duas ideias com outras palavras.`,
+ pi:`O trecho com "mas". Depois do "mas" vem a ideia que o autor quer destacar.`,
+ ar:[3,`É o contrário do texto: o autor diz que mobilidade "não é falar apenas de asfalto e de veículos".`],
+ d:`A resposta certa costuma ser uma paráfrase: o mesmo sentido do texto, com outras palavras. Desconfie de alternativas com informação que o texto não deu, como o preço da passagem.`},
+{id:'por2',a:'Português',t:'Conectivos',
+ x:`A prefeitura ampliou o horário de funcionamento das bibliotecas públicas. ⟦No entanto⟧, o número de visitantes caiu no último ano, já que boa parte dos jovens passou a estudar por materiais digitais.`,
+ q:`A expressão "No entanto" estabelece, entre a primeira e a segunda frase, uma relação de`,
+ al:[`oposição.`,`causa.`,`conclusão.`,`tempo.`,`comparação.`],c:0,
+ p:`Com mais horário, o esperado seria ter mais visitantes, mas aconteceu o contrário. "No entanto" tem o mesmo valor de "mas", "porém" e "contudo": introduz uma ideia que contraria a expectativa.`,
+ pi:`O que vem depois do conectivo contraria o que a primeira frase faz esperar.`,
+ ar:[1,`Existe uma causa no texto, mas ela é marcada por "já que" (o motivo da queda de visitantes), e não por "No entanto".`],
+ d:`Teste trocando o conectivo: se dá para usar "mas" sem mudar o sentido, é oposição. "Porque" indica causa; "portanto", conclusão.`},
+{id:'por3',a:'Português',t:'Figuras de linguagem',
+ x:`— Que maravilha de serviço! ⟦Esperei três horas na fila⟧ para ser informado de que o sistema estava fora do ar desde cedo.`,
+ q:`O sentido de "Que maravilha de serviço!" é construído principalmente por meio de`,
+ al:[`ironia.`,`metáfora.`,`hipérbole.`,`personificação.`,`eufemismo.`],c:0,
+ p:`O falante faz um elogio, mas o contexto (três horas de fila, sistema fora do ar) mostra que ele quer dizer o oposto: é uma crítica. Dizer o contrário do que se pensa é ironia.`,
+ pi:`A frase logo depois do elogio, que descreve uma situação ruim.`,
+ ar:[2,`Hipérbole é exagero proposital. "Três horas" é um fato relatado; a expressão analisada é o elogio, que não exagera, e sim inverte o sentido.`],
+ d:`Ironia só aparece com contexto. Quando um elogio não combina com a situação descrita, pense em ironia.`},
+{id:'por4',a:'Português',t:'Variação linguística',
+ x:`— Ô, cumpadi, cê vai na festa da padroeira?\n— Vô sim, sô! ⟦Num perco por nada.⟧`,
+ q:`Sobre a linguagem usada no diálogo, é correto afirmar que`,
+ al:[`é um registro informal e regional, adequado a uma conversa entre amigos.`,`apresenta erros que impedem a comunicação entre os falantes.`,`mostra que os falantes desconhecem a língua portuguesa.`,`é típica de textos científicos e técnicos.`,`usa a norma-padrão para demonstrar respeito.`],c:0,
+ p:`Formas como "cê", "vô", "sô" e "num" são marcas de uma variedade regional e informal. Os dois falantes se entendem perfeitamente, e a situação (conversa entre amigos) pede mesmo esse registro.`,
+ pi:`A conversa funciona: um pergunta, o outro responde. Não há falha de comunicação.`,
+ ar:[1,`Tratar variação linguística como "erro" é preconceito linguístico. Os vestibulares quase sempre consideram errada a alternativa que faz isso.`],
+ d:`Em questões de variação, a resposta certa costuma ter palavras como "adequado", "contexto" e "situação". Fuja de alternativas com "erro", "incorreto" ou "inferior".`},
+{id:'por5',a:'Português',t:'Pressupostos',
+ x:`Depois de muitos anos, Joana ⟦voltou a⟧ estudar e se inscreveu no vestibular.`,
+ q:`A expressão "voltou a" permite concluir que Joana`,
+ al:[`já tinha estudado antes e havia interrompido os estudos.`,`nunca havia frequentado uma escola.`,`estudou sem parar durante muitos anos.`,`não gosta de estudar.`,`foi obrigada a se inscrever no vestibular.`],c:0,
+ p:`"Voltar a" só faz sentido se a ação já aconteceu antes e foi interrompida. Essa informação não está escrita com todas as letras, mas está pressuposta na expressão.`,
+ pi:`A própria expressão "voltou a".`,
+ ar:[1,`Contradiz o pressuposto: só dá para voltar a fazer algo que já se fez.`],
+ d:`Palavras como "voltou a", "ainda", "deixou de" e "até" carregam informações escondidas (pressupostos). Quando o enunciado diz "permite concluir" ou "infere-se", procure por elas.`},
+{id:'por6',a:'Português',t:'Pronomes e retomada',
+ x:`Os agricultores do Vale do Paraíba enfrentaram uma longa estiagem. ⟦Eles⟧ perderam parte da colheita, mas a cooperativa ofereceu crédito para que ⟦esses trabalhadores⟧ replantassem.`,
+ q:`As expressões "Eles" e "esses trabalhadores" retomam, no texto,`,
+ al:[`os agricultores do Vale do Paraíba.`,`a cooperativa.`,`a estiagem.`,`a colheita.`,`o crédito.`],c:0,
+ p:`As duas expressões estão no masculino plural e se referem a pessoas que perderam a colheita e vão replantar: os agricultores. Isso se chama coesão referencial (retomar algo já dito sem repetir a palavra).`,
+ pi:`Gênero e número: "Eles" é masculino e plural.`,
+ ar:[1,`"Cooperativa" é feminino e singular, não combina com "Eles". Além disso, é ela quem oferece o crédito, não quem replanta.`],
+ d:`Pronome que retoma termo caiu em 2024/2 e 2025/2. Confira gênero e número e faça a troca: "Os agricultores perderam parte da colheita" faz sentido.`},
+{id:'por7',a:'Português',t:'Objetivo do texto',
+ x:`⟦Doe sangue.⟧ Uma única doação pode salvar até quatro vidas. ⟦Procure⟧ o hemocentro mais próximo e ⟦agende⟧ seu horário.`,
+ q:`A finalidade principal do texto é`,
+ al:[`convencer o leitor a realizar uma ação.`,`narrar uma história real.`,`apresentar dados científicos sobre o sangue.`,`descrever o funcionamento de um hemocentro.`,`expressar os sentimentos do autor.`],c:0,
+ p:`Os verbos no imperativo ("Doe", "Procure", "agende") falam diretamente com o leitor e pedem uma atitude. O dado sobre as vidas salvas serve de argumento para convencer.`,
+ pi:`Os verbos que dão ordem ou fazem pedido.`,
+ ar:[2,`Há um dado ("até quatro vidas"), mas ele está a serviço do convencimento. Ele não é o objetivo do texto.`],
+ d:`"O texto tem por objetivo" caiu em 2026/1. Imperativo é sinal de texto que quer convencer. Pergunte sempre: o que esse texto quer que eu faça ou pense?`},
+{id:'por8',a:'Português',t:'Provérbios',
+ x:`Um aluno passa o semestre sem abrir o caderno. ⟦Na véspera da prova, tenta estudar todas as matérias numa noite só⟧ e acaba dormindo em cima dos livros, sem aprender nada.`,
+ q:`Qual provérbio resume a ideia da situação descrita?`,
+ al:[`Devagar se vai ao longe.`,`Quem ri por último ri melhor.`,`Em boca fechada não entra mosquito.`,`Casa de ferreiro, espeto de pau.`,`Mais vale um pássaro na mão do que dois voando.`],c:0,
+ p:`A situação mostra que tentar fazer tudo de uma vez não funciona; estudar um pouco por dia funcionaria. "Devagar se vai ao longe" diz exatamente isso: constância vence pressa.`,
+ pi:`Tentar estudar tudo "numa noite só" e não aprender nada.`,
+ ar:[4,`"Mais vale um pássaro na mão" fala de preferir o certo ao incerto. Não tem relação com pressa ou constância.`],
+ d:`Provérbio caiu nas duas últimas provas (2026/1 e 2026/2). Resuma a situação numa frase sua ("a pressa atrapalha") e só depois procure o provérbio com o mesmo sentido.`},
+
+{id:'mat1',a:'Matemática',t:'Porcentagem',
+ x:`Uma loja aumentou em 20% o preço de um tênis. Uma semana depois, anunciou ⟦desconto de 20% sobre o novo preço⟧.`,
+ q:`Em relação ao preço original, o preço final do tênis ficou`,
+ al:[`4% menor.`,`igual.`,`4% maior.`,`2% menor.`,`40% menor.`],c:0,
+ p:`Use 100 como preço inicial. Com aumento de 20%: 100 × 1,2 = 120. Com desconto de 20% sobre 120: 120 × 0,8 = 96. Como 96 é 4 a menos que 100, o preço final ficou 4% menor.`,
+ pi:`"Sobre o novo preço": o desconto é calculado em cima de 120, e não de 100.`,
+ ar:[1,`Parece que +20% e −20% se anulam, mas cada porcentagem é calculada sobre um valor diferente.`],
+ d:`Comece com 100: porcentagem vira conta de cabeça. Aumento de x% é multiplicar por (1 + x/100); desconto de x% é multiplicar por (1 − x/100).`},
+{id:'mat2',a:'Matemática',t:'Proporção',o:1,
+ x:`Uma impressora 3D do laboratório imprime ⟦12 peças em 3 horas⟧, sempre ⟦no mesmo ritmo⟧.`,
+ q:`Quantas horas ela leva para imprimir 40 peças?`,
+ al:[`7 horas`,`8 horas`,`9 horas`,`10 horas`,`13,3 horas`],c:3,
+ p:`12 peças em 3 horas dá 4 peças por hora (12 ÷ 3). Para 40 peças: 40 ÷ 4 = 10 horas.`,
+ pi:`"No mesmo ritmo" indica grandezas diretamente proporcionais.`,
+ ar:[4,`13,3 vem de 40 ÷ 3, que mistura peças com horas sem montar a proporção.`],
+ d:`Antes da regra de três, ache a taxa por unidade (peças por hora, km por litro, reais por quilo). Fica mais rápido e com menos erro.`},
+{id:'mat3',a:'Matemática',t:'Função afim',o:1,
+ x:`Um aplicativo de transporte cobra ⟦R$ 5,00 fixos⟧ mais ⟦R$ 2,50 por quilômetro⟧ rodado.`,
+ q:`Uma corrida que custou R$ 30,00 teve quantos quilômetros?`,
+ al:[`10 km`,`11 km`,`12 km`,`13 km`,`14 km`],c:0,
+ p:`O valor fixo é cobrado uma vez só: 30 − 5 = 25 reais referentes aos quilômetros. Como cada km custa 2,50: 25 ÷ 2,5 = 10 km.`,
+ pi:`A palavra "fixos": esse valor não depende da distância.`,
+ ar:[2,`12 km vem de 30 ÷ 2,5, esquecendo de tirar os R$ 5,00 fixos antes.`],
+ d:`Valor fixo + valor por unidade é uma função afim: f(x) = ax + b, em que b é o fixo. Tire o fixo antes de dividir.`},
+{id:'mat4',a:'Matemática',t:'Probabilidade',o:1,
+ x:`Em uma urna há ⟦5 bolas vermelhas, 3 azuis e 2 verdes⟧, todas do mesmo tamanho. Uma bola é retirada ao acaso.`,
+ q:`Qual é a probabilidade de a bola retirada NÃO ser vermelha?`,
+ al:[`1/10`,`1/5`,`3/10`,`2/5`,`1/2`],c:4,
+ p:`Total de bolas: 5 + 3 + 2 = 10. Bolas que não são vermelhas: 3 azuis + 2 verdes = 5. Probabilidade = 5/10 = 1/2.`,
+ pi:`O "NÃO" em maiúsculas: a pergunta quer as azuis e as verdes juntas.`,
+ ar:[2,`3/10 é a chance de sair só azul. Faltou somar as verdes.`],
+ d:`Probabilidade aparece em quase toda prova da Fatec. Casos que interessam ÷ total de casos. Circule NÃO e EXCETO antes de começar.`},
+{id:'mat5',a:'Matemática',t:'Média',o:1,
+ x:`As notas de Ana em quatro provas foram ⟦6,0; 7,5; 8,0 e 5,5⟧. Para ser aprovada, ela precisa de ⟦média 7,0 nas cinco provas⟧ do semestre.`,
+ q:`Qual é a nota mínima que Ana precisa tirar na quinta prova?`,
+ al:[`6,5`,`7,0`,`7,5`,`8,0`,`8,5`],c:3,
+ p:`Média 7,0 em cinco provas significa soma total de 7 × 5 = 35. Ela já tem 6 + 7,5 + 8 + 5,5 = 27. Falta 35 − 27 = 8,0.`,
+ pi:`"Média 7,0 nas cinco provas": transforme a média em soma total.`,
+ ar:[1,`Tirar 7,0 só basta se a média das quatro primeiras já for 7,0. A dela é 6,75.`],
+ d:`Média × quantidade = soma necessária. Calcule a soma que já tem e veja quanto falta.`},
+{id:'mat6',a:'Matemática',t:'Área',o:1,
+ x:`Um terreno retangular mede ⟦20 m por 15 m⟧. O dono quer gramar todo o terreno, exceto ⟦uma área quadrada de 5 m de lado⟧, onde ficará um depósito de ferramentas.`,
+ q:`Quantos metros quadrados de grama serão necessários?`,
+ al:[`250 m²`,`275 m²`,`280 m²`,`295 m²`,`300 m²`],c:1,
+ p:`Área do terreno: 20 × 15 = 300 m². Área do quadrado: 5 × 5 = 25 m². Grama: 300 − 25 = 275 m².`,
+ pi:`"Exceto": a área do depósito deve ser descontada.`,
+ ar:[2,`280 m² vem de 300 − 20, usando o perímetro do quadrado (4 × 5) em vez da área (5 × 5).`],
+ d:`Área = espaço ocupado; perímetro = contorno. Grama, piso e pintura pedem área; cerca e rodapé pedem perímetro.`},
+{id:'mat7',a:'Matemática',t:'Escala',o:1,
+ x:`Em um mapa, a escala é ⟦1 : 50 000⟧. A distância entre duas cidades, medida no mapa, é de ⟦8 cm⟧.`,
+ q:`A distância real entre as cidades é de`,
+ al:[`0,4 km`,`4 km`,`40 km`,`400 km`,`4 000 km`],c:1,
+ p:`Escala 1 : 50 000 quer dizer que 1 cm no mapa vale 50 000 cm na realidade. 8 × 50 000 = 400 000 cm. Como 1 km = 100 000 cm, isso dá 4 km.`,
+ pi:`A escala: cada 1 cm do mapa vale 50 000 cm reais.`,
+ ar:[2,`40 km aparece quando a conversão de centímetros para quilômetros é feita dividindo por 10 000 em vez de 100 000.`],
+ d:`Faça a conta toda em centímetros e converta só no final: 1 m = 100 cm; 1 km = 100 000 cm.`},
+{id:'mat8',a:'Matemática',t:'Volume com fórmula dada',o:1,
+ x:`Uma garrafa de bebida isotônica tem formato de cilindro, com ⟦raio da base de 3 cm⟧ e ⟦altura de 20 cm⟧. O volume do cilindro é ⟦V = π · r² · h⟧. Adote ⟦π = 3⟧ e 1 cm³ = 1 mL.`,
+ q:`O volume dessa garrafa é de`,
+ al:[`180 mL`,`360 mL`,`540 mL`,`1 080 mL`,`3 600 mL`],c:2,
+ p:`V = π · r² · h = 3 · 3² · 20 = 3 · 9 · 20 = 540 cm³, ou seja, 540 mL.`,
+ pi:`A fórmula e o valor de π já estão no enunciado.`,
+ ar:[1,`360 mL vem de fazer r · 2 (3 × 2 = 6) em vez de r² (3 × 3 = 9).`],
+ d:`Na Fatec, as fórmulas costumam vir no enunciado (volume da esfera, log 2 = 0,3, seno e cosseno). Você não precisa decorar; precisa substituir com cuidado. Treine sem calculadora.`},
+
+{id:'rl1',a:'Raciocínio lógico',t:'Sequências',o:1,
+ x:`Observe a sequência: ⟦2, 6, 12, 20, 30⟧, …`,
+ q:`Qual é o próximo termo?`,
+ al:[`36`,`38`,`40`,`42`,`44`],c:3,
+ p:`As diferenças entre termos vizinhos são 4, 6, 8, 10, crescendo de 2 em 2. A próxima é 12: 30 + 12 = 42. Outro jeito: 1×2, 2×3, 3×4, 4×5, 5×6, então vem 6×7 = 42.`,
+ pi:`As diferenças entre os números: 4, 6, 8, 10.`,
+ ar:[2,`40 vem de somar 10 de novo, como se a diferença tivesse parado de crescer.`],
+ d:`Calcule a diferença entre vizinhos. Se ela não for constante, olhe a "diferença das diferenças". Teste também multiplicações.`},
+{id:'rl2',a:'Raciocínio lógico',t:'Negação',
+ x:`Considere a afirmação: ⟦"Todos os alunos da turma passaram na prova."⟧`,
+ q:`A negação lógica dessa afirmação é:`,
+ al:[`Pelo menos um aluno da turma não passou na prova.`,`Nenhum aluno da turma passou na prova.`,`Todos os alunos da turma não passaram na prova.`,`Alguns alunos da turma passaram na prova.`,`Apenas um aluno da turma passou na prova.`],c:0,
+ p:`Para "todos passaram" ser falsa, basta que um aluno não tenha passado. Por isso a negação de "todos são" é "pelo menos um não é".`,
+ pi:`A palavra "Todos": basta uma exceção para derrubar a frase.`,
+ ar:[1,`"Nenhum passou" é o extremo oposto, não a negação. Se metade passou, as duas frases são falsas ao mesmo tempo.`],
+ d:`Negação de "todo A é B": "algum A não é B". Negação de "nenhum A é B": "algum A é B".`},
+{id:'rl3',a:'Raciocínio lógico',t:'Associação',
+ x:`Bia, Caio e Davi fazem, cada um, um curso diferente: Logística, Desenvolvimento de Sistemas e Gestão Empresarial. ⟦Davi faz Gestão Empresarial⟧. ⟦Caio não faz Logística⟧.`,
+ q:`Qual curso Bia faz?`,
+ al:[`Logística.`,`Desenvolvimento de Sistemas.`,`Gestão Empresarial.`,`Não é possível saber com essas informações.`,`Bia faz dois cursos.`],c:0,
+ p:`Davi já ficou com Gestão Empresarial. Sobram Logística e Sistemas para Caio e Bia. Como Caio não faz Logística, ele faz Sistemas. Logo, Bia faz Logística.`,
+ pi:`Comece pela informação afirmativa ("Davi faz...") e depois use a negativa.`,
+ ar:[3,`Parece faltar dado, mas eliminando o curso de Davi primeiro, sobra uma única possibilidade para cada um.`],
+ d:`"Única associação correta possível" caiu em 2025/2. Desenhe uma tabelinha com ✓ e ✗. Use primeiro as certezas, depois as negações.`},
+{id:'rl4',a:'Raciocínio lógico',t:'Se... então',
+ x:`Considere verdadeira a afirmação: ⟦"Se chove, então o jogo é cancelado."⟧`,
+ q:`Qual conclusão é necessariamente verdadeira?`,
+ al:[`Se o jogo não foi cancelado, então não choveu.`,`Se o jogo foi cancelado, então choveu.`,`Se não chove, então o jogo acontece.`,`O jogo nunca acontece.`,`Chove sempre que há jogo.`],c:0,
+ p:`"Se A, então B" equivale a "se não B, então não A". Se tivesse chovido, o jogo teria sido cancelado; como não foi, não choveu.`,
+ pi:`A estrutura "Se..., então...".`,
+ ar:[1,`O jogo pode ser cancelado por outro motivo. Inverter a frase sem negar é a pegadinha clássica.`],
+ d:`"Se A, então B" = "Se não B, então não A". As trocas "Se B, então A" e "Se não A, então não B" NÃO são garantidas.`},
+{id:'rl5',a:'Raciocínio lógico',t:'Analogias',
+ x:`⟦CANETA⟧ está para ⟦ESCREVER⟧ assim como TESOURA está para …`,
+ q:`Qual palavra completa a analogia?`,
+ al:[`cortar`,`papel`,`costurar`,`afiar`,`escola`],c:0,
+ p:`A relação é objeto → função: a caneta serve para escrever; a tesoura serve para cortar.`,
+ pi:`Descubra a relação do primeiro par antes de olhar as alternativas.`,
+ ar:[1,`Papel é algo em que se usa a tesoura, mas a relação do primeiro par é "objeto → ação que ele faz", e papel não é ação.`],
+ d:`Analogia caiu em 2026/2. Monte uma frase com o primeiro par ("caneta serve para escrever") e teste a mesma frase com cada alternativa.`},
+
+{id:'ing1',a:'Inglês',t:'Interpretação',en:1,
+ x:`Many teenagers say they feel tired at school. Scientists explain that during adolescence the body clock changes, so ⟦teens naturally fall asleep later at night⟧. Some schools have started classes later in the morning, and ⟦students' grades and attendance improved⟧.`,
+ q:`De acordo com o texto,`,
+ al:[`o relógio biológico faz os adolescentes dormirem mais tarde, e escolas que atrasaram o início das aulas tiveram melhoras.`,`os adolescentes dormem tarde porque usam o celular à noite.`,`os cientistas recomendam que os adolescentes acordem mais cedo.`,`as notas pioraram nas escolas que mudaram o horário.`,`os adolescentes não sentem cansaço na escola.`],c:0,
+ p:`"Teens naturally fall asleep later" = adolescentes naturalmente adormecem mais tarde. "Grades and attendance improved" = notas e frequência melhoraram. A certa junta as duas informações.`,
+ pi:`As palavras "naturally" (naturalmente) e "improved" (melhoraram).`,
+ ar:[1,`O celular nem aparece no texto. Pode até ser verdade no mundo real, mas a pergunta é "de acordo com o texto".`],
+ d:`Comece pelos cognatos (scientists, adolescence, naturally) para ter uma ideia geral. Cuidado: "attendance" é frequência, e não "atendimento".`},
+{id:'ing2',a:'Inglês',t:'Falsos cognatos',en:1,
+ x:`⟦Actually⟧, the new library is bigger than the old one.`,
+ q:`Nesse contexto, "Actually" pode ser traduzido por`,
+ al:[`na verdade.`,`atualmente.`,`rapidamente.`,`felizmente.`,`finalmente.`],c:0,
+ p:`"Actually" é um falso cognato: parece "atualmente", mas significa "na verdade" ou "de fato".`,
+ pi:`É uma palavra que parece português, mas engana.`,
+ ar:[1,`"Atualmente" em inglês é "currently" ou "nowadays". É o falso cognato mais famoso.`],
+ d:`Falsos cognatos que mais caem: actually (na verdade), pretend (fingir), push (empurrar), library (biblioteca), parents (pais), college (faculdade), realize (perceber).`},
+{id:'ing3',a:'Inglês',t:'Conectivos',en:1,
+ x:`Solar energy is clean and renewable. ⟦However⟧, its installation can still be expensive for many families.`,
+ q:`A palavra "However" introduz uma ideia de`,
+ al:[`contraste.`,`adição.`,`exemplo.`,`consequência.`,`tempo.`],c:0,
+ p:`A primeira frase mostra vantagens (limpa e renovável). A segunda traz um problema (cara). "However" = "no entanto", "porém".`,
+ pi:`Uma frase positiva seguida de uma negativa.`,
+ ar:[1,`Adição seria "moreover", "also" ou "in addition". Aqui a segunda ideia se opõe à primeira.`],
+ d:`Conectivos: however, but, although, despite (contraste); so, therefore (consequência); because, since (causa); moreover, also (adição). "Despite" já caiu (2024/2).`},
+{id:'ing4',a:'Inglês',t:'Referência',en:1,
+ x:`Bees are essential for agriculture. ⟦They⟧ pollinate many of the fruits and vegetables we eat every day.`,
+ q:`A palavra "They" refere-se a`,
+ al:[`bees (abelhas).`,`fruits (frutas).`,`vegetables (vegetais).`,`we (nós).`,`agriculture (agricultura).`],c:0,
+ p:`Quem poliniza (pollinate) são as abelhas. "They" retoma "Bees", que vem antes.`,
+ pi:`O verbo depois do pronome: quem pode polinizar?`,
+ ar:[1,`"Fruits" é plural e aparece perto, mas frutas não polinizam: elas são polinizadas.`],
+ d:`"It" e "its" referem-se a quê? caiu em 2026/2. Faça a troca: "Bees pollinate..." faz sentido.`},
+{id:'ing5',a:'Inglês',t:'Sentido no contexto',en:1,
+ x:`Look at him! He played for ⟦120 minutes⟧. He ⟦must⟧ be exhausted.`,
+ q:`Nesse contexto, o verbo "must" expressa`,
+ al:[`uma dedução: o falante conclui que ele provavelmente está exausto.`,`uma obrigação: ele é obrigado a ficar exausto.`,`uma proibição.`,`uma permissão.`,`uma habilidade.`],c:0,
+ p:`"Must" pode indicar obrigação ("You must study") ou dedução. Aqui, o falante vê que o jogador jogou 120 minutos e conclui: ele deve estar exausto.`,
+ pi:`"120 minutes" é a evidência que leva à conclusão.`,
+ ar:[1,`Ninguém é obrigado a ficar cansado. Quando "must" vem com "be" + estado (tired, right, exhausted), quase sempre é dedução.`],
+ d:`A Fatec pergunta o sentido de uma palavra no texto: já caíram "must" (2026/1), "like" (2026/2), "despite" (2024/2) e "in fact" (2026/1). Decida pelo contexto.`},
+
+{id:'fis1',a:'Física',t:'Velocidade média',o:1,
+ x:`Um ônibus sai de Guaratinguetá às ⟦8h⟧ e chega a São Paulo, a cerca de ⟦180 km⟧, às ⟦10h30⟧.`,
+ q:`A velocidade média do ônibus na viagem foi de aproximadamente`,
+ al:[`60 km/h`,`72 km/h`,`80 km/h`,`90 km/h`,`100 km/h`],c:1,
+ p:`De 8h às 10h30 passaram 2h30, ou seja, 2,5 horas. Velocidade média = distância ÷ tempo = 180 ÷ 2,5 = 72 km/h.`,
+ pi:`Os horários: 30 minutos são meia hora (0,5 h).`,
+ ar:[3,`90 km/h vem de 180 ÷ 2, esquecendo os 30 minutos.`],
+ d:`Minutos em horas: divida por 60. 30 min = 0,5 h; 15 min = 0,25 h. Cuidado: 2h30 é 2,5 h, e não 2,3 h.`},
+{id:'fis2',a:'Física',t:'Energia elétrica',o:1,
+ x:`Um chuveiro elétrico tem potência de ⟦5 000 W⟧ e é usado ⟦30 minutos por dia⟧.`,
+ q:`Em 30 dias, o consumo de energia desse chuveiro é de`,
+ al:[`7,5 kWh`,`15 kWh`,`37,5 kWh`,`75 kWh`,`150 kWh`],c:3,
+ p:`Energia = potência × tempo. 5 000 W = 5 kW. 30 min = 0,5 h por dia. Em 30 dias: 5 × 0,5 × 30 = 75 kWh.`,
+ pi:`As unidades: W precisa virar kW e minutos precisam virar horas.`,
+ ar:[4,`150 kWh vem de considerar 1 hora por dia em vez de meia hora.`],
+ d:`E = P × t. Potência em kW e tempo em horas dão kWh, a unidade da conta de luz. Placa de aparelho elétrico caiu em 2026/1.`},
+{id:'fis3',a:'Física',t:'Inércia',
+ x:`Quando um carro freia bruscamente, os passageiros sem cinto ⟦são projetados para a frente⟧, pois ⟦tendem a continuar em movimento⟧.`,
+ q:`Esse fenômeno é explicado`,
+ al:[`pela 1ª lei de Newton (princípio da inércia).`,`pela 3ª lei de Newton (ação e reação).`,`pela lei da gravitação universal.`,`pela lei de Ohm.`,`pela lei de Hooke.`],c:0,
+ p:`Todo corpo tende a manter seu estado de movimento se nada o impedir. O carro para, mas o corpo do passageiro continua. O cinto é a força que o segura.`,
+ pi:`"Tendem a continuar em movimento" é a definição de inércia.`,
+ ar:[1,`Ação e reação fala de pares de forças entre dois corpos. A ideia central aqui é o corpo manter o movimento que já tinha.`],
+ d:`"Tende a manter", "continua" = inércia (1ª lei). "Força = massa × aceleração" = 2ª lei. "Par de forças" = 3ª lei.`},
+
+{id:'qui1',a:'Química',t:'Separação de misturas',
+ x:`Em uma estação de tratamento, a água passa por várias etapas. Em uma delas, ⟦a água fica parada em grandes tanques para que as partículas mais pesadas se depositem no fundo⟧.`,
+ q:`Essa etapa corresponde à`,
+ al:[`decantação.`,`filtração.`,`destilação.`,`cloração.`,`evaporação.`],c:0,
+ p:`Na decantação, a mistura fica em repouso e a gravidade leva as partículas mais densas para o fundo.`,
+ pi:`"Fica parada" e "se depositem no fundo".`,
+ ar:[1,`A filtração separa com uma barreira (areia, cascalho, papel de filtro). Não depende de deixar a água parada.`],
+ d:`Separação de misturas caiu em 2026/1. Repousar e depositar = decantação; reter numa barreira = filtração; ferver e condensar = destilação.`},
+{id:'qui2',a:'Química',t:'Ácidos e bases',
+ x:`Uma pessoa com azia (excesso de acidez no estômago) tomou ⟦um antiácido à base de hidróxido de magnésio⟧ e sentiu alívio.`,
+ q:`O antiácido alivia o desconforto porque`,
+ al:[`é uma base que neutraliza parte do ácido do estômago.`,`é um ácido forte que aumenta a acidez.`,`é um sal que não reage com nada.`,`aumenta a produção de suco gástrico.`,`é um metal que se dissolve no estômago.`],c:0,
+ p:`Substâncias com "hidróxido" no nome são bases (liberam OH⁻). Base + ácido formam sal + água: é a neutralização, que reduz a acidez.`,
+ pi:`A palavra "hidróxido".`,
+ ar:[1,`Um ácido pioraria a azia. O próprio nome "antiácido" já diz que ele age contra o ácido.`],
+ d:`Ácido + base → sal + água. pH abaixo de 7 é ácido, 7 é neutro, acima de 7 é básico.`},
+{id:'qui3',a:'Química',t:'Transformações',
+ x:`Considere os processos:\nI. gelo derretendo\nII. ferro ⟦enferrujando⟧\nIII. papel ⟦queimando⟧\nIV. água fervendo`,
+ q:`São transformações químicas apenas`,
+ al:[`II e III.`,`I e II.`,`III e IV.`,`I e IV.`,`II e IV.`],c:0,
+ p:`Na ferrugem e na queima surgem substâncias novas (óxido de ferro, gás carbônico, cinzas). Derreter e ferver só mudam o estado físico: continua sendo água.`,
+ pi:`Em cada item: apareceu uma substância nova?`,
+ ar:[4,`Ferver tem bolhas, que parecem reação, mas o gás é vapor de água, a mesma substância.`],
+ d:`Sinais de transformação química: mudança de cor, gás novo, chama, cheiro novo. Mudança de estado (derreter, ferver, congelar) é física.`},
+
+{id:'bio1',a:'Biologia',t:'Cadeia alimentar',
+ x:`Em um lago, ⟦algas⟧ servem de alimento para pequenos crustáceos, que são comidos por ⟦peixes⟧, que por sua vez são caçados por garças.`,
+ q:`Nessa cadeia alimentar, os peixes são`,
+ al:[`consumidores secundários.`,`consumidores primários.`,`produtores.`,`consumidores terciários.`,`decompositores.`],c:0,
+ p:`Algas são produtores. Crustáceos comem algas: consumidores primários. Peixes comem crustáceos: secundários. Garças comem peixes: terciários.`,
+ pi:`Comece a contar pelo produtor, as algas.`,
+ ar:[1,`Os peixes não comem as algas diretamente. Entre eles estão os crustáceos, que são os primários.`],
+ d:`Conte os degraus a partir do produtor: 1º degrau acima = primário, 2º = secundário, 3º = terciário.`},
+{id:'bio2',a:'Biologia',t:'Soro e vacina',
+ x:`Um trabalhador rural foi picado por uma jararaca. No hospital, recebeu ⟦soro antiofídico⟧, que contém ⟦anticorpos prontos⟧ contra o veneno da cobra.`,
+ q:`Sobre o tratamento recebido, é correto afirmar que`,
+ al:[`é uma imunização passiva, de ação rápida, porque o corpo recebe anticorpos já prontos.`,`é uma vacina, porque estimula o corpo a produzir células de memória.`,`tem efeito permanente e protege de novas picadas pelo resto da vida.`,`age destruindo a cobra que causou a picada.`,`é um antibiótico, pois o veneno é formado por bactérias.`],c:0,
+ p:`O soro já traz os anticorpos prontos, então age rápido, o que é essencial depois de uma picada. Como o corpo não fabricou essas defesas, não fica memória: é imunização passiva e temporária.`,
+ pi:`"Anticorpos prontos".`,
+ ar:[1,`Vacina é o contrário: estimula o próprio corpo a produzir defesas e demora a fazer efeito. Serve para prevenir, não para tratar uma picada.`],
+ d:`Soro: anticorpos prontos, efeito rápido e curto, usado para tratar. Vacina: o corpo produz a defesa, demora mas dura, usada para prevenir. Picada de cobra caiu em 2025/2.`},
+{id:'bio3',a:'Biologia',t:'Genética',o:1,
+ x:`Em ervilhas, a cor amarela (A) é ⟦dominante⟧ sobre a verde (a). Foram cruzadas duas plantas ⟦heterozigotas (Aa)⟧.`,
+ q:`Qual é a porcentagem esperada de descendentes com sementes verdes?`,
+ al:[`0%`,`25%`,`50%`,`75%`,`100%`],c:1,
+ p:`Aa × Aa gera AA, Aa, Aa e aa. Só aa é verde, porque o verde é recessivo e só aparece sem o A. Então 1 em 4 = 25%.`,
+ pi:`"Dominante" e "heterozigotas": o verde só aparece em aa.`,
+ ar:[3,`75% é a porcentagem de sementes amarelas (AA + Aa + Aa). A pergunta pede as verdes.`],
+ d:`Monte o quadro 2×2 e, antes de marcar, releia: a pergunta quer o dominante ou o recessivo? Heredograma caiu em 2026/1.`},
+
+{id:'his1',a:'História',t:'Era Vargas',
+ x:`Em 1943, durante o governo de Getúlio Vargas, foi criada a ⟦Consolidação das Leis do Trabalho (CLT)⟧, que reuniu normas sobre ⟦jornada, férias, carteira de trabalho e salário mínimo⟧.`,
+ q:`A criação da CLT está relacionada`,
+ al:[`à regulamentação das relações entre patrões e empregados.`,`ao fim da escravidão no Brasil.`,`à independência do Brasil.`,`à ditadura militar iniciada em 1964.`,`à realização da reforma agrária.`],c:0,
+ p:`A CLT juntou numa só lei os direitos e deveres de quem trabalha e de quem contrata. Faz parte das políticas trabalhistas da Era Vargas.`,
+ pi:`Os temas listados: jornada, férias, carteira, salário.`,
+ ar:[3,`A ditadura militar começou em 1964, mais de 20 anos depois da CLT. A data do texto elimina essa alternativa.`],
+ d:`Era Vargas caiu em 2026/1. Era Vargas (1930–1945) = leis trabalhistas, industrialização, Estado Novo. Datas ajudam a eliminar alternativas.`},
+{id:'his2',a:'História',t:'Revolução Industrial',
+ x:`No século XVIII, na Inglaterra, ⟦a máquina a vapor passou a ser usada nas fábricas de tecidos⟧. ⟦Muitos artesãos perderam espaço⟧ e passaram a trabalhar como operários assalariados.`,
+ q:`Uma consequência da Revolução Industrial apresentada no texto é`,
+ al:[`a substituição do trabalho artesanal pelo trabalho fabril assalariado.`,`o fortalecimento das oficinas artesanais.`,`o retorno da população das cidades para o campo.`,`o fim da produção de tecidos na Inglaterra.`,`a diminuição do tamanho das cidades.`],c:0,
+ p:`O texto diz que os artesãos perderam espaço e viraram operários assalariados nas fábricas: é a troca do artesanal pelo fabril.`,
+ pi:`"Muitos artesãos perderam espaço".`,
+ ar:[2,`Aconteceu o contrário: o êxodo rural levou muita gente do campo para as cidades industriais.`],
+ d:`Motor a vapor caiu em 2026/1. Revolução Industrial = máquinas, fábricas, operários, êxodo rural, crescimento das cidades.`},
+{id:'his3',a:'História',t:'Café no Vale do Paraíba',
+ x:`No século XIX, o Vale do Paraíba foi o principal produtor de café do Brasil. As grandes fazendas utilizavam mão de obra escravizada, e cidades como Guaratinguetá e Bananal enriqueceram. Com o ⟦esgotamento do solo⟧, a produção se deslocou para o Oeste Paulista.`,
+ q:`De acordo com o texto, um fator do declínio do café no Vale do Paraíba foi`,
+ al:[`o esgotamento do solo das fazendas.`,`a chegada da indústria automobilística à região.`,`a proibição do consumo de café na Europa.`,`a construção de Brasília.`,`a substituição do café pela soja.`],c:0,
+ p:`O texto afirma que, "com o esgotamento do solo", a produção foi para o Oeste Paulista. A resposta está escrita no texto.`,
+ pi:`"De acordo com o texto" no enunciado: procure a causa no próprio trecho.`,
+ ar:[1,`Anacronismo: a indústria automobilística chegou ao Brasil no século XX, bem depois do auge do café no Vale.`],
+ d:`O café no Vale do Paraíba já caiu (2025/2). Cuidado com anacronismo, alternativas que misturam épocas.`},
+
+{id:'geo1',a:'Geografia',t:'Indústria',
+ x:`A Rodovia Presidente Dutra liga São Paulo ao Rio de Janeiro e atravessa o Vale do Paraíba. Ao longo dela, ⟦cidades como São José dos Campos, Taubaté e Guaratinguetá concentram indústrias⟧ e serviços, formando um eixo econômico ⟦entre as duas maiores metrópoles do país⟧.`,
+ q:`A concentração de indústrias ao longo da Via Dutra é explicada principalmente`,
+ al:[`pela facilidade de transporte e pela proximidade dos dois maiores mercados consumidores do país.`,`pelo clima frio da região.`,`pela ausência de população nas cidades do Vale.`,`pela proibição de indústrias nas capitais.`,`pela distância em relação aos centros consumidores.`],c:0,
+ p:`Indústrias procuram lugares por onde é fácil receber matéria-prima e escoar produtos. A Dutra liga São Paulo e Rio, os maiores mercados consumidores do Brasil.`,
+ pi:`"Entre as duas maiores metrópoles do país".`,
+ ar:[1,`O clima não é decisivo para a maioria das indústrias. Transporte e mercado pesam muito mais.`],
+ d:`Fatores de localização industrial: transporte, mercado consumidor, mão de obra, matéria-prima e incentivos fiscais.`},
+{id:'geo2',a:'Geografia',t:'Clima',
+ x:`A queima de combustíveis fósseis libera ⟦gás carbônico (CO₂)⟧ na atmosfera, ⟦aumentando a retenção de calor⟧ perto da superfície da Terra.`,
+ q:`O fenômeno descrito é`,
+ al:[`a intensificação do efeito estufa.`,`a destruição da camada de ozônio.`,`a inversão térmica.`,`a chuva ácida.`,`a formação de ilhas de calor.`],c:0,
+ p:`O CO₂ é um gás de efeito estufa: ele dificulta a saída do calor da Terra. Mais CO₂, efeito estufa mais forte e aquecimento global.`,
+ pi:`"CO₂" e "retenção de calor".`,
+ ar:[1,`A camada de ozônio é destruída principalmente por CFCs e protege contra a radiação ultravioleta. Não tem a ver com reter calor.`],
+ d:`Efeito estufa (CO₂, metano, retém calor) × camada de ozônio (CFC, protege do UV) × chuva ácida (óxidos de enxofre e nitrogênio) × inversão térmica (ar frio preso embaixo do quente).`},
+{id:'geo3',a:'Geografia',t:'População',
+ x:`Nas últimas décadas, a taxa de natalidade no Brasil caiu e a ⟦expectativa de vida aumentou⟧. Com isso, a ⟦base da pirâmide etária está se estreitando e o topo, se alargando⟧.`,
+ q:`Essa mudança indica`,
+ al:[`o envelhecimento da população.`,`o rejuvenescimento da população.`,`o aumento da mortalidade infantil.`,`o crescimento acelerado do número de crianças.`,`a diminuição da expectativa de vida.`],c:0,
+ p:`Na pirâmide etária, a base são os jovens e o topo, os idosos. Menos jovens e mais idosos = população envelhecendo.`,
+ pi:`"Base estreitando, topo alargando".`,
+ ar:[3,`Base estreita significa menos crianças, e não mais.`],
+ d:`População brasileira e IBGE caíram em 2026/1. Envelhecimento traz debates sobre previdência e saúde, que também servem de repertório na redação.`},
+
+{id:'mul1',a:'Multidisciplinar',t:'Português + Matemática',
+ x:`Uma pesquisa com 400 estudantes perguntou como eles chegam à escola: ⟦45% vão a pé, 30% de ônibus, 15% de bicicleta e o restante de carro⟧. Uma reportagem concluiu: ⟦"A maioria dos estudantes usa transporte motorizado."⟧`,
+ q:`Com base nos dados, a conclusão da reportagem está`,
+ al:[`incorreta, pois apenas 40% usam transporte motorizado.`,`correta, pois 160 estudantes usam transporte motorizado.`,`correta, pois 70% usam ônibus ou carro.`,`incorreta, pois 30% vão de carro.`,`correta, pois o ônibus é o meio mais usado.`],c:0,
+ p:`O restante é 100 − 45 − 30 − 15 = 10% de carro. Motorizados: ônibus (30%) + carro (10%) = 40%. Maioria é mais da metade, então a reportagem errou.`,
+ pi:`"O restante": calcule quanto sobra para o carro.`,
+ ar:[1,`160 estudantes é a quantidade certa (40% de 400), mas 160 não é maioria: seria preciso mais de 200.`],
+ d:`Maioria = mais de 50%. Nas multidisciplinares, um texto faz uma afirmação e você confere com a conta.`},
+{id:'mul2',a:'Multidisciplinar',t:'Biologia + Química + Geografia',
+ x:`As florestas ⟦absorvem gás carbônico durante a fotossíntese⟧ e liberam oxigênio. Quando uma área é desmatada e queimada, ⟦o carbono armazenado na vegetação volta à atmosfera⟧.`,
+ q:`A partir do texto, conclui-se que as queimadas`,
+ al:[`contribuem para o aquecimento global, pois liberam CO₂ e reduzem a absorção desse gás.`,`reduzem o efeito estufa, pois liberam oxigênio.`,`não interferem no clima, pois o carbono é natural.`,`aumentam a fotossíntese da região.`,`destroem diretamente a camada de ozônio.`],c:0,
+ p:`São dois efeitos juntos: a queima devolve CO₂ ao ar e, sem a floresta, há menos fotossíntese para retirar CO₂. Mais CO₂ intensifica o efeito estufa.`,
+ pi:`Junte as duas frases: a floresta tira CO₂ do ar; a queimada devolve.`,
+ ar:[4,`Confusão clássica entre efeito estufa e camada de ozônio. Queimadas emitem CO₂, ligado ao efeito estufa.`],
+ d:`Multidisciplinares juntam duas ideias simples. Aqui: fotossíntese (Biologia) + CO₂ e aquecimento (Química e Geografia). Separe as partes e depois junte.`},
+{id:'mul3',a:'Multidisciplinar',t:'Física + Matemática',o:1,
+ x:`Uma família trocou ⟦10 lâmpadas incandescentes de 60 W⟧ por ⟦10 lâmpadas de LED de 9 W⟧, que iluminam o mesmo tanto. As lâmpadas ficam acesas ⟦5 horas por dia⟧, e o ⟦kWh custa R$ 0,80⟧.`,
+ q:`A economia na conta de luz em 30 dias é de aproximadamente`,
+ al:[`R$ 6,12`,`R$ 12,24`,`R$ 61,20`,`R$ 72,00`,`R$ 122,40`],c:2,
+ p:`Cada lâmpada economiza 60 − 9 = 51 W. As 10 economizam 510 W = 0,51 kW. Em 30 dias: 0,51 × 5 × 30 = 76,5 kWh. Em dinheiro: 76,5 × 0,80 = R$ 61,20.`,
+ pi:`A diferença de potência entre as lâmpadas: 60 W − 9 W.`,
+ ar:[3,`R$ 72,00 é o gasto total das lâmpadas antigas (0,6 kW × 5 × 30 × 0,80), e não a economia.`],
+ d:`Economia = gasto antes − gasto depois. Organize: W → kW, × horas por dia, × dias, × preço do kWh.`},
+{id:'mul4',a:'Multidisciplinar',t:'Matemática + Geografia',o:1,
+ x:`Um município tem ⟦área de 750 km²⟧ e ⟦população de 120 000 habitantes⟧.`,
+ q:`A densidade demográfica desse município é de`,
+ al:[`0,00625 hab/km²`,`16 hab/km²`,`160 hab/km²`,`1 600 hab/km²`,`9 000 000 hab/km²`],c:2,
+ p:`Densidade demográfica = habitantes ÷ área = 120 000 ÷ 750 = 160 habitantes por km².`,
+ pi:`A unidade "hab/km²" já mostra a conta: habitantes divididos por km².`,
+ ar:[0,`0,00625 vem da divisão invertida (750 ÷ 120 000).`],
+ d:`A unidade ensina a conta. E lembre: populoso (muita gente) não é o mesmo que povoado (muita gente por km²).`},
+{id:'mul5',a:'Multidisciplinar',t:'Português + Biologia',
+ x:`A dengue é transmitida pela picada da fêmea do mosquito Aedes aegypti, que deposita seus ovos em ⟦água parada⟧. ⟦Por isso⟧, as campanhas insistem: ⟦não deixe água acumulada⟧ em pneus, garrafas e vasos de plantas.`,
+ q:`A principal forma de prevenção defendida no texto atua`,
+ al:[`na eliminação dos locais de reprodução do mosquito.`,`no tratamento dos doentes com antibióticos.`,`na vacinação de animais domésticos.`,`no combate ao vírus dentro do corpo humano.`,`na proibição de vasos de plantas nas casas.`],c:0,
+ p:`O mosquito põe ovos em água parada; "por isso" a orientação é não deixar água acumulada. Sem criadouro, não nascem novos mosquitos.`,
+ pi:`O conectivo "Por isso", que liga a causa à solução.`,
+ ar:[1,`A dengue é causada por vírus, e antibiótico só age contra bactérias. Além disso, o texto fala de prevenção, não de tratamento.`],
+ d:`Siga os conectivos ("por isso", "portanto", "porque"): eles mostram o raciocínio do texto. Desconfie de exageros como "proibição", que vão além do que foi dito.`},
+{id:'mul6',a:'Multidisciplinar',t:'Geografia + Matemática',o:1,
+ x:`Um jogo de futebol começa às ⟦16h no horário de Brasília (UTC−3)⟧. Um torcedor vai assistir pela TV em Lisboa, Portugal, que nessa época está no fuso ⟦UTC+0⟧.`,
+ q:`Em Lisboa, o jogo começa às`,
+ al:[`13h`,`15h`,`16h`,`19h`,`22h`],c:3,
+ p:`UTC−3 significa 3 horas atrás do horário de referência (UTC+0). Quando são 16h em Brasília, no UTC+0 já são 16 + 3 = 19h.`,
+ pi:`Os números dos fusos: de −3 para 0 são 3 horas a mais.`,
+ ar:[0,`13h vem de subtrair 3 horas em vez de somar. Quem está mais a leste tem o relógio adiantado.`],
+ d:`Fuso horário caiu em 2024/2 e 2026/2, sempre misturando Geografia e Matemática. Indo para leste, adianta o relógio; indo para oeste, atrasa.`}
+];
+const QM = Object.fromEntries(Q.map(q => [q.id, q]));
+
+/* ---------- utilidades ---------- */
+const $ = s => document.querySelector(s);
+const app = $('#app'), nav = $('#nav');
+const pad = n => String(n).padStart(2, '0');
+function key(d){ return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()); }
+function parseKey(k){ const [y, m, d] = k.split('-').map(Number); return new Date(y, m - 1, d); }
+function addDays(k, n){ const d = parseKey(k); d.setDate(d.getDate() + n); return key(d); }
+function diffDays(a, b){ return Math.round((parseKey(b) - parseKey(a)) / 864e5); }
+const today = () => key(new Date());
+function shuffle(a){ a = a.slice(); for (let i = a.length - 1; i > 0; i--){ const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+function esc(s){ return String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+function rich(s){ return esc(s).replace(/\*\*(.+?)\*\*/g, '<b>$1</b>'); }
+function texto(s, rev){ return esc(s).replace(/\n/g, '<br>').replace(/⟦(.+?)⟧/g, rev ? '<mark>$1</mark>' : '$1'); }
+const fmtD = k => { const d = parseKey(k); return d.getDate() + '/' + (d.getMonth() + 1); };
+const pct = (a, b) => b ? Math.round(a / b * 100) : 0;
+
+/* ---------- progresso salvo neste aparelho ---------- */
+const KEY = 'fatec30-v1';
+const fresh = () => ({v:1, start:today(), days:{}, qs:{}, ar:{}, red:{}, pr:{}});
+function load(){ try { const s = JSON.parse(localStorage.getItem(KEY)); if (s && s.v === 1) return Object.assign(fresh(), s); } catch (e) {} return fresh(); }
+let S = load();
+function save(){ try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
+
+function studied(k){
+  const d = S.days[k], r = S.red[k];
+  return !!((d && ((d.q || 0) + (d.pr || 0)) >= 5) || (r && r.length === 3 && r.every(Boolean)));
+}
+function streak(){ let k = today(); if (!studied(k)) k = addDays(k, -1); let n = 0; while (studied(k)){ n++; k = addDays(k, -1); } return n; }
+function bumpDay(kind, ok, n){
+  const t = today(), d = S.days[t] || {q:0, ok:0, pr:0, prok:0};
+  if (kind === 'q'){ d.q = (d.q || 0) + n; d.ok = (d.ok || 0) + ok; }
+  else { d.pr = (d.pr || 0) + n; d.prok = (d.prok || 0) + ok; }
+  S.days[t] = d;
+}
+
+/* ---------- provas oficiais ---------- */
+const edById = id => EDS.find(e => e.id === id);
+function prState(id){ return S.pr[id] || (S.pr[id] = {a:{}, c:{}}); }
+function isRight(e, q, a){ const k = e.k[q - 1]; return k === '-' ? true : a === k; }
+function prStats(id){
+  const e = edById(id), st = S.pr[id]; let n = 0, ok = 0;
+  if (st) for (const q in st.c){ n++; if (isRight(e, +q, st.a[q])) ok++; }
+  return {n, ok};
+}
+function sundayBlock(t){
+  let k = Math.floor(diffDays('2026-11-01', t) / 7) + 1;
+  k = Math.min(6, Math.max(1, k));
+  return {k, from:(k - 1) * 10 + 1, to:k * 10};
+}
+
+/* ---------- sessão de questões comentadas ---------- */
+let tab = 'hoje', sess = null, provaSel = null, resetArm = false;
+
+function buildSession(areas, n, rev){
+  const t = today(), pick = [];
+  const add = list => { for (const q of list){ if (pick.length >= n) break; if (!pick.includes(q.id)) pick.push(q.id); } };
+  const due = shuffle(Q.filter(q => { const r = S.qs[q.id]; return r && r.due && r.due <= t; }));
+  add(due.slice(0, rev ? n : Math.min(3, n)));
+  const seen = Q.filter(q => S.qs[q.id]).sort((x, y) => {
+    const a = S.qs[x.id], b = S.qs[y.id];
+    if (a.lastOk !== b.lastOk) return a.lastOk ? 1 : -1;
+    const fa = areas.includes(x.a) ? 0 : 1, fb = areas.includes(y.a) ? 0 : 1;
+    if (fa !== fb) return fa - fb;
+    return a.last < b.last ? -1 : a.last > b.last ? 1 : 0;
+  });
+  const unseenFoco = shuffle(Q.filter(q => !S.qs[q.id] && areas.includes(q.a)));
+  const unseen = shuffle(Q.filter(q => !S.qs[q.id]));
+  (rev ? [seen, unseen] : [unseenFoco, unseen, seen]).forEach(add);
+  return shuffle(pick);
+}
+function newPerm(){ const q = QM[sess.ids[sess.i]]; sess.perm = q.o ? [0, 1, 2, 3, 4] : shuffle([0, 1, 2, 3, 4]); }
+function startSession(n, areas, rev){
+  const t = today(), ids = buildSession(areas, n, rev);
+  sess = {ids, i:0, res:[], chosen:null, revealed:false, t0:Date.now(), end:false,
+    tags: ids.map(id => { const r = S.qs[id]; return r && r.due && r.due <= t ? 'REVISÃO' : r ? 'REPETIDA' : ''; })};
+  newPerm(); render(); scrollTo(0, 0);
+}
+function record(q, ok){
+  const t = today(), r = S.qs[q.id] || {n:0, ok:0, step:0};
+  r.n++; if (ok) r.ok++; r.last = t; r.lastOk = ok;
+  if (!ok){ r.due = addDays(t, 1); r.step = 0; }
+  else if (r.due){ if (r.step >= 1) r.due = null; else { r.due = addDays(t, 3); r.step = 1; } }
+  S.qs[q.id] = r;
+  const a = S.ar[q.a] || {n:0, ok:0}; a.n++; if (ok) a.ok++; S.ar[q.a] = a;
+  bumpDay('q', ok ? 1 : 0, 1);
+  save();
+}
+
+/* ---------- telas ---------- */
+function viewHome(){
+  const t = today(), left = diffDays(t, EXAM_KEY), wd = parseKey(t).getDay(), st = streak();
+  let hero;
+  if (left > 0){
+    const horas = left === 1 ? '30 min' : Math.floor(left / 2) + 'h' + (left % 2 ? '30' : '');
+    hero = `<header class="hero">
+      <p class="eyebrow">Vestibular Fatec · 1º semestre de 2027</p>
+      <h1><span class="n">${left}</span> ${left === 1 ? 'dia' : 'dias'}</h1>
+      <p class="sub">até a prova: domingo, 13 de dezembro, às 13h.</p>
+      <p class="sub2">30 minutos por dia até lá somam <b>${horas}</b> de estudo${st ? ` · <b>${st} ${st === 1 ? 'dia' : 'dias'} seguidos</b>` : ''}.</p>
+    </header>`;
+  } else if (left === 0){
+    hero = `<header class="hero"><p class="eyebrow">Vestibular Fatec · 1º semestre de 2027</p><h1>Hoje é a prova.</h1>
+      <p class="sub">Portões fecham às 13h. São 5 horas de prova: 60 questões e uma redação. Você treinou para isso.</p></header>`;
+  } else {
+    hero = `<header class="hero"><p class="eyebrow">Vestibular Fatec · 1º semestre de 2027</p><h1>A prova passou.</h1>
+      <p class="sub">Confira o gabarito oficial e o resultado no site do vestibular.</p></header>`;
+  }
+  let card;
+  if (left === 0) card = cardDiaProva();
+  else if (wd === 6) card = cardSabado(t, left);
+  else if (wd === 0) card = cardDomingo(t);
+  else card = cardQuestoes(t, wd);
+  const tip = TIPS[((diffDays('2026-01-01', t) % TIPS.length) + TIPS.length) % TIPS.length];
+  return hero + card + calendario() + `<section class="card tip"><p class="eyebrow">Dica do dia · tirada das 10 últimas provas</p><p class="tiptx">${esc(tip)}</p></section>`;
+}
+function cardQuestoes(t, wd){
+  const f = FOCO[wd], d = S.days[t], done = studied(t);
+  return `<section class="card today-card">
+    <p class="eyebrow">Hoje · ${DIAS[wd]}</p>
+    <h2>${f.nome}</h2>
+    <p class="meta">8 questões comentadas no estilo Fatec, com a pista grifada no texto e a pegadinha explicada. Cerca de 30 minutos. As que você errar voltam amanhã.</p>
+    ${done && d ? `<p class="done-line">✓ Sessão de hoje feita${d.q ? `: ${d.ok} de ${d.q} certas` : ''}.</p>` : ''}
+    <button class="primary" data-act="start" data-n="8">${done ? 'Fazer mais 8 questões' : 'Começar sessão de 30 min'}</button>
+  </section>`;
+}
+function cardSabado(t, left){
+  const i = ((Math.floor(diffDays('2026-10-31', t) / 7) % TEMAS.length) + TEMAS.length) % TEMAS.length;
+  const r = S.red[t] || [false, false, false];
+  const passos = [
+    `<b>5 min</b> · Leia o tema e escolha: narração ou dissertação (a Fatec deixa escolher). Anote 5 ideias soltas.`,
+    `<b>10 min</b> · Escreva sua resposta à pergunta do tema em uma frase (a tese) e escolha 2 argumentos, cada um com um exemplo.`,
+    `<b>15 min</b> · Escreva o título, a introdução e a conclusão completas. Na conclusão, proponha uma solução: quem faz, o quê e como.`];
+  return `<section class="card today-card">
+    <p class="eyebrow">Hoje · sábado · redação</p>
+    <h2>${esc(TEMAS[i])}</h2>
+    <p class="meta">${left === 1 ? 'Véspera da prova: faça só o primeiro passo e descanse. Separe documento original e caneta azul ou preta, e durma cedo.' : 'Treino de 30 minutos em papel, com cronômetro. Tema no estilo Fatec: em forma de pergunta, sobre tecnologia, trabalho ou sociedade. Marque cada passo quando terminar.'}</p>
+    <ol class="steps">${passos.map((p, j) => `<li><input type="checkbox" id="red-${j}" data-red="${j}" ${r[j] ? 'checked' : ''}><label for="red-${j}">${p}</label></li>`).join('')}</ol>
+    ${r.every(Boolean) ? '<p class="done-line">✓ Treino de redação feito.</p>' : ''}
+    <button class="ghost" data-act="start" data-n="4" data-rev="1">Fazer 4 questões de revisão</button>
+  </section>`;
+}
+function cardDomingo(t){
+  const e = edById(SUNDAY_ED), b = sundayBlock(t), st = S.pr[e.id];
+  let feitos = 0; if (st) for (let q = b.from; q <= b.to; q++) if (st.c[q]) feitos++;
+  let ok = 0; if (st) for (let q = b.from; q <= b.to; q++) if (st.c[q] && isRight(e, q, st.a[q])) ok++;
+  return `<section class="card today-card">
+    <p class="eyebrow">Hoje · domingo · prova oficial (bloco ${b.k} de 6)</p>
+    <h2>Questões ${b.from} a ${b.to} da prova de dezembro de 2025</h2>
+    <p>É a prova mais parecida com a sua: a do 1º semestre de 2026, aplicada em 14/12/2025, tema central "${esc(e.tema)}". Abra o caderno oficial, faça as questões <b>${b.from} a ${b.to}</b> em 30 minutos, sem consulta, e marque no cartão-resposta do app. Em 6 domingos você faz a prova inteira.</p>
+    ${feitos === 10 ? `<p class="done-line">✓ Bloco corrigido: ${ok} de 10 certas.</p>` : ''}
+    <button class="primary" data-act="sun-open" data-f="${b.from}" data-t="${b.to}">${feitos === 10 ? 'Ver o cartão corrigido' : 'Abrir o cartão-resposta'}</button>
+    <button class="link" data-act="start" data-n="8">Quer mais? Fazer 8 questões comentadas</button>
+  </section>`;
+}
+function cardDiaProva(){
+  return `<section class="card today-card"><p class="eyebrow">Checklist</p><h2>Antes de sair de casa</h2>
+    <ul class="list"><li>Documento de identidade original com foto.</li><li>Caneta esferográfica de tinta azul ou preta.</li><li>Água e um lanche.</li><li>Chegue cedo: os portões fecham às 13h.</li><li>Celular desligado, sem alarme. Calculadora, régua, relógio inteligente, boné e corretivo são proibidos.</li><li>Leia a proposta de redação logo no começo: o tema central da prova é o mesmo.</li></ul></section>`;
+}
+function calendario(){
+  const t = today(), s = S.start < t ? S.start : t;
+  const off = (parseKey(s).getDay() + 6) % 7;
+  let k = addDays(s, -off);
+  const end = addDays(EXAM_KEY, 6 - ((parseKey(EXAM_KEY).getDay() + 6) % 7));
+  let cells = '';
+  while (k <= end){
+    const d = parseKey(k), out = k < s || k > EXAM_KEY;
+    let cls = 'd';
+    if (out) cls += ' out';
+    else {
+      if (studied(k)) cls += ' done';
+      else if (k < t) cls += ' miss';
+      if (k === t) cls += ' today';
+      if (k === EXAM_KEY) cls += ' exam';
+    }
+    const m = !out && (d.getDate() === 1 || k === s) ? ` data-m="${MES[d.getMonth()]}"` : '';
+    cells += `<span class="${cls}"${m} title="${fmtD(k)}">${out ? '' : d.getDate()}</span>`;
+    k = addDays(k, 1);
+  }
+  return `<section class="card"><div class="cal-head"><h2 class="h-sm">Sua trilha até a prova</h2>
+    <p class="legend"><span><span class="lg done"></span>estudou</span><span><span class="lg today"></span>hoje</span><span><span class="lg exam"></span>prova</span></p></div>
+    <div class="cal">${['S','T','Q','Q','S','S','D'].map(c => `<span class="wh">${c}</span>`).join('')}${cells}</div></section>`;
+}
+
+function viewQuiz(){
+  const q = QM[sess.ids[sess.i]], P = sess.perm, n = sess.ids.length;
+  const posC = P.indexOf(q.c), Lc = L[posC], tag = sess.tags[sess.i];
+  const alts = P.map((o, pos) => {
+    let cls = 'alt';
+    if (sess.revealed){ if (o === q.c) cls += ' right'; else if (o === sess.chosen) cls += ' wrong'; else cls += ' dim'; }
+    else if (o === sess.chosen) cls += ' sel';
+    return `<li><button class="${cls}" data-act="pick" data-o="${o}" aria-pressed="${o === sess.chosen}" ${sess.revealed ? 'disabled' : ''}><span class="bub">${L[pos]}</span><span class="atx">${rich(q.al[o])}</span></button></li>`;
+  }).join('');
+  let after;
+  if (sess.revealed){
+    const ok = sess.chosen === q.c, Lar = L[P.indexOf(q.ar[0])], caiu = !ok && sess.chosen === q.ar[0];
+    after = `<section class="fb ${ok ? 'is-ok' : 'is-bad'}">
+      <p class="verdict"><span class="dot" aria-hidden="true">${ok ? '✓' : '✗'}</span>${ok ? 'Acertou.' : `A certa é a (${Lc}).`}</p>
+      ${caiu ? '<p class="caiu">Você marcou a pegadinha principal desta questão. Veja abaixo por que ela engana.</p>' : ''}
+      <h3>Por que é a (${Lc})</h3><p>${rich(q.p)}</p>
+      <h3><span class="sw" aria-hidden="true"></span>Onde está a pista (grifada no texto)</h3><p>${rich(q.pi)}</p>
+      <h3>A pegadinha (${Lar})</h3><p>${rich(q.ar[1])}</p>
+      <h3>Leve pra prova</h3><p>${rich(q.d)}</p>
+    </section>
+    <button class="primary" data-act="next">${sess.i + 1 < n ? 'Próxima questão' : 'Ver resultado'}</button>`;
+  } else {
+    after = `<button class="primary" id="confirmar" data-act="confirm" ${sess.chosen == null ? 'disabled' : ''}>Confirmar resposta</button>`;
+  }
+  return `<div class="qbar">
+      <button class="link" data-act="quit">Sair</button>
+      <div class="qprog"><span>${sess.i + 1} de ${n}</span><div class="track"><i style="width:${(sess.i + (sess.revealed ? 1 : 0)) / n * 100}%"></i></div></div>
+      <span class="timer" data-t0="${sess.t0}" data-dur="1800"></span>
+    </div>
+    <article class="q">
+      <p class="eyebrow">Questão ${pad(sess.i + 1)} · ${esc(q.a)} · ${esc(q.t)}${tag ? ` <span class="chip">${tag}</span>` : ''}</p>
+      <blockquote class="texto"${q.en ? ' lang="en"' : ''}>${texto(q.x, sess.revealed)}</blockquote>
+      <p class="enun">${rich(q.q)}</p>
+      <ol class="alts">${alts}</ol>
+      ${after}
+    </article>`;
+}
+function viewEnd(){
+  const n = sess.res.length, ok = sess.res.filter(r => r.ok).length, p = n ? ok / n : 0;
+  const min = Math.max(1, Math.round((Date.now() - sess.t0) / 60000));
+  const msg = n === 0 ? 'Nenhuma questão respondida.' : p >= .75 ? 'Mandou bem. Amanhã tem mais.' : p >= .5 ? 'Bom treino. Releia as explicações das que você errou.' : 'Errar aqui é bem melhor que errar na prova. As que você errou voltam amanhã para revisão.';
+  return `<section class="end card">
+    <p class="eyebrow">Sessão concluída · ${min} min</p>
+    <h1>${ok} de ${n}</h1>
+    <p>${msg}</p>
+    <ul class="reslist">${sess.res.map(r => { const q = QM[r.id]; return `<li class="${r.ok ? 'ok' : 'bad'}"><b>${r.ok ? '✓' : '✗'}</b><span>${esc(q.a)} · ${esc(q.t)}</span></li>`; }).join('')}</ul>
+    <button class="primary" data-act="home">Voltar ao início</button>
+  </section>`;
+}
+
+function viewProvas(){
+  if (provaSel) return viewEdicao();
+  const rows = EDS.map(e => {
+    const p = prStats(e.id), tot = e.k.length;
+    return `<li><button class="ed" data-act="ed-open" data-id="${e.id}">
+      <span class="ed-top"><b>${e.nome}</b>${e.data ? `<small>${e.data}</small>` : ''}</span>
+      <span class="ed-tema">Tema central: ${esc(e.tema)}</span>
+      <span class="ed-prog">${p.n ? `${p.n}/${tot} corrigidas · ${pct(p.ok, p.n)}% de acerto` : `${tot} questões · não começou`}</span>
+    </button></li>`;
+  }).join('');
+  return `<header class="hero"><p class="eyebrow">Provas oficiais</p><h1 class="h1-sm">As 10 últimas provas da Fatec</h1>
+    <p class="sub">Abra o caderno oficial em PDF, marque as respostas no cartão do app e ele corrige pelo gabarito oficial, mostrando a matéria de cada questão.</p></header>
+    <ul class="eds">${rows}</ul>
+    <p class="meta">PDFs do site oficial: <a href="${SITE}" target="_blank" rel="noopener">vestibular.fatec.sp.gov.br</a>. A prova do 1º semestre de 2025 não está publicada lá.</p>`;
+}
+function viewEdicao(){
+  const e = edById(provaSel.id), st = prState(e.id), tot = e.k.length, from = provaSel.from, to = provaSel.to;
+  const blocks = []; for (let f = 1; f <= tot; f += 10) blocks.push([f, Math.min(tot, f + 9)]); blocks.push([1, tot]);
+  const chips = blocks.map(([f, t]) => {
+    const on = f === from && t === to, label = f === 1 && t === tot ? 'Inteira' : `${f}–${t}`;
+    let done = true; for (let q = f; q <= t; q++) if (!st.c[q]){ done = false; break; }
+    return `<button class="chip-btn${on ? ' on' : ''}${done ? ' done' : ''}" data-act="blk" data-f="${f}" data-t="${t}" aria-pressed="${on}">${label}${done ? ' ✓' : ''}</button>`;
+  }).join('');
+  let rows = '', anyMarked = false, corrected = 0, ok = 0; const errs = [], subErr = {};
+  for (let q = from; q <= to; q++){
+    const k = e.k[q - 1], sc = e.s[q - 1], a = st.a[q], c = !!st.c[q];
+    if (a && !c) anyMarked = true;
+    let right = false;
+    if (c){ corrected++; right = isRight(e, q, a); if (right) ok++; else { errs.push(q); subErr[sc] = (subErr[sc] || 0) + 1; } }
+    const bubs = [...L].map(l => {
+      let cls = 'bub-btn';
+      if (c){ if (k !== '-' && l === k) cls += ' right'; else if (l === a) cls += k === '-' ? ' sel' : ' wrong'; }
+      else if (l === a) cls += ' sel';
+      return `<button class="${cls}" data-act="mark" data-q="${q}" data-l="${l}" aria-label="Questão ${q}, alternativa ${l}" aria-pressed="${l === a}" ${c ? 'disabled' : ''}>${l}</button>`;
+    }).join('');
+    const note = c && k === '-' ? '<span class="anul">anulada</span>' : c && !a ? '<span class="anul">em branco</span>' : '';
+    rows += `<li class="crow${c ? (right ? ' is-ok' : ' is-bad') : ''}"><span class="qn">${pad(q)}</span><span class="qs">${ABR[sc] || ''}</span><span class="bubs">${bubs}</span>${note}</li>`;
+  }
+  const n = to - from + 1, allDone = corrected === n;
+  const res = corrected ? `<section class="card" id="res">
+      <p class="eyebrow">Resultado · questões ${from} a ${to}</p>
+      <p class="big-score">${ok} <span>de ${corrected} corrigidas</span></p>
+      ${errs.length ? `<p class="meta">Errou: ${errs.map(q => `${pad(q)} (${ABR[e.s[q - 1]]}, certa ${e.k[q - 1]})`).join(' · ')}</p>` : '<p class="done-line">Gabaritou o bloco.</p>'}
+      ${Object.keys(subErr).map(sc => `<p class="tipline"><b>${MAT[sc]}</b>: ${esc(DICA_MAT[sc])}</p>`).join('')}
+      ${errs.length ? '<p class="meta">Volte ao caderno nas que errou e procure no texto a palavra que leva à resposta certa.</p>' : ''}
+      <button class="link" data-act="refazer">Refazer este bloco</button>
+    </section>` : '';
+  return `<button class="link" data-act="ed-back">← Todas as provas</button>
+    <header class="hero"><p class="eyebrow">Prova oficial · ${e.nome}${e.data ? ' · ' + e.data : ''}</p>
+      <h1 class="h1-sm">Tema central: ${esc(e.tema)}</h1><p class="sub">Redação: ${esc(e.red)}.</p></header>
+    <div class="links">
+      <a class="ghost" href="${S3 + e.pid}/Prova.pdf" target="_blank" rel="noopener">Abrir caderno de questões (PDF) ↗</a>
+      <a class="link" href="${S3 + e.pid}/${e.g}.pdf" target="_blank" rel="noopener">Gabarito oficial (PDF) ↗</a>
+    </div>
+    <div class="chips" role="group" aria-label="Escolha o bloco de questões">${chips}</div>
+    ${res}
+    <section class="card">
+      <div class="cartao-head"><p class="eyebrow">Cartão-resposta · ${from} a ${to}</p><span class="timer" data-t0="${provaSel.t0}" data-dur="${n * 180}"></span></div>
+      <ol class="crows">${rows}</ol>
+      ${allDone ? '' : `<button class="primary" id="corrigir" data-act="corrigir" ${anyMarked ? '' : 'disabled'}>${corrected ? 'Corrigir o que falta' : 'Corrigir'}</button>`}
+      <p class="meta">Tempo sugerido: 3 minutos por questão. Na correção, questão em branco conta como erro, igual na prova.</p>
+    </section>`;
+}
+
+function viewPadroes(){
+  const cnt = {A:0, B:0, C:0, D:0, E:0}; let tot = 0, anul = 0;
+  EDS.forEach(e => { for (const c of e.k){ if (c in cnt){ cnt[c]++; tot++; } else anul++; } });
+  const nq = tot + anul;
+  const letras = [...L].map(l => `<div class="lt"><b>${l}</b><span>${pct(cnt[l], tot)}%</span></div>`).join('');
+  const temas = EDS.map(e => `<tr><td>${e.nome}</td><td>${esc(e.tema)}</td><td>${esc(e.red)}</td></tr>`).join('');
+  const mats = PADROES.map(([nome, qtd, itens]) => `<details><summary><span>${nome}</span><small>${qtd} na prova</small></summary><ul>${itens.map(i => `<li>${esc(i)}</li>`).join('')}</ul></details>`).join('');
+  return `<header class="hero"><p class="eyebrow">Padrões · ${EDS.length} provas · ${nq} questões</p><h1 class="h1-sm">O que a Fatec repete</h1>
+      <p class="sub">Analisei as 10 últimas provas oficiais (2019 a 2026) e os gabaritos com a matéria de cada questão.</p></header>
+    <section class="card"><p class="eyebrow">Padrão nº 1</p><h2 class="h-sm">Cada prova tem um tema central, e a redação é sobre ele</h2>
+      <p>As questões de todas as matérias giram em torno do mesmo assunto, e a redação também. Na prova de futebol, até Biologia falava de atletas. Por isso, leia a proposta de redação logo no início: as questões dão dados, fatos e exemplos para usar no texto.</p>
+      <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Prova</th><th>Tema central</th><th>Redação</th></tr></thead><tbody>${temas}</tbody></table></div></section>
+    <section class="card"><p class="eyebrow">Como a prova é montada</p><h2 class="h-sm">60 questões desde dezembro de 2025</h2>
+      <ul class="list"><li>Português 8, Matemática 8, Multidisciplinar 9.</li><li>Física, Química, Biologia, História, Geografia, Inglês e Raciocínio lógico: 5 cada.</li><li>Até 2024 eram 54 questões (5 por matéria e 9 multidisciplinares).</li><li>As questões vêm agrupadas por matéria, mas a ordem dos blocos muda de prova para prova. Comece pelo bloco em que ela é mais forte.</li><li>Só os acertos contam: errar não desconta. Nunca deixe em branco.</li></ul></section>
+    <section class="card"><p class="eyebrow">Como as perguntas são feitas</p><h2 class="h-sm">É uma prova de leitura</h2>
+      <ul class="list"><li>Enunciados longos: em média 70 palavras antes das alternativas.</li><li>Mais de 1 em cada 4 questões pede a resposta "de acordo com o texto", "segundo o texto" ou "com base no texto".</li><li>"Assinale a INCORRETA" quase não existe: a palavra aparece só 3 vezes nas 10 provas. Procure sempre a correta.</li><li>Cerca de 1 em cada 4 questões traz texto real com fonte, e 1 em cada 5 tem imagem, gráfico, tabela, charge ou tirinha.</li><li>Em cada prova recente, de 8 a 10 textos servem para duas questões seguidas.</li><li>As fórmulas costumam vir prontas no enunciado. E calculadora é proibida: treine conta à mão.</li></ul></section>
+    <section class="card"><p class="eyebrow">Gabarito</p><h2 class="h-sm">Como as letras se distribuem</h2>
+      <div class="letras">${letras}</div>
+      <p class="meta">Contando as ${tot} respostas das 10 provas. As letras são bem espalhadas: não existe letra mágica. Se precisar chutar, chute, porque em branco é ponto perdido com certeza.</p></section>
+    <h2 class="h-sm">O que mais cai em cada matéria</h2>
+    ${mats}
+    <section class="card"><p class="eyebrow">Redação</p><h2 class="h-sm">Padrões da proposta</h2>
+      <ul class="list"><li>Em todas as 10 provas ela pode escolher: texto <b>narrativo</b> ou <b>dissertativo-argumentativo</b>.</li><li>7 dos 10 temas vieram em forma de pergunta, incluindo os 4 mais recentes. A tese deve responder a pergunta.</li><li>Assuntos que se repetem: tecnologia (4 vezes), trabalho e mercado (3), desigualdade, preconceito e representatividade (3).</li><li>Regras do caderno: dar título, não escrever em versos, organizar em parágrafos, usar a norma-padrão, não copiar os textos da coletânea, caneta azul ou preta, fazer rascunho antes.</li><li>Estrutura segura para dissertação: introdução com a tese, dois parágrafos de argumento (cada um com exemplo ou dado) e conclusão com proposta.</li><li>Se escolher narração: fato, personagens, tempo e lugar bem definidos, sempre ligados ao tema.</li></ul></section>
+    <section class="card"><p class="eyebrow">Dia da prova</p><h2 class="h-sm">Regras do caderno oficial</h2>
+      <ul class="list"><li>Portões fecham às 13h. Prova de 5 horas.</li><li>Levar documento de identidade original.</li><li>Caneta esferográfica azul ou preta. Questão rasurada ou com duas marcas é anulada, e a folha de respostas não é trocada.</li><li>Proibidos: calculadora, régua, celular ligado, relógio inteligente, boné, óculos escuros, corretivo.</li><li>Não dá para sair do prédio antes de 2h30 de prova.</li></ul></section>
+    <p class="meta">Material de estudo independente, sem vínculo com a Fatec ou o Centro Paula Souza.</p>`;
+}
+
+function viewProgresso(){
+  const ks = new Set([...Object.keys(S.days), ...Object.keys(S.red)]);
+  const dias = [...ks].filter(studied).length;
+  let tq = 0, tok = 0, tp = 0, tpok = 0;
+  for (const d of Object.values(S.days)){ tq += d.q || 0; tok += d.ok || 0; tp += d.pr || 0; tpok += d.prok || 0; }
+  const rev = Object.values(S.qs).filter(r => r.due).length;
+  const by = {}; AREAS.forEach(a => by[a] = {n:0, ok:0});
+  for (const a in S.ar){ if (by[a]){ by[a].n += S.ar[a].n; by[a].ok += S.ar[a].ok; } }
+  EDS.forEach(e => { const st = S.pr[e.id]; if (!st) return; for (const q in st.c){ const sc = e.s[+q - 1]; if (!MAT[sc]) continue; const b = by[MAT[sc]]; b.n++; if (isRight(e, +q, st.a[q])) b.ok++; } });
+  const rows = AREAS.map(a => { const b = by[a], p = b.n ? pct(b.ok, b.n) : null;
+    return `<div><div class="bar-top"><span>${a} <small>· ${NA_PROVA[a]} na prova</small></span><span class="num">${p == null ? 'sem dados' : `${p}% · ${b.ok}/${b.n}`}</span></div><div class="track"><i style="width:${p || 0}%"></i></div></div>`; }).join('');
+  let w = null; AREAS.forEach(a => { const b = by[a]; if (b.n >= 3){ const p = b.ok / b.n; if (!w || p < w.p) w = {a, p}; } });
+  const eds = EDS.map(e => { const p = prStats(e.id); return p.n ? `<li><span>${e.nome}</span><b>${p.ok}/${p.n}</b></li>` : ''; }).join('');
+  return `<header class="hero"><p class="eyebrow">Progresso</p><h1 class="h1-sm">Como você está indo</h1></header>
+    <div class="tiles">
+      <div class="tile"><b>${dias}</b><span>dias estudados</span></div>
+      <div class="tile"><b>${tq + tp}</b><span>questões feitas</span></div>
+      <div class="tile"><b>${tq + tp ? pct(tok + tpok, tq + tp) + '%' : '—'}</b><span>de acerto</span></div>
+      <div class="tile"><b>${rev}</b><span>para revisar</span></div>
+    </div>
+    ${w ? `<section class="card"><p class="eyebrow">Ponto para reforçar</p><p><b>${w.a}</b>: ${Math.round(w.p * 100)}% de acerto. ${esc(DICA_MAT[Object.keys(MAT).find(c => MAT[c] === w.a)])}</p></section>` : ''}
+    <section class="card"><h2 class="h-sm">Por matéria (questões comentadas + provas oficiais)</h2><div class="bars">${rows}</div></section>
+    <section class="card"><h2 class="h-sm">Provas oficiais corrigidas</h2>${eds ? `<ul class="plain">${eds}</ul>` : '<p class="meta">Nenhuma ainda. Aos domingos o app indica um bloco de 10 questões da prova de dezembro de 2025.</p>'}</section>
+    <p class="meta">Questões comentadas já vistas: ${Object.keys(S.qs).length} de ${Q.length}. O progresso fica salvo neste aparelho.</p>
+    <button class="link danger" id="reset" data-act="reset">${resetArm ? 'Toque de novo para apagar tudo' : 'Apagar meu progresso'}</button>`;
+}
+
+function render(){
+  nav.hidden = !!sess;
+  app.innerHTML = sess ? (sess.end ? viewEnd() : viewQuiz())
+    : tab === 'hoje' ? viewHome() : tab === 'provas' ? viewProvas() : tab === 'padroes' ? viewPadroes() : viewProgresso();
+  nav.querySelectorAll('[data-tab]').forEach(b => b.setAttribute('aria-current', !sess && b.dataset.tab === tab ? 'page' : 'false'));
+  tick();
+}
+function fmtLeft(t0, dur){ const rem = dur - Math.floor((Date.now() - t0) / 1000); return rem <= 0 ? 'tempo ✓' : Math.floor(rem / 60) + ':' + pad(rem % 60); }
+function tick(){ document.querySelectorAll('.timer[data-t0]').forEach(el => { el.textContent = fmtLeft(+el.dataset.t0, +el.dataset.dur); }); }
+
+/* ---------- eventos ---------- */
+document.addEventListener('click', ev => {
+  const tb = ev.target.closest('[data-tab]');
+  if (tb){ tab = tb.dataset.tab; resetArm = false; render(); scrollTo(0, 0); return; }
+  const b = ev.target.closest('[data-act]'); if (!b) return;
+  const act = b.dataset.act;
+  if (act === 'start'){
+    const f = FOCO[parseKey(today()).getDay()];
+    startSession(+b.dataset.n || 8, f ? f.areas : [], !!b.dataset.rev);
+  } else if (act === 'pick'){
+    if (sess.revealed) return;
+    sess.chosen = +b.dataset.o;
+    app.querySelectorAll('.alt').forEach(el => { const on = +el.dataset.o === sess.chosen; el.classList.toggle('sel', on); el.setAttribute('aria-pressed', on); });
+    $('#confirmar').disabled = false;
+  } else if (act === 'confirm'){
+    if (sess.chosen == null || sess.revealed) return;
+    const q = QM[sess.ids[sess.i]], ok = sess.chosen === q.c;
+    sess.revealed = true; sess.res.push({id:q.id, ok}); record(q, ok); render();
+  } else if (act === 'next'){
+    sess.i++;
+    if (sess.i >= sess.ids.length) sess.end = true;
+    else { sess.chosen = null; sess.revealed = false; newPerm(); }
+    render(); scrollTo(0, 0);
+  } else if (act === 'quit'){
+    if (sess.res.length) sess.end = true; else sess = null;
+    render(); scrollTo(0, 0);
+  } else if (act === 'home'){
+    sess = null; tab = 'hoje'; render(); scrollTo(0, 0);
+  } else if (act === 'ed-open'){
+    provaSel = {id:b.dataset.id, from:1, to:10, t0:Date.now()}; render(); scrollTo(0, 0);
+  } else if (act === 'sun-open'){
+    tab = 'provas'; provaSel = {id:SUNDAY_ED, from:+b.dataset.f, to:+b.dataset.t, t0:Date.now()}; render(); scrollTo(0, 0);
+  } else if (act === 'ed-back'){
+    provaSel = null; render(); scrollTo(0, 0);
+  } else if (act === 'blk'){
+    provaSel.from = +b.dataset.f; provaSel.to = +b.dataset.t; provaSel.t0 = Date.now(); render();
+  } else if (act === 'mark'){
+    const st = prState(provaSel.id), q = +b.dataset.q, l = b.dataset.l;
+    if (st.c[q]) return;
+    if (st.a[q] === l) delete st.a[q]; else st.a[q] = l;
+    save();
+    b.closest('.crow').querySelectorAll('.bub-btn').forEach(x => { const on = x.dataset.l === st.a[q]; x.classList.toggle('sel', on); x.setAttribute('aria-pressed', on); });
+    const c = $('#corrigir'); if (c) c.disabled = false;
+  } else if (act === 'corrigir'){
+    const e = edById(provaSel.id), st = prState(e.id); let n = 0, ok = 0;
+    for (let q = provaSel.from; q <= provaSel.to; q++){ if (st.c[q]) continue; st.c[q] = true; n++; if (isRight(e, q, st.a[q])) ok++; }
+    bumpDay('pr', ok, n); save(); render();
+    const r = $('#res'); if (r) r.scrollIntoView({block:'start'});
+  } else if (act === 'refazer'){
+    const st = prState(provaSel.id);
+    for (let q = provaSel.from; q <= provaSel.to; q++){ delete st.a[q]; delete st.c[q]; }
+    provaSel.t0 = Date.now(); save(); render();
+  } else if (act === 'reset'){
+    if (!resetArm){ resetArm = true; b.textContent = 'Toque de novo para apagar tudo'; setTimeout(() => { resetArm = false; const r = $('#reset'); if (r) r.textContent = 'Apagar meu progresso'; }, 4000); }
+    else { S = fresh(); save(); resetArm = false; render(); }
+  }
+});
+document.addEventListener('change', ev => {
+  const el = ev.target;
+  if (el.dataset && el.dataset.red != null){
+    const t = today(), r = S.red[t] || [false, false, false];
+    r[+el.dataset.red] = el.checked; S.red[t] = r; save(); render();
+  }
+});
+
+render();
+setInterval(tick, 1000);
+</script>
+
+</body>
+</html>
