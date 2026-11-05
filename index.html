@@ -72,6 +72,17 @@ p{margin:0}
 .link{appearance:none;background:none;border:0;padding:6px 0;color:var(--pen);font:600 .95rem var(--f-ui);text-decoration:underline;text-underline-offset:3px;cursor:pointer;align-self:flex-start}
 .danger{color:var(--bad)}
 .row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.simnav{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.ghost:disabled{opacity:.4;cursor:default}
+.chute{display:flex;align-items:center;gap:10px;font-size:.95rem;color:var(--muted)}
+.chute input{width:22px;height:22px;accent-color:var(--pen);flex:none}
+.tbl.compact{min-width:0}
+.rev details{border-top:1px solid var(--line);padding:0}
+.rev summary{padding:10px 0;font-weight:600;font-size:.95rem;display:flex;gap:8px;align-items:baseline;cursor:pointer;list-style:none}
+.rev summary::-webkit-details-marker{display:none}
+.rev .body{display:flex;flex-direction:column;gap:8px;padding-bottom:12px;font-size:.95rem}
+.tag{font:600 .7rem var(--f-mono);padding:2px 6px;border-radius:4px;flex:none}
+.tag.ok{background:var(--ok-soft);color:var(--ok)} .tag.bad{background:var(--bad-soft);color:var(--bad)} .tag.nil{background:var(--line);color:var(--muted)}
 input[type="text"]{font:500 16px var(--f-ui);color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 12px;min-height:44px;flex:1;min-width:0}
 .reltxt{width:100%;min-height:160px;font:13px/1.45 var(--f-mono);color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:10px;margin-top:8px}
 :focus-visible{outline:3px solid var(--pen);outline-offset:2px}
@@ -209,7 +220,7 @@ details > ul{margin:0 0 14px;padding-left:1.15em;display:flex;flex-direction:col
 <nav id="nav" class="nav" aria-label="Seções">
   <div class="in">
     <button data-tab="hoje">Hoje</button>
-    <button data-tab="provas">Provas</button>
+    <button data-tab="provas">Simulados</button>
     <button data-tab="padroes">Padrões</button>
     <button data-tab="progresso">Progresso</button>
   </div>
@@ -704,7 +715,338 @@ const Q = [
  p:`UTC−3 significa 3 horas atrás do horário de referência (UTC+0). Quando são 16h em Brasília, no UTC+0 já são 16 + 3 = 19h.`,
  pi:`Os números dos fusos: de −3 para 0 são 3 horas a mais.`,
  ar:[0,`13h vem de subtrair 3 horas em vez de somar. Quem está mais a leste tem o relógio adiantado.`],
- d:`Fuso horário caiu em 2024/2 e 2026/2, sempre misturando Geografia e Matemática. Indo para leste, adianta o relógio; indo para oeste, atrasa.`}
+ d:`Fuso horário caiu em 2024/2 e 2026/2, sempre misturando Geografia e Matemática. Indo para leste, adianta o relógio; indo para oeste, atrasa.`},
+
+/* ---------- lote 2 ---------- */
+{id:'por9',a:'Português',t:'Interpretação',
+ x:`Minha avó guardava receitas num caderno de capa dura. Não havia medidas exatas: "uma xícara bem cheia", "farinha até dar o ponto". Quando tentei seguir o caderno pela primeira vez, o bolo afundou. Só depois entendi que aquelas receitas não ensinavam a cozinhar; ⟦supunham que a pessoa já soubesse⟧.`,
+ q:`De acordo com o texto, o bolo afundou porque`,
+ al:[`as receitas pressupunham um conhecimento que o narrador ainda não tinha.`,`a avó errava as quantidades de propósito.`,`o caderno estava incompleto, sem várias páginas.`,`o narrador usou ingredientes estragados.`,`receitas antigas não funcionam mais hoje em dia.`],c:0,
+ p:`O narrador conclui que as receitas "supunham que a pessoa já soubesse" cozinhar. Medidas como "até dar o ponto" exigem uma experiência que ele não tinha.`,
+ pi:`"Supunham que a pessoa já soubesse".`,
+ ar:[4,`Generalização: o texto fala de um caderno e de um leitor sem experiência, não de todas as receitas antigas.`],
+ d:`Alternativas que generalizam ("todas", "não funcionam mais") costumam ir além do texto. A certa fica presa ao que foi dito.`},
+{id:'por10',a:'Português',t:'Comparação de textos',
+ x:`Texto I: "As redes sociais aproximaram pessoas que estavam longe."\nTexto II: "Nunca estivemos tão conectados e, ao mesmo tempo, ⟦tão sozinhos⟧."`,
+ q:`Ao se compararem os textos, conclui-se que`,
+ al:[`o texto II relativiza o efeito positivo apontado pelo texto I.`,`os dois textos defendem exatamente a mesma ideia.`,`o texto I critica as redes sociais.`,`o texto II nega que as redes conectem as pessoas.`,`nenhum dos textos trata de relações humanas.`],c:0,
+ p:`O texto I aponta um efeito positivo (aproximação). O texto II reconhece a conexão, mas acrescenta a solidão: ele relativiza, sem negar.`,
+ pi:`"E, ao mesmo tempo, tão sozinhos".`,
+ ar:[3,`O texto II não nega a conexão ("nunca estivemos tão conectados"). Ele soma um efeito negativo.`],
+ d:`"Ao se compararem os textos" caiu em 2025/2 e 2026/2. Resuma cada texto em uma frase e veja se concordam, discordam ou se um relativiza o outro.`},
+{id:'por11',a:'Português',t:'Figuras de linguagem',
+ x:`Na hora do rush, ⟦a avenida é um rio de carros⟧ que não corre.`,
+ q:`Na frase, ocorre principalmente`,
+ al:[`metáfora.`,`ironia.`,`hipérbole.`,`eufemismo.`,`pleonasmo.`],c:0,
+ p:`A avenida é chamada de "rio" sem a palavra "como": é uma comparação implícita, ou seja, metáfora.`,
+ pi:`"É um rio de carros".`,
+ ar:[2,`Pode parecer exagero, mas o recurso central é aproximar avenida e rio por semelhança. Hipérbole seria exagerar uma quantidade ("um milhão de carros").`],
+ d:`Com "como" = comparação. Sem "como", dizendo que uma coisa "é" outra = metáfora.`},
+{id:'por12',a:'Português',t:'Verbos',
+ x:`Numa campanha, lia-se: "⟦Recicle⟧ o lixo e ⟦economize⟧ água."`,
+ q:`Passando as formas verbais para a 2ª pessoa do singular (tu), no imperativo afirmativo, a frase fica:`,
+ al:[`Recicla o lixo e economiza água.`,`Reciclas o lixo e economizas água.`,`Recicle o lixo e economize água.`,`Reciclai o lixo e economizai água.`,`Recicles o lixo e economizes água.`],c:0,
+ p:`O imperativo afirmativo de "tu" vem do presente do indicativo sem o "s": tu reciclas → recicla; tu economizas → economiza.`,
+ pi:`"Recicle" e "economize" estão na 3ª pessoa (você).`,
+ ar:[1,`"Reciclas" e "economizas" são presente do indicativo, não imperativo. Falta tirar o "s".`],
+ d:`Imperativo caiu em 2025/2. Afirmativo: tu e vós vêm do presente do indicativo sem o "s"; as outras pessoas vêm do presente do subjuntivo.`},
+{id:'por13',a:'Português',t:'Pronomes e retomada',
+ x:`A biblioteca do bairro estava fechada havia anos. A comunidade decidiu ⟦reabri-la⟧ com doações de livros.`,
+ q:`O pronome em "reabri-la" retoma`,
+ al:[`a biblioteca do bairro.`,`a comunidade.`,`as doações.`,`os livros.`,`os anos.`],c:0,
+ p:`O que estava fechado e vai ser reaberto é a biblioteca. "-la" é feminino singular, como "a biblioteca".`,
+ pi:`Feminino singular + o que pode ser reaberto.`,
+ ar:[1,`"Comunidade" também é feminina e singular, mas é ela quem reabre, não o que é reaberto.`],
+ d:`Quando dois termos têm o mesmo gênero e número, decida pelo sentido: troque o pronome pelo nome e veja se a frase faz sentido.`},
+{id:'por14',a:'Português',t:'Gênero textual',
+ x:`⟦Vendo⟧ bicicleta aro 29, pouco uso, freio a disco. ⟦Aceito proposta⟧. Tratar pelo telefone do anúncio.`,
+ q:`O texto pertence ao gênero`,
+ al:[`anúncio classificado.`,`crônica.`,`notícia.`,`editorial.`,`resenha.`],c:0,
+ p:`Texto curto, que oferece um produto, com características e forma de contato: é um classificado.`,
+ pi:`Oferta de produto + contato.`,
+ ar:[2,`Notícia relata um fato de interesse público (quem, quando, onde). Aqui alguém só quer vender um objeto.`],
+ d:`Para reconhecer o gênero, pergunte qual é o objetivo (vender, informar, opinar, narrar) e onde o texto circula.`},
+
+{id:'mat9',a:'Matemática',t:'Juros simples',o:1,
+ x:`Um empréstimo de ⟦R$ 2.000,00⟧ foi feito a ⟦juros simples de 3% ao mês⟧, por ⟦5 meses⟧.`,
+ q:`O valor total pago ao final será de`,
+ al:[`R$ 2.150,00`,`R$ 2.300,00`,`R$ 2.318,55`,`R$ 2.600,00`,`R$ 3.000,00`],c:1,
+ p:`Juros simples: J = C · i · t = 2.000 × 0,03 × 5 = 300. Total: 2.000 + 300 = R$ 2.300,00.`,
+ pi:`"Juros simples": a taxa incide sempre sobre os R$ 2.000,00 iniciais.`,
+ ar:[2,`R$ 2.318,55 seria o resultado com juros compostos (2.000 × 1,03⁵). O enunciado diz simples.`],
+ d:`Juros simples: J = C·i·t. Juros compostos: M = C·(1 + i)ᵗ. Leia qual dos dois o enunciado pede.`},
+{id:'mat10',a:'Matemática',t:'Progressão aritmética',o:1,
+ x:`Uma prefeitura construiu ⟦2 km de ciclovia no primeiro mês⟧ e, a cada mês seguinte, constrói ⟦3 km a mais⟧ do que no mês anterior.`,
+ q:`No oitavo mês, serão construídos`,
+ al:[`21 km`,`23 km`,`24 km`,`26 km`,`100 km`],c:1,
+ p:`É uma PA de razão 3: aₙ = a₁ + (n − 1)·r = 2 + 7 × 3 = 23 km. (100 km seria o total dos oito meses somados.)`,
+ pi:`"3 km a mais a cada mês": razão constante.`,
+ ar:[3,`26 km vem de usar n em vez de (n − 1): 2 + 8 × 3.`],
+ d:`Termo geral da PA: aₙ = a₁ + (n − 1)·r. Progressões caíram em 2025/2 e 2026/1.`},
+{id:'mat11',a:'Matemática',t:'Probabilidade',o:1,
+ x:`Num sorteio, cada bilhete tem um número de ⟦1 a 20⟧. Ganha quem tirar um ⟦múltiplo de 4⟧.`,
+ q:`A probabilidade de ganhar é de`,
+ al:[`1/20`,`1/5`,`1/4`,`1/2`,`4/5`],c:2,
+ p:`Múltiplos de 4 entre 1 e 20: 4, 8, 12, 16 e 20, ou seja, 5 casos. Probabilidade = 5/20 = 1/4.`,
+ pi:`Liste os múltiplos de 4 até o 20.`,
+ ar:[1,`1/5 aparece quando se esquece o 20 e se contam só 4 múltiplos (4/20).`],
+ d:`Com poucos casos, liste todos. Esquecer o último número é o erro mais comum.`},
+{id:'mat12',a:'Matemática',t:'Circunferência',o:1,
+ x:`Uma praça circular tem ⟦raio de 10 m⟧. Será instalada uma cerca em ⟦todo o contorno⟧. Adote π = 3,14.`,
+ q:`O comprimento da cerca é de aproximadamente`,
+ al:[`31,4 m`,`62,8 m`,`100 m`,`314 m`,`628 m`],c:1,
+ p:`Comprimento da circunferência = 2πr = 2 × 3,14 × 10 = 62,8 m.`,
+ pi:`"Contorno" pede o comprimento (perímetro), não a área.`,
+ ar:[3,`314 seria a área (π · r² = 314 m²), e área não mede cerca.`],
+ d:`Contorno = 2πr; espaço de dentro = πr². A palavra "cerca" já indica perímetro.`},
+{id:'mat13',a:'Matemática',t:'Função exponencial',o:1,
+ x:`Uma cultura de bactérias ⟦dobra a cada hora⟧. No início havia ⟦100 bactérias⟧.`,
+ q:`Depois de 5 horas, haverá`,
+ al:[`500 bactérias`,`1 000 bactérias`,`1 600 bactérias`,`3 200 bactérias`,`10 000 bactérias`],c:3,
+ p:`100 × 2⁵ = 100 × 32 = 3 200. (1 600 é o que haveria depois de 4 horas.)`,
+ pi:`"Dobra a cada hora": multiplica por 2 cinco vezes.`,
+ ar:[0,`500 vem de somar 100 por hora (crescimento linear). Dobrar é multiplicar.`],
+ d:`O que "dobra", "triplica" ou "cai pela metade" cresce de forma exponencial: Q = Q₀ · 2ᵗ.`},
+{id:'mat14',a:'Matemática',t:'Estatística',o:1,
+ x:`As notas de uma turma num simulado foram: ⟦4, 6, 6, 7, 8, 9, 10⟧.`,
+ q:`A mediana dessas notas é`,
+ al:[`6`,`7`,`7,1`,`8`,`9`],c:1,
+ p:`São 7 notas já em ordem: a mediana é a do meio, a 4ª, que vale 7.`,
+ pi:`7 valores em ordem: o do meio é o 4º.`,
+ ar:[2,`7,1 é a média aritmética (50 ÷ 7), não a mediana.`],
+ d:`Média: soma ÷ quantidade. Mediana: valor do meio com os dados em ordem. Moda: o que mais se repete (aqui, 6).`},
+
+{id:'mul7',a:'Multidisciplinar',t:'Química + Matemática',o:1,
+ x:`Um suco concentrado tem ⟦80 g de açúcar por litro⟧. Uma pessoa bebeu ⟦0,25 L⟧ desse suco.`,
+ q:`A massa de açúcar ingerida foi de`,
+ al:[`8 g`,`20 g`,`32 g`,`80 g`,`320 g`],c:1,
+ p:`Massa = concentração × volume = 80 g/L × 0,25 L = 20 g.`,
+ pi:`A unidade g/L: multiplique pelos litros.`,
+ ar:[4,`320 g vem de dividir 80 por 0,25 em vez de multiplicar.`],
+ d:`Concentração = massa ÷ volume, então massa = concentração × volume. A unidade mostra a conta.`},
+{id:'mul8',a:'Multidisciplinar',t:'História + Português',
+ x:`Em 1888, a Lei Áurea extinguiu a escravidão no Brasil. ⟦Não houve, porém, políticas de terra, trabalho ou educação⟧ para as pessoas libertadas, que passaram a disputar empregos mal pagos nas cidades.`,
+ q:`O texto permite concluir que`,
+ al:[`o fim legal da escravidão não garantiu a inclusão social dos libertos.`,`a Lei Áurea distribuiu terras aos libertos.`,`depois de 1888 deixou de existir desigualdade racial no Brasil.`,`os libertos foram contratados com bons salários pelas fazendas.`,`a escravidão acabou por causa da industrialização dos anos 1950.`],c:0,
+ p:`O texto diz que não houve políticas de terra, trabalho ou educação: a liberdade legal veio sem condições de inclusão.`,
+ pi:`"Não houve, porém, políticas…": o "porém" introduz a limitação da lei.`,
+ ar:[2,`Extrapolação e contradição: o texto mostra justamente o começo de uma desigualdade que continuou.`],
+ d:`Em multidisciplinares de História, a certa costuma ligar o fato (a lei) à consequência que o texto aponta.`},
+{id:'mul9',a:'Multidisciplinar',t:'Física + Geografia',o:1,
+ x:`Um painel solar de ⟦400 W⟧ recebe sol direto por cerca de ⟦5 horas por dia⟧.`,
+ q:`Em 30 dias, a energia gerada por esse painel é de aproximadamente`,
+ al:[`2 kWh`,`12 kWh`,`60 kWh`,`600 kWh`,`2 000 kWh`],c:2,
+ p:`400 W = 0,4 kW. Por dia: 0,4 × 5 = 2 kWh. Em 30 dias: 2 × 30 = 60 kWh.`,
+ pi:`W → kW (÷ 1 000) antes de multiplicar pelas horas e pelos dias.`,
+ ar:[0,`2 kWh é a energia de um dia só. Faltou multiplicar pelos 30 dias.`],
+ d:`Energia = potência × tempo: kW × horas por dia × dias. Energia solar combina com o tema de economia verde (2025/2).`},
+{id:'mul10',a:'Multidisciplinar',t:'Biologia + Geografia',
+ x:`A Floresta Amazônica lança enormes quantidades de vapor de água na atmosfera pela transpiração das plantas. Parte desse vapor é levada pelos ventos e ⟦forma chuvas no Centro-Oeste e no Sudeste⟧.`,
+ q:`Com base no texto, o desmatamento da Amazônia pode`,
+ al:[`reduzir as chuvas em regiões distantes da floresta.`,`aumentar a umidade do Sudeste.`,`afetar apenas a fauna local da Amazônia.`,`acabar com os ventos no Brasil.`,`aumentar a transpiração das plantas restantes a ponto de compensar a perda.`],c:0,
+ p:`Menos floresta → menos transpiração → menos vapor levado pelos ventos → menos chuva nas regiões que recebem essa umidade.`,
+ pi:`O vapor da floresta "forma chuvas no Centro-Oeste e no Sudeste".`,
+ ar:[2,`"Apenas" restringe demais: o texto mostra justamente efeitos longe da floresta.`],
+ d:`Siga a cadeia de causa e efeito do texto. "Apenas" e "somente" costumam deixar a alternativa errada.`},
+{id:'mul11',a:'Multidisciplinar',t:'Inglês + Biologia',en:1,
+ x:`Bees are disappearing in many countries. ⟦Pesticides, habitat loss and climate change⟧ are among the main causes, scientists say.`,
+ q:`Segundo o texto, entre as causas do desaparecimento das abelhas estão`,
+ al:[`pesticidas, perda de habitat e mudanças climáticas.`,`o excesso de flores nas cidades.`,`o ataque de outros insetos predadores.`,`a falta de mel no mercado.`,`o aumento do número de apicultores.`],c:0,
+ p:`"Pesticides, habitat loss and climate change" = pesticidas, perda de habitat e mudanças climáticas.`,
+ pi:`"Among the main causes" = entre as principais causas.`,
+ ar:[2,`O texto não fala de predadores. Responda só com o que está escrito.`],
+ d:`Inglês com ciência caiu em 2025/2 e 2026/1. Os cognatos ajudam: pesticides, habitat, climate.`},
+{id:'mul12',a:'Multidisciplinar',t:'Matemática + leitura',o:1,
+ x:`Numa escola, ⟦60% dos alunos usam ônibus⟧. ⟦Desses⟧, metade também usa bicicleta em algum dia da semana.`,
+ q:`A porcentagem do total de alunos que usam ônibus e também bicicleta é de`,
+ al:[`10%`,`30%`,`50%`,`60%`,`110%`],c:1,
+ p:`Metade de 60% = 0,5 × 60% = 30% do total de alunos.`,
+ pi:`"Desses": a metade é calculada sobre os 60%, não sobre o total.`,
+ ar:[2,`50% é a metade de quem usa ônibus, mas a pergunta é sobre o total de alunos.`],
+ d:`"Desses", "dentre eles": a nova porcentagem é calculada sobre o grupo anterior. Multiplique as porcentagens.`},
+
+{id:'fis4',a:'Física',t:'Ondas',o:1,
+ x:`Uma rádio FM transmite na frequência de ⟦100 MHz⟧. A velocidade das ondas de rádio é 3 × 10⁸ m/s. Use v = λ · f.`,
+ q:`O comprimento de onda dessa transmissão é de`,
+ al:[`0,3 m`,`3 m`,`30 m`,`300 m`,`3 × 10¹⁶ m`],c:1,
+ p:`100 MHz = 100 × 10⁶ Hz = 10⁸ Hz. λ = v ÷ f = 3 × 10⁸ ÷ 10⁸ = 3 m.`,
+ pi:`O prefixo M (mega) vale 10⁶.`,
+ ar:[4,`3 × 10¹⁶ vem de multiplicar v por f em vez de dividir.`],
+ d:`Prefixos: k = 10³, M = 10⁶, G = 10⁹. Converta antes de usar a fórmula.`},
+{id:'fis5',a:'Física',t:'Calorimetria',o:1,
+ x:`Para aquecer ⟦2 kg de água⟧ de 20 °C para 70 °C, use Q = m · c · Δθ, com ⟦c = 1 cal/(g·°C)⟧.`,
+ q:`A quantidade de calor necessária é de`,
+ al:[`100 cal`,`140 cal`,`100 000 cal`,`140 000 cal`,`1 000 000 cal`],c:2,
+ p:`Massa em gramas: 2 kg = 2 000 g. Δθ = 70 − 20 = 50 °C. Q = 2 000 × 1 × 50 = 100 000 cal. (140 000 viria de usar 70 °C em vez da variação.)`,
+ pi:`c em cal/(g·°C) pede a massa em gramas.`,
+ ar:[0,`100 cal vem de usar a massa em quilos (2) com o calor específico em gramas.`],
+ d:`Confira se as unidades combinam antes de multiplicar. Δθ é a variação: final menos inicial.`},
+{id:'fis6',a:'Física',t:'Queda livre',o:1,
+ x:`Uma bola é solta do alto de um prédio e leva ⟦2 segundos⟧ para chegar ao chão. Despreze a resistência do ar e use g = 10 m/s² e ⟦h = g · t² / 2⟧.`,
+ q:`A altura do prédio é de`,
+ al:[`10 m`,`20 m`,`40 m`,`80 m`,`200 m`],c:1,
+ p:`h = 10 × 2² ÷ 2 = 10 × 4 ÷ 2 = 20 m.`,
+ pi:`t² = 4 e não esqueça de dividir por 2.`,
+ ar:[2,`40 m vem de esquecer de dividir por 2 (10 × 4).`],
+ d:`Fórmula dada no enunciado: substitua com calma e resolva o quadrado primeiro.`},
+
+{id:'qui4',a:'Química',t:'Equações químicas',
+ x:`A combustão completa do metano pode ser representada por: ⟦CH₄ + 2 O₂ → CO₂ + 2 H₂O⟧.`,
+ q:`Na equação, para cada molécula de metano consumida, formam-se`,
+ al:[`1 molécula de CO₂ e 2 de água.`,`2 moléculas de CO₂ e 1 de água.`,`1 molécula de CO₂ e 1 de água.`,`2 moléculas de CO₂ e 2 de água.`,`4 moléculas de água e nenhuma de CO₂.`],c:0,
+ p:`Os coeficientes mostram: 1 CH₄ forma 1 CO₂ e 2 H₂O. Conferindo: C 1 = 1; H 4 = 4; O 4 = 2 + 2.`,
+ pi:`Os números na frente das fórmulas (coeficientes).`,
+ ar:[1,`Inverte os coeficientes: o 2 está na frente da água, não do CO₂.`],
+ d:`Equações e combustão caíram em 2024/2 e 2025/2. Para conferir o balanceamento, conte cada elemento dos dois lados.`},
+{id:'qui5',a:'Química',t:'Meia-vida',o:1,
+ x:`Um material radioativo tem ⟦meia-vida de 10 anos⟧. Havia 80 g no início.`,
+ q:`Depois de 30 anos, restarão`,
+ al:[`5 g`,`10 g`,`20 g`,`40 g`,`53,3 g`],c:1,
+ p:`30 anos = 3 meias-vidas: 80 → 40 → 20 → 10 g.`,
+ pi:`Divida por 2 uma vez a cada 10 anos.`,
+ ar:[2,`20 g é o que resta depois de 20 anos (duas meias-vidas).`],
+ d:`Meia-vida caiu em 2024/2 e 2026/1. Monte a escadinha dividindo por 2.`},
+{id:'qui6',a:'Química',t:'Misturas',
+ x:`Ao misturar água e óleo de cozinha, formam-se ⟦duas fases⟧, porque a água é polar e o óleo é apolar.`,
+ q:`Essa mistura é classificada como`,
+ al:[`heterogênea.`,`homogênea.`,`substância pura.`,`solução.`,`liga metálica.`],c:0,
+ p:`Duas fases visíveis = mistura heterogênea. Substâncias polares se misturam com polares; apolares, com apolares.`,
+ pi:`"Duas fases".`,
+ ar:[3,`Solução é mistura homogênea, de uma fase só, como água com sal dissolvido.`],
+ d:`Uma fase = homogênea (solução); duas ou mais = heterogênea. A polaridade explica o que se mistura.`},
+
+{id:'bio4',a:'Biologia',t:'Grupos sanguíneos',
+ x:`No sistema ABO, as hemácias de pessoas do tipo O ⟦não têm aglutinogênios A nem B⟧.`,
+ q:`Por isso, considerando apenas o sistema ABO, o sangue tipo O é chamado de`,
+ al:[`doador universal.`,`receptor universal.`,`tipo incompatível com todos.`,`tipo que só pode doar para AB.`,`tipo que não pode receber sangue.`],c:0,
+ p:`Sem antígenos A ou B nas hemácias, o sangue O não é atacado pelos anticorpos de nenhum receptor do sistema ABO: é o doador universal.`,
+ pi:`"Não têm aglutinogênios A nem B".`,
+ ar:[1,`Receptor universal é o AB, que não tem anticorpos anti-A nem anti-B no plasma.`],
+ d:`Grupos sanguíneos caíram em 2026/1. O = doador universal; AB = receptor universal.`},
+{id:'bio5',a:'Biologia',t:'Fotossíntese',
+ x:`Na ⟦fotossíntese⟧, as plantas usam luz, gás carbônico e água para produzir glicose e liberar oxigênio.`,
+ q:`Esse processo ocorre principalmente`,
+ al:[`nos cloroplastos.`,`nas mitocôndrias.`,`nos ribossomos.`,`no núcleo.`,`nos lisossomos.`],c:0,
+ p:`Os cloroplastos têm clorofila, que capta a luz. As mitocôndrias fazem a respiração celular.`,
+ pi:`Luz + clorofila = cloroplasto.`,
+ ar:[1,`Mitocôndria é a organela da respiração celular, que consome oxigênio e glicose.`],
+ d:`Pares de organelas: cloroplasto (fotossíntese) × mitocôndria (respiração); ribossomo produz proteínas.`},
+{id:'bio6',a:'Biologia',t:'Espécies invasoras',
+ x:`O caramujo-africano foi trazido ao Brasil para criação comercial e acabou ⟦solto na natureza⟧. ⟦Sem predadores naturais⟧ e com reprodução rápida, espalhou-se por várias cidades.`,
+ q:`O caso é um exemplo de`,
+ al:[`espécie exótica invasora.`,`espécie endêmica.`,`controle biológico.`,`extinção natural.`,`mutualismo.`],c:0,
+ p:`Uma espécie de fora (exótica) que se espalha sem controle e causa prejuízos é chamada de invasora.`,
+ pi:`"Trazido ao Brasil" + "sem predadores naturais".`,
+ ar:[2,`Controle biológico é usar um ser vivo para controlar uma praga. Aqui o caramujo é o problema.`],
+ d:`Espécie invasora caiu em 2026/2. Endêmica = só existe naquele lugar; exótica = veio de fora.`},
+
+{id:'his4',a:'História',t:'Guerra Fria',
+ x:`Depois da Segunda Guerra Mundial, Estados Unidos e União Soviética disputaram influência no mundo ⟦sem se enfrentarem diretamente em guerra⟧, por meio da corrida armamentista e da corrida espacial.`,
+ q:`Esse período ficou conhecido como`,
+ al:[`Guerra Fria.`,`Belle Époque.`,`Era Vargas.`,`Revolução Industrial.`,`Idade Média.`],c:0,
+ p:`A disputa entre EUA (capitalismo) e URSS (socialismo), de 1947 a 1991, sem guerra direta entre os dois, é a Guerra Fria.`,
+ pi:`"Sem se enfrentarem diretamente".`,
+ ar:[1,`Belle Époque é o período de otimismo e inovações antes da Primeira Guerra (fim do século XIX até 1914).`],
+ d:`Guerra Fria e Belle Époque caíram em 2026/1. As datas eliminam alternativas: depois de 1945, só sobra a Guerra Fria.`},
+{id:'his5',a:'História',t:'Ditadura militar',
+ x:`Em 1968, durante a ditadura militar, o ⟦AI-5⟧ fechou o Congresso, suspendeu o habeas corpus para crimes políticos e ampliou a censura.`,
+ q:`O AI-5 representou`,
+ al:[`o endurecimento do regime militar.`,`o fim da ditadura e a volta da democracia.`,`a criação da CLT.`,`a independência do Brasil.`,`a abolição da escravidão.`],c:0,
+ p:`O AI-5 deu ao governo poderes de exceção: é o marco do endurecimento do regime.`,
+ pi:`Fechar o Congresso e suspender garantias.`,
+ ar:[1,`A redemocratização veio só nos anos 1980 (Diretas Já em 1984, nova Constituição em 1988).`],
+ d:`Ditadura militar: 1964 a 1985. AI-5 (1968) = endurecimento; Anistia (1979) e Diretas Já (1984) = abertura.`},
+{id:'his6',a:'História',t:'Brasil colonial',
+ x:`No século XVIII, a descoberta de ⟦ouro em Minas Gerais⟧ deslocou o centro econômico da colônia. Em 1763, a capital foi transferida de Salvador para o Rio de Janeiro, ⟦porto por onde o ouro era embarcado⟧.`,
+ q:`A transferência da capital está ligada`,
+ al:[`à importância econômica da mineração e do porto do Rio de Janeiro.`,`à chegada da família real portuguesa em 1808.`,`à construção de Brasília.`,`ao fim do ciclo do café.`,`à Proclamação da República.`],c:0,
+ p:`O texto liga o ouro de Minas ao porto do Rio: a capital foi para perto da nova riqueza.`,
+ pi:`"Porto por onde o ouro era embarcado".`,
+ ar:[1,`A família real chegou em 1808, depois da mudança de 1763. A data elimina a alternativa.`],
+ d:`Compare as datas do texto com as das alternativas. Anacronismo é a pegadinha mais comum em História.`},
+
+{id:'geo4',a:'Geografia',t:'Urbanização',
+ x:`Entre as décadas de 1950 e 1980, milhões de brasileiros ⟦deixaram o campo em direção às grandes cidades⟧. Sem planejamento urbano e moradia suficiente, parte dessa população passou a viver em áreas irregulares.`,
+ q:`O processo descrito é chamado de`,
+ al:[`êxodo rural.`,`migração pendular.`,`transumância.`,`conurbação.`,`gentrificação.`],c:0,
+ p:`A saída em massa do campo para a cidade é o êxodo rural.`,
+ pi:`"Deixaram o campo em direção às grandes cidades".`,
+ ar:[3,`Conurbação é quando duas ou mais cidades crescem até se juntarem.`],
+ d:`Êxodo rural (campo → cidade), migração pendular (ida e volta todo dia), conurbação (cidades que se encontram). Favelas e urbanização caíram em 2026/1.`},
+{id:'geo5',a:'Geografia',t:'Clima',
+ x:`No verão, em muitas cidades do Sudeste, ⟦o calor da tarde faz o ar úmido subir rapidamente⟧, formando nuvens e pancadas de chuva no fim do dia.`,
+ q:`Esse tipo de chuva é chamado de`,
+ al:[`convectiva.`,`orográfica.`,`frontal.`,`ácida.`,`garoa.`],c:0,
+ p:`Ar aquecido sobe, esfria e condensa: é a chuva de convecção, típica das tardes de verão.`,
+ pi:`"O calor faz o ar úmido subir".`,
+ ar:[1,`Orográfica (ou de relevo) acontece quando o ar sobe por causa de uma serra.`],
+ d:`Convectiva = calor; orográfica = relevo; frontal = encontro de massas de ar. Chuvas caíram em 2026/1.`},
+{id:'geo6',a:'Geografia',t:'Blocos econômicos',
+ x:`O ⟦Mercosul⟧, criado em 1991 por Brasil, Argentina, Paraguai e Uruguai, busca a ⟦livre circulação de mercadorias⟧ entre os membros e uma tarifa comum para produtos de fora do bloco.`,
+ q:`O Mercosul é um exemplo de`,
+ al:[`bloco econômico regional.`,`aliança militar.`,`organização religiosa.`,`federação de estados.`,`império colonial.`],c:0,
+ p:`Países vizinhos que reduzem tarifas entre si e adotam tarifa comum para quem é de fora formam um bloco econômico.`,
+ pi:`"Livre circulação de mercadorias" + "tarifa comum".`,
+ ar:[1,`Aliança militar seria algo como a OTAN. O Mercosul trata de comércio.`],
+ d:`Globalização e blocos econômicos aparecem em Geografia e nas multidisciplinares sobre América Latina (2024/2).`},
+
+{id:'ing6',a:'Inglês',t:'Referência',en:1,
+ x:`Many cities are turning old railway lines into parks. ⟦These green spaces⟧ give residents a place to walk, cycle and meet their neighbors.`,
+ q:`A expressão "These green spaces" refere-se`,
+ al:[`aos parques criados nas antigas linhas de trem.`,`aos moradores das cidades.`,`às bicicletas.`,`aos vizinhos.`,`às novas linhas de trem.`],c:0,
+ p:`"These green spaces" (esses espaços verdes) retoma "parks", criados a partir das antigas linhas de trem.`,
+ pi:`"Green spaces" = espaços verdes = parques.`,
+ ar:[4,`O texto fala de linhas antigas virando parques, não de novas linhas.`],
+ d:`Expressões como "these", "it" e "they" retomam algo já dito. Volte uma frase.`},
+{id:'ing7',a:'Inglês',t:'Falsos cognatos',en:1,
+ x:`The child ⟦pretended⟧ to be asleep when her mother came into the room.`,
+ q:`Nesse contexto, "pretended" significa`,
+ al:[`fingiu.`,`pretendeu.`,`preferiu.`,`precisou.`,`prometeu.`],c:0,
+ p:`"Pretend" é falso cognato: significa fingir.`,
+ pi:`Parece "pretender", mas não é.`,
+ ar:[1,`"Pretender" (ter a intenção) em inglês é "to intend" ou "to plan".`],
+ d:`Falsos cognatos que mais caem: pretend (fingir), actually (na verdade), push (empurrar), college (faculdade), parents (pais).`},
+{id:'ing8',a:'Inglês',t:'Verbos modais',en:1,
+ x:`You ⟦should⟧ drink water before you feel thirsty, especially on hot days.`,
+ q:`O verbo "should" indica`,
+ al:[`um conselho.`,`uma proibição.`,`uma habilidade.`,`um fato do passado.`,`uma certeza absoluta.`],c:0,
+ p:`"Should" expressa recomendação: você deveria beber água.`,
+ pi:`"Should" = deveria.`,
+ ar:[1,`Proibição seria "must not" ou "can't".`],
+ d:`Modais: must (obrigação ou dedução), should (conselho), can (habilidade ou permissão), may/might (possibilidade). "Must" caiu em 2026/1.`},
+{id:'ing9',a:'Inglês',t:'Humor',en:1,
+ x:`Sign at a café: "⟦No wifi here⟧. Look up from your phone and talk to the person next to you."`,
+ q:`O humor da placa vem de`,
+ al:[`transformar a falta de internet num convite para conversar com quem está perto.`,`oferecer internet de graça aos clientes.`,`proibir os clientes de conversar.`,`pedir que os clientes deixem o celular no caixa.`,`anunciar um novo modelo de celular.`],c:0,
+ p:`Em vez de pedir desculpas pela falta de wi-fi, a placa transforma isso em vantagem: olhar para cima e conversar.`,
+ pi:`"No wifi here" seguido de "talk to the person next to you".`,
+ ar:[1,`"No wifi" quer dizer que não há internet, e não que ela é grátis.`],
+ d:`Humor de charge, placa e tirinha caiu em 2025/2 e 2026/1. Ele costuma estar numa quebra de expectativa.`},
+
+{id:'rl6',a:'Raciocínio lógico',t:'Sequências',o:1,
+ x:`Observe a sequência: ⟦A, C, F, J, O⟧, …`,
+ q:`A próxima letra é`,
+ al:[`S`,`T`,`U`,`V`,`X`],c:2,
+ p:`Os saltos crescem: +2, +3, +4, +5. O próximo é +6. O é a 15ª letra; 15 + 6 = 21, que é o U (contando K, W e Y).`,
+ pi:`A distância entre as letras: 2, 3, 4, 5.`,
+ ar:[1,`T aparece quando se repete o salto de +5.`],
+ d:`Troque cada letra pela posição no alfabeto (A = 1, B = 2…). O alfabeto oficial tem 26 letras, com K, W e Y.`},
+{id:'rl7',a:'Raciocínio lógico',t:'Dedução',
+ x:`Considere verdadeiras as afirmações: ⟦"Todos os atletas do clube treinam de manhã."⟧ e ⟦"Lia é atleta do clube."⟧`,
+ q:`Conclui-se, necessariamente, que`,
+ al:[`Lia treina de manhã.`,`Lia treina também à noite.`,`todos que treinam de manhã são atletas do clube.`,`Lia não é atleta.`,`nenhum atleta treina à tarde.`],c:0,
+ p:`Se todos os atletas treinam de manhã e Lia é atleta, Lia treina de manhã.`,
+ pi:`"Todos" + Lia pertence ao grupo.`,
+ ar:[2,`"Todo A é B" não garante que "todo B é A". Pode haver quem treine de manhã sem ser atleta do clube.`],
+ d:`Desenhe círculos: o círculo dos atletas fica dentro do círculo de quem treina de manhã.`},
+{id:'rl8',a:'Raciocínio lógico',t:'Calendário',
+ x:`Hoje é ⟦quarta-feira⟧.`,
+ q:`Daqui a 100 dias será`,
+ al:[`sexta-feira.`,`quinta-feira.`,`sábado.`,`domingo.`,`quarta-feira.`],c:0,
+ p:`100 ÷ 7 = 14 semanas e sobram 2 dias. Quarta + 2 dias = sexta-feira.`,
+ pi:`Semanas completas não mudam o dia: só o resto da divisão por 7 importa.`,
+ ar:[4,`Quarta-feira seria a resposta se 100 fosse múltiplo de 7.`],
+ d:`Problemas de calendário: divida por 7 e use só o resto.`}
 ];
 const QM = Object.fromEntries(Q.map(q => [q.id, q]));
 
@@ -727,7 +1069,7 @@ const pct = (a, b) => b ? Math.round(a / b * 100) : 0;
 /* ---------- progresso salvo neste aparelho ---------- */
 const KEY = 'fatec30-v1';
 // log: cada resposta [data, id, acertou 1/0, alternativa marcada]; ses: resumo de cada sessão. Usados no relatório.
-const fresh = () => ({v:1, start:today(), days:{}, qs:{}, ar:{}, red:{}, pr:{}, log:[], ses:[], nome:''});
+const fresh = () => ({v:1, start:today(), days:{}, qs:{}, ar:{}, red:{}, pr:{}, log:[], ses:[], sims:[], autoEnd:true, nome:''});
 function load(){ try { const s = JSON.parse(localStorage.getItem(KEY)); if (s && s.v === 1) return Object.assign(fresh(), s); } catch (e) {} return fresh(); }
 let S = load();
 function save(){ try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
@@ -760,7 +1102,7 @@ function sundayBlock(t){
 }
 
 /* ---------- sessão de questões comentadas ---------- */
-let tab = 'hoje', sess = null, provaSel = null, resetArm = false;
+let tab = 'hoje', sess = null, sim = null, provaSel = null, resetArm = false;
 
 function buildSession(areas, n, rev){
   const t = today(), pick = [];
@@ -779,6 +1121,45 @@ function buildSession(areas, n, rev){
   (rev ? [seen, unseen] : [unseenFoco, unseen, seen]).forEach(add);
   return shuffle(pick);
 }
+/* ---------- simulado: o mesmo número de questões de cada uma das 10 matérias, 3 min por questão ---------- */
+// Prioriza as questões nunca vistas; depois as que ela errou; depois as vistas há mais tempo.
+function pickSim(porMateria){
+  let ids = [];
+  AREAS.forEach(a => {
+    const pool = shuffle(Q.filter(q => q.a === a));
+    const nunca = pool.filter(q => !S.qs[q.id]);
+    const vistas = pool.filter(q => S.qs[q.id]).sort((x, y) => {
+      const r = S.qs[x.id], s = S.qs[y.id];
+      if (r.lastOk !== s.lastOk) return r.lastOk ? 1 : -1;
+      return r.last < s.last ? -1 : r.last > s.last ? 1 : 0;
+    });
+    ids = ids.concat([...nunca, ...vistas].slice(0, porMateria).map(q => q.id));
+  });
+  return ids;
+}
+function startSim(porMateria){
+  const ids = pickSim(porMateria), perm = {};
+  ids.forEach(id => { perm[id] = QM[id].o ? [0, 1, 2, 3, 4] : shuffle([0, 1, 2, 3, 4]); });
+  sim = {ids, perm, i:0, ans:{}, t0:Date.now(), dur:ids.length * 180, auto:S.autoEnd !== false, end:false};
+  render(); scrollTo(0, 0);
+}
+function finishSim(timeout){
+  const t = today(); let c = 0, w = 0, b = 0;
+  sim.ids.forEach(id => {
+    const q = QM[id], a = sim.ans[id];
+    if (a == null){ b++; record(q, false, null, 'sim'); return; }
+    const ok = a === q.c; if (ok) c++; else w++;
+    record(q, ok, a, 'sim');
+  });
+  sim.end = true;
+  sim.result = {c, w, b, n:sim.ids.length, min:Math.max(1, Math.round((Date.now() - sim.t0) / 60000)), timeout:!!timeout};
+  S.sims.unshift({date:t, ...sim.result, items:sim.ids.map(id => [id, sim.ans[id] == null ? null : sim.ans[id]])});
+  S.sims = S.sims.slice(0, 40);
+  S.ses.push({d:t, k:'sim', n:sim.result.n, ok:c, min:sim.result.min});
+  if (S.ses.length > 300) S.ses = S.ses.slice(-300);
+  save();
+}
+
 function newPerm(){ const q = QM[sess.ids[sess.i]]; sess.perm = q.o ? [0, 1, 2, 3, 4] : shuffle([0, 1, 2, 3, 4]); }
 function startSession(n, areas, rev){
   const t = today(), ids = buildSession(areas, n, rev);
@@ -786,9 +1167,9 @@ function startSession(n, areas, rev){
     tags: ids.map(id => { const r = S.qs[id]; return r && r.due && r.due <= t ? 'REVISÃO' : r ? 'REPETIDA' : ''; })};
   newPerm(); render(); scrollTo(0, 0);
 }
-function record(q, ok, ch){
+function record(q, ok, ch, kind){
   const t = today(), r = S.qs[q.id] || {n:0, ok:0, step:0};
-  S.log.push([t, q.id, ok ? 1 : 0, ch]);
+  S.log.push([t, q.id, ok ? 1 : 0, ch, kind || 'dia']);
   if (S.log.length > 2000) S.log = S.log.slice(-2000);
   r.n++; if (ok) r.ok++; r.last = t; r.lastOk = ok;
   if (!ok){ r.due = addDays(t, 1); r.step = 0; }
@@ -862,7 +1243,7 @@ function cardDomingo(t){
     <p>É a prova mais parecida com a sua: a do 1º semestre de 2026, aplicada em 14/12/2025, tema central "${esc(e.tema)}". Abra o caderno oficial, faça as questões <b>${b.from} a ${b.to}</b> em 30 minutos, sem consulta, e marque no cartão-resposta do app. Em 6 domingos você faz a prova inteira.</p>
     ${feitos === 10 ? `<p class="done-line">✓ Bloco corrigido: ${ok} de 10 certas.</p>` : ''}
     <button class="primary" data-act="sun-open" data-f="${b.from}" data-t="${b.to}">${feitos === 10 ? 'Ver o cartão corrigido' : 'Abrir o cartão-resposta'}</button>
-    <button class="link" data-act="start" data-n="8">Quer mais? Fazer 8 questões comentadas</button>
+    <button class="link" data-act="fsim" data-n="3">Ou o simulado do app: 3 questões de cada matéria (1h30)</button>
   </section>`;
 }
 function cardDiaProva(){
@@ -944,6 +1325,63 @@ function viewEnd(){
   </section>`;
 }
 
+function viewSim(){
+  const id = sim.ids[sim.i], q = QM[id], n = sim.ids.length, P = sim.perm[id], a = sim.ans[id], last = sim.i + 1 === n;
+  const alts = P.map((o, pos) => `<li><button class="alt${o === a ? ' sel' : ''}" data-act="fs-pick" data-o="${o}" aria-pressed="${o === a}"><span class="bub">${L[pos]}</span><span class="atx">${rich(q.al[o])}</span></button></li>`).join('');
+  return `<div class="qbar">
+      <button class="link" data-act="fs-quit">Sair</button>
+      <div class="qprog"><span>${sim.i + 1} de ${n} · ${Object.keys(sim.ans).length} marcadas</span><div class="track"><i style="width:${(sim.i + 1) / n * 100}%"></i></div></div>
+      <span class="timer" data-t0="${sim.t0}" data-dur="${sim.dur}"></span>
+    </div>
+    <article class="q">
+      <p class="eyebrow">Questão ${pad(sim.i + 1)} · ${esc(q.a)}</p>
+      <blockquote class="texto"${q.en ? ' lang="en"' : ''}>${texto(q.x, false)}</blockquote>
+      <p class="enun">${rich(q.q)}</p>
+      <ol class="alts">${alts}</ol>
+      <div class="simnav">
+        <button class="ghost" data-act="fs-prev" ${sim.i === 0 ? 'disabled' : ''}>← Anterior</button>
+        ${last ? '<button class="primary" data-act="fs-finish">Entregar</button>' : '<button class="primary" data-act="fs-next">Próxima →</button>'}
+      </div>
+      ${last ? '' : '<button class="link" data-act="fs-finish">Entregar agora</button>'}
+      <p class="meta">Toque de novo na alternativa para desmarcar. Questão sem resposta conta como erro, igual na prova.</p>
+    </article>`;
+}
+function viewSimEnd(){
+  const r = sim.result, porMat = {};
+  sim.ids.forEach(id => { const q = QM[id], m = porMat[q.a] || (porMat[q.a] = {c:0, n:0}); m.n++; if (sim.ans[id] === q.c) m.c++; });
+  const rows = AREAS.filter(a => porMat[a]).map(a => `<tr><td>${a}</td><td class="n${porMat[a].c / porMat[a].n < .5 ? ' danger' : ''}">${porMat[a].c} de ${porMat[a].n}</td></tr>`).join('');
+  const rev = sim.ids.map((id, i) => {
+    const q = QM[id], a = sim.ans[id], ok = a === q.c, P = sim.perm[id], Lc = L[P.indexOf(q.c)];
+    const st = a == null ? 'nil' : ok ? 'ok' : 'bad';
+    return `<details><summary><span class="tag ${st}">${a == null ? 'BRANCO' : ok ? 'CERTA' : 'ERRADA'}</span><span>${pad(i + 1)} · ${esc(q.a)} · ${esc(q.t)}</span></summary>
+      <div class="body"><blockquote class="texto"${q.en ? ' lang="en"' : ''}>${texto(q.x, true)}</blockquote><p class="enun">${rich(q.q)}</p>
+      <ol class="alts">${P.map((o, pos) => `<li><div class="alt${o === q.c ? ' right' : o === a ? ' wrong' : ' dim'}"><span class="bub">${L[pos]}</span><span class="atx">${rich(q.al[o])}</span></div></li>`).join('')}</ol>
+      <p><b>Certa: (${Lc}).</b> ${a == null ? 'Você deixou em branco.' : ok ? 'Você acertou.' : `Você marcou (${L[P.indexOf(a)]})${a === q.ar[0] ? ', a pegadinha principal' : ''}.`}</p>
+      <p>${rich(q.p)}</p><p class="tipline">${rich(q.d)}</p></div></details>`;
+  }).join('');
+  return `<section class="end card">
+    <p class="eyebrow">Simulado entregue · ${r.n} questões · ${r.min} min</p>
+    <h1>${r.c} de ${r.n}</h1>
+    <p class="meta">${pct(r.c, r.n)}% de acerto · ${r.w} ${r.w === 1 ? 'errada' : 'erradas'} · ${r.b} em branco</p>
+    ${r.timeout ? '<p class="tipline">O tempo acabou e o simulado foi entregue sozinho. As questões sem resposta contaram como em branco.</p>' : ''}
+    ${r.b ? '<p class="tipline">Na Fatec, erro não desconta ponto: nunca deixe questão em branco. Se não souber, elimine as absurdas e chute.</p>' : ''}
+    <div class="tbl-wrap"><table class="tbl compact"><thead><tr><th>Matéria</th><th class="n">Acertos</th></tr></thead><tbody>${rows}</tbody></table></div>
+    <h2 class="h-sm">Correção questão a questão</h2>
+    <div class="rev">${rev}</div>
+    <button class="primary" data-act="fs-close">Voltar às provas</button>
+  </section>`;
+}
+function cardSimulado(){
+  const hist = S.sims.slice(0, 5).map(s => `<li><span>${fmtD(s.date)} · ${s.n} questões${s.timeout ? ' · tempo esgotado' : ''}</span><b>${s.c}/${s.n}</b></li>`).join('');
+  return `<section class="card today-card"><p class="eyebrow">Simulado do app</p>
+    <h2 class="h-sm">3 questões de cada matéria</h2>
+    <p class="meta">As 10 matérias da prova: Português, Matemática, Multidisciplinar, Física, Química, Biologia, História, Geografia, Inglês e Raciocínio lógico. 3 minutos por questão, o ritmo da prova. A correção só aparece no fim.</p>
+    <button class="primary" data-act="fsim" data-n="3">Simulado completo · 30 questões · 1h30</button>
+    <button class="ghost" data-act="fsim" data-n="1">Versão rápida · 1 de cada · 30 min</button>
+    <label class="chute"><input type="checkbox" id="auto-end" ${S.autoEnd !== false ? 'checked' : ''}> Entregar sozinho quando o tempo acabar</label>
+    ${hist ? `<h3 class="eyebrow">Últimos simulados</h3><ul class="plain">${hist}</ul>` : ''}</section>`;
+}
+
 function viewProvas(){
   if (provaSel) return viewEdicao();
   const rows = EDS.map(e => {
@@ -954,8 +1392,10 @@ function viewProvas(){
       <span class="ed-prog">${p.n ? `${p.n}/${tot} corrigidas · ${pct(p.ok, p.n)}% de acerto` : `${tot} questões · não começou`}</span>
     </button></li>`;
   }).join('');
-  return `<header class="hero"><p class="eyebrow">Provas oficiais</p><h1 class="h1-sm">As 10 últimas provas da Fatec</h1>
-    <p class="sub">Abra o caderno oficial em PDF, marque as respostas no cartão do app e ele corrige pelo gabarito oficial, mostrando a matéria de cada questão.</p></header>
+  return `<header class="hero"><p class="eyebrow">Simulados e provas</p><h1 class="h1-sm">Treine no ritmo da prova</h1></header>
+    ${cardSimulado()}
+    <h2 class="h-sm">As 10 últimas provas oficiais</h2>
+    <p class="meta">Abra o caderno oficial em PDF, marque as respostas no cartão do app e ele corrige pelo gabarito oficial, mostrando a matéria de cada questão.</p>
     <ul class="eds">${rows}</ul>
     <p class="meta">PDFs do site oficial: <a href="${SITE}" target="_blank" rel="noopener">vestibular.fatec.sp.gov.br</a>. A prova do 1º semestre de 2025 não está publicada lá.</p>`;
 }
@@ -1059,6 +1499,7 @@ function viewProgresso(){
     ${cardRelatorio()}
     ${w ? `<section class="card"><p class="eyebrow">Ponto para reforçar</p><p><b>${w.a}</b>: ${Math.round(w.p * 100)}% de acerto. ${esc(DICA_MAT[Object.keys(MAT).find(c => MAT[c] === w.a)])}</p></section>` : ''}
     <section class="card"><h2 class="h-sm">Por matéria (questões comentadas + provas oficiais)</h2><div class="bars">${rows}</div></section>
+    <section class="card"><h2 class="h-sm">Simulados do app</h2>${S.sims.length ? `<ul class="plain">${S.sims.slice(0, 10).map(s => `<li><span>${fmtD(s.date)} · ${s.n} questões${s.timeout ? ' · tempo esgotado' : ''}</span><b>${s.c}/${s.n} · ${pct(s.c, s.n)}%</b></li>`).join('')}</ul>` : '<p class="meta">Nenhum ainda. O simulado completo tem 3 questões de cada matéria, na aba Simulados.</p>'}</section>
     <section class="card"><h2 class="h-sm">Provas oficiais corrigidas</h2>${eds ? `<ul class="plain">${eds}</ul>` : '<p class="meta">Nenhuma ainda. Aos domingos o app indica um bloco de 10 questões da prova de dezembro de 2025.</p>'}</section>
     <p class="meta">Questões comentadas já vistas: ${Object.keys(S.qs).length} de ${Q.length}. O progresso fica salvo neste aparelho.</p>
     <button class="link danger" id="reset" data-act="reset">${resetArm ? 'Toque de novo para apagar tudo' : 'Apagar meu progresso'}</button>`;
@@ -1098,9 +1539,9 @@ function relDados(){
     });
     if (n) provas.push({nome:e.nome, tema:e.tema, n, ok, errs});
   });
-  const erros = S.log.filter(l => !l[2]).slice(-60).reverse().map(([d, id, , ch]) => {
+  const erros = S.log.filter(l => !l[2]).slice(-60).reverse().map(([d, id, , ch, kind]) => {
     const q = QM[id]; if (!q) return null;
-    return {d, q, marcou:ch == null ? '' : q.al[ch], pegadinha:ch === q.ar[0]};
+    return {d, q, kind, marcou:ch == null ? '' : q.al[ch], pegadinha:ch != null && ch === q.ar[0]};
   }).filter(Boolean);
   const comLog = new Set(S.log.map(l => l[1]));
   const errosSemLog = Object.keys(S.qs).filter(id => !S.qs[id].lastOk && !comLog.has(id) && QM[id]).map(id => QM[id]);
@@ -1127,6 +1568,13 @@ function relLeitura(D){
     const p = D.erros.filter(e => e.pegadinha).length;
     L.push(`Marcou a pegadinha principal em ${p} dos ${D.erros.length} erros registrados${p / D.erros.length >= .4 ? ': a dificuldade parece estar na leitura das alternativas, mais do que no conteúdo' : ''}.`);
   }
+  if (S.sims.length >= 2){
+    const ult = S.sims[0], pri = S.sims[S.sims.length - 1];
+    L.push(`Simulados do app: ${pct(pri.c, pri.n)}% no primeiro (${fmtD(pri.date)}) e ${pct(ult.c, ult.n)}% no último (${fmtD(ult.date)}).`);
+  } else if (S.sims.length === 1) L.push(`Fez 1 simulado do app: ${S.sims[0].c} de ${S.sims[0].n} (${pct(S.sims[0].c, S.sims[0].n)}%).`);
+  else L.push('Ainda não fez nenhum simulado do app.');
+  const brancos = S.sims.reduce((s, x) => s + (x.b || 0), 0);
+  if (brancos) L.push(`Deixou ${brancos} ${brancos === 1 ? 'questão' : 'questões'} em branco nos simulados. Na Fatec, erro não desconta: vale sempre responder.`);
   if (!D.provas.length) L.push('Ainda não corrigiu nenhum bloco das provas oficiais.');
   if (D.left > 0) L.push(`Faltam ${D.left} dias para a prova.`);
   return L;
@@ -1161,10 +1609,11 @@ function relHTML(){
     const b = D.by[a], tot = acc(b.aok + b.pok, b.an + b.pn);
     return `<tr><td>${a}</td><td class="n">${NA_PROVA[a]}</td><td class="n">${b.an}</td><td class="n">${fmtPct(acc(b.aok, b.an))}</td><td class="n">${b.pn}</td><td class="n">${fmtPct(acc(b.pok, b.pn))}</td><td class="n${tot != null && tot < 50 ? ' bad' : ''}"><b>${fmtPct(tot)}</b></td></tr>`;
   }).join('');
-  const erros = D.erros.slice(0, 40).map(e => `<tr><td>${fmtD(e.d)}</td><td>${esc(e.q.a)}<br><small>${esc(e.q.t)}</small></td><td><small>${esc(corta(e.q.x, 150))}</small><br><b>${esc(e.q.q)}</b></td><td class="bad">${e.marcou ? esc(e.marcou) : '—'}${e.pegadinha ? ' <span class="tag">pegadinha</span>' : ''}</td><td class="ok">${esc(e.q.al[e.q.c])}</td></tr>`).join('');
+  const simRows = S.sims.slice(0, 30).map(x => `<tr><td>${fmtD(x.date)}</td><td class="n">${x.n}</td><td class="n ok">${x.c}</td><td class="n bad">${x.w}</td><td class="n">${x.b}</td><td class="n"><b>${pct(x.c, x.n)}%</b></td><td class="n">${x.min} min${x.timeout ? ' (esgotou)' : ''}</td></tr>`).join('');
+  const erros = D.erros.slice(0, 40).map(e => `<tr><td>${fmtD(e.d)}${e.kind === 'sim' ? '<br><small>simulado</small>' : ''}</td><td>${esc(e.q.a)}<br><small>${esc(e.q.t)}</small></td><td><small>${esc(corta(e.q.x, 150))}</small><br><b>${esc(e.q.q)}</b></td><td class="bad">${e.marcou ? esc(e.marcou) : '—'}${e.pegadinha ? ' <span class="tag">pegadinha</span>' : ''}</td><td class="ok">${esc(e.q.al[e.q.c])}</td></tr>`).join('');
   const repetidas = D.maisErradas.map(x => `<tr><td>${esc(x.q.a)} · ${esc(x.q.t)}<br><small>${esc(x.q.q)}</small></td><td class="n">${x.e}</td><td class="n">${x.n}</td></tr>`).join('');
   const provas = D.provas.map(p => `<h3>${p.nome} <small>· tema central: ${esc(p.tema)}</small></h3><p>${p.ok} de ${p.n} questões corrigidas certas (${fmtPct(acc(p.ok, p.n))}).</p>${p.errs.length ? `<div class="chips">${p.errs.map(x => `<span>Q${pad(x.q)} · ${esc(x.mat)} · marcou ${esc(x.marcou)}, certa ${x.certa}</span>`).join('')}</div>` : '<p class="ok">Nenhum erro nos blocos corrigidos.</p>'}`).join('');
-  const sessoes = S.ses.slice(-25).reverse().map(s => `<tr><td>${fmtD(s.d)}</td><td>${s.k === 'rev' ? 'Revisão' : 'Sessão do dia'}</td><td class="n">${s.n}</td><td class="n">${s.ok}</td><td class="n">${fmtPct(acc(s.ok, s.n))}</td><td class="n">${s.min} min</td></tr>`).join('');
+  const sessoes = S.ses.slice(-25).reverse().map(s => `<tr><td>${fmtD(s.d)}</td><td>${s.k === 'sim' ? 'Simulado' : s.k === 'rev' ? 'Revisão' : 'Sessão do dia'}</td><td class="n">${s.n}</td><td class="n">${s.ok}</td><td class="n">${fmtPct(acc(s.ok, s.n))}</td><td class="n">${s.min} min</td></tr>`).join('');
   const dados = JSON.stringify({app:'Fatec em 30 minutos', versao:1, gerado:agora.toISOString(), nome:S.nome || '', estado:S}).replace(/</g, '\\u003c');
   return `<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Relatório Fatec 30 · ${nome}</title><style>${REL_CSS}</style></head><body>
 <h1>Relatório de estudo · ${nome}</h1>
@@ -1173,6 +1622,9 @@ function relHTML(){
 <div class="note"><b>Leitura rápida</b><ul>${relLeitura(D).map(l => `<li>${esc(l)}</li>`).join('')}</ul></div>
 <h2>Evolução semana a semana</h2>
 ${tabela('<th>Semana</th><th class="n">Dias</th><th class="n">Questões app</th><th class="n">Acerto</th><th class="n">Prova oficial</th><th class="n">Acerto</th><th class="n">Redações</th><th class="n">Tendência</th>', semanas, 'Ainda sem dias de estudo registrados.')}
+<h2>Simulados do app</h2>
+<p class="meta">3 questões de cada matéria (ou 1 de cada, na versão rápida), 3 minutos por questão.</p>
+${tabela('<th>Data</th><th class="n">Questões</th><th class="n">Certas</th><th class="n">Erradas</th><th class="n">Branco</th><th class="n">Acerto</th><th class="n">Tempo</th>', simRows, 'Nenhum simulado feito ainda.')}
 <h2>Acerto por matéria</h2>
 ${tabela('<th>Matéria</th><th class="n">Na prova</th><th class="n">App</th><th class="n">Acerto</th><th class="n">Prova oficial</th><th class="n">Acerto</th><th class="n">Total</th>', mats, '')}
 <h2>Questões do app que errou</h2>
@@ -1197,6 +1649,7 @@ function relTexto(){
   L.push(`Questões do app: ${D.tq}, acerto ${fmtPct(acc(D.tok, D.tq))}`);
   L.push(`Provas oficiais: ${D.tp} questões, acerto ${fmtPct(acc(D.tpok, D.tp))}`);
   L.push(`Treinos de redação: ${D.redacoes.length}`);
+  if (S.sims.length) L.push(`Simulados: ${S.sims.length}; último: ${S.sims[0].c} de ${S.sims[0].n} (${pct(S.sims[0].c, S.sims[0].n)}%)`);
   const m = AREAS.map(a => { const b = D.by[a]; return {a, n:b.an + b.pn, p:acc(b.aok + b.pok, b.an + b.pn)}; }).filter(x => x.n);
   if (m.length){ L.push('', 'Por matéria:'); m.forEach(x => L.push(`- ${x.a}: ${x.p}% (${x.n} questões)`)); }
   if (D.semanas.length){ L.push('', 'Semana a semana:'); D.semanas.slice(-6).forEach(s => L.push(`- ${fmtD(s.w)}: ${s.dias} dias, ${s.q + s.pr} questões, ${fmtPct(acc(s.ok + s.prok, s.q + s.pr))}`)); }
@@ -1237,14 +1690,19 @@ function cardRelatorio(){
 }
 
 function render(){
-  nav.hidden = !!sess;
+  const full = !!(sess || sim);
+  nav.hidden = full;
   app.innerHTML = sess ? (sess.end ? viewEnd() : viewQuiz())
+    : sim ? (sim.end ? viewSimEnd() : viewSim())
     : tab === 'hoje' ? viewHome() : tab === 'provas' ? viewProvas() : tab === 'padroes' ? viewPadroes() : viewProgresso();
-  nav.querySelectorAll('[data-tab]').forEach(b => b.setAttribute('aria-current', !sess && b.dataset.tab === tab ? 'page' : 'false'));
+  nav.querySelectorAll('[data-tab]').forEach(b => b.setAttribute('aria-current', !full && b.dataset.tab === tab ? 'page' : 'false'));
   tick();
 }
 function fmtLeft(t0, dur){ const rem = dur - Math.floor((Date.now() - t0) / 1000); return rem <= 0 ? 'tempo ✓' : Math.floor(rem / 60) + ':' + pad(rem % 60); }
-function tick(){ document.querySelectorAll('.timer[data-t0]').forEach(el => { el.textContent = fmtLeft(+el.dataset.t0, +el.dataset.dur); }); }
+function tick(){
+  if (sim && !sim.end && sim.auto && Date.now() - sim.t0 >= sim.dur * 1000){ finishSim(true); render(); scrollTo(0, 0); return; }
+  document.querySelectorAll('.timer[data-t0]').forEach(el => { el.textContent = fmtLeft(+el.dataset.t0, +el.dataset.dur); });
+}
 
 /* ---------- eventos ---------- */
 document.addEventListener('click', ev => {
@@ -1298,6 +1756,21 @@ document.addEventListener('click', ev => {
     const st = prState(provaSel.id);
     for (let q = provaSel.from; q <= provaSel.to; q++){ delete st.a[q]; delete st.c[q]; }
     provaSel.t0 = Date.now(); save(); render();
+  } else if (act === 'fsim'){
+    startSim(+b.dataset.n || 3);
+  } else if (act === 'fs-pick'){
+    const id = sim.ids[sim.i], o = +b.dataset.o;
+    if (sim.ans[id] === o) delete sim.ans[id]; else sim.ans[id] = o;
+    app.querySelectorAll('.alt').forEach(x => { const on = +x.dataset.o === sim.ans[id]; x.classList.toggle('sel', on); x.setAttribute('aria-pressed', on); });
+    const pr = app.querySelector('.qprog span'); if (pr) pr.textContent = `${sim.i + 1} de ${sim.ids.length} · ${Object.keys(sim.ans).length} marcadas`;
+  } else if (act === 'fs-next' || act === 'fs-prev'){
+    sim.i += act === 'fs-next' ? 1 : -1; render(); scrollTo(0, 0);
+  } else if (act === 'fs-finish'){
+    finishSim(false); render(); scrollTo(0, 0);
+  } else if (act === 'fs-quit'){
+    sim = null; render(); scrollTo(0, 0);
+  } else if (act === 'fs-close'){
+    sim = null; tab = 'provas'; render(); scrollTo(0, 0);
   } else if (act === 'rel-enviar'){
     relEnviar();
   } else if (act === 'rel-copiar'){
@@ -1309,6 +1782,7 @@ document.addEventListener('click', ev => {
 });
 document.addEventListener('change', ev => {
   const el = ev.target;
+  if (el.id === 'auto-end'){ S.autoEnd = el.checked; save(); return; }
   if (el.dataset && el.dataset.red != null){
     const t = today(), r = S.red[t] || [false, false, false];
     r[+el.dataset.red] = el.checked; S.red[t] = r; save(); render();
