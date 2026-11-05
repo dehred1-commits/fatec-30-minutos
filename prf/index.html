@@ -70,6 +70,8 @@ p{margin:0}
 .ghost{display:inline-flex;align-items:center;justify-content:center;gap:6px;background:transparent;color:var(--pen);border:1.5px solid var(--pen);font:600 1rem/1.2 var(--f-ui);padding:12px 16px;border-radius:12px;min-height:46px;text-decoration:none;cursor:pointer;width:100%}
 .link{appearance:none;background:none;border:0;padding:6px 0;color:var(--pen);font:600 .95rem var(--f-ui);text-decoration:underline;text-underline-offset:3px;cursor:pointer;align-self:flex-start}
 .danger{color:var(--bad)}
+input[type="text"]{font:500 16px var(--f-ui);color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 12px;min-height:44px;flex:1;min-width:0}
+.reltxt{width:100%;min-height:160px;font:13px/1.45 var(--f-mono);color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:10px;margin-top:8px}
 :focus-visible{outline:3px solid var(--pen);outline-offset:2px}
 small{font-size:.78rem;color:var(--muted);font-weight:500}
 .row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
@@ -547,7 +549,8 @@ const NOME_G = {C:'CERTO', E:'ERRADO'};
 
 /* ---------- progresso salvo neste aparelho ---------- */
 const KEY = 'prf30-v1';
-const fresh = () => ({v:1, start:today(), exam:'', days:{}, qs:{}, ar:{}, red:{}, pr:{}, sims:[]});
+// log: cada resposta [data, id, acertou 1/0, marcou C/E/B, origem dia/sim, chute 1/0]; ses: resumo de cada sessão. Usados no relatório.
+const fresh = () => ({v:1, start:today(), exam:'', days:{}, qs:{}, ar:{}, red:{}, pr:{}, sims:[], log:[], ses:[], nome:''});
 function load(){ try { const s = JSON.parse(localStorage.getItem(KEY)); if (s && s.v === 1) return Object.assign(fresh(), s); } catch (e) {} return fresh(); }
 let S = load();
 function save(){ try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
@@ -563,8 +566,10 @@ function bumpDay(kind, ok, n){
   else { d.pr = (d.pr || 0) + n; d.prok = (d.prok || 0) + ok; }
   S.days[t] = d;
 }
-function record(q, ok){
+function record(q, ok, ch, kind, chute){
   const t = today(), r = S.qs[q.id] || {n:0, ok:0, step:0};
+  S.log.push([t, q.id, ok ? 1 : 0, ch || 'B', kind || 'dia', chute ? 1 : 0]);
+  if (S.log.length > 2500) S.log = S.log.slice(-2500);
   r.n++; if (ok) r.ok++; r.last = t; r.lastOk = ok;
   if (!ok){ r.due = addDays(t, 1); r.step = 0; }
   else if (r.due){ if (r.step >= 1) r.due = null; else { r.due = addDays(t, 3); r.step = 1; } }
@@ -604,7 +609,7 @@ function pickDaily(areas, n, rev){
 }
 function startDaily(n, areas, rev){
   const t = today(), ids = pickDaily(areas, n, rev);
-  sess = {ids, i:0, res:[], chosen:null, revealed:false, t0:Date.now(), end:false,
+  sess = {ids, i:0, res:[], chosen:null, revealed:false, t0:Date.now(), end:false, rev:!!rev,
     tags: ids.map(id => { const r = S.qs[id]; return r && r.due && r.due <= t ? 'REVISÃO' : r ? 'REPETIDO' : ''; })};
   render(); scrollTo(0, 0);
 }
@@ -624,15 +629,17 @@ function finishSim(){
   let c = 0, w = 0, b = 0, cc = 0, cw = 0;
   sim.ids.forEach(id => {
     const q = QM[id], a = sim.ans[id];
-    if (!a){ b++; record(q, false); return; }
+    if (!a){ b++; record(q, false, 'B', 'sim', sim.chute[id]); return; }
     const ok = a === q.g; if (ok) c++; else w++;
     if (sim.chute[id]){ if (ok) cc++; else cw++; }
-    record(q, ok);
+    record(q, ok, a, 'sim', sim.chute[id]);
   });
   bumpDay('q', c, sim.ids.length);
   sim.end = true;
   sim.result = {c, w, b, cc, cw, net:c - w, n:sim.ids.length, min:Math.max(1, Math.round((Date.now() - sim.t0) / 60000))};
-  S.sims.unshift({date:today(), ...sim.result});
+  S.sims.unshift({date:today(), ...sim.result, items:sim.ids.map(id => [id, sim.ans[id] || 'B', sim.chute[id] ? 1 : 0])});
+  S.ses.push({d:today(), k:'sim', n:sim.result.n, ok:c, net:sim.result.net, min:sim.result.min});
+  if (S.ses.length > 300) S.ses = S.ses.slice(-300);
   S.sims = S.sims.slice(0, 40);
   save();
 }
@@ -948,12 +955,201 @@ function viewProgresso(){
       <div class="tile"><b>${tq ? pct(tok, tq) + '%' : '—'}</b><span>de acerto no app</span></div>
       <div class="tile"><b>${rev}</b><span>para revisar</span></div>
     </div>
+    ${cardRelatorio()}
     ${w ? `<section class="card"><p class="eyebrow">Ponto para reforçar</p><p><b>${MAT[w.c]}</b>: ${Math.round(w.p * 100)}% de acerto. ${esc(DICA_MAT[w.c])}</p></section>` : ''}
     <section class="card"><h2 class="h-sm">Acerto por matéria (app + provas oficiais)</h2><div class="bars">${rows}</div></section>
     <section class="card"><h2 class="h-sm">Simulados</h2>${sims ? `<ul class="plain">${sims}</ul>` : '<p class="meta">Nenhum ainda. Aos domingos o app sugere um simulado de 20 itens.</p>'}</section>
     <section class="card"><h2 class="h-sm">Provas oficiais (nota líquida)</h2>${eds ? `<ul class="plain">${eds}</ul>` : '<p class="meta">Nenhuma corrigida ainda.</p>'}</section>
     <p class="meta">Itens do app já vistos: ${Object.keys(S.qs).length} de ${Q.length}. O progresso fica salvo neste aparelho.</p>
     <button class="link danger" id="reset" data-act="reset">${resetArm ? 'Toque de novo para apagar tudo' : 'Apagar meu progresso'}</button>`;
+}
+
+/* ---------- relatório para quem está ajudando ---------- */
+function closeSess(){
+  if (!sess || sess.saved || !sess.res.length) return;
+  S.ses.push({d:today(), k:sess.rev ? 'rev' : 'dia', n:sess.res.length, ok:sess.res.filter(r => r.ok).length, min:Math.max(1, Math.round((Date.now() - sess.t0) / 60000))});
+  if (S.ses.length > 300) S.ses = S.ses.slice(-300);
+  sess.saved = true; save();
+}
+const semanaDe = k => addDays(k, -((parseKey(k).getDay() + 6) % 7));
+const acc = (ok, n) => n ? Math.round(ok / n * 100) : null;
+const fmtPct = p => p == null ? '—' : p + '%';
+const limpa = s => String(s || '').replace(/[⟦⟧]/g, '');
+const corta = (s, n) => { s = limpa(s); return s.length > n ? s.slice(0, n).trim() + '…' : s; };
+const MARCOU = {C:'Certo', E:'Errado', B:'Em branco'};
+const por10 = x => Math.round(x.net / x.n * 100) / 10;
+function relDados(){
+  const t = today(), dias = new Set([...Object.keys(S.days), ...Object.keys(S.red)]), sem = {};
+  const linha = k => { const w = semanaDe(k); return sem[w] || (sem[w] = {dias:0, q:0, ok:0, pr:0, prok:0, red:0, sims:0, soma10:0}); };
+  dias.forEach(k => {
+    const s = linha(k), d = S.days[k] || {}, r = S.red[k];
+    if (studied(k)) s.dias++;
+    s.q += d.q || 0; s.ok += d.ok || 0; s.pr += d.pr || 0; s.prok += d.prok || 0;
+    if (r && r.length === 3 && r.every(Boolean)) s.red++;
+  });
+  S.sims.forEach(x => { const s = linha(x.date); s.sims++; s.soma10 += por10(x); });
+  const by = {}; ORDEM.forEach(c => by[c] = {an:0, aok:0, pn:0, pok:0});
+  for (const c in S.ar) if (by[c]){ by[c].an = S.ar[c].n; by[c].aok = S.ar[c].ok; }
+  const provas = [];
+  EDS.forEach(e => {
+    const st = S.pr[e.id]; if (!st) return;
+    let n = 0, net = 0, c = 0, w = 0, br = 0; const errs = [];
+    Object.keys(st.c).map(Number).sort((x, y) => x - y).forEach(q => {
+      const a = st.a[q], k = e.k[q - 1], p = pts(e, q, a), b = by[e.s[q - 1]]; n++; net += p;
+      if (p > 0) c++; else if (p < 0){ w++; errs.push({q, mat:MAT[e.s[q - 1]], marcou:a, certa:k}); } else br++;
+      if (b && a && k !== 'X'){ b.pn++; if (a === k) b.pok++; }
+    });
+    const blocos = e.blocos.map(([a, b, nome, min]) => { let s = 0, m = 0; for (let q = a; q <= b; q++) if (st.c[q]){ m++; s += pts(e, q, st.a[q]); } return {nome, a, b, min, s, m}; });
+    if (n) provas.push({nome:e.nome, n, net, c, w, br, errs, blocos, min:e.min});
+  });
+  const erros = S.log.filter(l => !l[2]).slice(-60).reverse().map(([d, id, , ch, kind, chute]) => { const q = QM[id]; return q ? {d, q, ch, kind, chute} : null; }).filter(Boolean);
+  const comLog = new Set(S.log.map(l => l[1]));
+  const errosSemLog = Object.keys(S.qs).filter(id => !S.qs[id].lastOk && !comLog.has(id) && QM[id]).map(id => QM[id]);
+  const maisErrados = Object.keys(S.qs).map(id => ({q:QM[id], e:S.qs[id].n - S.qs[id].ok, n:S.qs[id].n})).filter(x => x.q && x.e > 1).sort((a, b) => b.e - a.e).slice(0, 10);
+  let tq = 0, tok = 0, tp = 0;
+  for (const d of Object.values(S.days)){ tq += d.q || 0; tok += d.ok || 0; tp += d.pr || 0; }
+  let ult7 = 0; for (let i = 0; i < 7; i++) if (studied(addDays(t, -i))) ult7++;
+  const ch = S.sims.reduce((s, x) => ({c:s.c + (x.cc || 0), w:s.w + (x.cw || 0), b:s.b + (x.b || 0), n:s.n + x.n}), {c:0, w:0, b:0, n:0});
+  return {t, semanas:Object.keys(sem).sort().map(w => ({w, ...sem[w]})), by, provas, erros, errosSemLog, maisErrados, ch, tq, tok, tp, ult7,
+    discursivas:Object.keys(S.red).filter(k => S.red[k].length === 3 && S.red[k].every(Boolean)).sort(),
+    diasEst:[...dias].filter(studied).length, seq:streak(), rev:Object.values(S.qs).filter(r => r.due).length, left:S.exam ? diffDays(t, S.exam) : null};
+}
+function relLeitura(D){
+  const L = [];
+  const mats = ORDEM.map(c => { const b = D.by[c], n = b.an + b.pn; return {c, n, p:acc(b.aok + b.pok, n)}; }).filter(x => x.n >= 4).sort((x, y) => x.p - y.p);
+  if (mats.length) L.push(`Matéria mais fraca: ${MAT[mats[0].c]}, com ${mats[0].p}% de acerto em ${mats[0].n} itens.`);
+  if (mats.length > 1){ const m = mats[mats.length - 1]; L.push(`Matéria mais forte: ${MAT[m.c]}, com ${m.p}% em ${m.n} itens.`); }
+  const tr = D.by.T, trn = tr.an + tr.pn;
+  if (trn) L.push(`Legislação de trânsito, o maior bloco da prova: ${acc(tr.aok + tr.pok, trn)}% de acerto em ${trn} itens.`);
+  const s = D.semanas.filter(x => x.q > 0);
+  if (s.length >= 2){
+    const a = s[s.length - 2], b = s[s.length - 1], pa = acc(a.ok, a.q), pb = acc(b.ok, b.q);
+    L.push(`Acerto ${pb > pa ? 'subiu' : pb < pa ? 'caiu' : 'se manteve'}: ${pa}% na semana de ${fmtD(a.w)} e ${pb}% na de ${fmtD(b.w)}.`);
+  }
+  if (S.sims.length >= 2){
+    const ult = S.sims[0], pri = S.sims[S.sims.length - 1];
+    L.push(`Nota líquida por 10 itens nos simulados: ${por10(pri)} no primeiro (${fmtD(pri.date)}) e ${por10(ult)} no último (${fmtD(ult.date)}).`);
+  }
+  const saldo = D.ch.c - D.ch.w;
+  if (D.ch.c + D.ch.w) L.push(`Nos simulados, os chutes somaram ${saldo > 0 ? '+' : ''}${saldo} (${D.ch.c} certos, ${D.ch.w} errados)${saldo < 0 ? ': está chutando demais, deixar em branco renderia mais' : saldo > 0 ? ': chutar com algum conhecimento está compensando' : ''}.`);
+  if (D.ch.n) L.push(`Deixou ${D.ch.b} de ${D.ch.n} itens em branco nos simulados (${acc(D.ch.b, D.ch.n)}%).`);
+  L.push(`Estudou em ${D.ult7} dos últimos 7 dias.`);
+  if (D.left != null && D.left > 0) L.push(`Faltam ${D.left} dias para a prova (data marcada no app).`);
+  else if (D.left == null) L.push('A data da prova ainda não foi marcada no app.');
+  return L;
+}
+const REL_CSS = `:root{color-scheme:light}*{box-sizing:border-box}
+body{margin:0 auto;max-width:900px;padding:24px 16px 48px;font:15px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:#13201a;background:#fff}
+h1{font-size:1.6rem;margin:0 0 4px;line-height:1.2}h2{font-size:1.1rem;margin:30px 0 10px;padding-bottom:4px;border-bottom:2px solid #dfe6e2}h3{font-size:1rem;margin:18px 0 6px}
+p{margin:6px 0}.meta,small{color:#56655d}small{font-size:.8rem}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px;margin:16px 0}
+.tile{border:1px solid #dfe6e2;border-radius:10px;padding:10px 12px}.tile b{display:block;font-size:1.5rem;font-variant-numeric:tabular-nums}.tile span{font-size:.82rem;color:#56655d}
+.wrap{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:.9rem;min-width:520px}
+th,td{padding:6px 8px;border-bottom:1px solid #dfe6e2;text-align:left;vertical-align:top}th{font-size:.72rem;letter-spacing:.05em;text-transform:uppercase;color:#56655d;white-space:nowrap}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.ok{color:#17804a}.bad{color:#c0352b}.up{color:#17804a}.down{color:#c0352b}
+.tag{display:inline-block;font-size:.72rem;font-weight:600;background:#fff1c2;color:#7a5a00;border-radius:4px;padding:1px 6px}
+.note{background:#fff7d1;border-radius:10px;padding:12px 16px}.note ul{margin:6px 0 0;padding-left:1.1em}
+.chips{display:flex;flex-wrap:wrap;gap:6px}.chips span{font-size:.82rem;border:1px solid #dfe6e2;border-radius:6px;padding:3px 8px}
+footer{margin-top:36px;font-size:.82rem;color:#56655d}`;
+function relHTML(){
+  const D = relDados(), agora = new Date(), nome = S.nome ? esc(S.nome) : 'Estudante';
+  const quando = agora.toLocaleDateString('pt-BR') + ' às ' + agora.toLocaleTimeString('pt-BR', {hour:'2-digit', minute:'2-digit'});
+  const tile = (v, l) => `<div class="tile"><b>${v}</b><span>${l}</span></div>`;
+  const tabela = (cab, linhas, vazio) => linhas ? `<div class="wrap"><table><thead><tr>${cab}</tr></thead><tbody>${linhas}</tbody></table></div>` : `<p class="meta">${vazio}</p>`;
+  let ant = null;
+  const semanas = D.semanas.map(s => {
+    const p = acc(s.ok, s.q);
+    const tend = p == null || ant == null ? '' : p > ant ? '<span class="up">▲</span>' : p < ant ? '<span class="down">▼</span>' : '=';
+    if (p != null) ant = p;
+    return `<tr><td>${fmtD(s.w)} a ${fmtD(addDays(s.w, 6))}</td><td class="n">${s.dias}</td><td class="n">${s.q}</td><td class="n">${fmtPct(p)}</td><td class="n">${s.sims}</td><td class="n">${s.sims ? Math.round(s.soma10 / s.sims * 10) / 10 : '—'}</td><td class="n">${s.pr}</td><td class="n">${s.red}</td><td class="n">${tend}</td></tr>`;
+  }).join('');
+  const sims = S.sims.slice(0, 30).map(x => `<tr><td>${fmtD(x.date)}</td><td class="n">${x.n}</td><td class="n ok">${x.c}</td><td class="n bad">${x.w}</td><td class="n">${x.b}</td><td class="n"><b>${x.net}</b></td><td class="n">${por10(x)}</td><td class="n">${(x.cc || 0)}/${(x.cw || 0)}</td><td class="n">${x.min} min</td></tr>`).join('');
+  const mats = ORDEM.map(c => {
+    const b = D.by[c], tot = acc(b.aok + b.pok, b.an + b.pn), na = [...EDS[0].s].filter(x => x === c).length;
+    return `<tr><td>${MAT[c]}</td><td class="n">${na}</td><td class="n">${b.an}</td><td class="n">${fmtPct(acc(b.aok, b.an))}</td><td class="n">${b.pn}</td><td class="n">${fmtPct(acc(b.pok, b.pn))}</td><td class="n${tot != null && tot < 50 ? ' bad' : ''}"><b>${fmtPct(tot)}</b></td></tr>`;
+  }).join('');
+  const erros = D.erros.slice(0, 50).map(e => `<tr><td>${fmtD(e.d)}<br><small>${e.kind === 'sim' ? 'simulado' : 'sessão'}</small></td><td>${esc(MAT[e.q.a])}<br><small>${esc(e.q.t)}</small></td><td>${e.q.x ? `<small>${esc(corta(e.q.x, 120))}</small><br>` : ''}${esc(limpa(e.q.q))}</td><td>${NOME_G[e.q.g]}</td><td class="${e.ch === 'B' ? '' : 'bad'}">${MARCOU[e.ch] || '—'}${e.chute ? ' <span class="tag">chute</span>' : ''}</td></tr>`).join('');
+  const repetidos = D.maisErrados.map(x => `<tr><td>${esc(MAT[x.q.a])} · ${esc(x.q.t)}<br><small>${esc(limpa(x.q.q))}</small></td><td class="n">${x.e}</td><td class="n">${x.n}</td></tr>`).join('');
+  const provas = D.provas.map(p => `<h3>${p.nome}</h3><p>Nota líquida <b>${p.net}</b> em ${p.n} itens corrigidos: ${p.c} certos, ${p.w} errados, ${p.br} em branco.</p>
+    ${tabela('<th>Bloco</th><th class="n">Corrigidos</th><th class="n">Nota</th><th class="n">Mínimo</th>', p.blocos.map(b => `<tr><td>${b.nome} <small>(itens ${b.a}–${b.b})</small></td><td class="n">${b.m}</td><td class="n">${b.m ? b.s : '—'}</td><td class="n">${b.min != null ? b.min : '—'}</td></tr>`).join(''), '')}
+    ${p.errs.length ? `<div class="chips">${p.errs.map(x => `<span>Item ${x.q} · ${esc(x.mat)} · marcou ${x.marcou}, gabarito ${x.certa}</span>`).join('')}</div>` : '<p class="ok">Nenhum erro nos itens corrigidos.</p>'}`).join('');
+  const sessoes = S.ses.slice(-25).reverse().map(s => `<tr><td>${fmtD(s.d)}</td><td>${s.k === 'sim' ? 'Simulado' : s.k === 'rev' ? 'Revisão' : 'Sessão do dia'}</td><td class="n">${s.n}</td><td class="n">${s.ok}</td><td class="n">${s.k === 'sim' ? s.net : '—'}</td><td class="n">${s.min} min</td></tr>`).join('');
+  const dados = JSON.stringify({app:'PRF em 30 minutos', versao:1, gerado:agora.toISOString(), nome:S.nome || '', estado:S}).replace(/</g, '\\u003c');
+  const ultSim = S.sims[0];
+  const totProvas = D.provas.reduce((s, p) => ({n:s.n + p.n, net:s.net + p.net}), {n:0, net:0});
+  return `<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Relatório PRF 30 · ${nome}</title><style>${REL_CSS}</style></head><body>
+<h1>Relatório de estudo · ${nome}</h1>
+<p class="meta">Concurso PRF${S.exam ? `, prova marcada para ${fmtD(S.exam)}` : ''} · gerado em ${quando} pelo app PRF em 30 minutos</p>
+<div class="tiles">${tile(D.diasEst, 'dias estudados')}${tile(D.seq, 'dias seguidos agora')}${tile(D.tq, `itens feitos · ${fmtPct(acc(D.tok, D.tq))} de acerto`)}${tile(S.sims.length, ultSim ? `simulados · último: nota ${ultSim.net} em ${ultSim.n}` : 'simulados')}${tile(totProvas.n, `itens de prova oficial · nota ${totProvas.net}`)}${tile(D.discursivas.length, 'treinos de discursiva')}</div>
+<div class="note"><b>Leitura rápida</b><ul>${relLeitura(D).map(l => `<li>${esc(l)}</li>`).join('')}</ul></div>
+<h2>Evolução semana a semana</h2>
+${tabela('<th>Semana</th><th class="n">Dias</th><th class="n">Itens</th><th class="n">Acerto</th><th class="n">Simulados</th><th class="n">Nota / 10 itens</th><th class="n">Prova oficial</th><th class="n">Discursivas</th><th class="n">Tendência</th>', semanas, 'Ainda sem dias de estudo registrados.')}
+<h2>Simulados</h2>
+<p class="meta">Nota líquida = certos menos errados. "Nota / 10 itens" permite comparar simulados de tamanhos diferentes. Chutes: certos/errados.</p>
+${tabela('<th>Data</th><th class="n">Itens</th><th class="n">Certos</th><th class="n">Errados</th><th class="n">Branco</th><th class="n">Nota</th><th class="n">/ 10</th><th class="n">Chutes</th><th class="n">Tempo</th>', sims, 'Nenhum simulado feito ainda.')}
+<h2>Acerto por matéria</h2>
+${tabela('<th>Matéria</th><th class="n">Itens na prova (2021)</th><th class="n">App</th><th class="n">Acerto</th><th class="n">Prova oficial</th><th class="n">Acerto</th><th class="n">Total</th>', mats, '')}
+<h2>Itens do app que errou ou deixou em branco</h2>
+<p class="meta">Os mais recentes primeiro, das sessões e dos simulados.</p>
+${tabela('<th>Data</th><th>Matéria</th><th>Item</th><th>Gabarito</th><th>Marcou</th>', erros, 'Nenhum erro registrado ainda.')}
+${D.errosSemLog.length ? `<p class="meta">Também errou na última tentativa, antes de o relatório existir: ${D.errosSemLog.map(q => esc(MAT[q.a] + ' · ' + q.t)).join('; ')}.</p>` : ''}
+${repetidos ? `<h3>Itens que errou mais de uma vez</h3>${tabela('<th>Item</th><th class="n">Erros</th><th class="n">Tentativas</th>', repetidos, '')}` : ''}
+<h2>Provas oficiais</h2>
+${provas || '<p class="meta">Nenhum item de prova oficial corrigido ainda.</p>'}
+<h2>Discursiva</h2>
+<p>${D.discursivas.length ? 'Treinos completos em: ' + D.discursivas.map(fmtD).join(', ') + '.' : 'Nenhum treino de discursiva completo ainda.'}</p>
+<h2>Sessões recentes</h2>
+${tabela('<th>Data</th><th>Tipo</th><th class="n">Itens</th><th class="n">Certos</th><th class="n">Nota</th><th class="n">Tempo</th>', sessoes, 'Nenhuma sessão registrada ainda.')}
+<footer>Os dados completos estão guardados dentro deste arquivo, para análise. Material de estudo independente, sem vínculo com a PRF ou o Cebraspe.</footer>
+<script type="application/json" id="dados-brutos">${dados}<\/script>
+</body></html>`;
+}
+function relTexto(){
+  const D = relDados(), L = [];
+  L.push(`Relatório PRF 30 · ${S.nome || 'Estudante'} · ${fmtD(D.t)}`);
+  L.push(`Dias estudados: ${D.diasEst} (seguidos agora: ${D.seq}; nos últimos 7 dias: ${D.ult7})`);
+  L.push(`Itens feitos: ${D.tq}, acerto ${fmtPct(acc(D.tok, D.tq))}`);
+  if (S.sims.length) L.push(`Simulados: ${S.sims.length}; último: nota ${S.sims[0].net} em ${S.sims[0].n} itens (${S.sims[0].c} certos, ${S.sims[0].w} errados, ${S.sims[0].b} em branco)`);
+  if (D.ch.c + D.ch.w) L.push(`Chutes nos simulados: ${D.ch.c} certos, ${D.ch.w} errados`);
+  L.push(`Treinos de discursiva: ${D.discursivas.length}`);
+  const m = ORDEM.map(c => { const b = D.by[c]; return {c, n:b.an + b.pn, p:acc(b.aok + b.pok, b.an + b.pn)}; }).filter(x => x.n);
+  if (m.length){ L.push('', 'Por matéria:'); m.forEach(x => L.push(`- ${MAT[x.c]}: ${x.p}% (${x.n} itens)`)); }
+  if (D.semanas.length){ L.push('', 'Semana a semana:'); D.semanas.slice(-6).forEach(s => L.push(`- ${fmtD(s.w)}: ${s.dias} dias, ${s.q} itens, ${fmtPct(acc(s.ok, s.q))}${s.sims ? `, ${s.sims} simulado(s)` : ''}`)); }
+  if (D.erros.length){ L.push('', 'Erros recentes:'); D.erros.slice(0, 8).forEach(e => L.push(`- ${MAT[e.q.a]} · ${e.q.t}: gabarito ${NOME_G[e.q.g]}, marcou ${MARCOU[e.ch] || '?'}${e.chute ? ' (chute)' : ''}`)); }
+  return L.join('\n');
+}
+function relArquivo(){
+  const slug = (S.nome || '').normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-zA-Z0-9]+/g, '-').replace(/^-|-$/g, '').toLowerCase();
+  return new File([relHTML()], `relatorio-prf${slug ? '-' + slug : ''}-${today()}.html`, {type:'text/html'});
+}
+function relEnviar(){
+  const st = $('#rel-status'), f = relArquivo();
+  const baixar = () => {
+    const u = URL.createObjectURL(f), a = document.createElement('a');
+    a.href = u; a.download = f.name; document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(u), 5000);
+    st.textContent = `Arquivo ${f.name} gerado. No iPhone ele fica no app Arquivos, em Downloads. Se nada apareceu, use "Copiar resumo em texto".`;
+  };
+  if (navigator.canShare && navigator.canShare({files:[f]})){
+    navigator.share({files:[f], title:'Relatório PRF 30'})
+      .then(() => { st.textContent = 'Pronto: o relatório foi para o app que você escolheu.'; })
+      .catch(e => { if (e && e.name === 'AbortError') st.textContent = 'Envio cancelado.'; else baixar(); });
+  } else baixar();
+}
+function relCopiar(){
+  const txt = relTexto(), st = $('#rel-status');
+  const mostrar = () => { st.innerHTML = 'Copie o texto abaixo:<textarea class="reltxt" readonly aria-label="Resumo do relatório"></textarea>'; const ta = st.querySelector('textarea'); ta.value = txt; ta.focus(); ta.select(); };
+  if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(txt).then(() => { st.textContent = 'Resumo copiado. É só colar no WhatsApp.'; }, mostrar);
+  else mostrar();
+}
+function cardRelatorio(){
+  return `<section class="card"><p class="eyebrow">Relatório</p><h2 class="h-sm">Mandar meu progresso para quem me ajuda</h2>
+    <p class="meta">Gera um arquivo com a evolução semana a semana, os simulados, o acerto por matéria, os itens que você errou e as provas oficiais corrigidas. Dá para mandar pelo WhatsApp.</p>
+    <div class="row"><label for="nome" class="meta">Seu nome</label><input type="text" id="nome" value="${esc(S.nome || '')}" placeholder="opcional" autocomplete="given-name" maxlength="40"></div>
+    <button class="primary" data-act="rel-enviar">Enviar relatório</button>
+    <button class="link" data-act="rel-copiar">Copiar resumo em texto</button>
+    <div class="meta" id="rel-status" aria-live="polite"></div></section>`;
 }
 
 function render(){
@@ -993,13 +1189,13 @@ document.addEventListener('click', ev => {
   } else if (act === 'confirm'){
     if (sess.chosen == null || sess.revealed) return;
     const q = QM[sess.ids[sess.i]], ok = sess.chosen === q.g;
-    sess.revealed = true; sess.res.push({id:q.id, ok}); record(q, ok); bumpDay('q', ok ? 1 : 0, 1); save(); render();
+    sess.revealed = true; sess.res.push({id:q.id, ok}); record(q, ok, sess.chosen, 'dia'); bumpDay('q', ok ? 1 : 0, 1); save(); render();
   } else if (act === 'next'){
     sess.i++;
-    if (sess.i >= sess.ids.length) sess.end = true; else { sess.chosen = null; sess.revealed = false; }
+    if (sess.i >= sess.ids.length){ sess.end = true; closeSess(); } else { sess.chosen = null; sess.revealed = false; }
     render(); scrollTo(0, 0);
   } else if (act === 'quit'){
-    if (sess.res.length) sess.end = true; else sess = null;
+    if (sess.res.length){ sess.end = true; closeSess(); } else sess = null;
     render(); scrollTo(0, 0);
   } else if (act === 'home'){
     sess = null; tab = 'hoje'; render(); scrollTo(0, 0);
@@ -1030,13 +1226,17 @@ document.addEventListener('click', ev => {
     const c = $('#corrigir'); if (c) c.disabled = false;
   } else if (act === 'corrigir'){
     const e = edById(provaSel.id), st = prState(e.id); let n = 0, ok = 0;
-    for (let q = provaSel.from; q <= provaSel.to; q++){ if (st.c[q]) continue; st.c[q] = true; n++; if (pts(e, q, st.a[q]) > 0) ok++; }
+    for (let q = provaSel.from; q <= provaSel.to; q++){ if (st.c[q]) continue; st.c[q] = today(); n++; if (pts(e, q, st.a[q]) > 0) ok++; }
     bumpDay('pr', ok, n); save(); render();
     const r = $('#res'); if (r) r.scrollIntoView({block:'start'});
   } else if (act === 'refazer'){
     const st = prState(provaSel.id);
     for (let q = provaSel.from; q <= provaSel.to; q++){ delete st.a[q]; delete st.c[q]; }
     provaSel.t0 = Date.now(); save(); render();
+  } else if (act === 'rel-enviar'){
+    relEnviar();
+  } else if (act === 'rel-copiar'){
+    relCopiar();
   } else if (act === 'reset'){
     if (!resetArm){ resetArm = true; b.textContent = 'Toque de novo para apagar tudo'; setTimeout(() => { resetArm = false; const r = $('#reset'); if (r) r.textContent = 'Apagar meu progresso'; }, 4000); }
     else { S = fresh(); save(); resetArm = false; render(); }
@@ -1050,6 +1250,10 @@ document.addEventListener('change', ev => {
     const t = today(), r = S.red[t] || [false, false, false];
     r[+el.dataset.red] = el.checked; S.red[t] = r; save(); render();
   }
+});
+
+document.addEventListener('input', ev => {
+  if (ev.target.id === 'nome'){ S.nome = ev.target.value.trim().slice(0, 40); save(); }
 });
 
 render();

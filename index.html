@@ -71,6 +71,9 @@ p{margin:0}
 .ghost{display:inline-flex;align-items:center;justify-content:center;gap:6px;background:transparent;color:var(--pen);border:1.5px solid var(--pen);font:600 1rem/1.2 var(--f-ui);padding:12px 16px;border-radius:12px;min-height:46px;text-decoration:none;cursor:pointer;width:100%}
 .link{appearance:none;background:none;border:0;padding:6px 0;color:var(--pen);font:600 .95rem var(--f-ui);text-decoration:underline;text-underline-offset:3px;cursor:pointer;align-self:flex-start}
 .danger{color:var(--bad)}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+input[type="text"]{font:500 16px var(--f-ui);color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 12px;min-height:44px;flex:1;min-width:0}
+.reltxt{width:100%;min-height:160px;font:13px/1.45 var(--f-mono);color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:10px;margin-top:8px}
 :focus-visible{outline:3px solid var(--pen);outline-offset:2px}
 small{font-size:.78rem;color:var(--muted);font-weight:500}
 
@@ -723,7 +726,8 @@ const pct = (a, b) => b ? Math.round(a / b * 100) : 0;
 
 /* ---------- progresso salvo neste aparelho ---------- */
 const KEY = 'fatec30-v1';
-const fresh = () => ({v:1, start:today(), days:{}, qs:{}, ar:{}, red:{}, pr:{}});
+// log: cada resposta [data, id, acertou 1/0, alternativa marcada]; ses: resumo de cada sessão. Usados no relatório.
+const fresh = () => ({v:1, start:today(), days:{}, qs:{}, ar:{}, red:{}, pr:{}, log:[], ses:[], nome:''});
 function load(){ try { const s = JSON.parse(localStorage.getItem(KEY)); if (s && s.v === 1) return Object.assign(fresh(), s); } catch (e) {} return fresh(); }
 let S = load();
 function save(){ try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
@@ -778,12 +782,14 @@ function buildSession(areas, n, rev){
 function newPerm(){ const q = QM[sess.ids[sess.i]]; sess.perm = q.o ? [0, 1, 2, 3, 4] : shuffle([0, 1, 2, 3, 4]); }
 function startSession(n, areas, rev){
   const t = today(), ids = buildSession(areas, n, rev);
-  sess = {ids, i:0, res:[], chosen:null, revealed:false, t0:Date.now(), end:false,
+  sess = {ids, i:0, res:[], chosen:null, revealed:false, t0:Date.now(), end:false, rev:!!rev,
     tags: ids.map(id => { const r = S.qs[id]; return r && r.due && r.due <= t ? 'REVISÃO' : r ? 'REPETIDA' : ''; })};
   newPerm(); render(); scrollTo(0, 0);
 }
-function record(q, ok){
+function record(q, ok, ch){
   const t = today(), r = S.qs[q.id] || {n:0, ok:0, step:0};
+  S.log.push([t, q.id, ok ? 1 : 0, ch]);
+  if (S.log.length > 2000) S.log = S.log.slice(-2000);
   r.n++; if (ok) r.ok++; r.last = t; r.lastOk = ok;
   if (!ok){ r.due = addDays(t, 1); r.step = 0; }
   else if (r.due){ if (r.step >= 1) r.due = null; else { r.due = addDays(t, 3); r.step = 1; } }
@@ -1050,11 +1056,184 @@ function viewProgresso(){
       <div class="tile"><b>${tq + tp ? pct(tok + tpok, tq + tp) + '%' : '—'}</b><span>de acerto</span></div>
       <div class="tile"><b>${rev}</b><span>para revisar</span></div>
     </div>
+    ${cardRelatorio()}
     ${w ? `<section class="card"><p class="eyebrow">Ponto para reforçar</p><p><b>${w.a}</b>: ${Math.round(w.p * 100)}% de acerto. ${esc(DICA_MAT[Object.keys(MAT).find(c => MAT[c] === w.a)])}</p></section>` : ''}
     <section class="card"><h2 class="h-sm">Por matéria (questões comentadas + provas oficiais)</h2><div class="bars">${rows}</div></section>
     <section class="card"><h2 class="h-sm">Provas oficiais corrigidas</h2>${eds ? `<ul class="plain">${eds}</ul>` : '<p class="meta">Nenhuma ainda. Aos domingos o app indica um bloco de 10 questões da prova de dezembro de 2025.</p>'}</section>
     <p class="meta">Questões comentadas já vistas: ${Object.keys(S.qs).length} de ${Q.length}. O progresso fica salvo neste aparelho.</p>
     <button class="link danger" id="reset" data-act="reset">${resetArm ? 'Toque de novo para apagar tudo' : 'Apagar meu progresso'}</button>`;
+}
+
+/* ---------- relatório para quem está ajudando ---------- */
+function closeSess(){
+  if (!sess || sess.saved || !sess.res.length) return;
+  S.ses.push({d:today(), k:sess.rev ? 'rev' : 'dia', n:sess.res.length, ok:sess.res.filter(r => r.ok).length, min:Math.max(1, Math.round((Date.now() - sess.t0) / 60000))});
+  if (S.ses.length > 300) S.ses = S.ses.slice(-300);
+  sess.saved = true; save();
+}
+const semanaDe = k => addDays(k, -((parseKey(k).getDay() + 6) % 7));
+const acc = (ok, n) => n ? Math.round(ok / n * 100) : null;
+const fmtPct = p => p == null ? '—' : p + '%';
+const limpa = s => String(s || '').replace(/[⟦⟧]/g, '');
+const corta = (s, n) => { s = limpa(s); return s.length > n ? s.slice(0, n).trim() + '…' : s; };
+function relDados(){
+  const t = today(), dias = new Set([...Object.keys(S.days), ...Object.keys(S.red)]), sem = {};
+  dias.forEach(k => {
+    const w = semanaDe(k), s = sem[w] || (sem[w] = {dias:0, q:0, ok:0, pr:0, prok:0, red:0});
+    const d = S.days[k] || {}, r = S.red[k];
+    if (studied(k)) s.dias++;
+    s.q += d.q || 0; s.ok += d.ok || 0; s.pr += d.pr || 0; s.prok += d.prok || 0;
+    if (r && r.length === 3 && r.every(Boolean)) s.red++;
+  });
+  const by = {}; AREAS.forEach(a => by[a] = {an:0, aok:0, pn:0, pok:0});
+  for (const a in S.ar) if (by[a]){ by[a].an = S.ar[a].n; by[a].aok = S.ar[a].ok; }
+  const provas = [];
+  EDS.forEach(e => {
+    const st = S.pr[e.id]; if (!st) return;
+    let n = 0, ok = 0; const errs = [];
+    Object.keys(st.c).map(Number).sort((x, y) => x - y).forEach(q => {
+      const sc = e.s[q - 1], k = e.k[q - 1], right = isRight(e, q, st.a[q]); n++;
+      if (right) ok++; else errs.push({q, mat:MAT[sc] || '', marcou:st.a[q] || 'em branco', certa:k});
+      const b = by[MAT[sc]]; if (b && k !== '-'){ b.pn++; if (right) b.pok++; }
+    });
+    if (n) provas.push({nome:e.nome, tema:e.tema, n, ok, errs});
+  });
+  const erros = S.log.filter(l => !l[2]).slice(-60).reverse().map(([d, id, , ch]) => {
+    const q = QM[id]; if (!q) return null;
+    return {d, q, marcou:ch == null ? '' : q.al[ch], pegadinha:ch === q.ar[0]};
+  }).filter(Boolean);
+  const comLog = new Set(S.log.map(l => l[1]));
+  const errosSemLog = Object.keys(S.qs).filter(id => !S.qs[id].lastOk && !comLog.has(id) && QM[id]).map(id => QM[id]);
+  const maisErradas = Object.keys(S.qs).map(id => ({q:QM[id], e:S.qs[id].n - S.qs[id].ok, n:S.qs[id].n})).filter(x => x.q && x.e > 1).sort((a, b) => b.e - a.e).slice(0, 10);
+  let tq = 0, tok = 0, tp = 0, tpok = 0;
+  for (const d of Object.values(S.days)){ tq += d.q || 0; tok += d.ok || 0; tp += d.pr || 0; tpok += d.prok || 0; }
+  let ult7 = 0; for (let i = 0; i < 7; i++) if (studied(addDays(t, -i))) ult7++;
+  return {t, semanas:Object.keys(sem).sort().map(w => ({w, ...sem[w]})), by, provas, erros, errosSemLog, maisErradas,
+    redacoes:Object.keys(S.red).filter(k => S.red[k].length === 3 && S.red[k].every(Boolean)).sort(),
+    tq, tok, tp, tpok, ult7, diasEst:[...dias].filter(studied).length, seq:streak(), rev:Object.values(S.qs).filter(r => r.due).length, left:diffDays(t, EXAM_KEY)};
+}
+function relLeitura(D){
+  const L = [];
+  const mats = AREAS.map(a => { const b = D.by[a], n = b.an + b.pn; return {a, n, p:acc(b.aok + b.pok, n)}; }).filter(x => x.n >= 4).sort((x, y) => x.p - y.p);
+  if (mats.length) L.push(`Matéria mais fraca: ${mats[0].a}, com ${mats[0].p}% de acerto em ${mats[0].n} questões.`);
+  if (mats.length > 1){ const m = mats[mats.length - 1]; L.push(`Matéria mais forte: ${m.a}, com ${m.p}% em ${m.n} questões.`); }
+  const s = D.semanas.filter(x => x.q + x.pr > 0);
+  if (s.length >= 2){
+    const a = s[s.length - 2], b = s[s.length - 1], pa = acc(a.ok + a.prok, a.q + a.pr), pb = acc(b.ok + b.prok, b.q + b.pr);
+    L.push(`Acerto ${pb > pa ? 'subiu' : pb < pa ? 'caiu' : 'se manteve'}: ${pa}% na semana de ${fmtD(a.w)} e ${pb}% na de ${fmtD(b.w)}.`);
+  }
+  L.push(`Estudou em ${D.ult7} dos últimos 7 dias.`);
+  if (D.erros.length >= 5){
+    const p = D.erros.filter(e => e.pegadinha).length;
+    L.push(`Marcou a pegadinha principal em ${p} dos ${D.erros.length} erros registrados${p / D.erros.length >= .4 ? ': a dificuldade parece estar na leitura das alternativas, mais do que no conteúdo' : ''}.`);
+  }
+  if (!D.provas.length) L.push('Ainda não corrigiu nenhum bloco das provas oficiais.');
+  if (D.left > 0) L.push(`Faltam ${D.left} dias para a prova.`);
+  return L;
+}
+const REL_CSS = `:root{color-scheme:light}*{box-sizing:border-box}
+body{margin:0 auto;max-width:900px;padding:24px 16px 48px;font:15px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:#16202e;background:#fff}
+h1{font-size:1.6rem;margin:0 0 4px;line-height:1.2}h2{font-size:1.1rem;margin:30px 0 10px;padding-bottom:4px;border-bottom:2px solid #e2e6ee}h3{font-size:1rem;margin:18px 0 6px}
+p{margin:6px 0}.meta,small{color:#5b6478}small{font-size:.8rem}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px;margin:16px 0}
+.tile{border:1px solid #e2e6ee;border-radius:10px;padding:10px 12px}.tile b{display:block;font-size:1.5rem;font-variant-numeric:tabular-nums}.tile span{font-size:.82rem;color:#5b6478}
+.wrap{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:.9rem;min-width:520px}
+th,td{padding:6px 8px;border-bottom:1px solid #e2e6ee;text-align:left;vertical-align:top}th{font-size:.72rem;letter-spacing:.05em;text-transform:uppercase;color:#5b6478;white-space:nowrap}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.ok{color:#17804a}.bad{color:#c0352b}.up{color:#17804a}.down{color:#c0352b}
+.tag{display:inline-block;font-size:.72rem;font-weight:600;background:#fde8e6;color:#a32b22;border-radius:4px;padding:1px 6px}
+.note{background:#fff7d1;border-radius:10px;padding:12px 16px}.note ul{margin:6px 0 0;padding-left:1.1em}
+.chips{display:flex;flex-wrap:wrap;gap:6px}.chips span{font-size:.82rem;border:1px solid #e2e6ee;border-radius:6px;padding:3px 8px}
+footer{margin-top:36px;font-size:.82rem;color:#5b6478}`;
+function relHTML(){
+  const D = relDados(), agora = new Date(), nome = S.nome ? esc(S.nome) : 'Estudante';
+  const quando = agora.toLocaleDateString('pt-BR') + ' às ' + agora.toLocaleTimeString('pt-BR', {hour:'2-digit', minute:'2-digit'});
+  const tile = (v, l) => `<div class="tile"><b>${v}</b><span>${l}</span></div>`;
+  const tabela = (cab, linhas, vazio) => linhas ? `<div class="wrap"><table><thead><tr>${cab}</tr></thead><tbody>${linhas}</tbody></table></div>` : `<p class="meta">${vazio}</p>`;
+  let ant = null;
+  const semanas = D.semanas.map(s => {
+    const p = acc(s.ok + s.prok, s.q + s.pr);
+    const tend = p == null || ant == null ? '' : p > ant ? '<span class="up">▲</span>' : p < ant ? '<span class="down">▼</span>' : '=';
+    if (p != null) ant = p;
+    return `<tr><td>${fmtD(s.w)} a ${fmtD(addDays(s.w, 6))}</td><td class="n">${s.dias}</td><td class="n">${s.q}</td><td class="n">${fmtPct(acc(s.ok, s.q))}</td><td class="n">${s.pr}</td><td class="n">${fmtPct(acc(s.prok, s.pr))}</td><td class="n">${s.red}</td><td class="n">${tend}</td></tr>`;
+  }).join('');
+  const mats = AREAS.map(a => {
+    const b = D.by[a], tot = acc(b.aok + b.pok, b.an + b.pn);
+    return `<tr><td>${a}</td><td class="n">${NA_PROVA[a]}</td><td class="n">${b.an}</td><td class="n">${fmtPct(acc(b.aok, b.an))}</td><td class="n">${b.pn}</td><td class="n">${fmtPct(acc(b.pok, b.pn))}</td><td class="n${tot != null && tot < 50 ? ' bad' : ''}"><b>${fmtPct(tot)}</b></td></tr>`;
+  }).join('');
+  const erros = D.erros.slice(0, 40).map(e => `<tr><td>${fmtD(e.d)}</td><td>${esc(e.q.a)}<br><small>${esc(e.q.t)}</small></td><td><small>${esc(corta(e.q.x, 150))}</small><br><b>${esc(e.q.q)}</b></td><td class="bad">${e.marcou ? esc(e.marcou) : '—'}${e.pegadinha ? ' <span class="tag">pegadinha</span>' : ''}</td><td class="ok">${esc(e.q.al[e.q.c])}</td></tr>`).join('');
+  const repetidas = D.maisErradas.map(x => `<tr><td>${esc(x.q.a)} · ${esc(x.q.t)}<br><small>${esc(x.q.q)}</small></td><td class="n">${x.e}</td><td class="n">${x.n}</td></tr>`).join('');
+  const provas = D.provas.map(p => `<h3>${p.nome} <small>· tema central: ${esc(p.tema)}</small></h3><p>${p.ok} de ${p.n} questões corrigidas certas (${fmtPct(acc(p.ok, p.n))}).</p>${p.errs.length ? `<div class="chips">${p.errs.map(x => `<span>Q${pad(x.q)} · ${esc(x.mat)} · marcou ${esc(x.marcou)}, certa ${x.certa}</span>`).join('')}</div>` : '<p class="ok">Nenhum erro nos blocos corrigidos.</p>'}`).join('');
+  const sessoes = S.ses.slice(-25).reverse().map(s => `<tr><td>${fmtD(s.d)}</td><td>${s.k === 'rev' ? 'Revisão' : 'Sessão do dia'}</td><td class="n">${s.n}</td><td class="n">${s.ok}</td><td class="n">${fmtPct(acc(s.ok, s.n))}</td><td class="n">${s.min} min</td></tr>`).join('');
+  const dados = JSON.stringify({app:'Fatec em 30 minutos', versao:1, gerado:agora.toISOString(), nome:S.nome || '', estado:S}).replace(/</g, '\\u003c');
+  return `<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Relatório Fatec 30 · ${nome}</title><style>${REL_CSS}</style></head><body>
+<h1>Relatório de estudo · ${nome}</h1>
+<p class="meta">Vestibular Fatec, prova em 13/12/2026 · gerado em ${quando} pelo app Fatec em 30 minutos</p>
+<div class="tiles">${tile(D.diasEst, 'dias estudados')}${tile(D.seq, 'dias seguidos agora')}${tile(D.tq, `questões do app · ${fmtPct(acc(D.tok, D.tq))} de acerto`)}${tile(D.tp, `questões de prova oficial · ${fmtPct(acc(D.tpok, D.tp))} de acerto`)}${tile(D.redacoes.length, 'treinos de redação')}${tile(D.rev, 'questões para revisar')}</div>
+<div class="note"><b>Leitura rápida</b><ul>${relLeitura(D).map(l => `<li>${esc(l)}</li>`).join('')}</ul></div>
+<h2>Evolução semana a semana</h2>
+${tabela('<th>Semana</th><th class="n">Dias</th><th class="n">Questões app</th><th class="n">Acerto</th><th class="n">Prova oficial</th><th class="n">Acerto</th><th class="n">Redações</th><th class="n">Tendência</th>', semanas, 'Ainda sem dias de estudo registrados.')}
+<h2>Acerto por matéria</h2>
+${tabela('<th>Matéria</th><th class="n">Na prova</th><th class="n">App</th><th class="n">Acerto</th><th class="n">Prova oficial</th><th class="n">Acerto</th><th class="n">Total</th>', mats, '')}
+<h2>Questões do app que errou</h2>
+<p class="meta">As mais recentes primeiro. "Pegadinha" quer dizer que marcou a alternativa feita para enganar.</p>
+${tabela('<th>Data</th><th>Matéria</th><th>Questão</th><th>Marcou</th><th>Certa</th>', erros, 'Nenhum erro registrado ainda.')}
+${D.errosSemLog.length ? `<p class="meta">Também errou na última tentativa, antes de o relatório existir: ${D.errosSemLog.map(q => esc(q.a + ' · ' + q.t)).join('; ')}.</p>` : ''}
+${repetidas ? `<h3>Questões que errou mais de uma vez</h3>${tabela('<th>Questão</th><th class="n">Erros</th><th class="n">Tentativas</th>', repetidas, '')}` : ''}
+<h2>Provas oficiais</h2>
+${provas || '<p class="meta">Nenhum bloco de prova oficial corrigido ainda.</p>'}
+<h2>Redação</h2>
+<p>${D.redacoes.length ? 'Treinos completos em: ' + D.redacoes.map(fmtD).join(', ') + '.' : 'Nenhum treino de redação completo ainda.'}</p>
+<h2>Sessões recentes</h2>
+${tabela('<th>Data</th><th>Tipo</th><th class="n">Questões</th><th class="n">Certas</th><th class="n">Acerto</th><th class="n">Tempo</th>', sessoes, 'Nenhuma sessão registrada ainda.')}
+<footer>Os dados completos estão guardados dentro deste arquivo, para análise. Material de estudo independente, sem vínculo com a Fatec.</footer>
+<script type="application/json" id="dados-brutos">${dados}<\/script>
+</body></html>`;
+}
+function relTexto(){
+  const D = relDados(), L = [];
+  L.push(`Relatório Fatec 30 · ${S.nome || 'Estudante'} · ${fmtD(D.t)}`);
+  L.push(`Dias estudados: ${D.diasEst} (seguidos agora: ${D.seq}; nos últimos 7 dias: ${D.ult7})`);
+  L.push(`Questões do app: ${D.tq}, acerto ${fmtPct(acc(D.tok, D.tq))}`);
+  L.push(`Provas oficiais: ${D.tp} questões, acerto ${fmtPct(acc(D.tpok, D.tp))}`);
+  L.push(`Treinos de redação: ${D.redacoes.length}`);
+  const m = AREAS.map(a => { const b = D.by[a]; return {a, n:b.an + b.pn, p:acc(b.aok + b.pok, b.an + b.pn)}; }).filter(x => x.n);
+  if (m.length){ L.push('', 'Por matéria:'); m.forEach(x => L.push(`- ${x.a}: ${x.p}% (${x.n} questões)`)); }
+  if (D.semanas.length){ L.push('', 'Semana a semana:'); D.semanas.slice(-6).forEach(s => L.push(`- ${fmtD(s.w)}: ${s.dias} dias, ${s.q + s.pr} questões, ${fmtPct(acc(s.ok + s.prok, s.q + s.pr))}`)); }
+  if (D.erros.length){ L.push('', 'Erros recentes:'); D.erros.slice(0, 8).forEach(e => L.push(`- ${e.q.a} · ${e.q.t}: marcou "${limpa(e.marcou) || '?'}", certa "${e.q.al[e.q.c]}"${e.pegadinha ? ' (pegadinha)' : ''}`)); }
+  return L.join('\n');
+}
+function relArquivo(){
+  const slug = (S.nome || '').normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-zA-Z0-9]+/g, '-').replace(/^-|-$/g, '').toLowerCase();
+  return new File([relHTML()], `relatorio-fatec${slug ? '-' + slug : ''}-${today()}.html`, {type:'text/html'});
+}
+function relEnviar(){
+  const st = $('#rel-status'), f = relArquivo();
+  const baixar = () => {
+    const u = URL.createObjectURL(f), a = document.createElement('a');
+    a.href = u; a.download = f.name; document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(u), 5000);
+    st.textContent = `Arquivo ${f.name} gerado. No iPhone ele fica no app Arquivos, em Downloads. Se nada apareceu, use "Copiar resumo em texto".`;
+  };
+  if (navigator.canShare && navigator.canShare({files:[f]})){
+    navigator.share({files:[f], title:'Relatório Fatec 30'})
+      .then(() => { st.textContent = 'Pronto: o relatório foi para o app que você escolheu.'; })
+      .catch(e => { if (e && e.name === 'AbortError') st.textContent = 'Envio cancelado.'; else baixar(); });
+  } else baixar();
+}
+function relCopiar(){
+  const txt = relTexto(), st = $('#rel-status');
+  const mostrar = () => { st.innerHTML = 'Copie o texto abaixo:<textarea class="reltxt" readonly aria-label="Resumo do relatório"></textarea>'; const ta = st.querySelector('textarea'); ta.value = txt; ta.focus(); ta.select(); };
+  if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(txt).then(() => { st.textContent = 'Resumo copiado. É só colar no WhatsApp.'; }, mostrar);
+  else mostrar();
+}
+function cardRelatorio(){
+  return `<section class="card"><p class="eyebrow">Relatório</p><h2 class="h-sm">Mandar meu progresso para quem me ajuda</h2>
+    <p class="meta">Gera um arquivo com a evolução semana a semana, o acerto por matéria, as questões que você errou e as provas oficiais corrigidas. Dá para mandar pelo WhatsApp.</p>
+    <div class="row"><label for="nome" class="meta">Seu nome</label><input type="text" id="nome" value="${esc(S.nome || '')}" placeholder="opcional" autocomplete="given-name" maxlength="40"></div>
+    <button class="primary" data-act="rel-enviar">Enviar relatório</button>
+    <button class="link" data-act="rel-copiar">Copiar resumo em texto</button>
+    <div class="meta" id="rel-status" aria-live="polite"></div></section>`;
 }
 
 function render(){
@@ -1084,14 +1263,14 @@ document.addEventListener('click', ev => {
   } else if (act === 'confirm'){
     if (sess.chosen == null || sess.revealed) return;
     const q = QM[sess.ids[sess.i]], ok = sess.chosen === q.c;
-    sess.revealed = true; sess.res.push({id:q.id, ok}); record(q, ok); render();
+    sess.revealed = true; sess.res.push({id:q.id, ok}); record(q, ok, sess.chosen); render();
   } else if (act === 'next'){
     sess.i++;
-    if (sess.i >= sess.ids.length) sess.end = true;
+    if (sess.i >= sess.ids.length){ sess.end = true; closeSess(); }
     else { sess.chosen = null; sess.revealed = false; newPerm(); }
     render(); scrollTo(0, 0);
   } else if (act === 'quit'){
-    if (sess.res.length) sess.end = true; else sess = null;
+    if (sess.res.length){ sess.end = true; closeSess(); } else sess = null;
     render(); scrollTo(0, 0);
   } else if (act === 'home'){
     sess = null; tab = 'hoje'; render(); scrollTo(0, 0);
@@ -1112,13 +1291,17 @@ document.addEventListener('click', ev => {
     const c = $('#corrigir'); if (c) c.disabled = false;
   } else if (act === 'corrigir'){
     const e = edById(provaSel.id), st = prState(e.id); let n = 0, ok = 0;
-    for (let q = provaSel.from; q <= provaSel.to; q++){ if (st.c[q]) continue; st.c[q] = true; n++; if (isRight(e, q, st.a[q])) ok++; }
+    for (let q = provaSel.from; q <= provaSel.to; q++){ if (st.c[q]) continue; st.c[q] = today(); n++; if (isRight(e, q, st.a[q])) ok++; }
     bumpDay('pr', ok, n); save(); render();
     const r = $('#res'); if (r) r.scrollIntoView({block:'start'});
   } else if (act === 'refazer'){
     const st = prState(provaSel.id);
     for (let q = provaSel.from; q <= provaSel.to; q++){ delete st.a[q]; delete st.c[q]; }
     provaSel.t0 = Date.now(); save(); render();
+  } else if (act === 'rel-enviar'){
+    relEnviar();
+  } else if (act === 'rel-copiar'){
+    relCopiar();
   } else if (act === 'reset'){
     if (!resetArm){ resetArm = true; b.textContent = 'Toque de novo para apagar tudo'; setTimeout(() => { resetArm = false; const r = $('#reset'); if (r) r.textContent = 'Apagar meu progresso'; }, 4000); }
     else { S = fresh(); save(); resetArm = false; render(); }
@@ -1130,6 +1313,10 @@ document.addEventListener('change', ev => {
     const t = today(), r = S.red[t] || [false, false, false];
     r[+el.dataset.red] = el.checked; S.red[t] = r; save(); render();
   }
+});
+
+document.addEventListener('input', ev => {
+  if (ev.target.id === 'nome'){ S.nome = ev.target.value.trim().slice(0, 40); save(); }
 });
 
 render();
