@@ -1,0 +1,1080 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Concurso da Prefeitura de Guaratinguetá (VUNESP) e cursos de Administração e Secretariado, Informática básica e Inglês, com explicações simples.">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Estudo Guará">
+<meta name="theme-color" content="#f2f6f7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0c1316" media="(prefers-color-scheme: dark)">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="icon" type="image/png" href="icon-180.png">
+<style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}.appswitch{max-width:560px;margin:0 auto;padding-top:12px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;gap:6px}.appswitch a{font:600 .82rem var(--f-ui);text-decoration:none;color:var(--muted);border:1px solid var(--line);border-radius:99px;padding:6px 16px;min-height:34px;display:inline-flex;align-items:center}.appswitch a[aria-current="page"]{background:var(--pen);border-color:var(--pen);color:var(--on-pen)}body:has(#nav[hidden]) .appswitch{display:none}</style>
+<title>Estudo Guará</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&family=Schibsted+Grotesk:wght@400;500;600;700;800&display=swap">
+<style>
+/* Layout: uma coluna de celular (máx. 560px), letra um pouco maior e uma ideia por tela. Azul-petróleo de caderno, amarelo de marca-texto para o que importa. */
+:root{
+  --paper:#f2f6f7; --card:#ffffff; --ink:#132026; --muted:#53646b; --line:#d4dfe2;
+  --pen:#155e75; --pen-soft:#e0eff3; --on-pen:#ffffff;
+  --mark:#ffd84d; --mark-ink:#132026;
+  --ok:#1b7c4b; --ok-soft:#e1f3e8; --bad:#bf3a2e; --bad-soft:#fbe8e6;
+  --shadow:rgba(21,94,117,.22);
+  --f-ui:"Schibsted Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-read:"Literata", Georgia, "Times New Roman", serif;
+  --f-mono:"IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+  --base:17px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#0c1316; --card:#141e22; --ink:#e5eef0; --muted:#97a9ae; --line:#27363b;
+    --pen:#67c6dd; --pen-soft:#14363f; --on-pen:#0c1316;
+    --mark:#5e4e0a; --mark-ink:#fff3c4;
+    --ok:#56cc8e; --ok-soft:#12301f; --bad:#ff8174; --bad-soft:#3b1a17;
+    --shadow:rgba(0,0,0,.55); color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0c1316; --card:#141e22; --ink:#e5eef0; --muted:#97a9ae; --line:#27363b;
+  --pen:#67c6dd; --pen-soft:#14363f; --on-pen:#0c1316;
+  --mark:#5e4e0a; --mark-ink:#fff3c4;
+  --ok:#56cc8e; --ok-soft:#12301f; --bad:#ff8174; --bad-soft:#3b1a17;
+  --shadow:rgba(0,0,0,.55); color-scheme:dark;
+}
+:root.big{--base:19px}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--paper);color:var(--ink);font-family:var(--f-ui);font-size:var(--base);line-height:1.55}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--paper)}
+a{color:var(--pen)}
+.wrap{max-width:560px;margin:0 auto;padding-left:max(16px, env(safe-area-inset-left,0px));padding-right:max(16px, env(safe-area-inset-right,0px));padding-block:20px 120px;display:flex;flex-direction:column;gap:18px}
+h1,h2,h3{text-wrap:balance;margin:0}
+p{margin:0}
+.eyebrow{font-family:var(--f-mono);font-size:.72rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.hero{display:flex;flex-direction:column;gap:6px;padding-top:4px}
+.hero h1{font-size:clamp(2.3rem,11vw,3.2rem);font-weight:800;letter-spacing:-.03em;line-height:1}
+.hero h1 .n{color:var(--pen);font-variant-numeric:tabular-nums}
+.hero .sub{color:var(--muted)}
+.h1-sm{font-size:1.55rem;font-weight:800;letter-spacing:-.02em;line-height:1.15}
+.h-sm{font-size:1.05rem;font-weight:700}
+.meta{color:var(--muted);font-size:.92rem}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.today-card{border:1.5px solid var(--pen);box-shadow:0 14px 30px -22px var(--shadow)}
+.done-line{color:var(--ok);font-weight:600}
+.primary{appearance:none;border:0;background:var(--pen);color:var(--on-pen);font:600 1rem/1.25 var(--f-ui);padding:14px 18px;border-radius:12px;width:100%;min-height:50px;cursor:pointer}
+.primary:disabled{opacity:.4;cursor:default}
+.ghost{display:inline-flex;align-items:center;justify-content:center;gap:6px;background:transparent;color:var(--pen);border:1.5px solid var(--pen);font:600 1rem/1.25 var(--f-ui);padding:12px 16px;border-radius:12px;min-height:48px;text-decoration:none;cursor:pointer;width:100%}
+.ghost:disabled{opacity:.4;cursor:default}
+.link{appearance:none;background:none;border:0;padding:6px 0;color:var(--pen);font:600 .95rem var(--f-ui);text-decoration:underline;text-underline-offset:3px;cursor:pointer;align-self:flex-start;text-align:left}
+.danger{color:var(--bad)}
+:focus-visible{outline:3px solid var(--pen);outline-offset:2px}
+small{font-size:.8rem;color:var(--muted);font-weight:500}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+input[type="text"]{font:500 16px var(--f-ui);color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 12px;min-height:44px;flex:1;min-width:0}
+.check{display:flex;align-items:center;gap:10px;color:var(--ink)}
+.check input{width:22px;height:22px;accent-color:var(--pen);flex:none}
+.reltxt{width:100%;min-height:160px;font:13px/1.45 var(--f-mono);color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:10px;margin-top:8px}
+.track{height:8px;background:var(--line);border-radius:99px;overflow:hidden}
+.track i{display:block;height:100%;background:var(--pen);border-radius:99px}
+.list{margin:0;padding-left:1.15em;display:flex;flex-direction:column;gap:6px}
+.plain{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.plain li{display:flex;justify-content:space-between;gap:10px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip-btn{appearance:none;border:1px solid var(--line);background:var(--card);color:var(--ink);font:600 .9rem var(--f-ui);padding:9px 14px;border-radius:99px;cursor:pointer;min-height:42px}
+.tbl-wrap{overflow-x:auto}
+.tbl{width:100%;border-collapse:collapse;font-size:.9rem}
+.tbl th{font:600 .68rem var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);text-align:left;padding:6px 4px;border-bottom:1px solid var(--line)}
+.tbl td{padding:7px 4px;border-bottom:1px solid var(--line);vertical-align:top}
+.tbl .n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+details.box{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:0 16px}
+details.box summary{cursor:pointer;padding:13px 0;font-weight:700;list-style:none;display:flex;justify-content:space-between;gap:10px}
+details.box summary::-webkit-details-marker{display:none}
+details.box summary::after{content:"+";font-family:var(--f-mono);color:var(--muted)}
+details.box[open] summary::after{content:"−"}
+details.box > div{padding-bottom:14px;display:flex;flex-direction:column;gap:8px;font-size:.95rem}
+
+/* passos do dia */
+.passo{display:flex;gap:12px;align-items:flex-start}
+.passo .num{flex:none;width:30px;height:30px;border-radius:50%;background:var(--pen-soft);color:var(--pen);display:grid;place-items:center;font:700 .9rem var(--f-mono)}
+.passo.ok .num{background:var(--ok);color:var(--on-pen)}
+.passo .txt{flex:1;min-width:0;display:flex;flex-direction:column;gap:8px}
+
+/* curso */
+.aulas{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.aula-btn{appearance:none;width:100%;display:flex;gap:12px;align-items:center;text-align:left;background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:12px;padding:12px 14px;font:inherit;cursor:pointer}
+.aula-btn .k{flex:none;width:32px;height:32px;border-radius:50%;border:1.5px solid var(--muted);display:grid;place-items:center;font:600 .85rem var(--f-mono);color:var(--muted)}
+.aula-btn.feita .k{background:var(--ok);border-color:var(--ok);color:var(--on-pen)}
+.aula-btn.revisar .k{background:var(--mark);border-color:var(--mark);color:var(--mark-ink)}
+.aula-btn.proxima{border:1.5px solid var(--pen)}
+.aula-btn .t{flex:1;min-width:0;display:flex;flex-direction:column}
+.aula-btn .t b{font-weight:600}
+.frase{font-family:var(--f-read);font-size:1.2rem;line-height:1.5;background:var(--card);border:1px solid var(--line);border-left:5px solid var(--mark);border-radius:12px;padding:16px}
+.ess{margin:0;padding-left:1.2em;display:flex;flex-direction:column;gap:10px}
+.ess li::marker{color:var(--pen)}
+.mais{display:flex;flex-direction:column;gap:10px;background:var(--pen-soft);border-radius:12px;padding:14px 16px}
+.exemplo{font-family:var(--f-read);background:var(--card);border:1px dashed var(--pen);border-radius:12px;padding:14px 16px}
+
+/* pergunta */
+.qbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--paper);display:flex;align-items:center;gap:12px;padding-block:10px;border-bottom:1px solid var(--line)}
+.qprog{flex:1;min-width:0;display:flex;flex-direction:column;gap:4px;font:600 .78rem var(--f-mono);color:var(--muted)}
+.timer{font:600 .9rem var(--f-mono);font-variant-numeric:tabular-nums;min-width:4.5em;text-align:right}
+.q{display:flex;flex-direction:column;gap:14px}
+.texto{margin:0;font-family:var(--f-read);font-size:1.02rem;line-height:1.65;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;overflow-wrap:anywhere}
+.enun{font-weight:600;font-size:1.06rem}
+mark{color:var(--mark-ink);background:var(--mark);padding:0 .12em;border-radius:.15em;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.alts{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:9px}
+.alt{appearance:none;width:100%;display:flex;gap:12px;align-items:flex-start;text-align:left;background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:12px;padding:13px 12px;font:inherit;cursor:pointer}
+.alt:disabled{cursor:default}
+.bub{flex:none;width:30px;height:30px;border-radius:50%;border:1.5px solid var(--muted);display:grid;place-items:center;font:600 .85rem var(--f-mono)}
+.atx{min-width:0;padding-top:3px}
+.alt.sel{border-color:var(--pen);background:var(--pen-soft)} .alt.sel .bub{background:var(--pen);border-color:var(--pen);color:var(--on-pen)}
+.alt.right{border-color:var(--ok);background:var(--ok-soft)} .alt.right .bub{background:var(--ok);border-color:var(--ok);color:var(--on-pen)}
+.alt.wrong{border-color:var(--bad);background:var(--bad-soft)} .alt.wrong .bub{background:var(--bad);border-color:var(--bad);color:var(--on-pen)}
+.alt.dim{opacity:.55}
+.dica{background:var(--mark);color:var(--mark-ink);border-radius:12px;padding:12px 14px;font-weight:500}
+.fb{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:8px}
+.verdict{display:flex;align-items:center;gap:10px;font-weight:700;font-size:1.1rem}
+.dot{flex:none;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;color:var(--on-pen);background:var(--ok);font-size:.9rem}
+.is-bad .dot{background:var(--bad)} .is-mid .dot{background:var(--pen)}
+.end h1{font-size:2.8rem;font-weight:800;letter-spacing:-.02em}
+.rev details{border-top:1px solid var(--line)}
+.rev summary{padding:10px 0;font-weight:600;font-size:.95rem;display:flex;gap:8px;align-items:baseline;cursor:pointer;list-style:none}
+.rev summary::-webkit-details-marker{display:none}
+.rev .body{display:flex;flex-direction:column;gap:8px;padding-bottom:12px;font-size:.95rem}
+.tag{font:600 .7rem var(--f-mono);padding:2px 6px;border-radius:4px;flex:none}
+.tag.ok{background:var(--ok-soft);color:var(--ok)} .tag.bad{background:var(--bad-soft);color:var(--bad)} .tag.nil{background:var(--line);color:var(--muted)}
+.tiles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.tile{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:2px}
+.tile b{font-size:1.8rem;font-weight:800;font-variant-numeric:tabular-nums;line-height:1.1}
+.tile span{color:var(--muted);font-size:.85rem}
+.bars{display:flex;flex-direction:column;gap:12px}
+.bar-top{display:flex;justify-content:space-between;gap:8px;font-size:.93rem}
+.num{font-family:var(--f-mono);font-size:.8rem;color:var(--muted);white-space:nowrap}
+
+/* navegação */
+.nav{position:fixed;left:0;right:0;bottom:0;z-index:6;background:var(--card);border-top:1px solid var(--line);padding-top:8px;padding-bottom:calc(8px + env(safe-area-inset-bottom,0px));padding-left:max(8px, env(safe-area-inset-left,0px));padding-right:max(8px, env(safe-area-inset-right,0px))}
+.nav .in{max-width:560px;margin:0 auto;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:2px}
+.nav button{appearance:none;border:0;background:transparent;color:var(--muted);font:600 .8rem var(--f-ui);padding:10px 2px;border-radius:10px;cursor:pointer;min-height:46px}
+.nav button[aria-current="page"]{background:var(--pen-soft);color:var(--pen)}
+</style>
+
+</head>
+<body>
+<nav class="appswitch" aria-label="Escolher app"><a href="../">Fatec</a><a href="../prf/">PRF</a><a href="./" aria-current="page">Guará</a></nav>
+<main id="app" class="wrap"></main>
+<nav id="nav" class="nav" aria-label="Seções">
+  <div class="in">
+    <button data-tab="conc">Concurso</button>
+    <button data-tab="adm">Adm</button>
+    <button data-tab="info">Info</button>
+    <button data-tab="ing">Inglês</button>
+    <button data-tab="prog">Progresso</button>
+  </div>
+</nav>
+
+<script>
+document.documentElement.lang = 'pt-BR';
+
+const EXAM_KEY = '2027-02-21';
+const VUNESP = 'https://www.vunesp.com.br';
+const L = 'ABCDE';
+const DIAS = ['domingo','segunda-feira','terça-feira','quarta-feira','quinta-feira','sexta-feira','sábado'];
+const MATS = ['Português','Matemática','Informática','Específicos'];
+const NA_PROVA = {'Português':10,'Matemática':10,'Informática':5,'Específicos':25};
+const SEG_Q = 216; // 3 horas para 50 questões: cerca de 3min36 por questão
+
+/* ---------- questões do concurso (estilo VUNESP, 5 alternativas). ⟦…⟧ marca a pista no texto. ---------- */
+const CONC = [
+{id:'lp1',a:'Português',x:`A prefeitura abriu um posto de atendimento no bairro. ⟦Antes, os moradores precisavam ir até o centro⟧ para pedir documentos. Agora, ⟦resolvem quase tudo perto de casa⟧, sem gastar com ônibus.`,
+ q:`De acordo com o texto, a principal vantagem do novo posto é`,
+ al:[`facilitar o acesso dos moradores aos serviços.`,`aumentar o preço das passagens de ônibus.`,`fechar o atendimento no centro da cidade.`,`obrigar os moradores a ir ao centro.`,`diminuir o número de documentos emitidos.`],c:0,
+ dica:`Compare o "antes" e o "agora" do texto.`,
+ p:`Antes era preciso ir ao centro; agora dá para resolver perto de casa. A vantagem é o acesso mais fácil.`,
+ mais:`Em interpretação, a resposta certa diz o que o texto diz, com outras palavras. As erradas costumam inventar algo (o preço da passagem) ou dizer o contrário do texto (ter que ir ao centro).`},
+{id:'lp2',a:'Português',x:`O servidor foi ⟦ágil⟧ no atendimento e resolveu o problema ⟦em poucos minutos⟧.`,
+ q:`Sem mudar o sentido da frase, "ágil" pode ser trocado por`,
+ al:[`rápido.`,`lento.`,`grosseiro.`,`distraído.`,`confuso.`],c:0,
+ dica:`Releia o fim da frase: ele resolveu "em poucos minutos".`,
+ p:`"Ágil" quer dizer rápido, ligeiro. O próprio texto ajuda: ele resolveu tudo em poucos minutos.`,
+ mais:`Quando não souber o significado de uma palavra, use o contexto: as palavras em volta dão pistas. "Lento" é o contrário (antônimo) de ágil.`},
+{id:'lp3',a:'Português',x:``,
+ q:`Assinale a frase com a pontuação correta.`,
+ al:[`Maria, traga os documentos, por favor.`,`Maria traga, os documentos por favor.`,`Maria traga os documentos, por, favor.`,`Maria, traga os, documentos por favor.`,`Maria traga os documentos por, favor.`],c:0,
+ dica:`Quando chamamos alguém pelo nome, esse nome fica separado por vírgula.`,
+ p:`"Maria" é o vocativo (a pessoa chamada) e fica separado por vírgula. "Por favor", no fim, também.`,
+ mais:`Vírgulas que mais caem: separar o vocativo ("Maria, venha"), separar itens de uma lista ("canetas, papéis e clipes") e isolar explicações ("isto é", "por exemplo"). Nunca separe o sujeito do verbo: "Os documentos, chegaram" está errado.`},
+{id:'lp4',a:'Português',x:``,
+ q:`Assinale a frase em que o acento indicativo de crase (à) está correto.`,
+ al:[`Entreguei o ofício à diretora.`,`Fui à pé até a prefeitura.`,`Começou à chover cedo.`,`Ele se referiu à você.`,`Vou à Brasília amanhã.`],c:0,
+ dica:`Troque a palavra feminina por uma masculina. Se aparecer "ao", existe crase.`,
+ p:`Entregar algo "a" alguém + "a diretora" = à diretora. Teste: "Entreguei o ofício ao diretor". Apareceu "ao", então há crase.`,
+ mais:`Não há crase antes de palavra masculina (a pé), antes de verbo (a chover), antes de "você" e antes de cidades que não usam artigo. Truque da volta: "Vou a Brasília, volto de Brasília" (sem crase); "Vou à Bahia, volto da Bahia" (com crase).`},
+{id:'lp5',a:'Português',x:``,
+ q:`Assinale a frase em que a concordância verbal está correta.`,
+ al:[`Faltam dois documentos no processo.`,`Falta dois documentos no processo.`,`Haviam muitos candidatos na fila.`,`Fazem três anos que trabalho aqui.`,`Os funcionário chegou cedo.`],c:0,
+ dica:`Descubra o sujeito: o que é que "falta"?`,
+ p:`O sujeito é "dois documentos" (plural), então o verbo vai para o plural: faltam.`,
+ mais:`Pegadinhas clássicas: "haver" no sentido de existir fica no singular ("Havia muitos candidatos"); "fazer" indicando tempo também ("Faz três anos"). Quando o sujeito vem depois do verbo, inverta para conferir: "Dois documentos faltam".`},
+{id:'lp6',a:'Português',x:``,
+ q:`Assinale a frase escrita de acordo com a norma-padrão.`,
+ al:[`Prefiro trabalhar de manhã a trabalhar à noite.`,`Prefiro mais trabalhar de manhã do que à noite.`,`Prefiro trabalhar de manhã do que à noite.`,`Prefiro mais trabalhar de manhã que de noite.`,`Eu prefiro mais de manhã do que de noite.`],c:0,
+ dica:`Na norma-padrão, quem prefere, prefere uma coisa "a" outra.`,
+ p:`O verbo "preferir" pede a preposição "a": prefere-se uma coisa a outra. Não se usa "mais" nem "do que".`,
+ mais:`Outras regências que caem muito: "assistir ao jogo" (no sentido de ver), "obedecer ao regulamento", "chegar a algum lugar" (e não "chegar em"), "ir ao banco".`},
+{id:'lp7',a:'Português',x:`O sistema estava fora do ar; ⟦por isso⟧, o atendimento foi feito em papel.`,
+ q:`A expressão "por isso" indica`,
+ al:[`consequência.`,`oposição.`,`tempo.`,`comparação.`,`condição.`],c:0,
+ dica:`O que aconteceu por causa do sistema fora do ar?`,
+ p:`O atendimento em papel foi a consequência de o sistema estar fora do ar.`,
+ mais:`Consequência ou conclusão: por isso, portanto, logo, então. Oposição: mas, porém, contudo. Causa: porque, pois, já que. Condição: se, caso.`},
+
+{id:'mt1',a:'Matemática',o:1,x:``,
+ q:`Uma repartição tinha 40 processos para analisar e já analisou 25% deles. Quantos processos já foram analisados?`,
+ al:[`10`,`15`,`20`,`25`,`30`],c:0,
+ dica:`25% é o mesmo que um quarto (1/4).`,
+ p:`25% de 40 = 40 ÷ 4 = 10 processos.`,
+ mais:`Atalhos de porcentagem: 50% é a metade; 25% é um quarto (divide por 4); 10% divide por 10; 1% divide por 100. Para 30%, faça 10% e multiplique por 3.`},
+{id:'mt2',a:'Matemática',o:1,x:``,
+ q:`Uma impressora imprime 30 páginas em 2 minutos. No mesmo ritmo, quantas páginas ela imprime em 5 minutos?`,
+ al:[`60`,`65`,`70`,`75`,`80`],c:3,
+ dica:`Descubra primeiro quantas páginas ela imprime em 1 minuto.`,
+ p:`Em 1 minuto: 30 ÷ 2 = 15 páginas. Em 5 minutos: 15 × 5 = 75 páginas.`,
+ mais:`Na regra de três, achar o valor de "1 unidade" (1 minuto, 1 litro, 1 pessoa) deixa a conta mais fácil. Depois é só multiplicar.`},
+{id:'mt3',a:'Matemática',o:1,x:``,
+ q:`De uma caixa com 24 canetas, 3/8 foram entregues aos funcionários. Quantas canetas foram entregues?`,
+ al:[`3`,`6`,`8`,`9`,`12`],c:3,
+ dica:`Divida 24 em 8 partes iguais e pegue 3 dessas partes.`,
+ p:`24 ÷ 8 = 3 canetas em cada parte. Três partes: 3 × 3 = 9 canetas.`,
+ mais:`Fração de uma quantidade: divida pelo número de baixo (denominador) e multiplique pelo de cima (numerador).`},
+{id:'mt4',a:'Matemática',o:1,x:``,
+ q:`Um ônibus passa no ponto a cada 12 minutos e outro a cada 18 minutos. Se os dois passaram juntos às 8h, quando passarão juntos de novo?`,
+ al:[`8h30`,`8h36`,`8h45`,`9h00`,`9h12`],c:1,
+ dica:`Procure o primeiro número que aparece nas duas tabuadas: a do 12 e a do 18.`,
+ p:`Múltiplos de 12: 12, 24, 36… Múltiplos de 18: 18, 36… O primeiro em comum é 36 (o MMC). 8h + 36 min = 8h36.`,
+ mais:`"Voltam a coincidir" e "passam juntos de novo" pedem o MMC (mínimo múltiplo comum). "Dividir em partes iguais, do maior tamanho possível" pede o MDC (máximo divisor comum).`},
+{id:'mt5',a:'Matemática',o:1,x:``,
+ q:`Pedro e Ana, juntos, têm 50 anos. Ana tem 10 anos a mais que Pedro. Qual é a idade de Pedro?`,
+ al:[`15`,`20`,`25`,`30`,`35`],c:1,
+ dica:`Se Pedro tem x anos, Ana tem x + 10. Some os dois e iguale a 50.`,
+ p:`x + (x + 10) = 50 → 2x + 10 = 50 → 2x = 40 → x = 20. Pedro tem 20 e Ana tem 30.`,
+ mais:`Confira a resposta no enunciado: 20 + 30 = 50 e 30 − 20 = 10. Testar a resposta evita erro bobo.`},
+{id:'mt6',a:'Matemática',o:1,x:``,
+ q:`Uma sala retangular mede 5 m por 4 m. Quantos metros quadrados de piso são necessários para cobrir todo o chão?`,
+ al:[`9 m²`,`18 m²`,`20 m²`,`25 m²`,`40 m²`],c:2,
+ dica:`Piso cobre o chão todo: é área (comprimento × largura).`,
+ p:`Área do retângulo = 5 × 4 = 20 m².`,
+ mais:`18 seria o perímetro (5 + 4 + 5 + 4), que é o contorno da sala, usado para rodapé. Piso, tinta e grama pedem área.`},
+{id:'mt7',a:'Matemática',o:1,x:``,
+ q:`Um setor atendeu 30, 40 e 50 pessoas em três dias. Qual foi a média de atendimentos por dia?`,
+ al:[`30`,`35`,`40`,`45`,`120`],c:2,
+ dica:`Some os três dias e divida por 3.`,
+ p:`(30 + 40 + 50) ÷ 3 = 120 ÷ 3 = 40 atendimentos por dia.`,
+ mais:`Média aritmética: soma tudo e divide pela quantidade. 120 é a soma, não a média.`},
+
+{id:'in1',a:'Informática',x:``,
+ q:`No Windows 11, o atalho Ctrl + C serve para`,
+ al:[`copiar o item selecionado.`,`colar o item copiado.`,`recortar o item selecionado.`,`desfazer a última ação.`,`fechar a janela.`],c:0,
+ dica:`Pense em "C" de Copiar.`,
+ p:`Ctrl + C copia. Ctrl + V cola, Ctrl + X recorta e Ctrl + Z desfaz.`,
+ mais:`O que é copiado ou recortado vai para a área de transferência, um espaço temporário. De lá, você cola com Ctrl + V quantas vezes quiser.`},
+{id:'in2',a:'Informática',x:``,
+ q:`No MS-Word 2016 em português, o atalho para aplicar negrito ao texto selecionado é`,
+ al:[`Ctrl + N`,`Ctrl + B`,`Ctrl + I`,`Ctrl + S`,`Ctrl + P`],c:0,
+ dica:`No Word em português, os atalhos de formatação seguem as iniciais em português.`,
+ p:`No Word em português: Ctrl + N = Negrito, Ctrl + I = Itálico, Ctrl + S = Sublinhado.`,
+ mais:`Pegadinha comum: no Word em português, Ctrl + B é Salvar (e não negrito, como no inglês "bold"). Ctrl + P é Imprimir.`},
+{id:'in3',a:'Informática',x:``,
+ q:`No MS-Excel 2016, a fórmula que soma os valores das células de A1 até A5 é`,
+ al:[`=SOMA(A1:A5)`,`=SOMA(A1;A5)`,`SOMA A1 até A5`,`=A1+A5`,`=MÉDIA(A1:A5)`],c:0,
+ dica:`Os dois-pontos (:) significam "até".`,
+ p:`=SOMA(A1:A5) soma A1, A2, A3, A4 e A5. Toda fórmula começa com o sinal de igual.`,
+ mais:`=SOMA(A1;A5) soma só A1 e A5 (o ponto e vírgula significa "e"). =A1+A5 também soma só as duas. =MÉDIA calcula a média.`},
+{id:'in4',a:'Informática',x:``,
+ q:`Ao enviar um e-mail, para que um destinatário receba a mensagem sem que os outros vejam o endereço dele, deve-se usar o campo`,
+ al:[`Cco`,`Cc`,`Para`,`Assunto`,`Anexo`],c:0,
+ dica:`Procure o campo de cópia "oculta".`,
+ p:`Cco = com cópia oculta. Quem está no Cco recebe, mas os outros não veem o endereço.`,
+ mais:`Para: destinatário principal. Cc: cópia visível para todos. Cco: cópia escondida, útil para mandar a muita gente sem expor os e-mails de todos.`},
+
+{id:'ce1',a:'Específicos',x:``,
+ q:`Os princípios da Administração Pública escritos no art. 37 da Constituição Federal são`,
+ al:[`legalidade, impessoalidade, moralidade, publicidade e eficiência.`,`lucro, rapidez, simpatia, sigilo e economia.`,`liberdade, igualdade, fraternidade, paz e ordem.`,`legalidade, interesse pessoal, moralidade, sigilo e eficiência.`,`hierarquia, disciplina, lucro, publicidade e rapidez.`],c:0,
+ dica:`Lembre da palavra LIMPE.`,
+ p:`LIMPE: Legalidade, Impessoalidade, Moralidade, Publicidade e Eficiência.`,
+ mais:`Legalidade: o servidor só faz o que a lei permite. Impessoalidade: trata todos igual, sem favorecer ninguém. Moralidade: age com honestidade. Publicidade: transparência. Eficiência: faz bem feito, sem desperdício.`},
+{id:'ce2',a:'Específicos',x:``,
+ q:`Um servidor atende primeiro um amigo que chegou depois de outras pessoas na fila. Ele desrespeitou principalmente o princípio da`,
+ al:[`impessoalidade.`,`publicidade.`,`eficiência.`,`autonomia.`,`hierarquia.`],c:0,
+ dica:`Qual princípio manda tratar todas as pessoas da mesma forma?`,
+ p:`Impessoalidade: o servidor não pode favorecer nem prejudicar alguém por amizade ou interesse.`,
+ mais:`Furar a fila de um amigo também fere a moralidade, mas o centro da questão é tratar pessoas de forma diferente por motivo pessoal: impessoalidade.`},
+{id:'ce3',a:'Específicos',x:``,
+ q:`A divulgação dos gastos da prefeitura em um portal da transparência atende ao princípio da`,
+ al:[`publicidade.`,`impessoalidade.`,`pessoalidade.`,`sigilo.`,`hierarquia.`],c:0,
+ dica:`Divulgar é tornar público…`,
+ p:`Publicidade: os atos da administração devem ser divulgados, para a população acompanhar e fiscalizar.`,
+ mais:`A publicidade tem exceções, como informações que põem em risco a segurança ou a intimidade das pessoas. Mas a regra é a transparência.`},
+{id:'ce4',a:'Específicos',x:``,
+ q:`Fazem parte da administração pública indireta`,
+ al:[`autarquias, fundações públicas, empresas públicas e sociedades de economia mista.`,`apenas os ministérios e as secretarias municipais.`,`os partidos políticos.`,`as empresas privadas que vendem para a prefeitura.`,`os sindicatos.`],c:0,
+ dica:`Indireta = entidades criadas pelo governo, com personalidade jurídica própria.`,
+ p:`A administração indireta é formada por autarquias, fundações públicas, empresas públicas e sociedades de economia mista.`,
+ mais:`A administração direta é a própria União, os estados, o DF e os municípios, com seus órgãos (ministérios, secretarias). A indireta são entidades separadas, criadas para áreas específicas.`},
+{id:'ce5',a:'Específicos',x:``,
+ q:`Os documentos usados com frequência no dia a dia do setor, guardados perto de quem trabalha com eles, formam o arquivo`,
+ al:[`corrente.`,`permanente.`,`intermediário.`,`histórico.`,`morto.`],c:0,
+ dica:`Pense em "corrente" como "em uso agora".`,
+ p:`Arquivo corrente: documentos de uso frequente, que ficam no próprio setor.`,
+ mais:`Teoria das três idades: corrente (uso frequente, no setor) → intermediário (uso raro, aguardando o prazo) → permanente (valor histórico ou de prova, guardado para sempre).`},
+{id:'ce6',a:'Específicos',x:``,
+ q:`Documentos com valor histórico, que devem ser guardados para sempre, pertencem ao arquivo`,
+ al:[`permanente.`,`corrente.`,`intermediário.`,`provisório.`,`setorial.`],c:0,
+ dica:`Para sempre = …`,
+ p:`O arquivo permanente guarda documentos de valor histórico ou de prova. Eles não podem ser eliminados.`,
+ mais:`No arquivo intermediário, os documentos esperam o fim do prazo. Depois, ou são eliminados (com autorização) ou vão para o permanente.`},
+{id:'ce7',a:'Específicos',x:``,
+ q:`Ao arquivar as fichas dos funcionários pelo nome, em ordem de A a Z, usa-se o método`,
+ al:[`alfabético.`,`numérico.`,`geográfico.`,`cronológico.`,`ideográfico.`],c:0,
+ dica:`De A a Z…`,
+ p:`Organizar pelo nome, de A a Z, é o método alfabético.`,
+ mais:`Outros métodos: numérico (por número), cronológico (por data), geográfico (por lugar) e ideográfico (por assunto).`},
+{id:'ce8',a:'Específicos',x:``,
+ q:`O setor responsável por receber, registrar, distribuir e controlar a tramitação dos documentos é o`,
+ al:[`protocolo.`,`almoxarifado.`,`arquivo permanente.`,`recursos humanos.`,`tesouraria.`],c:0,
+ dica:`É a "porta de entrada" dos documentos na repartição.`,
+ p:`O protocolo recebe os documentos, registra (dá um número), distribui para os setores e acompanha por onde eles passam.`,
+ mais:`Etapas do protocolo: recebimento, registro, autuação (quando vira processo), classificação, distribuição e controle da tramitação. Assim ninguém perde um documento de vista.`},
+{id:'ce9',a:'Específicos',x:``,
+ q:`Ao atender o telefone no trabalho, a atitude mais adequada é`,
+ al:[`identificar o setor e o próprio nome e cumprimentar quem ligou.`,`dizer apenas "alô" e esperar a pessoa falar.`,`deixar tocar várias vezes antes de atender.`,`pedir que a pessoa ligue mais tarde, sem explicar.`,`passar a ligação sem perguntar quem é.`],c:0,
+ dica:`Quem liga precisa saber logo com quem está falando.`,
+ p:`O atendimento correto começa com identificação (setor e nome) e um cumprimento: "Secretaria de Educação, Ana, bom dia".`,
+ mais:`Boas práticas: atender rápido, falar com clareza, anotar recados completos (nome, telefone, assunto, horário) e não deixar a pessoa esperando na linha sem retorno.`},
+{id:'ce10',a:'Específicos',x:``,
+ q:`Um cidadão chega irritado, reclamando da demora. A atitude mais adequada do servidor é`,
+ al:[`ouvir com calma, mostrar que entendeu o problema e buscar uma solução.`,`responder no mesmo tom para mostrar autoridade.`,`ignorar a reclamação e chamar o próximo.`,`dizer que a culpa é de outro setor e encerrar a conversa.`,`pedir que ele volte outro dia, sem explicação.`],c:0,
+ dica:`Pense em escuta e em solução.`,
+ p:`Diante de alguém irritado, o servidor mantém a calma, ouve com atenção e busca resolver ou encaminhar o problema.`,
+ mais:`Isso se chama escuta ativa: deixar a pessoa falar, repetir o que entendeu ("O senhor está esperando há uma hora, certo?") e dizer o que vai ser feito. Responder com grosseria só aumenta o conflito.`},
+{id:'ce11',a:'Específicos',x:``,
+ q:`Segundo o Manual de Redação da Presidência da República, o fecho usado para autoridades de hierarquia superior é`,
+ al:[`Respeitosamente,`,`Atenciosamente,`,`Abraços,`,`Até mais,`,`Saudações cordiais,`],c:0,
+ dica:`Para quem está acima na hierarquia, mostre respeito.`,
+ p:`"Respeitosamente" é para autoridades superiores; "Atenciosamente", para as de mesma hierarquia ou inferior.`,
+ mais:`O fecho é a despedida do documento. Nas comunicações oficiais, só existem esses dois. Expressões informais, como "Abraços", não cabem.`},
+{id:'ce12',a:'Específicos',x:``,
+ q:`Uma característica obrigatória da redação oficial é a`,
+ al:[`impessoalidade.`,`linguagem com gírias.`,`opinião pessoal de quem escreve.`,`abreviação informal, como "vc".`,`linguagem rebuscada e difícil.`],c:0,
+ dica:`O documento fala em nome do órgão, e não da pessoa.`,
+ p:`A redação oficial deve ser impessoal, clara, concisa e formal.`,
+ mais:`Impessoal: fala em nome do órgão. Clara: qualquer pessoa entende. Concisa: diz o necessário, sem enrolar. Formal: segue a norma-padrão. Linguagem difícil demais também é erro, porque atrapalha a clareza.`}
+];
+const CM = Object.fromEntries(CONC.map(q => [q.id, q]));
+
+/* ---------- cursos: cada aula tem frase, essencial, explicação longa (opcional), exemplo e 3 perguntas ---------- */
+const CURSOS = {
+adm:{nome:'Administração e Secretariado',aulas:[
+ {id:'adm1',t:'O papel do secretário',frase:`O secretário organiza a rotina, cuida das informações e faz a ponte entre as pessoas do trabalho.`,
+  ess:[`Organiza agenda, documentos e reuniões.`,`Atende pessoas, por telefone e pessoalmente.`,`Guarda sigilo: o que se sabe no trabalho fica no trabalho.`,`Precisa de organização, educação e iniciativa.`],
+  mais:`Pense no secretário como o "centro de controle" do setor. Ele sabe onde está cada documento, quem precisa falar com quem e o que acontece em cada dia da semana.\n\nSigilo é regra de ouro: informações de pessoas, processos e salários não podem ser comentadas fora do trabalho, nem com colegas que não precisam saber.\n\nIniciativa é perceber o que precisa ser feito antes de alguém pedir. Por exemplo: avisar que duas reuniões vão acontecer no mesmo horário.`,
+  ex:`Seu chefe tem duas reuniões marcadas no mesmo horário. Em vez de esperar dar problema, você avisa e sugere outro horário para uma delas.`,
+  qs:[{q:`Qual destas atitudes mostra sigilo profissional?`,al:[`Não comentar fora do trabalho o salário de um colega.`,`Contar para a família os problemas de um cidadão atendido.`,`Postar nas redes sociais um documento do setor.`,`Deixar processos abertos na mesa no fim do dia.`],dica:`Sigilo é guardar segredo do que se sabe no trabalho.`,p:`Salário e dados pessoais são sigilosos: não se comenta fora do trabalho.`},
+   {q:`Avisar o chefe que duas reuniões vão bater no mesmo horário, antes do problema acontecer, é um exemplo de`,al:[`iniciativa.`,`desorganização.`,`falta de sigilo.`,`desobediência.`],dica:`É fazer algo antes de alguém pedir.`,p:`Iniciativa é agir antes do problema acontecer.`},
+   {q:`Uma tarefa típica do secretário é`,al:[`organizar a agenda e os documentos do setor.`,`consertar o computador do setor.`,`fazer a limpeza do prédio.`,`dirigir o carro oficial.`],dica:`Pense em organização e informação.`,p:`Organizar agenda e documentos é o centro do trabalho de secretaria.`}]},
+ {id:'adm2',t:'Atendimento presencial e por telefone',frase:`Atender bem é receber a pessoa com educação, entender o que ela precisa e dar uma resposta clara.`,
+  ess:[`Cumprimente, olhe nos olhos e chame pelo nome.`,`Escute até o fim antes de responder.`,`Se não souber, diga que vai verificar e dê retorno.`,`No telefone: diga o setor e seu nome logo ao atender.`],
+  mais:`Um bom atendimento tem três passos: acolher (cumprimentar e mostrar que está disponível), entender (ouvir e perguntar) e resolver (responder ou encaminhar para quem resolve).\n\nNo telefone, a pessoa não vê você, então a voz faz todo o trabalho: fale devagar e com clareza. Se precisar deixar a pessoa esperando, avise e não demore.\n\nAo anotar um recado, escreva: nome de quem ligou, telefone, assunto, dia e hora. Recado sem telefone para retorno não serve.`,
+  ex:`"Secretaria de Educação, Ana, bom dia. Em que posso ajudar?"`,
+  qs:[{q:`Ao atender o telefone do setor, a melhor forma é`,al:[`"Secretaria de Educação, Ana, bom dia."`,`"Alô?"`,`"Fala."`,`"Quem é?"`],dica:`Quem liga quer saber logo onde ligou e com quem fala.`,p:`Identificar o setor e o próprio nome, com um cumprimento, é o padrão.`},
+   {q:`Um recado completo deve ter, no mínimo,`,al:[`nome de quem ligou, telefone, assunto e horário.`,`apenas o nome de quem ligou.`,`apenas o horário da ligação.`,`a opinião de quem anotou.`],dica:`Pense no que o chefe precisa para retornar a ligação.`,p:`Sem telefone e assunto, quem recebe o recado não consegue retornar.`},
+   {q:`Se o cidadão pergunta algo que você não sabe, o correto é`,al:[`dizer que vai verificar e dar o retorno.`,`inventar uma resposta para não ficar mal.`,`dizer que não é problema seu.`,`mandar a pessoa procurar na internet.`],dica:`Honestidade e compromisso de retorno.`,p:`É melhor dizer que vai verificar do que dar uma informação errada.`}]},
+ {id:'adm3',t:'Comunicação e conflitos',frase:`Comunicar bem é falar com clareza e ouvir com atenção. Nos conflitos, a calma resolve mais do que a força.`,
+  ess:[`Fale de forma simples e direta.`,`Ouça sem interromper (escuta ativa).`,`Diante de alguém nervoso: calma, ouvir e buscar solução.`,`Respeite a hierarquia: assuntos do setor vão primeiro ao chefe imediato.`],
+  mais:`Escuta ativa é ouvir de verdade: olhar para a pessoa, não interromper e repetir o que entendeu ("Então o documento não chegou, certo?"). A pessoa se sente respeitada e você evita mal-entendidos.\n\nEm um conflito, não leve para o lado pessoal. Geralmente a pessoa está brava com a situação, não com você. Responder no mesmo tom só piora.\n\nHierarquia é a ordem de comando: quem responde a quem. Pular o chefe imediato para reclamar com o chefe dele costuma criar mais problemas.`,
+  ex:`Cidadão irritado: "Estou esperando há uma hora!" Você: "Entendo, o senhor esperou muito. Vou ver agora o que aconteceu com seu pedido."`,
+  qs:[{q:`Escuta ativa significa`,al:[`ouvir com atenção, sem interromper, e confirmar o que entendeu.`,`ouvir enquanto mexe no celular.`,`interromper para responder mais rápido.`,`falar mais alto que a outra pessoa.`],dica:`"Ativa" é participar de verdade.`,p:`Escuta ativa é prestar atenção total e confirmar o entendimento.`},
+   {q:`Um colega discorda de você em voz alta. A melhor atitude é`,al:[`manter a calma e conversar sobre o problema.`,`gritar mais alto para encerrar.`,`espalhar para todos que ele é grosseiro.`,`parar de falar com ele para sempre.`],dica:`Calma e conversa resolvem.`,p:`Manter a calma e tratar do problema, e não da pessoa, ajuda a resolver o conflito.`},
+   {q:`Hierarquia, no trabalho, é`,al:[`a ordem de comando: quem responde a quem.`,`o tempo de casa de cada funcionário.`,`o salário de cada um.`,`a amizade entre os colegas.`],dica:`Pense em "quem é o chefe de quem".`,p:`Hierarquia define as relações de comando e de responsabilidade.`}]},
+ {id:'adm4',t:'Arquivo: como guardar documentos',frase:`Arquivar é guardar documentos de um jeito que qualquer pessoa consiga encontrar depressa.`,
+  ess:[`Corrente: documentos usados com frequência; ficam no setor.`,`Intermediário: usados de vez em quando; aguardam um prazo.`,`Permanente: valor histórico ou de prova; guardados para sempre.`,`Métodos: alfabético (nome), numérico (número), cronológico (data), geográfico (lugar) e por assunto.`],
+  mais:`Isso se chama "teoria das três idades". Todo documento começa no arquivo corrente, quando é muito usado. Com o tempo, passa a ser pouco consultado e vai para o intermediário, onde espera o prazo definido numa tabela (a tabela de temporalidade). No fim do prazo, ou é eliminado com autorização, ou vai para o permanente, se tiver valor histórico ou servir de prova.\n\nO método de arquivamento é a regra para ordenar: pelo nome (alfabético), por número (numérico), por data (cronológico), por cidade ou estado (geográfico) ou por assunto (ideográfico). O importante é que todos no setor sigam a mesma regra.`,
+  ex:`Fichas de funcionários por nome, de A a Z = método alfabético. Notas fiscais por data = método cronológico.`,
+  qs:[{q:`Os documentos usados todo dia no setor ficam no arquivo`,al:[`corrente.`,`permanente.`,`intermediário.`,`histórico.`],dica:`"Corrente" é o que está em uso agora.`,p:`Uso frequente = arquivo corrente.`},
+   {q:`Documentos com valor histórico, guardados para sempre, ficam no arquivo`,al:[`permanente.`,`corrente.`,`intermediário.`,`temporário.`],dica:`Para sempre…`,p:`O permanente guarda o que tem valor histórico ou de prova.`},
+   {q:`Organizar notas fiscais pela data de emissão é usar o método`,al:[`cronológico.`,`alfabético.`,`geográfico.`,`numérico.`],dica:`"Crono" quer dizer tempo.`,p:`Cronológico vem de "cronos", tempo: ordenar por data.`}]},
+ {id:'adm5',t:'Protocolo: o caminho dos documentos',frase:`O protocolo recebe, registra e acompanha os documentos para que nenhum se perca.`,
+  ess:[`Recebe o documento e confere se está completo.`,`Registra: dá um número, a data e o assunto.`,`Distribui para o setor certo.`,`Controla a tramitação: por onde o documento passou e onde está agora.`],
+  mais:`Imagine um pedido entregue na prefeitura. O protocolo recebe e confere, registra com um número (que o cidadão usa para acompanhar), envia para o setor responsável e anota cada vez que o documento muda de lugar.\n\nQuando um pedido vira processo, com várias folhas e despachos, isso se chama autuação. O número do protocolo é o que permite ao cidadão perguntar "como está meu pedido?" e receber resposta.`,
+  ex:`O cidadão recebe um comprovante com o número 2026/0457. Com esse número, qualquer servidor descobre em que setor o pedido está.`,
+  qs:[{q:`Dar um número, a data e o assunto a um documento recebido é a etapa de`,al:[`registro.`,`eliminação.`,`arquivamento permanente.`,`digitação.`],dica:`Registrar é anotar oficialmente.`,p:`O registro identifica o documento para ele ser localizado depois.`},
+   {q:`Acompanhar por quais setores o documento passou é o controle de`,al:[`tramitação.`,`suprimentos.`,`ponto.`,`estoque.`],dica:`Tramitar é andar de um lugar para outro.`,p:`Tramitação é o caminho do documento dentro da organização.`},
+   {q:`Para que serve o número de protocolo entregue ao cidadão?`,al:[`Para acompanhar o andamento do pedido.`,`Para pagar uma taxa extra.`,`Para marcar consulta médica.`,`Para nada, é só formalidade.`],dica:`Pense em "como está meu pedido?".`,p:`Com o número, o cidadão e o servidor localizam o pedido.`}]},
+ {id:'adm6',t:'Agenda e economia de materiais',frase:`Uma agenda bem feita evita esquecimentos, e cuidar dos materiais evita desperdício de dinheiro público.`,
+  ess:[`Anote compromissos com data, hora, local e assunto.`,`Confirme reuniões um dia antes.`,`Imprima só o necessário e use frente e verso.`,`Desligue os equipamentos no fim do dia e avise defeitos logo.`],
+  mais:`A agenda pode ser de papel ou digital (como a Agenda do Google). O importante é anotar tudo assim que marcar e consultar todos os dias. Deixe um intervalo entre compromissos: reuniões costumam atrasar.\n\nEconomia de suprimentos é usar com cuidado papel, tinta, cartuchos e energia. Na repartição pública, isso é dinheiro de todos.\n\nManutenção preventiva é cuidar antes de quebrar: limpar, desligar do jeito certo e avisar quando algo começa a falhar.`,
+  ex:`Antes de imprimir um documento de 20 páginas, você verifica se dá para enviar por e-mail.`,
+  qs:[{q:`Ao marcar uma reunião na agenda, o mínimo que se deve anotar é`,al:[`data, hora, local e assunto.`,`só o dia.`,`só o nome de quem marcou.`,`a roupa que vai usar.`],dica:`O que você precisa saber para chegar à reunião certa?`,p:`Data, hora, local e assunto evitam confusão.`},
+   {q:`Uma atitude de economia de materiais é`,al:[`imprimir frente e verso e só o necessário.`,`imprimir tudo duas vezes, por garantia.`,`deixar o computador ligado no fim de semana.`,`jogar fora canetas que ainda funcionam.`],dica:`Economizar é não desperdiçar.`,p:`Imprimir só o necessário, em frente e verso, economiza papel e tinta.`},
+   {q:`Manutenção preventiva é`,al:[`cuidar dos equipamentos antes que quebrem.`,`consertar só depois que quebrar.`,`comprar equipamento novo todo ano.`,`não usar os equipamentos.`],dica:`Prevenir é agir antes.`,p:`Prevenir evita que o equipamento pare de funcionar.`}]},
+ {id:'adm7',t:'Redação oficial',frase:`Redação oficial é escrever de forma clara, curta, formal e impessoal, em nome do órgão público.`,
+  ess:[`Clareza: qualquer pessoa entende.`,`Concisão: diz o necessário, sem enrolar.`,`Impessoalidade: sem opinião pessoal.`,`Formalidade: norma-padrão, sem gírias.`,`Fechos: "Respeitosamente" (para superiores) e "Atenciosamente" (mesmo nível ou abaixo).`],
+  mais:`Quem escreve um documento oficial não fala por si, e sim pelo órgão. Por isso nada de "eu acho" ou de expressões como "vc", "blz", "abraços".\n\nO documento mais comum é o ofício, usado para se comunicar com outros órgãos ou com pessoas. O e-mail também é usado e segue as mesmas regras: assunto claro, texto formal e identificação de quem envia.\n\nA referência que a banca cobra é o Manual de Redação da Presidência da República (3ª edição).`,
+  ex:`Errado: "Oi, tudo bem? Manda aí os documentos." Certo: "Solicito o envio dos documentos referentes ao processo nº 457/2026."`,
+  qs:[{q:`Qual frase está adequada a um documento oficial?`,al:[`"Solicito o envio dos documentos do processo."`,`"Manda aí os documentos, blz?"`,`"Acho que vocês esqueceram de mandar, né?"`,`"Vc pode mandar logo?"`],dica:`Formal, clara e sem gíria.`,p:`É a única formal, clara e impessoal.`},
+   {q:`Para uma autoridade de hierarquia superior, o fecho correto é`,al:[`Respeitosamente,`,`Atenciosamente,`,`Abraços,`,`Valeu,`],dica:`Para quem está acima: respeito.`,p:`"Respeitosamente" é para superiores; "Atenciosamente", para os demais.`},
+   {q:`Escrever "eu acho que" num documento oficial fere a`,al:[`impessoalidade.`,`numeração.`,`pontuação.`,`margem.`],dica:`O documento fala pelo órgão, não pela pessoa.`,p:`Opinião pessoal contraria a impessoalidade.`}]},
+ {id:'adm8',t:'Princípios e ética no serviço público',frase:`O servidor trabalha para todos: segue a lei, trata todos igual, age com honestidade, é transparente e faz bem feito.`,
+  ess:[`Legalidade: só faz o que a lei permite.`,`Impessoalidade: sem favorecer ninguém.`,`Moralidade: honestidade sempre.`,`Publicidade: transparência dos atos.`,`Eficiência: bom resultado, sem desperdício.`],
+  mais:`Esses cinco princípios estão no art. 37 da Constituição e formam a palavra LIMPE. Valem para a prefeitura, o estado e a União.\n\nNa prática: furar a fila de um amigo fere a impessoalidade; aceitar presente para agilizar um pedido fere a moralidade; esconder gastos fere a publicidade; deixar processos parados sem motivo fere a eficiência.\n\nÉtica no serviço público é isso no dia a dia: cortesia com o cidadão, sigilo das informações, não usar o cargo em benefício próprio e cuidar do patrimônio público.\n\nOrganização: a administração direta é a própria prefeitura com suas secretarias; a indireta são entidades criadas por ela, como autarquias e empresas públicas.`,
+  ex:`Um cidadão oferece dinheiro para "furar a fila" do pedido dele. O servidor ético recusa e segue a ordem de chegada.`,
+  qs:[{q:`A palavra que ajuda a lembrar os princípios da administração pública é`,al:[`LIMPE`,`RÁPIDO`,`LUCRO`,`FILA`],dica:`Cinco letras, uma para cada princípio.`,p:`LIMPE: Legalidade, Impessoalidade, Moralidade, Publicidade, Eficiência.`},
+   {q:`Divulgar os gastos da prefeitura na internet atende ao princípio da`,al:[`publicidade.`,`pessoalidade.`,`sigilo.`,`hierarquia.`],dica:`Tornar público…`,p:`Publicidade é transparência dos atos públicos.`},
+   {q:`Aceitar um presente para agilizar o pedido de alguém fere principalmente a`,al:[`moralidade.`,`eficiência.`,`publicidade.`,`hierarquia.`],dica:`Pense em honestidade.`,p:`Moralidade exige honestidade e conduta correta.`}]}
+]},
+info:{nome:'Informática básica',aulas:[
+ {id:'inf1',t:'Arquivos, pastas e área de trabalho',frase:`No computador, tudo é guardado em arquivos, e os arquivos ficam organizados em pastas.`,
+  ess:[`Arquivo: um documento, foto, planilha ou música.`,`Pasta: um lugar para agrupar arquivos.`,`Área de trabalho: a tela inicial do Windows.`,`Atalho: um ícone com setinha que abre algo que está em outro lugar.`],
+  mais:`Pense num armário: as pastas são as gavetas e os arquivos são os papéis. Uma pasta pode ter outras pastas dentro (subpastas).\n\nNo Windows 11, quem mostra suas pastas é o Explorador de Arquivos (ícone de pasta amarela ou teclas Windows + E).\n\nO atalho não é o arquivo de verdade: é só um caminho até ele. Se você apagar o atalho, o arquivo continua lá. Se apagar o arquivo, o atalho para de funcionar.\n\nO tipo do arquivo aparece nas letras depois do ponto (extensão): .docx (Word), .xlsx (Excel), .pptx (PowerPoint), .pdf, .jpg (foto).`,
+  ex:`Pasta "Documentos" > pasta "Concurso" > arquivo "edital.pdf".`,
+  qs:[{q:`Para agrupar vários arquivos do mesmo assunto, usamos`,al:[`uma pasta.`,`um atalho.`,`a lixeira.`,`o papel de parede.`],dica:`Pense numa gaveta.`,p:`Pastas servem para organizar e agrupar arquivos.`},
+   {q:`Se você apagar um atalho da área de trabalho, o arquivo original`,al:[`continua guardado no lugar dele.`,`é apagado também.`,`vai para o e-mail.`,`fica estragado.`],dica:`O atalho é só um caminho.`,p:`Apagar o atalho não apaga o arquivo.`},
+   {q:`Um arquivo terminado em .xlsx foi feito no`,al:[`Excel.`,`Word.`,`PowerPoint.`,`Paint.`],dica:`O "x" de eXcel aparece no começo.`,p:`.xlsx é a extensão do Excel. Word usa .docx e PowerPoint, .pptx.`}]},
+ {id:'inf2',t:'Atalhos de teclado que mais caem',frase:`Atalhos são combinações de teclas que fazem tarefas rápido, sem usar o mouse.`,
+  ess:[`Ctrl + C: copiar. Ctrl + X: recortar. Ctrl + V: colar.`,`Ctrl + Z: desfazer a última ação.`,`Windows + E: abrir o Explorador de Arquivos.`,`Alt + Tab: alternar entre janelas abertas.`],
+  mais:`Copiar (Ctrl + C) mantém o original e faz uma cópia. Recortar (Ctrl + X) tira do lugar para colar em outro. Os dois guardam o conteúdo na área de transferência, um espaço temporário. Colar (Ctrl + V) traz de lá.\n\nCtrl + Z é o "voltar": desfaz o último passo. Errou? Ctrl + Z.\n\nOutros úteis: Windows + D mostra a área de trabalho; Ctrl + P manda imprimir.`,
+  ex:`Para mover um parágrafo: selecione, aperte Ctrl + X, clique no novo lugar e aperte Ctrl + V.`,
+  qs:[{q:`Para desfazer a última ação, usa-se`,al:[`Ctrl + Z`,`Ctrl + C`,`Ctrl + V`,`Ctrl + X`],dica:`É o atalho de "voltar".`,p:`Ctrl + Z desfaz.`},
+   {q:`Para tirar um texto de um lugar e levar para outro, usam-se`,al:[`Ctrl + X e depois Ctrl + V`,`Ctrl + C e depois Ctrl + Z`,`Ctrl + V e depois Ctrl + X`,`Ctrl + Z e depois Ctrl + C`],dica:`Primeiro recorta, depois cola.`,p:`Recortar (Ctrl + X) e colar (Ctrl + V) move o conteúdo.`},
+   {q:`O espaço temporário onde fica o que foi copiado ou recortado chama-se`,al:[`área de transferência.`,`lixeira.`,`área de trabalho.`,`barra de tarefas.`],dica:`É de onde o Ctrl + V busca o conteúdo.`,p:`A área de transferência guarda temporariamente o que foi copiado ou recortado.`}]},
+ {id:'inf3',t:'Word: formatar um texto',frase:`Formatar é deixar o texto organizado: mudar letra, tamanho, negrito, alinhamento e listas.`,
+  ess:[`No Word em português: Ctrl + N = negrito, Ctrl + I = itálico, Ctrl + S = sublinhado.`,`Ctrl + B = salvar (pegadinha comum!).`,`Marcadores fazem listas com bolinhas; numeração, listas com números.`,`Cabeçalho e rodapé aparecem em todas as páginas; ali vai o número da página.`],
+  mais:`A guia Página Inicial tem quase tudo de formatação: fonte, tamanho, cor, negrito, alinhamento (esquerda, centro, direita, justificado) e marcadores.\n\nA guia Inserir coloca tabelas, imagens, caixas de texto e números de página. A guia Layout muda margens, orientação (retrato ou paisagem) e colunas.\n\nJustificado é o alinhamento que deixa o texto reto dos dois lados, como em livros e documentos oficiais.\n\nNo Word em inglês os atalhos mudam (Ctrl + B é negrito), mas a prova da VUNESP usa o Office em português.`,
+  ex:`Selecione o título e aperte Ctrl + N: ele fica em negrito.`,
+  qs:[{q:`No Word em português, Ctrl + N serve para`,al:[`aplicar negrito.`,`abrir um novo documento.`,`salvar o documento.`,`imprimir.`],dica:`N de…`,p:`No Word em português, Ctrl + N aplica negrito.`},
+   {q:`No Word em português, o atalho para salvar é`,al:[`Ctrl + B`,`Ctrl + S`,`Ctrl + N`,`Ctrl + V`],dica:`É a pegadinha: não é o S.`,p:`No Word em português, Ctrl + B salva. Ctrl + S é sublinhado.`},
+   {q:`O número da página costuma ficar no`,al:[`cabeçalho ou rodapé.`,`meio do texto.`,`título.`,`marcador.`],dica:`É uma área que se repete em todas as páginas.`,p:`Cabeçalho e rodapé se repetem em todas as páginas, por isso ali vai o número.`}]},
+ {id:'inf4',t:'Excel: células e fórmulas',frase:`O Excel é uma grande tabela de células. Cada célula tem um endereço, como A1, e pode fazer contas.`,
+  ess:[`Coluna = letra (A, B, C). Linha = número (1, 2, 3).`,`Célula = encontro de coluna e linha, como B3.`,`Toda fórmula começa com =.`,`=SOMA(A1:A5) soma de A1 até A5. =MÉDIA(A1:A5) calcula a média.`],
+  mais:`Os dois-pontos querem dizer "até": A1:A5 é A1, A2, A3, A4 e A5. O ponto e vírgula quer dizer "e": A1;A5 é só A1 e A5.\n\nContas diretas: =A1+B1 (soma), =A1-B1 (subtração), =A1*B1 (multiplicação, com asterisco) e =A1/B1 (divisão, com barra).\n\nOutras funções que caem: =MÁXIMO (maior valor) e =MÍNIMO (menor valor). O arquivo do Excel se chama pasta de trabalho, e cada aba embaixo é uma planilha.`,
+  ex:`Gastos em A1 (100), A2 (50) e A3 (30): =SOMA(A1:A3) mostra 180.`,
+  qs:[{q:`Toda fórmula no Excel começa com`,al:[`=`,`#`,`@`,`?`],dica:`É o sinal de igualdade.`,p:`Sem o sinal de igual, o Excel entende como texto, não como conta.`},
+   {q:`A fórmula =SOMA(A1:A3) soma`,al:[`A1, A2 e A3.`,`só A1 e A3.`,`A1 três vezes.`,`a coluna A inteira.`],dica:`Os dois-pontos significam "até".`,p:`A1:A3 = de A1 até A3.`},
+   {q:`No Excel, o sinal usado para multiplicar é`,al:[`*`,`x`,`÷`,`#`],dica:`É o asterisco.`,p:`Para multiplicar usa-se o asterisco: =A1*B1.`}]},
+ {id:'inf5',t:'Excel: gráficos, ordenar e filtrar',frase:`O Excel organiza dados (ordenar e filtrar) e transforma números em gráficos fáceis de entender.`,
+  ess:[`Ordenar: coloca em ordem (A a Z, do menor para o maior).`,`Filtrar: mostra só o que você quer ver, sem apagar o resto.`,`Gráfico de colunas: comparar valores.`,`Gráfico de pizza: mostrar partes de um todo.`],
+  mais:`Para criar um gráfico: selecione os dados, vá na guia Inserir e escolha o tipo. O Excel desenha na hora.\n\nColunas ou barras servem para comparar (atendimentos de cada mês). Pizza mostra a divisão de um total (quanto do orçamento vai para cada área). Linha mostra evolução no tempo.\n\nO filtro é um "esconder temporário": as linhas que não combinam ficam ocultas, mas continuam lá. Ordenar e filtrar ficam na guia Dados.`,
+  ex:`Lista de 200 pedidos: filtre a coluna "Bairro" por "Centro" e veja só os pedidos do Centro.`,
+  qs:[{q:`Para mostrar quanto cada área representa do orçamento total, o gráfico mais indicado é o de`,al:[`pizza.`,`linha.`,`dispersão.`,`nenhum, só tabela.`],dica:`Partes de um todo, como fatias.`,p:`A pizza mostra a divisão de um total em partes.`},
+   {q:`Filtrar uma planilha`,al:[`mostra só as linhas desejadas, sem apagar as outras.`,`apaga as linhas que não interessam.`,`muda as cores das células.`,`transforma a tabela em gráfico.`],dica:`É um esconder temporário.`,p:`O filtro só oculta; os dados continuam lá.`},
+   {q:`Para comparar o número de atendimentos de cada mês, um bom gráfico é o de`,al:[`colunas.`,`pizza com um só valor.`,`texto.`,`nenhum.`],dica:`Barras lado a lado para comparar.`,p:`Colunas facilitam comparar valores lado a lado.`}]},
+ {id:'inf6',t:'PowerPoint: apresentações',frase:`O PowerPoint cria apresentações em slides, que podem ter texto, imagens, transições e animações.`,
+  ess:[`Slide: cada "página" da apresentação.`,`Transição: efeito ao passar de um slide para outro.`,`Animação: efeito em um item dentro do slide.`,`F5: começa a apresentação do início.`],
+  mais:`Transição e animação se confundem. A transição acontece entre slides (o slide inteiro entra girando, por exemplo); a animação acontece num elemento dentro do slide (um título que aparece letra por letra).\n\nAs anotações ficam embaixo do slide e só o apresentador vê: servem de "cola" para quem fala.\n\nDica de apresentação: pouco texto por slide, letras grandes e imagens que ajudam a explicar.`,
+  ex:`Slide 1: título. Slide 2: três tópicos curtos. Ao passar para o slide 3, uma transição de esmaecer.`,
+  qs:[{q:`O efeito que acontece ao passar de um slide para o próximo é a`,al:[`transição.`,`animação.`,`anotação.`,`régua.`],dica:`"Trans" é passar de um lugar para outro.`,p:`Transição é o efeito entre slides.`},
+   {q:`Fazer um título aparecer letra por letra dentro do slide é uma`,al:[`animação.`,`transição.`,`margem.`,`tabela.`],dica:`É um efeito num item dentro do slide.`,p:`Animação é o efeito aplicado a um elemento do slide.`},
+   {q:`Para começar a apresentação pelo primeiro slide, aperta-se`,al:[`F5`,`F1`,`Esc`,`Ctrl + Z`],dica:`É uma tecla de função.`,p:`F5 inicia a apresentação do começo. Esc encerra.`}]},
+ {id:'inf7',t:'Internet e e-mail',frase:`Na internet, cada página tem um endereço (URL). No e-mail, você escolhe quem recebe e pode mandar anexos.`,
+  ess:[`URL: endereço de um site, como www.vunesp.com.br.`,`Link: texto ou imagem que leva a outra página.`,`Para: destinatário principal. Cc: cópia visível. Cco: cópia oculta.`,`Anexo: arquivo enviado junto com o e-mail (símbolo do clipe).`],
+  mais:`O navegador é o programa que abre sites: Chrome, Edge, Firefox. Na barra de endereço você digita a URL; na busca (como o Google) você digita palavras.\n\nNo e-mail: quem está no Cc recebe e todos veem; quem está no Cco recebe, mas ninguém vê o endereço dele. Use Cco ao mandar para muita gente que não se conhece, para proteger os e-mails delas.\n\nCuidado com e-mails estranhos pedindo senha ou com links suspeitos: pode ser golpe (phishing). Bancos e órgãos públicos não pedem senha por e-mail.`,
+  ex:`Para mandar o edital a 30 candidatos sem mostrar os e-mails de todos, coloque os endereços no Cco.`,
+  qs:[{q:`Para enviar um e-mail sem que os outros destinatários vejam um endereço, usa-se o campo`,al:[`Cco`,`Cc`,`Para`,`Assunto`],dica:`Cópia oculta.`,p:`Cco = com cópia oculta.`},
+   {q:`O endereço de um site, como www.vunesp.com.br, chama-se`,al:[`URL.`,`anexo.`,`pasta.`,`planilha.`],dica:`São três letras.`,p:`URL é o endereço de uma página na internet.`},
+   {q:`Um e-mail pede a senha do seu banco por um link. O mais seguro é`,al:[`não clicar e apagar a mensagem.`,`clicar e digitar a senha rapidinho.`,`responder com a senha.`,`encaminhar para todos os amigos.`],dica:`Banco não pede senha por e-mail.`,p:`É golpe (phishing). Não clique nem informe dados.`}]},
+ {id:'inf8',t:'Google Workspace e Microsoft Teams',frase:`São ferramentas on-line para trabalhar em equipe: guardar arquivos, editar juntos, conversar e fazer reuniões.`,
+  ess:[`Drive: guarda arquivos na nuvem (internet).`,`Documentos, Planilhas e Apresentações: versões on-line do Word, Excel e PowerPoint.`,`Meet e Teams: reuniões por vídeo. Agenda: compromissos.`,`Formulários: cria questionários e pesquisas.`],
+  mais:`Na nuvem, o arquivo fica guardado na internet e pode ser aberto em qualquer computador ou celular, com login. Várias pessoas podem editar o mesmo documento ao mesmo tempo, e tudo é salvo sozinho.\n\nPara dividir um arquivo do Drive, usa-se o botão Compartilhar e escolhe-se quem pode ver ou editar.\n\nO Microsoft Teams junta chat, chamadas de áudio e vídeo e equipes (grupos de trabalho), e permite editar arquivos do Word, Excel e PowerPoint junto com os colegas.`,
+  ex:`O setor usa uma planilha no Google Planilhas: cada um preenche sua parte, ao mesmo tempo, sem mandar arquivo por e-mail.`,
+  qs:[{q:`O serviço do Google usado para guardar arquivos na nuvem é o`,al:[`Drive.`,`Meet.`,`Agenda.`,`Formulários.`],dica:`É como um pen drive na internet.`,p:`O Google Drive guarda arquivos na nuvem.`},
+   {q:`Para fazer uma reunião por vídeo, pode-se usar`,al:[`Google Meet ou Microsoft Teams.`,`Google Planilhas.`,`Bloco de Notas.`,`Lixeira.`],dica:`Ferramentas de chamada de vídeo.`,p:`Meet e Teams fazem reuniões por vídeo.`},
+   {q:`Para criar uma pesquisa de satisfação com os cidadãos, usa-se o`,al:[`Google Formulários.`,`Google Drive.`,`Paint.`,`Explorador de Arquivos.`],dica:`Questionário = formulário.`,p:`O Formulários cria questionários e organiza as respostas.`}]}
+]},
+ing:{nome:'Inglês do básico ao intermediário',aulas:[
+ {id:'ing1',t:'Cumprimentos e apresentações',nivel:'Básico',frase:`Para começar uma conversa: cumprimente, diga seu nome e pergunte o nome da pessoa.`,
+  ess:[`Hello / Hi = Olá. Good morning = Bom dia. Good afternoon = Boa tarde. Good evening = Boa noite (ao chegar).`,`My name is Ana. = Meu nome é Ana.`,`What is your name? = Qual é o seu nome?`,`Nice to meet you. = Prazer em conhecer você.`],
+  mais:`"Good night" é boa noite na despedida, na hora de dormir. Ao chegar, à noite, diz-se "Good evening".\n\n"How are you?" (Como vai?) costuma ser respondido com "I'm fine, thank you. And you?" (Estou bem, obrigado. E você?).\n\nPara se despedir: "Goodbye" ou "Bye" (tchau) e "See you later" (até mais).`,
+  ex:`— Hi! My name is Carlos. What is your name?\n— Hello, Carlos! I'm Beatriz. Nice to meet you!\n(— Oi! Meu nome é Carlos. Qual é o seu nome? — Olá, Carlos! Sou a Beatriz. Prazer!)`,
+  qs:[{q:`Ao chegar a uma reunião às 20h, você diz:`,al:[`Good evening.`,`Good night.`,`Good morning.`,`Goodbye.`],dica:`"Good night" é para despedida e hora de dormir.`,p:`"Good evening" é boa noite ao chegar. "Good night", ao se despedir.`},
+   {q:`"Nice to meet you" significa`,al:[`Prazer em conhecer você.`,`Vejo você depois.`,`Qual é o seu nome?`,`Bom dia.`],dica:`"Meet" é conhecer, encontrar.`,p:`É o "prazer em conhecer".`},
+   {q:`Como perguntar o nome de alguém?`,al:[`What is your name?`,`Where is your name?`,`How old is your name?`,`Who are name?`],dica:`"What" = o que, qual.`,p:`"What is your name?" = Qual é o seu nome?`}]},
+ {id:'ing2',t:'Verbo to be: ser e estar',nivel:'Básico',frase:`O verbo "to be" significa ser ou estar e muda conforme a pessoa: am, is, are.`,
+  ess:[`I am = eu sou / estou.`,`He is / She is / It is = ele, ela, isso é / está.`,`You are / We are / They are = você, nós, eles são / estão.`,`Negativa: I am not; she is not (isn't); they are not (aren't).`],
+  mais:`Formas curtas (contrações) são muito usadas: I'm, you're, he's, she's, it's, we're, they're.\n\nPara perguntar, troque a ordem: "You are tired." vira "Are you tired?" (Você está cansado?). "She is a teacher." vira "Is she a teacher?".\n\nResposta curta: "Yes, I am." / "No, I'm not."`,
+  ex:`I am a student. She is at work. They are not here. Are you ready?\n(Eu sou estudante. Ela está no trabalho. Eles não estão aqui. Você está pronto?)`,
+  qs:[{q:`Complete: She ___ a secretary.`,al:[`is`,`am`,`are`,`be`],dica:`"She" é ela: uma pessoa só.`,p:`He, she e it usam "is".`},
+   {q:`Complete: They ___ at the office.`,al:[`are`,`is`,`am`,`be`],dica:`"They" é eles: plural.`,p:`You, we e they usam "are".`},
+   {q:`Qual é a pergunta de "You are ready."?`,al:[`Are you ready?`,`You are ready?`,`Is you ready?`,`Ready you are?`],dica:`Na pergunta, o verbo vem antes da pessoa.`,p:`Inverte-se: "Are you ready?"`}]},
+ {id:'ing3',t:'Artigos e plural',nivel:'Básico',frase:`"A" e "an" = um, uma (qualquer). "The" = o, a, os, as (um específico). O plural geralmente ganha -s.`,
+  ess:[`"A" antes de som de consoante: a book, a car.`,`"An" antes de som de vogal: an apple, an hour.`,`"The" = o, a, os, as: the office (o escritório).`,`Plural: book → books; box → boxes; city → cities.`],
+  mais:`O que vale é o som, não a letra: "an hour" (o h não é pronunciado) e "a university" (começa com som de "iu").\n\nPalavras terminadas em s, x, ch, sh ganham -es: boxes, watches. Terminadas em consoante + y trocam o y por -ies: city → cities.\n\nAlguns plurais são irregulares: man → men, woman → women, child → children, person → people.`,
+  ex:`I have a pen and an orange. The pen is blue. There are two children and three women.\n(Tenho uma caneta e uma laranja. A caneta é azul. Há duas crianças e três mulheres.)`,
+  qs:[{q:`Complete: I need ___ umbrella.`,al:[`an`,`a`,`two`,`these`],dica:`"Umbrella" começa com som de vogal.`,p:`Antes de som de vogal usa-se "an".`},
+   {q:`O plural de "child" é`,al:[`children`,`childs`,`childes`,`childen`],dica:`É um plural irregular.`,p:`Child → children (criança → crianças).`},
+   {q:`O plural de "box" é`,al:[`boxes`,`boxs`,`boxies`,`box`],dica:`Palavras terminadas em x ganham -es.`,p:`Box → boxes.`}]},
+ {id:'ing4',t:'Pronomes e possessivos',nivel:'Básico',frase:`Pronomes substituem nomes (I, you, he…). Possessivos dizem de quem é (my, your, his…).`,
+  ess:[`I → my (eu → meu). You → your (você → seu).`,`He → his (ele → dele). She → her (ela → dela).`,`We → our (nós → nosso). They → their (eles → deles).`,`It → its (para coisas e animais).`],
+  mais:`Em português, "seu carro" pode ser de você ou dele. Em inglês não há dúvida: "your car" (de você), "his car" (dele), "her car" (dela).\n\nO possessivo vem antes da coisa e não muda no plural: my book, my books.\n\nTambém existe o 's para dizer de quem é: "Ana's phone" = o telefone da Ana.`,
+  ex:`This is Maria. Her office is on the second floor. Her colleagues are nice, and their manager is Paulo.\n(Esta é a Maria. O escritório dela fica no segundo andar. Os colegas dela são legais, e o gerente deles é o Paulo.)`,
+  qs:[{q:`Complete: This is John. ___ car is red.`,al:[`His`,`Her`,`Its`,`Their`],dica:`John é homem: dele.`,p:`His = dele.`},
+   {q:`Complete: Maria and Pedro love ___ jobs.`,al:[`their`,`his`,`her`,`our`],dica:`Maria e Pedro = eles.`,p:`Their = deles.`},
+   {q:`"Ana's phone" significa`,al:[`o telefone da Ana.`,`a Ana é um telefone.`,`os telefones da Ana.`,`a Ana telefona.`],dica:`O 's indica de quem é.`,p:`'s indica posse: o telefone da Ana.`}]},
+ {id:'ing5',t:'Presente simples: a rotina',nivel:'Básico',frase:`O presente simples fala de hábitos e rotina. Com he, she e it, o verbo ganha -s.`,
+  ess:[`I work every day. (Eu trabalho todo dia.)`,`She works at the city hall. (Ela trabalha na prefeitura.)`,`Negativa: I don't work / She doesn't work.`,`Pergunta: Do you work? / Does she work?`],
+  mais:`O -s só aparece com he, she e it: I work, you work, we work, they work, mas he works, she works.\n\nNa negativa e na pergunta, quem recebe a marca é o auxiliar "does", e o verbo volta ao normal: "She doesn't work" (e não "doesn't works"); "Does she work?".\n\nPalavras de frequência: always (sempre), usually (geralmente), sometimes (às vezes), never (nunca). Ficam antes do verbo: "I always arrive early."`,
+  ex:`I usually start work at 8. My boss always arrives at 9. Does he drink coffee? No, he doesn't.\n(Geralmente começo a trabalhar às 8. Meu chefe sempre chega às 9. Ele toma café? Não.)`,
+  qs:[{q:`Complete: She ___ at the city hall.`,al:[`works`,`work`,`working`,`is work`],dica:`"She" pede o verbo com -s.`,p:`Com he, she e it o verbo ganha -s.`},
+   {q:`Qual frase está correta?`,al:[`He doesn't work on Sundays.`,`He don't work on Sundays.`,`He doesn't works on Sundays.`,`He not work on Sundays.`],dica:`Com "he" usa-se "does", e o verbo fica sem -s.`,p:`Doesn't + verbo normal: doesn't work.`},
+   {q:`"Never" significa`,al:[`nunca.`,`sempre.`,`às vezes.`,`geralmente.`],dica:`É o oposto de "always".`,p:`Never = nunca.`}]},
+ {id:'ing6',t:'There is / there are e lugares',nivel:'Básico',frase:`"There is" = há, existe (um). "There are" = há, existem (vários). "In", "on", "at" e "next to" dizem onde.`,
+  ess:[`There is a printer in the office. (Há uma impressora no escritório.)`,`There are two meetings today. (Há duas reuniões hoje.)`,`In = dentro. On = em cima. Next to = ao lado. Under = embaixo.`,`At = em (lugar específico): at work, at home.`],
+  mais:`Use "there is" com singular e "there are" com plural. Pergunta: "Is there a bank near here?" (Tem um banco aqui perto?).\n\nAs preposições também servem para tempo: in (meses e anos: in May, in 2027), on (dias: on Monday), at (horas: at 8 o'clock).`,
+  ex:`There is a phone on the desk. The files are in the cabinet, next to the window.\n(Há um telefone em cima da mesa. Os arquivos estão no armário, ao lado da janela.)`,
+  qs:[{q:`Complete: There ___ three computers in the room.`,al:[`are`,`is`,`am`,`be`],dica:`Três computadores: plural.`,p:`Plural pede "there are".`},
+   {q:`"The phone is on the desk" significa que o telefone está`,al:[`em cima da mesa.`,`embaixo da mesa.`,`dentro da gaveta.`,`longe da mesa.`],dica:`"On" é sobre, em cima.`,p:`On = em cima de.`},
+   {q:`Complete: The meeting is ___ Monday.`,al:[`on`,`in`,`at`,`under`],dica:`Dias da semana usam…`,p:`Com dias da semana usa-se "on".`}]},
+ {id:'ing7',t:'Presente contínuo: o que acontece agora',nivel:'Intermediário',frase:`Para falar do que está acontecendo agora: am, is ou are + verbo com -ing.`,
+  ess:[`I am working now. (Estou trabalhando agora.)`,`She is talking on the phone. (Ela está falando ao telefone.)`,`They are waiting. (Eles estão esperando.)`,`Pergunta: Are you listening? Negativa: He isn't sleeping.`],
+  mais:`É o "estar + -ndo" do português: estou trabalhando = I am working.\n\nRegras do -ing: verbo terminado em e perde o e (write → writing); alguns dobram a última letra (sit → sitting, run → running).\n\nCompare: "I work at the city hall" (rotina, sempre) × "I am working at home today" (só hoje, agora).`,
+  ex:`Sorry, the manager is in a meeting now. He is talking to the mayor.\n(Desculpe, o gerente está em reunião agora. Ele está falando com o prefeito.)`,
+  qs:[{q:`Complete: Look! It ___ raining.`,al:[`is`,`are`,`am`,`be`],dica:`"It" é singular.`,p:`It + is + verbo com -ing.`},
+   {q:`O "-ing" de "write" é`,al:[`writing`,`writeing`,`writting`,`wrote`],dica:`Verbo terminado em e perde o e.`,p:`Write → writing.`},
+   {q:`Qual frase fala de algo acontecendo agora?`,al:[`She is answering the phone.`,`She answers the phone every day.`,`She answered the phone yesterday.`,`She will answer the phone.`],dica:`Procure am/is/are + -ing.`,p:`"is answering" = está atendendo (agora).`}]},
+ {id:'ing8',t:'Passado simples',nivel:'Intermediário',frase:`Para falar do passado: verbos regulares ganham -ed; os irregulares têm forma própria.`,
+  ess:[`Regular: work → worked; call → called.`,`Irregular: go → went; have → had; see → saw; buy → bought.`,`Negativa: I didn't go. Pergunta: Did you go?`,`Passado do "to be": I was, they were.`],
+  mais:`Depois de "did" ou "didn't", o verbo volta à forma normal: "Did you call?" (e não "Did you called?"); "I didn't see" (e não "didn't saw").\n\n"To be" no passado: I, he, she, it → was; you, we, they → were. "I was at work yesterday." (Eu estava no trabalho ontem.)\n\nPalavras de passado: yesterday (ontem), last week (semana passada), ago (atrás: two days ago).`,
+  ex:`Yesterday I went to the bank, paid the bills and called my sister.\n(Ontem fui ao banco, paguei as contas e liguei para minha irmã.)`,
+  qs:[{q:`O passado de "go" é`,al:[`went`,`goed`,`gone`,`goes`],dica:`É um verbo irregular.`,p:`Go → went.`},
+   {q:`Qual frase está correta?`,al:[`Did you call the client?`,`Did you called the client?`,`Do you called the client?`,`You did called the client?`],dica:`Depois de "did", o verbo fica sem -ed.`,p:`Did + verbo na forma normal.`},
+   {q:`Complete: They ___ at the meeting yesterday.`,al:[`were`,`was`,`are`,`is`],dica:`"They" no passado do "to be".`,p:`You, we e they → were.`}]},
+ {id:'ing9',t:'Futuro: will e going to',nivel:'Intermediário',frase:`"Will" para decisões na hora e previsões; "going to" para planos já decididos.`,
+  ess:[`I will help you. (Vou te ajudar.)`,`It will rain tomorrow. (Vai chover amanhã.)`,`I am going to study tonight. (Vou estudar hoje à noite: já planejei.)`,`Negativa: won't (will not). Pergunta: Will you…?`],
+  mais:`"Will" aparece em decisões tomadas na hora (o telefone toca: "I will answer it!"), em promessas e em previsões.\n\n"Going to" aparece quando já existe um plano: "I'm going to take the exam in February."\n\nAs duas formas viram "vou + verbo" em português, então o contexto ajuda a escolher.`,
+  ex:`I'm going to apply for the job. I think I will pass!\n(Vou me inscrever para a vaga. Acho que vou passar!)`,
+  qs:[{q:`Complete (plano já feito): I ___ take the exam in February.`,al:[`am going to`,`will to`,`going`,`am go`],dica:`Plano decidido = going to.`,p:`"Am going to" + verbo, para plano já decidido.`},
+   {q:`"Won't" é a forma curta de`,al:[`will not`,`want not`,`would`,`was not`],dica:`É a negativa do "will".`,p:`Won't = will not.`},
+   {q:`O telefone toca e você decide na hora: "I ___ answer it!"`,al:[`will`,`am going`,`was`,`did`],dica:`Decisão na hora = will.`,p:`"I will answer it": decisão tomada naquele momento.`}]},
+ {id:'ing10',t:'Comparar e aconselhar: comparativos e can, should, must',nivel:'Intermediário',frase:`Para comparar: -er / more (mais) e -est / most (o mais). Can = poder; should = deveria; must = precisa.`,
+  ess:[`Small → smaller → the smallest. Big → bigger → the biggest.`,`Important → more important → the most important.`,`Good → better → the best. Bad → worse → the worst.`,`You can (pode), you should (deveria), you must (precisa, tem que).`],
+  mais:`Palavras curtas ganham -er e -est; palavras longas usam "more" e "most". Depois do comparativo vem "than": "This office is bigger than that one."\n\n"Can" também é habilidade: "I can speak English" (sei falar inglês). "Should" é conselho: "You should rest" (você deveria descansar). "Must" é obrigação forte: "You must wear a badge" (você precisa usar crachá). "Mustn't" = proibido.\n\nEsses verbos não ganham -s e não usam "to": "She can drive" (e não "she cans to drive").`,
+  ex:`The new system is faster than the old one. You should read the manual. You must not share your password.\n(O sistema novo é mais rápido que o antigo. Você deveria ler o manual. Você não pode compartilhar sua senha.)`,
+  qs:[{q:`Complete: This room is ___ than the other.`,al:[`bigger`,`more big`,`biggest`,`big`],dica:`Palavra curta + than → -er.`,p:`Big → bigger (dobra o g).`},
+   {q:`O superlativo de "good" é`,al:[`the best`,`the goodest`,`the better`,`the most good`],dica:`É irregular.`,p:`Good → better → the best.`},
+   {q:`"You should rest" expressa`,al:[`um conselho.`,`uma proibição.`,`uma habilidade.`,`um fato do passado.`],dica:`"Should" = deveria.`,p:`"Should" dá conselho.`}]}
+]}};
+const CURSO_KEYS = ['adm','info','ing'];
+// perguntas dos cursos com id próprio: adm1-0, adm1-1…
+const QA = {};
+CURSO_KEYS.forEach(k => CURSOS[k].aulas.forEach(a => a.qs.forEach((q, i) => { q.id = a.id + '-' + i; q.c = 0; q.aula = a.id; q.curso = k; QA[q.id] = q; })));
+
+const PLANO = {
+  1:{curso:'adm', mat:'Português'}, 2:{curso:'info', mat:'Matemática'}, 3:{curso:'ing', mat:'Específicos'},
+  4:{curso:'adm', mat:'Português'}, 5:{curso:'info', mat:'Específicos'}
+};
+
+/* ---------- utilidades ---------- */
+const $ = s => document.querySelector(s);
+const app = $('#app'), nav = $('#nav');
+const pad = n => String(n).padStart(2, '0');
+function key(d){ return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()); }
+function parseKey(k){ const [y, m, d] = k.split('-').map(Number); return new Date(y, m - 1, d); }
+function addDays(k, n){ const d = parseKey(k); d.setDate(d.getDate() + n); return key(d); }
+function diffDays(a, b){ return Math.round((parseKey(b) - parseKey(a)) / 864e5); }
+const today = () => key(new Date());
+function shuffle(a){ a = a.slice(); for (let i = a.length - 1; i > 0; i--){ const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+function esc(s){ return String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+function rich(s){ return esc(s).replace(/\n/g, '<br>'); }
+function texto(s, rev){ return esc(s).replace(/\n/g, '<br>').replace(/⟦(.+?)⟧/g, rev ? '<mark>$1</mark>' : '$1'); }
+const paras = s => s.split('\n\n').map(p => `<p>${rich(p)}</p>`).join('');
+const fmtD = k => { const d = parseKey(k); return d.getDate() + '/' + (d.getMonth() + 1); };
+const pct = (a, b) => b ? Math.round(a / b * 100) : 0;
+
+/* ---------- progresso salvo neste aparelho ---------- */
+const KEY = 'guara-v1';
+// log: [data, id, resultado (1 de primeira, 2 com dica, 0 errou), alternativa marcada, origem]
+const fresh = () => ({v:1, start:today(), days:{}, aulas:{}, qs:{}, log:[], sims:[], ses:[], modo:'simples', big:false, autoEnd:true, nome:''});
+function load(){ try { const s = JSON.parse(localStorage.getItem(KEY)); if (s && s.v === 1) return Object.assign(fresh(), s); } catch (e) {} return fresh(); }
+let S = load();
+function save(){ try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
+function aplicarLetra(){ document.documentElement.classList.toggle('big', !!S.big); }
+
+function dia(k){ return S.days[k] || (S.days[k] = {q:0, ok:0, aulas:0, conc:0}); }
+function studied(k){ const d = S.days[k]; return !!(d && (d.q >= 3 || d.aulas >= 1)); }
+function streak(){ let k = today(); if (!studied(k)) k = addDays(k, -1); let n = 0; while (studied(k)){ n++; k = addDays(k, -1); } return n; }
+function registrar(id, res, ch, kind){
+  const t = today(), r = S.qs[id] || {n:0, ok:0};
+  r.n++; if (res === 1) r.ok++; r.last = t; r.lastRes = res;
+  r.due = res === 0 ? addDays(t, 1) : null;
+  S.qs[id] = r;
+  const d = dia(t); d.q++; if (res === 1) d.ok++; if (kind === 'conc' || kind === 'sim') d.conc++;
+  S.log.push([t, id, res, ch, kind]);
+  if (S.log.length > 2500) S.log = S.log.slice(-2500);
+  save();
+}
+
+/* ---------- estado das telas ---------- */
+let tab = 'conc', aulaSel = null, quiz = null, sim = null, resetArm = false;
+
+// quiz: perguntas de uma aula ou treino do concurso, com segunda chance e dica
+function novoQuiz(ids, tipo, extra){
+  quiz = Object.assign({ids, tipo, i:0, res:[], t0:Date.now()}, extra || {});
+  prepQ(); render(); scrollTo(0, 0);
+}
+function qObj(id){ return CM[id] || QA[id]; }
+function prepQ(){
+  const q = qObj(quiz.ids[quiz.i]);
+  quiz.perm = q.o ? q.al.map((_, i) => i) : shuffle(q.al.map((_, i) => i));
+  quiz.sel = null; quiz.tries = 0; quiz.wrong = []; quiz.done = false; quiz.result = null; quiz.showMais = S.modo === 'completo';
+}
+function responder(){
+  const q = qObj(quiz.ids[quiz.i]);
+  if (quiz.sel == null || quiz.done) return;
+  if (quiz.sel === q.c){ quiz.done = true; quiz.result = quiz.tries === 0 ? 1 : 2; }
+  else {
+    quiz.wrong.push(quiz.sel); quiz.tries++; quiz.sel = null;
+    if (quiz.tries >= 2){ quiz.done = true; quiz.result = 0; }
+  }
+  if (quiz.done){
+    quiz.res.push({id:q.id, r:quiz.result});
+    registrar(q.id, quiz.result, quiz.wrong.length ? quiz.wrong[0] : q.c, quiz.tipo === 'aula' ? 'aula' : 'conc');
+  }
+  render();
+}
+function proxima(){
+  quiz.i++;
+  if (quiz.i >= quiz.ids.length) fimQuiz(); else { prepQ(); render(); scrollTo(0, 0); }
+}
+function fimQuiz(){
+  const t = today(), first = quiz.res.filter(r => r.r === 1).length, hint = quiz.res.filter(r => r.r === 2).length, wrong = quiz.res.filter(r => r.r === 0).length;
+  quiz.fim = {first, hint, wrong};
+  if (quiz.tipo === 'aula'){
+    const ant = S.aulas[quiz.aula] || {};
+    S.aulas[quiz.aula] = {done:ant.done || t, last:t, first, hint, wrong, vezes:(ant.vezes || 0) + 1};
+    dia(t).aulas++;
+  }
+  S.ses.push({d:t, k:quiz.tipo === 'aula' ? 'aula' : 'treino', ref:quiz.aula || quiz.mat || 'misto', n:quiz.res.length, first, hint, wrong, min:Math.max(1, Math.round((Date.now() - quiz.t0) / 60000))});
+  if (S.ses.length > 300) S.ses = S.ses.slice(-300);
+  save(); render(); scrollTo(0, 0);
+}
+
+// treino do concurso: por matéria (5) ou misturado (10), priorizando erros e questões novas
+function pickConc(mat, n){
+  const t = today(), pool = CONC.filter(q => !mat || q.a === mat);
+  const devidas = shuffle(pool.filter(q => S.qs[q.id] && S.qs[q.id].due && S.qs[q.id].due <= t));
+  const novas = shuffle(pool.filter(q => !S.qs[q.id]));
+  const vistas = shuffle(pool.filter(q => S.qs[q.id] && !(S.qs[q.id].due && S.qs[q.id].due <= t)));
+  const out = []; [devidas, novas, vistas].forEach(l => l.forEach(q => { if (out.length < n && !out.includes(q.id)) out.push(q.id); }));
+  return out;
+}
+function pickMisto(porMat){
+  let ids = []; MATS.forEach(m => { ids = ids.concat(pickConc(m, porMat[m])); }); return ids;
+}
+const MISTO10 = {'Português':2,'Matemática':2,'Informática':1,'Específicos':5};
+const MISTO20 = {'Português':4,'Matemática':4,'Informática':2,'Específicos':10};
+
+// simulado do concurso: sem correção até o fim
+function startSim(dist){
+  const ids = pickMisto(dist), perm = {};
+  ids.forEach(id => { const q = CM[id]; perm[id] = q.o ? q.al.map((_, i) => i) : shuffle(q.al.map((_, i) => i)); });
+  sim = {ids, perm, i:0, ans:{}, t0:Date.now(), dur:ids.length * SEG_Q, auto:S.autoEnd !== false, end:false};
+  render(); scrollTo(0, 0);
+}
+function finishSim(timeout){
+  const t = today(); let c = 0, w = 0, b = 0;
+  sim.ids.forEach(id => {
+    const q = CM[id], a = sim.ans[id];
+    if (a == null){ b++; registrar(id, 0, null, 'sim'); return; }
+    if (a === q.c){ c++; registrar(id, 1, a, 'sim'); } else { w++; registrar(id, 0, a, 'sim'); }
+  });
+  sim.end = true;
+  sim.result = {c, w, b, n:sim.ids.length, min:Math.max(1, Math.round((Date.now() - sim.t0) / 60000)), timeout:!!timeout};
+  S.sims.unshift({date:t, ...sim.result, items:sim.ids.map(id => [id, sim.ans[id] == null ? null : sim.ans[id]])});
+  S.sims = S.sims.slice(0, 40);
+  S.ses.push({d:t, k:'sim', n:sim.result.n, first:c, hint:0, wrong:w + b, min:sim.result.min});
+  save();
+}
+
+/* ---------- telas ---------- */
+function proximaAula(k){
+  const aulas = CURSOS[k].aulas;
+  return aulas.find(a => !S.aulas[a.id]) || aulas.find(a => S.aulas[a.id] && S.aulas[a.id].wrong >= 2) || aulas[0];
+}
+function statusAula(a){
+  const s = S.aulas[a.id];
+  if (!s) return 'nova';
+  return s.wrong >= 2 ? 'revisar' : 'feita';
+}
+function viewConc(){
+  const t = today(), left = diffDays(t, EXAM_KEY), wd = parseKey(t).getDay(), st = streak();
+  const plano = PLANO[wd];
+  let hoje;
+  if (plano){
+    const a = proximaAula(plano.curso), aulaHoje = S.aulas[a.id] && S.aulas[a.id].last === t;
+    const feitosConc = S.ses.some(s => s.d === t && s.k === 'treino');
+    hoje = `<section class="card today-card"><p class="eyebrow">Hoje · ${DIAS[wd]} · cerca de 30 minutos</p>
+      <div class="passo${aulaHoje ? ' ok' : ''}"><span class="num">${aulaHoje ? '✓' : '1'}</span><div class="txt">
+        <p><b>Aula de ${CURSOS[plano.curso].nome}</b><br><span class="meta">${esc(a.t)} · uns 15 minutos</span></p>
+        <button class="ghost" data-act="aula" data-curso="${plano.curso}" data-id="${a.id}">Abrir a aula</button></div></div>
+      <div class="passo${feitosConc ? ' ok' : ''}"><span class="num">${feitosConc ? '✓' : '2'}</span><div class="txt">
+        <p><b>5 questões de ${plano.mat}</b><br><span class="meta">no estilo da prova · uns 15 minutos</span></p>
+        <button class="primary" data-act="treino" data-mat="${plano.mat}">Treinar ${plano.mat}</button></div></div>
+    </section>`;
+  } else if (wd === 6){
+    hoje = `<section class="card today-card"><p class="eyebrow">Hoje · sábado</p><h2 class="h-sm">Simulado curto: 10 questões</h2>
+      <p class="meta">2 de Português, 2 de Matemática, 1 de Informática e 5 de Conhecimentos Específicos, a mesma proporção da prova. Uns 36 minutos. A correção aparece no fim.</p>
+      <button class="primary" data-act="sim" data-n="10">Começar simulado</button></section>`;
+  } else {
+    hoje = `<section class="card today-card"><p class="eyebrow">Hoje · domingo</p><h2 class="h-sm">Dia de descanso</h2>
+      <p class="meta">Descansar também faz parte. Se quiser, faça uma aula leve de Inglês.</p>
+      <button class="ghost" data-act="aula" data-curso="ing" data-id="${proximaAula('ing').id}">Aula leve de Inglês</button></section>`;
+  }
+  const chips = MATS.map(m => `<button class="chip-btn" data-act="treino" data-mat="${m}">${m}</button>`).join('');
+  const hist = S.sims.slice(0, 4).map(s => `<li><span>${fmtD(s.date)} · ${s.n} questões${s.timeout ? ' · tempo esgotado' : ''}</span><b>${s.c}/${s.n}</b></li>`).join('');
+  return `<header class="hero"><p class="eyebrow">Concurso Prefeitura de Guaratinguetá · VUNESP</p>
+      ${left > 0 ? `<h1><span class="n">${left}</span> ${left === 1 ? 'dia' : 'dias'}</h1><p class="sub">até a prova, prevista para 21 de fevereiro de 2027.${st ? ` <b>${st} ${st === 1 ? 'dia seguido' : 'dias seguidos'}</b> de estudo.` : ''}</p>`
+      : left === 0 ? '<h1>Hoje é a prova.</h1><p class="sub">Leve documento com foto e caneta azul ou preta. Leia com calma. Boa prova!</p>'
+      : '<h1>A prova passou.</h1><p class="sub">Acompanhe o gabarito e o resultado no site da VUNESP.</p>'}</header>
+    ${hoje}
+    <section class="card"><p class="eyebrow">Treinar por matéria · 5 questões</p>
+      <p class="meta">Cada questão tem duas chances: se errar, aparece uma dica e você tenta de novo.</p>
+      <div class="chips">${chips}</div>
+      <button class="link" data-act="treino" data-mat="">Ou 10 questões misturadas</button></section>
+    <section class="card"><p class="eyebrow">Simulado</p><h2 class="h-sm">No ritmo da prova</h2>
+      <p class="meta">Sem dica e sem correção até o fim. Cerca de 3min36 por questão, como na prova (50 questões em 3 horas).</p>
+      <div class="two"><button class="ghost" data-act="sim" data-n="10">10 · 36 min</button><button class="ghost" data-act="sim" data-n="20">20 · 72 min</button></div>
+      <label class="check"><input type="checkbox" id="auto-end" ${S.autoEnd !== false ? 'checked' : ''}> Entregar sozinho quando o tempo acabar</label>
+      ${hist ? `<ul class="plain">${hist}</ul>` : ''}</section>
+    <section class="card"><p class="eyebrow">O cargo</p><h2 class="h-sm">Escriturário · nível médio</h2>
+      <ul class="list"><li>20 vagas, salário de R$ 2.696,78, 44 horas por semana.</li><li>Inscrições de 16/11 a 15/12/2026, só pela internet, no site da VUNESP. Taxa de R$ 80,00.</li><li>Pedido de isenção da taxa: de 16 a 20/11/2026.</li><li>Secretário de Escola tem a mesma prova de Português, Matemática e Informática, e boa parte dos Conhecimentos Específicos é igual.</li></ul>
+      <a class="ghost" href="${VUNESP}" target="_blank" rel="noopener">Abrir o site da VUNESP ↗</a></section>
+    <section class="card"><p class="eyebrow">A prova</p><h2 class="h-sm">50 questões em 3 horas</h2>
+      <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Matéria</th><th class="n">Questões</th></tr></thead><tbody>
+        <tr><td>Conhecimentos Específicos</td><td class="n"><b>25</b></td></tr><tr><td>Língua Portuguesa</td><td class="n">10</td></tr><tr><td>Matemática</td><td class="n">10</td></tr><tr><td>Noções de Informática</td><td class="n">5</td></tr></tbody></table></div>
+      <p>Para passar, a nota tem que ser 50 ou mais. Na prática, acertar pelo menos metade da prova.</p>
+      <p class="meta">Metade da prova é de Conhecimentos Específicos: atendimento, arquivo, protocolo, redação oficial e princípios da administração. Tudo isso está no curso de Administração deste app. Em caso de empate, ganha quem acertou mais Específicos.</p></section>
+    <details class="box"><summary>O que cai em cada matéria</summary><div>
+      <p><b>Português:</b> interpretação de texto, sinônimos e antônimos, sentido próprio e figurado, pontuação, classes de palavras, concordância, regência, colocação do pronome, crase.</p>
+      <p><b>Matemática:</b> as quatro operações com frações e decimais, MMC e MDC, porcentagem, razão e proporção, regra de três, equações do 1º e 2º grau, medidas, tabelas e gráficos, média, área, perímetro, volume, Pitágoras e Tales.</p>
+      <p><b>Informática:</b> Windows 11, Word, Excel e PowerPoint 2016, e-mail, internet, Google Workspace e Microsoft Teams. É o curso de Informática deste app.</p>
+      <p><b>Específicos:</b> princípios e ética da administração pública, organização administrativa, arquivo e gestão de documentos, protocolo, agenda e economia de materiais, comunicação e conflitos, hierarquia, atendimento presencial e por telefone, redação oficial (Manual da Presidência, 3ª edição). É o curso de Administração deste app.</p>
+      <p class="meta">Resumo do edital publicado no Diário Oficial de Guaratinguetá de 03/11/2026. Confira sempre o edital completo.</p></div></details>
+    <p class="meta">Material de estudo independente, sem vínculo com a Prefeitura ou com a VUNESP.</p>`;
+}
+function viewCurso(k){
+  if (aulaSel && aulaSel.curso === k) return viewAula();
+  const c = CURSOS[k], feitas = c.aulas.filter(a => S.aulas[a.id]).length, prox = proximaAula(k);
+  const lista = c.aulas.map((a, i) => {
+    const st = statusAula(a), cls = st === 'nova' ? (a.id === prox.id ? ' proxima' : '') : ' ' + st;
+    return `<li><button class="aula-btn${cls}" data-act="aula" data-curso="${k}" data-id="${a.id}"><span class="k">${st === 'feita' ? '✓' : i + 1}</span>
+      <span class="t"><b>${esc(a.t)}</b><small>${a.nivel ? a.nivel + ' · ' : ''}${st === 'feita' ? 'feita' : st === 'revisar' ? 'vale revisar' : 'nova'}</small></span></button></li>`;
+  }).join('');
+  return `<header class="hero"><p class="eyebrow">Curso</p><h1 class="h1-sm">${c.nome}</h1>
+      <p class="sub">${feitas} de ${c.aulas.length} aulas feitas</p><div class="track"><i style="width:${pct(feitas, c.aulas.length)}%"></i></div></header>
+    <section class="card today-card"><p class="eyebrow">Continuar</p><h2 class="h-sm">Aula ${c.aulas.indexOf(prox) + 1}: ${esc(prox.t)}</h2>
+      <p class="meta">Cada aula tem o essencial em poucas linhas, uma explicação mais completa se você quiser, um exemplo e 3 perguntas. Uns 15 minutos.</p>
+      <button class="primary" data-act="aula" data-curso="${k}" data-id="${prox.id}">Começar a aula</button></section>
+    <ul class="aulas">${lista}</ul>`;
+}
+function viewAula(){
+  const c = CURSOS[aulaSel.curso], idx = c.aulas.findIndex(a => a.id === aulaSel.id), a = c.aulas[idx];
+  const aberto = aulaSel.mais;
+  return `<button class="link" data-act="voltar-curso">← ${c.nome}</button>
+    <header class="hero"><p class="eyebrow">Aula ${idx + 1} de ${c.aulas.length}${a.nivel ? ' · ' + a.nivel : ''}</p><h1 class="h1-sm">${esc(a.t)}</h1></header>
+    <p class="eyebrow">Em uma frase</p>
+    <p class="frase">${rich(a.frase)}</p>
+    <section class="card"><p class="eyebrow">O essencial</p><ul class="ess">${a.ess.map(e => `<li>${rich(e)}</li>`).join('')}</ul></section>
+    ${aberto ? `<section class="mais"><p class="eyebrow">Explicação completa</p>${paras(a.mais)}</section><button class="link" data-act="mais">Esconder a explicação</button>`
+      : '<button class="ghost" data-act="mais">Quero entender melhor</button>'}
+    <section><p class="eyebrow">Exemplo</p><p class="exemplo">${rich(a.ex)}</p></section>
+    <button class="primary" data-act="praticar">Praticar: 3 perguntas</button>`;
+}
+function viewQuiz(){
+  const id = quiz.ids[quiz.i], q = qObj(id), n = quiz.ids.length;
+  const alts = quiz.perm.map((o, pos) => {
+    let cls = 'alt', dis = false;
+    if (quiz.done){ dis = true; cls += o === q.c ? ' right' : quiz.wrong.includes(o) ? ' wrong' : ' dim'; }
+    else if (quiz.wrong.includes(o)){ cls += ' wrong'; dis = true; }
+    else if (o === quiz.sel) cls += ' sel';
+    return `<li><button class="${cls}" data-act="pick" data-o="${o}" aria-pressed="${o === quiz.sel}" ${dis ? 'disabled' : ''}><span class="bub">${L[pos]}</span><span class="atx">${rich(q.al[o])}</span></button></li>`;
+  }).join('');
+  let after;
+  if (quiz.done){
+    const r = quiz.result, certo = q.al[q.c];
+    after = `<section class="fb ${r === 1 ? 'is-ok' : r === 2 ? 'is-mid' : 'is-bad'}">
+      <p class="verdict"><span class="dot" aria-hidden="true">${r === 0 ? '✗' : '✓'}</span>${r === 1 ? 'Acertou de primeira!' : r === 2 ? 'Acertou com a dica. Muito bem!' : 'Essa foi difícil.'}</p>
+      ${r === 0 ? `<p>A resposta certa é: <b>${rich(certo)}</b></p>` : ''}
+      <p><b>Por quê:</b> ${rich(q.p)}</p>
+      ${q.mais ? (quiz.showMais ? `<div class="mais">${paras(q.mais)}</div>` : '<button class="link" data-act="q-mais">Explicar mais</button>') : ''}
+    </section>
+    <button class="primary" data-act="proxima">${quiz.i + 1 < n ? 'Próxima pergunta' : 'Ver como fui'}</button>`;
+  } else {
+    after = `${quiz.tries ? `<p class="dica"><b>Ainda não.</b> Dica: ${rich(q.dica)}</p>` : ''}
+      <button class="primary" id="responder" data-act="responder" ${quiz.sel == null ? 'disabled' : ''}>${quiz.tries ? 'Tentar de novo' : 'Responder'}</button>`;
+  }
+  const titulo = quiz.tipo === 'aula' ? `Pergunta ${quiz.i + 1} · ${esc(CURSOS[q.curso].aulas.find(a => a.id === q.aula).t)}` : `Questão ${pad(quiz.i + 1)} · ${q.a}`;
+  return `<div class="qbar"><button class="link" data-act="sair-quiz">Sair</button>
+      <div class="qprog"><span>${quiz.i + 1} de ${n}</span><div class="track"><i style="width:${(quiz.i + (quiz.done ? 1 : 0)) / n * 100}%"></i></div></div></div>
+    <article class="q">
+      <p class="eyebrow">${titulo}</p>
+      ${q.x ? `<blockquote class="texto">${texto(q.x, quiz.done)}</blockquote>` : ''}
+      <p class="enun">${rich(q.q)}</p>
+      <ol class="alts">${alts}</ol>
+      ${after}
+    </article>`;
+}
+function viewFimQuiz(){
+  const f = quiz.fim, n = quiz.res.length, aula = quiz.tipo === 'aula';
+  const msg = f.first === n ? 'Perfeito! Acertou tudo de primeira.' : f.wrong === 0 ? 'Muito bom! Com a ajuda das dicas, acertou tudo.' : f.wrong >= 2 ? 'Tudo bem errar: é assim que se aprende. Vale reler a aula com calma e tentar de novo outro dia.' : 'Bom trabalho! Quase tudo certo.';
+  let botoes;
+  if (aula){
+    const c = CURSOS[quiz.curso], idx = c.aulas.findIndex(a => a.id === quiz.aula), prox = c.aulas[idx + 1];
+    botoes = `${prox ? `<button class="primary" data-act="aula" data-curso="${quiz.curso}" data-id="${prox.id}">Próxima aula: ${esc(prox.t)}</button>` : `<p class="done-line">Você terminou o curso de ${c.nome}!</p>`}
+      <button class="ghost" data-act="aula" data-curso="${quiz.curso}" data-id="${quiz.aula}">Reler esta aula</button>`;
+  } else {
+    botoes = `<button class="primary" data-act="treino" data-mat="${quiz.mat || ''}">${quiz.mat ? `Mais 5 questões de ${quiz.mat}` : 'Mais 10 questões misturadas'}</button><button class="ghost" data-act="fim-ok">Voltar ao concurso</button>`;
+  }
+  return `<section class="end card"><p class="eyebrow">${aula ? 'Aula concluída' : 'Treino concluído'} · ${Math.max(1, Math.round((Date.now() - quiz.t0) / 60000))} min</p>
+    <h1>${f.first + f.hint} de ${n}</h1>
+    <p class="meta">${f.first} de primeira · ${f.hint} com dica · ${f.wrong} ${f.wrong === 1 ? 'errada' : 'erradas'}</p>
+    <p>${msg}</p>${botoes}</section>`;
+}
+function viewSim(){
+  const id = sim.ids[sim.i], q = CM[id], n = sim.ids.length, P = sim.perm[id], a = sim.ans[id], last = sim.i + 1 === n;
+  const alts = P.map((o, pos) => `<li><button class="alt${o === a ? ' sel' : ''}" data-act="s-pick" data-o="${o}" aria-pressed="${o === a}"><span class="bub">${L[pos]}</span><span class="atx">${rich(q.al[o])}</span></button></li>`).join('');
+  return `<div class="qbar"><button class="link" data-act="s-quit">Sair</button>
+      <div class="qprog"><span>${sim.i + 1} de ${n} · ${Object.keys(sim.ans).length} marcadas</span><div class="track"><i style="width:${(sim.i + 1) / n * 100}%"></i></div></div>
+      <span class="timer" data-t0="${sim.t0}" data-dur="${sim.dur}"></span></div>
+    <article class="q"><p class="eyebrow">Questão ${pad(sim.i + 1)} · ${q.a}</p>
+      ${q.x ? `<blockquote class="texto">${texto(q.x, false)}</blockquote>` : ''}
+      <p class="enun">${rich(q.q)}</p><ol class="alts">${alts}</ol>
+      <div class="two"><button class="ghost" data-act="s-prev" ${sim.i === 0 ? 'disabled' : ''}>← Anterior</button>
+        ${last ? '<button class="primary" data-act="s-finish">Entregar</button>' : '<button class="primary" data-act="s-next">Próxima →</button>'}</div>
+      ${last ? '' : '<button class="link" data-act="s-finish">Entregar agora</button>'}
+      <p class="meta">Toque de novo na alternativa para desmarcar. Na prova, erro não desconta: responda todas.</p></article>`;
+}
+function viewSimEnd(){
+  const r = sim.result, porMat = {};
+  sim.ids.forEach(id => { const q = CM[id], m = porMat[q.a] || (porMat[q.a] = {c:0, n:0}); m.n++; if (sim.ans[id] === q.c) m.c++; });
+  const rows = MATS.filter(m => porMat[m]).map(m => `<tr><td>${m}</td><td class="n">${porMat[m].c} de ${porMat[m].n}</td></tr>`).join('');
+  const rev = sim.ids.map((id, i) => {
+    const q = CM[id], a = sim.ans[id], ok = a === q.c, P = sim.perm[id];
+    return `<details><summary><span class="tag ${a == null ? 'nil' : ok ? 'ok' : 'bad'}">${a == null ? 'BRANCO' : ok ? 'CERTA' : 'ERRADA'}</span><span>${pad(i + 1)} · ${q.a}</span></summary>
+      <div class="body">${q.x ? `<blockquote class="texto">${texto(q.x, true)}</blockquote>` : ''}<p class="enun">${rich(q.q)}</p>
+      <ol class="alts">${P.map((o, pos) => `<li><div class="alt${o === q.c ? ' right' : o === a ? ' wrong' : ' dim'}"><span class="bub">${L[pos]}</span><span class="atx">${rich(q.al[o])}</span></div></li>`).join('')}</ol>
+      <p><b>Por quê:</b> ${rich(q.p)}</p>${q.mais ? `<div class="mais">${paras(q.mais)}</div>` : ''}</div></details>`;
+  }).join('');
+  return `<section class="end card"><p class="eyebrow">Simulado entregue · ${r.n} questões · ${r.min} min</p>
+    <h1>${r.c} de ${r.n}</h1><p class="meta">${pct(r.c, r.n)}% de acerto · ${r.w} erradas · ${r.b} em branco</p>
+    ${r.timeout ? '<p class="dica">O tempo acabou e o simulado foi entregue sozinho.</p>' : ''}
+    <p>${pct(r.c, r.n) >= 50 ? 'Acima da metade: nesse ritmo, passaria na nota mínima.' : 'Abaixo da metade por enquanto. Os erros voltam nos próximos treinos para você revisar.'}</p>
+    <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Matéria</th><th class="n">Acertos</th></tr></thead><tbody>${rows}</tbody></table></div>
+    <h2 class="h-sm">Correção questão a questão</h2><div class="rev">${rev}</div>
+    <button class="primary" data-act="s-close">Voltar ao concurso</button></section>`;
+}
+
+function viewProg(){
+  const ks = Object.keys(S.days), dias = ks.filter(studied).length;
+  let tq = 0, tok = 0; for (const d of Object.values(S.days)){ tq += d.q || 0; tok += d.ok || 0; }
+  const cursos = CURSO_KEYS.map(k => { const c = CURSOS[k], f = c.aulas.filter(a => S.aulas[a.id]).length;
+    return `<div><div class="bar-top"><span>${c.nome}</span><span class="num">${f}/${c.aulas.length} aulas</span></div><div class="track"><i style="width:${pct(f, c.aulas.length)}%"></i></div></div>`; }).join('');
+  const conc = MATS.map(m => { let n = 0, ok = 0; CONC.filter(q => q.a === m).forEach(q => { const r = S.qs[q.id]; if (r){ n += r.n; ok += r.ok; } });
+    return `<div><div class="bar-top"><span>${m} <small>· ${NA_PROVA[m]} na prova</small></span><span class="num">${n ? `${pct(ok, n)}% de primeira · ${n}` : 'sem dados'}</span></div><div class="track"><i style="width:${n ? pct(ok, n) : 0}%"></i></div></div>`; }).join('');
+  return `<header class="hero"><p class="eyebrow">Progresso</p><h1 class="h1-sm">Como você está indo</h1></header>
+    <div class="tiles"><div class="tile"><b>${dias}</b><span>dias estudados</span></div><div class="tile"><b>${streak()}</b><span>dias seguidos</span></div>
+      <div class="tile"><b>${tq}</b><span>perguntas respondidas</span></div><div class="tile"><b>${tq ? pct(tok, tq) + '%' : '—'}</b><span>certas de primeira</span></div></div>
+    <section class="card"><h2 class="h-sm">Cursos</h2><div class="bars">${cursos}</div></section>
+    <section class="card"><h2 class="h-sm">Concurso por matéria</h2><div class="bars">${conc}</div></section>
+    <section class="card"><p class="eyebrow">Do seu jeito</p><h2 class="h-sm">Preferências</h2>
+      <label class="check"><input type="checkbox" id="modo-completo" ${S.modo === 'completo' ? 'checked' : ''}> Sempre mostrar a explicação completa</label>
+      <label class="check"><input type="checkbox" id="letra-maior" ${S.big ? 'checked' : ''}> Letra maior</label></section>
+    <section class="card"><p class="eyebrow">Relatório</p><h2 class="h-sm">Mandar meu progresso para quem me ajuda</h2>
+      <p class="meta">Gera um arquivo com as aulas feitas, os acertos por matéria, as perguntas que você errou e os simulados. Dá para mandar pelo WhatsApp.</p>
+      <div class="row"><label for="nome" class="meta">Seu nome</label><input type="text" id="nome" value="${esc(S.nome || '')}" placeholder="opcional" autocomplete="given-name" maxlength="40"></div>
+      <button class="primary" data-act="rel-enviar">Enviar relatório</button>
+      <button class="link" data-act="rel-copiar">Copiar resumo em texto</button>
+      <div class="meta" id="rel-status" aria-live="polite"></div></section>
+    <p class="meta">O progresso fica salvo neste aparelho.</p>
+    <button class="link danger" id="reset" data-act="reset">${resetArm ? 'Toque de novo para apagar tudo' : 'Apagar meu progresso'}</button>`;
+}
+
+/* ---------- relatório ---------- */
+const semanaDe = k => addDays(k, -((parseKey(k).getDay() + 6) % 7));
+function relDados(){
+  const t = today(), sem = {};
+  Object.keys(S.days).forEach(k => { const w = semanaDe(k), s = sem[w] || (sem[w] = {dias:0, q:0, ok:0, aulas:0}); const d = S.days[k]; if (studied(k)) s.dias++; s.q += d.q || 0; s.ok += d.ok || 0; s.aulas += d.aulas || 0; });
+  const conc = MATS.map(m => { let n = 0, ok = 0; CONC.filter(q => q.a === m).forEach(q => { const r = S.qs[q.id]; if (r){ n += r.n; ok += r.ok; } }); return {m, n, ok}; });
+  const erros = S.log.filter(l => l[2] !== 1).slice(-60).reverse().map(([d, id, r, ch, kind]) => { const q = qObj(id); return q ? {d, q, r, ch, kind} : null; }).filter(Boolean);
+  let ult7 = 0; for (let i = 0; i < 7; i++) if (studied(addDays(t, -i))) ult7++;
+  let tq = 0, tok = 0; for (const d of Object.values(S.days)){ tq += d.q || 0; tok += d.ok || 0; }
+  const comDica = S.log.filter(l => l[2] === 2).length;
+  return {t, semanas:Object.keys(sem).sort().map(w => ({w, ...sem[w]})), conc, erros, ult7, tq, tok, comDica, left:diffDays(t, EXAM_KEY)};
+}
+function relLeitura(D){
+  const L2 = [];
+  CURSO_KEYS.forEach(k => { const c = CURSOS[k], f = c.aulas.filter(a => S.aulas[a.id]).length, rv = c.aulas.filter(a => statusAula(a) === 'revisar').map(a => a.t);
+    L2.push(`${c.nome}: ${f} de ${c.aulas.length} aulas feitas${rv.length ? `; vale revisar: ${rv.join(', ')}` : ''}.`); });
+  const cm = D.conc.filter(x => x.n >= 3).sort((a, b) => a.ok / a.n - b.ok / b.n);
+  if (cm.length) L2.push(`No concurso, a matéria com menos acertos de primeira é ${cm[0].m} (${pct(cm[0].ok, cm[0].n)}% em ${cm[0].n} respostas).`);
+  if (D.tq) L2.push(`Acertou ${pct(D.tok, D.tq)}% de primeira e acertou com a dica em ${D.comDica} ${D.comDica === 1 ? 'pergunta' : 'perguntas'}. Acertar depois da dica é sinal de raciocínio, e não de chute.`);
+  if (S.sims.length) L2.push(`Simulados: ${S.sims.length}; o último teve ${S.sims[0].c} de ${S.sims[0].n} (${pct(S.sims[0].c, S.sims[0].n)}%). A nota mínima equivale a 50%.`);
+  L2.push(`Estudou em ${D.ult7} dos últimos 7 dias.`);
+  if (D.left > 0) L2.push(`Faltam ${D.left} dias para a prova (prevista para 21/02/2027).`);
+  return L2;
+}
+const REL_CSS = `:root{color-scheme:light}*{box-sizing:border-box}
+body{margin:0 auto;max-width:900px;padding:24px 16px 48px;font:15px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:#132026;background:#fff}
+h1{font-size:1.6rem;margin:0 0 4px;line-height:1.2}h2{font-size:1.1rem;margin:30px 0 10px;padding-bottom:4px;border-bottom:2px solid #dce5e8}h3{font-size:1rem;margin:18px 0 6px}
+p{margin:6px 0}.meta,small{color:#53646b}small{font-size:.8rem}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px;margin:16px 0}
+.tile{border:1px solid #dce5e8;border-radius:10px;padding:10px 12px}.tile b{display:block;font-size:1.5rem;font-variant-numeric:tabular-nums}.tile span{font-size:.82rem;color:#53646b}
+.wrap{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:.9rem;min-width:480px}
+th,td{padding:6px 8px;border-bottom:1px solid #dce5e8;text-align:left;vertical-align:top}th{font-size:.72rem;letter-spacing:.05em;text-transform:uppercase;color:#53646b;white-space:nowrap}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.ok{color:#17804a}.bad{color:#c0352b}.mid{color:#155e75}
+.note{background:#fff7d1;border-radius:10px;padding:12px 16px}.note ul{margin:6px 0 0;padding-left:1.1em}
+footer{margin-top:36px;font-size:.82rem;color:#53646b}`;
+function relHTML(){
+  const D = relDados(), agora = new Date(), nome = S.nome ? esc(S.nome) : 'Estudante';
+  const quando = agora.toLocaleDateString('pt-BR') + ' às ' + agora.toLocaleTimeString('pt-BR', {hour:'2-digit', minute:'2-digit'});
+  const tab = (cab, linhas, vazio) => linhas ? `<div class="wrap"><table><thead><tr>${cab}</tr></thead><tbody>${linhas}</tbody></table></div>` : `<p class="meta">${vazio}</p>`;
+  const semanas = D.semanas.map(s => `<tr><td>${fmtD(s.w)} a ${fmtD(addDays(s.w, 6))}</td><td class="n">${s.dias}</td><td class="n">${s.aulas}</td><td class="n">${s.q}</td><td class="n">${s.q ? pct(s.ok, s.q) + '%' : '—'}</td></tr>`).join('');
+  const aulas = CURSO_KEYS.map(k => { const c = CURSOS[k];
+    return `<h3>${c.nome}</h3>` + tab('<th>Aula</th><th class="n">De primeira</th><th class="n">Com dica</th><th class="n">Errou</th><th>Situação</th>', c.aulas.map((a, i) => { const s = S.aulas[a.id];
+      return `<tr><td>${i + 1}. ${esc(a.t)}</td><td class="n">${s ? s.first : '—'}</td><td class="n">${s ? s.hint : '—'}</td><td class="n">${s ? s.wrong : '—'}</td><td>${!s ? 'não feita' : statusAula(a) === 'revisar' ? '<span class="bad">revisar</span>' : '<span class="ok">ok</span>'}</td></tr>`; }).join(''), ''); }).join('');
+  const conc = D.conc.map(x => `<tr><td>${x.m}</td><td class="n">${NA_PROVA[x.m]}</td><td class="n">${x.n}</td><td class="n">${x.n ? pct(x.ok, x.n) + '%' : '—'}</td></tr>`).join('');
+  const sims = S.sims.slice(0, 20).map(s => `<tr><td>${fmtD(s.date)}</td><td class="n">${s.n}</td><td class="n ok">${s.c}</td><td class="n bad">${s.w}</td><td class="n">${s.b}</td><td class="n"><b>${pct(s.c, s.n)}%</b></td><td class="n">${s.min} min</td></tr>`).join('');
+  const erros = D.erros.slice(0, 50).map(e => { const marcou = e.ch == null ? 'em branco' : e.q.al[e.ch];
+    const onde = e.q.curso ? CURSOS[e.q.curso].nome : 'Concurso · ' + e.q.a;
+    return `<tr><td>${fmtD(e.d)}</td><td><small>${esc(onde)}</small></td><td>${esc(e.q.q)}</td><td class="${e.r === 2 ? 'mid' : 'bad'}">${esc(marcou)}${e.r === 2 ? ' (acertou na 2ª)' : ''}</td><td class="ok">${esc(e.q.al[e.q.c])}</td></tr>`; }).join('');
+  const dados = JSON.stringify({app:'Estudo Guará', versao:1, gerado:agora.toISOString(), nome:S.nome || '', estado:S}).replace(/</g, '\\u003c');
+  const totalAulas = CURSO_KEYS.reduce((s, k) => s + CURSOS[k].aulas.filter(a => S.aulas[a.id]).length, 0);
+  return `<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Relatório Estudo Guará · ${nome}</title><style>${REL_CSS}</style></head><body>
+<h1>Relatório de estudo · ${nome}</h1>
+<p class="meta">Concurso Prefeitura de Guaratinguetá (VUNESP) e cursos · gerado em ${quando}</p>
+<div class="tiles"><div class="tile"><b>${Object.keys(S.days).filter(studied).length}</b><span>dias estudados</span></div><div class="tile"><b>${totalAulas}</b><span>aulas feitas</span></div><div class="tile"><b>${D.tq}</b><span>perguntas respondidas</span></div><div class="tile"><b>${D.tq ? pct(D.tok, D.tq) + '%' : '—'}</b><span>certas de primeira</span></div><div class="tile"><b>${S.sims.length}</b><span>simulados</span></div></div>
+<div class="note"><b>Leitura rápida</b><ul>${relLeitura(D).map(l => `<li>${esc(l)}</li>`).join('')}</ul></div>
+<h2>Evolução semana a semana</h2>
+${tab('<th>Semana</th><th class="n">Dias</th><th class="n">Aulas</th><th class="n">Perguntas</th><th class="n">De primeira</th>', semanas, 'Ainda sem estudo registrado.')}
+<h2>Aulas dos cursos</h2>${aulas}
+<h2>Concurso por matéria</h2>
+${tab('<th>Matéria</th><th class="n">Na prova</th><th class="n">Respostas</th><th class="n">De primeira</th>', conc, '')}
+<h2>Simulados</h2>
+${tab('<th>Data</th><th class="n">Questões</th><th class="n">Certas</th><th class="n">Erradas</th><th class="n">Branco</th><th class="n">Acerto</th><th class="n">Tempo</th>', sims, 'Nenhum simulado ainda.')}
+<h2>Perguntas que errou ou acertou só na segunda tentativa</h2>
+${tab('<th>Data</th><th>Onde</th><th>Pergunta</th><th>Marcou primeiro</th><th>Certa</th>', erros, 'Nenhuma ainda.')}
+<footer>Os dados completos estão guardados dentro deste arquivo, para análise. Material de estudo independente, sem vínculo com a Prefeitura ou com a VUNESP.</footer>
+<script type="application/json" id="dados-brutos">${dados}<\/script>
+</body></html>`;
+}
+function relTexto(){
+  const D = relDados(), L2 = [`Relatório Estudo Guará · ${S.nome || 'Estudante'} · ${fmtD(D.t)}`];
+  L2.push(`Dias estudados: ${Object.keys(S.days).filter(studied).length} (nos últimos 7 dias: ${D.ult7})`);
+  CURSO_KEYS.forEach(k => { const c = CURSOS[k]; L2.push(`${c.nome}: ${c.aulas.filter(a => S.aulas[a.id]).length}/${c.aulas.length} aulas`); });
+  L2.push(`Perguntas: ${D.tq}, ${D.tq ? pct(D.tok, D.tq) : 0}% de primeira`);
+  D.conc.filter(x => x.n).forEach(x => L2.push(`- ${x.m}: ${pct(x.ok, x.n)}% de primeira (${x.n})`));
+  if (S.sims.length) L2.push(`Último simulado: ${S.sims[0].c} de ${S.sims[0].n}`);
+  if (D.erros.length){ L2.push('', 'Erros recentes:'); D.erros.slice(0, 8).forEach(e => L2.push(`- ${e.q.q} → certa: ${e.q.al[e.q.c]}`)); }
+  return L2.join('\n');
+}
+function relEnviar(){
+  const st = $('#rel-status');
+  const slug = (S.nome || '').normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-zA-Z0-9]+/g, '-').replace(/^-|-$/g, '').toLowerCase();
+  const f = new File([relHTML()], `relatorio-guara${slug ? '-' + slug : ''}-${today()}.html`, {type:'text/html'});
+  const baixar = () => {
+    const u = URL.createObjectURL(f), a = document.createElement('a');
+    a.href = u; a.download = f.name; document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(u), 5000);
+    st.textContent = `Arquivo ${f.name} gerado. No iPhone ele fica no app Arquivos, em Downloads. Se nada apareceu, use "Copiar resumo em texto".`;
+  };
+  if (navigator.canShare && navigator.canShare({files:[f]})){
+    navigator.share({files:[f], title:'Relatório Estudo Guará'})
+      .then(() => { st.textContent = 'Pronto: o relatório foi para o app que você escolheu.'; })
+      .catch(e => { if (e && e.name === 'AbortError') st.textContent = 'Envio cancelado.'; else baixar(); });
+  } else baixar();
+}
+function relCopiar(){
+  const txt = relTexto(), st = $('#rel-status');
+  const mostrar = () => { st.innerHTML = 'Copie o texto abaixo:<textarea class="reltxt" readonly aria-label="Resumo do relatório"></textarea>'; const ta = st.querySelector('textarea'); ta.value = txt; ta.focus(); ta.select(); };
+  if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(txt).then(() => { st.textContent = 'Resumo copiado. É só colar no WhatsApp.'; }, mostrar);
+  else mostrar();
+}
+
+/* ---------- desenho e eventos ---------- */
+function render(){
+  const full = !!(quiz || sim);
+  nav.hidden = full;
+  app.innerHTML = quiz ? (quiz.fim ? viewFimQuiz() : viewQuiz())
+    : sim ? (sim.end ? viewSimEnd() : viewSim())
+    : tab === 'conc' ? viewConc() : tab === 'prog' ? viewProg() : viewCurso(tab);
+  nav.querySelectorAll('[data-tab]').forEach(b => b.setAttribute('aria-current', !full && b.dataset.tab === tab ? 'page' : 'false'));
+  tick();
+}
+function fmtLeft(t0, dur){ const rem = dur - Math.floor((Date.now() - t0) / 1000); return rem <= 0 ? 'tempo ✓' : Math.floor(rem / 60) + ':' + pad(rem % 60); }
+function tick(){
+  if (sim && !sim.end && sim.auto && Date.now() - sim.t0 >= sim.dur * 1000){ finishSim(true); render(); scrollTo(0, 0); return; }
+  document.querySelectorAll('.timer[data-t0]').forEach(el => { el.textContent = fmtLeft(+el.dataset.t0, +el.dataset.dur); });
+}
+document.addEventListener('click', ev => {
+  const tb = ev.target.closest('[data-tab]');
+  if (tb){ tab = tb.dataset.tab; aulaSel = null; resetArm = false; render(); scrollTo(0, 0); return; }
+  const b = ev.target.closest('[data-act]'); if (!b) return;
+  const act = b.dataset.act;
+  if (act === 'aula'){
+    quiz = null; tab = b.dataset.curso; aulaSel = {curso:b.dataset.curso, id:b.dataset.id, mais:S.modo === 'completo'}; render(); scrollTo(0, 0);
+  } else if (act === 'voltar-curso'){ aulaSel = null; render(); scrollTo(0, 0);
+  } else if (act === 'mais'){ aulaSel.mais = !aulaSel.mais; render();
+  } else if (act === 'praticar'){
+    const a = CURSOS[aulaSel.curso].aulas.find(x => x.id === aulaSel.id);
+    novoQuiz(a.qs.map(q => q.id), 'aula', {aula:a.id, curso:aulaSel.curso});
+  } else if (act === 'treino'){
+    const mat = b.dataset.mat; quiz = null;
+    novoQuiz(mat ? pickConc(mat, 5) : pickMisto(MISTO10), 'conc', {mat});
+  } else if (act === 'pick'){
+    if (quiz.done) return;
+    quiz.sel = +b.dataset.o;
+    app.querySelectorAll('.alt:not(:disabled)').forEach(x => { const on = +x.dataset.o === quiz.sel; x.classList.toggle('sel', on); x.setAttribute('aria-pressed', on); });
+    const r = $('#responder'); if (r) r.disabled = false;
+  } else if (act === 'responder'){ responder();
+  } else if (act === 'q-mais'){ quiz.showMais = true; render();
+  } else if (act === 'proxima'){ proxima();
+  } else if (act === 'sair-quiz'){
+    if (quiz.res.length && !quiz.fim) fimQuiz(); else { quiz = null; render(); scrollTo(0, 0); }
+  } else if (act === 'fim-ok'){ quiz = null; tab = 'conc'; render(); scrollTo(0, 0);
+  } else if (act === 'sim'){ quiz = null; startSim(+b.dataset.n === 20 ? MISTO20 : MISTO10);
+  } else if (act === 's-pick'){
+    const id = sim.ids[sim.i], o = +b.dataset.o;
+    if (sim.ans[id] === o) delete sim.ans[id]; else sim.ans[id] = o;
+    app.querySelectorAll('.alt').forEach(x => { const on = +x.dataset.o === sim.ans[id]; x.classList.toggle('sel', on); x.setAttribute('aria-pressed', on); });
+    const pr = app.querySelector('.qprog span'); if (pr) pr.textContent = `${sim.i + 1} de ${sim.ids.length} · ${Object.keys(sim.ans).length} marcadas`;
+  } else if (act === 's-next' || act === 's-prev'){ sim.i += act === 's-next' ? 1 : -1; render(); scrollTo(0, 0);
+  } else if (act === 's-finish'){ finishSim(false); render(); scrollTo(0, 0);
+  } else if (act === 's-quit'){ sim = null; render(); scrollTo(0, 0);
+  } else if (act === 's-close'){ sim = null; tab = 'conc'; render(); scrollTo(0, 0);
+  } else if (act === 'rel-enviar'){ relEnviar();
+  } else if (act === 'rel-copiar'){ relCopiar();
+  } else if (act === 'reset'){
+    if (!resetArm){ resetArm = true; b.textContent = 'Toque de novo para apagar tudo'; setTimeout(() => { resetArm = false; const r = $('#reset'); if (r) r.textContent = 'Apagar meu progresso'; }, 4000); }
+    else { S = fresh(); save(); aplicarLetra(); resetArm = false; render(); }
+  }
+});
+document.addEventListener('change', ev => {
+  const el = ev.target;
+  if (el.id === 'auto-end'){ S.autoEnd = el.checked; save(); }
+  else if (el.id === 'modo-completo'){ S.modo = el.checked ? 'completo' : 'simples'; save(); }
+  else if (el.id === 'letra-maior'){ S.big = el.checked; save(); aplicarLetra(); }
+});
+document.addEventListener('input', ev => {
+  if (ev.target.id === 'nome'){ S.nome = ev.target.value.trim().slice(0, 40); save(); }
+});
+
+aplicarLetra();
+render();
+setInterval(tick, 1000);
+</script>
+
+</body>
+</html>
