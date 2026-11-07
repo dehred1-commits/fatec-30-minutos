@@ -378,6 +378,122 @@ const CM = Object.fromEntries(CONC.map(q => [q.id, q]));
 
 /* ---------- cursos: cada aula tem frase, essencial, explicação longa (opcional), exemplo e 3 perguntas ---------- */
 const CURSOS = {
+port:{nome:'Português para o concurso',concurso:1,aulas:[
+ {id:'port1',t:'Ler e entender um texto',frase:`Para entender um texto, descubra o assunto, a ideia principal e o que o autor quer dizer, sem inventar nada.`,
+  ess:[`Leia a pergunta antes do texto: assim você já sabe o que procurar.`,`Ideia principal: o que o texto inteiro defende ou conta.`,`A resposta certa costuma dizer o que o texto diz, com outras palavras.`,`Cuidado com alternativas que exageram ("sempre", "todos") ou inventam.`],
+  mais:`Leia o texto uma vez inteiro, sem parar. Depois, leia de novo procurando o trecho que responde à pergunta.\n\nTrês armadilhas comuns: a alternativa traz uma informação que o texto não deu; diz o contrário do texto; ou pega uma parte pequena e diz que é a ideia principal.\n\nPara achar a ideia principal, tente resumir o texto em uma frase sua. Se a sua frase combina com uma alternativa, é um ótimo sinal.`,
+  ex:`Texto: "Muita gente acha que ler é chato. Mas, quando encontra o livro certo, não para mais." Ideia principal: o gosto pela leitura depende de encontrar o livro certo.`,
+  qs:[{q:`Texto: "A cidade plantou mil árvores neste ano. Nas ruas arborizadas, a temperatura caiu e os moradores passaram a caminhar mais." Segundo o texto, as árvores`,al:[`deixaram as ruas mais frescas e incentivaram caminhadas.`,`acabaram com o trânsito da cidade.`,`foram plantadas há dez anos.`,`deixaram as ruas mais quentes.`],dica:`Procure o que mudou nas ruas com árvores.`,p:`O texto diz que a temperatura caiu e os moradores passaram a caminhar mais.`},
+   {q:`Qual é a melhor dica para responder questões de interpretação?`,al:[`Ler a pergunta antes e buscar no texto o trecho da resposta.`,`Responder pelo que você acha, sem voltar ao texto.`,`Escolher sempre a alternativa mais longa.`,`Ler só a primeira linha do texto.`],dica:`A resposta está no texto.`,p:`Saber o que procurar e voltar ao texto evita erros.`},
+   {q:`Uma alternativa diz que "todos os moradores adoraram a mudança", mas o texto fala que "muitos moradores gostaram". Essa alternativa`,al:[`exagera o que o texto diz.`,`resume bem o texto.`,`repete o texto.`,`não tem relação com o texto.`],dica:`Compare "todos" com "muitos".`,p:`"Todos" vai além de "muitos": é um exagero (generalização).`}]},
+ {id:'port2',t:'Sinônimos, antônimos e sentido das palavras',frase:`Sinônimo tem sentido parecido; antônimo tem sentido contrário. E uma palavra pode ter sentido próprio ou figurado.`,
+  ess:[`Sinônimos: rápido e ágil; bonito e belo.`,`Antônimos: rápido e lento; claro e escuro.`,`Sentido próprio (literal): "O copo está cheio de água."`,`Sentido figurado: "Estou cheio de trabalho" (com muito trabalho).`],
+  mais:`Na prova aparece muito: "a palavra X pode ser substituída, sem mudar o sentido, por…". Teste cada alternativa no lugar da palavra e leia a frase inteira: a certa mantém o sentido.\n\nO contexto ajuda a descobrir o significado: "Ele ficou exausto depois de correr 10 km". Pelo resto da frase, dá para perceber que exausto é muito cansado.\n\nSentido figurado é quando a palavra sai do significado comum para criar uma imagem: "Aquele chefe é uma fera" não quer dizer que ele é um animal, e sim que é bravo.`,
+  ex:`"O servidor foi cordial" = foi educado, gentil (sinônimos). O contrário seria grosseiro (antônimo).`,
+  qs:[{q:`Um sinônimo de "exausto" é`,al:[`muito cansado.`,`muito feliz.`,`descansado.`,`animado.`],dica:`Pense em como alguém fica depois de correr muito.`,p:`Exausto = muito cansado.`},
+   {q:`O antônimo de "aumentar" é`,al:[`diminuir.`,`crescer.`,`ampliar.`,`somar.`],dica:`Antônimo é o contrário.`,p:`O contrário de aumentar é diminuir.`},
+   {q:`Em "Ela tem um coração de ouro", a palavra "ouro" está em sentido`,al:[`figurado: quer dizer que ela é muito boa.`,`próprio: o coração é feito de metal.`,`técnico.`,`científico.`],dica:`O coração não é de metal de verdade.`,p:`É uma imagem: "coração de ouro" = pessoa bondosa.`}]},
+ {id:'port3',t:'Pontuação: a vírgula',frase:`A vírgula organiza a frase: separa itens de uma lista, quem é chamado (vocativo) e explicações. Nunca separa o sujeito do verbo.`,
+  ess:[`Lista: "Comprei canetas, papéis e clipes."`,`Vocativo: "Maria, traga os documentos."`,`Explicação: "Guaratinguetá, cidade do Vale do Paraíba, tem muitos estudantes."`,`Errado: "Os documentos, chegaram." (separou sujeito e verbo)`],
+  mais:`Pense na vírgula como uma pequena pausa que ajuda a entender. Mas cuidado: nem toda pausa da fala vira vírgula na escrita.\n\nNa lista, o último item normalmente vem com "e", sem vírgula antes: "canetas, papéis e clipes".\n\nA explicação sobre alguém ou algo (aposto) fica entre vírgulas: "O prefeito, que assumiu em janeiro, visitou a escola."\n\nRegra de ouro: sujeito e verbo ficam juntos. "O diretor da escola de Guaratinguetá assinou o documento" não leva vírgula entre "Guaratinguetá" e "assinou", mesmo sendo uma frase longa.`,
+  ex:`"Ana, por favor, envie o ofício, o relatório e a ata ainda hoje."`,
+  qs:[{q:`Qual frase está pontuada corretamente?`,al:[`João, venha aqui, por favor.`,`João venha, aqui por favor.`,`João venha aqui por, favor.`,`João, venha, aqui por favor.`],dica:`O nome de quem é chamado fica separado por vírgula.`,p:`"João" é vocativo, e "por favor" também fica separado.`},
+   {q:`Qual frase tem um erro de vírgula?`,al:[`Os funcionários do setor, chegaram cedo.`,`Comprei arroz, feijão e óleo.`,`Pedro, feche a porta.`,`Guaratinguetá, cidade do Vale, é antiga.`],dica:`Procure uma vírgula entre o sujeito e o verbo.`,p:`"Os funcionários do setor" é o sujeito de "chegaram": não pode ter vírgula entre eles.`},
+   {q:`Numa lista, antes do último item com "e", normalmente`,al:[`não se usa vírgula.`,`usa-se ponto final.`,`usa-se ponto e vírgula.`,`usam-se duas vírgulas.`],dica:`Exemplo: "canetas, papéis e clipes".`,p:`Antes do "e" que fecha a lista, em geral não vai vírgula.`}]},
+ {id:'port4',t:'Classes de palavras',frase:`Cada palavra tem uma função: nomear (substantivo), dar característica (adjetivo), indicar ação (verbo), ligar ideias (conjunção) e outras.`,
+  ess:[`Substantivo: nome de coisa, pessoa, lugar ou sentimento: mesa, Ana, cidade, alegria.`,`Adjetivo: dá característica: mesa grande, cidade bonita.`,`Verbo: ação ou estado: correr, estudar, estar, ser.`,`Advérbio: modifica o verbo (tempo, lugar, modo): chegou cedo, falou bem.`],
+  mais:`As outras classes: artigo (o, a, um, uma), numeral (dois, primeiro), pronome (eu, ele, este, meu), preposição (de, em, para, com) e conjunção (e, mas, porque, se).\n\nTruque para achar o adjetivo: pergunte "como é?". "A sala é grande": grande diz como é a sala.\n\nPara o advérbio, pergunte ao verbo "quando?", "onde?", "como?": "Ela chegou cedo" (chegou quando? cedo).\n\nA conjunção liga partes da frase e mostra a relação entre elas: "mas" (oposição), "porque" (causa), "portanto" (conclusão), "se" (condição).`,
+  ex:`"A nova (adjetivo) secretária (substantivo) chegou (verbo) cedo (advérbio) e (conjunção) organizou (verbo) tudo."`,
+  qs:[{q:`Em "A sala é grande", a palavra "grande" é`,al:[`adjetivo.`,`verbo.`,`substantivo.`,`advérbio.`],dica:`Pergunte: como é a sala?`,p:`"Grande" dá uma característica à sala: é adjetivo.`},
+   {q:`Em "Ele chegou cedo", a palavra "cedo" indica`,al:[`tempo (advérbio).`,`lugar (substantivo).`,`ação (verbo).`,`característica (adjetivo).`],dica:`Pergunte: chegou quando?`,p:`"Cedo" responde "quando?": advérbio de tempo.`},
+   {q:`Em "Estudei, mas não passei", a palavra "mas" indica`,al:[`oposição.`,`causa.`,`tempo.`,`lugar.`],dica:`O resultado foi o contrário do esperado.`,p:`"Mas" é conjunção de oposição.`}]},
+ {id:'port5',t:'Concordância verbal e nominal',frase:`Concordar é combinar: o verbo combina com o sujeito, e o adjetivo combina com o substantivo.`,
+  ess:[`Verbo com sujeito: "O aluno chegou" / "Os alunos chegaram".`,`Adjetivo com substantivo: "sala limpa" / "salas limpas".`,`"Haver" no sentido de existir fica no singular: "Havia muitas pessoas".`,`"Fazer" indicando tempo fica no singular: "Faz dois anos".`],
+  mais:`Para conferir a concordância verbal, ache o sujeito perguntando ao verbo "quem?" ou "o quê?": "Chegaram os documentos". O que chegou? Os documentos (plural), então "chegaram".\n\nQuando o sujeito vem depois do verbo, a frase engana. Coloque na ordem direta: "Faltam dois dias" = "Dois dias faltam".\n\nPegadinhas da VUNESP: "Houve muitos problemas" (haver = existir, singular); "Faz três meses que trabalho aqui" (tempo, singular); "Existem muitos problemas" (existir vai para o plural normalmente).`,
+  ex:`Certo: "Havia dez candidatos." Errado: "Haviam dez candidatos."`,
+  qs:[{q:`Complete: "___ muitos candidatos na fila."`,al:[`Havia`,`Haviam`,`Houveram`,`Hão`],dica:`"Haver" no sentido de existir fica no singular.`,p:`"Havia muitos candidatos": haver = existir, singular.`},
+   {q:`Qual frase está correta?`,al:[`Chegaram os documentos.`,`Chegou os documentos.`,`Os documento chegaram.`,`Chegaram o documento.`],dica:`Coloque na ordem direta: os documentos…`,p:`Os documentos (plural) chegaram (plural).`},
+   {q:`Complete: "As salas estão ___."`,al:[`limpas`,`limpa`,`limpo`,`limpos`],dica:`O adjetivo acompanha "salas": feminino e plural.`,p:`Salas (feminino plural) → limpas.`}]},
+ {id:'port6',t:'Regência e crase',frase:`Regência é a preposição que o verbo pede. Crase é o "à", a junção da preposição "a" com o artigo "a".`,
+  ess:[`"Assistir ao filme" (no sentido de ver) pede "a".`,`"Preferir uma coisa a outra" (sem "mais" e sem "do que").`,`Crase = a + a: "Fui à escola" (fui a + a escola).`,`Teste: troque por palavra masculina. Se virar "ao", tem crase: "Fui ao banco".`],
+  mais:`Regências que mais caem: assistir a (ver), obedecer a, chegar a (e não "em"), ir a, preferir… a, simpatizar com, gostar de.\n\nNão há crase antes de palavra masculina (a pé), antes de verbo (a partir de hoje), antes de "você" e "ela" e antes de cidades sem artigo (vou a Brasília; volto de Brasília).\n\nCom hora marcada, há crase: "A reunião é às 14h."\n\nTruque das cidades: "vou a X, volto de X" = sem crase; "vou à X, volto da X" = com crase (vou à Bahia, volto da Bahia).`,
+  ex:`"Entreguei o relatório à diretora às 10h." (Teste: ao diretor, ao meio-dia. Então há crase.)`,
+  qs:[{q:`Assinale a frase com crase correta.`,al:[`Vou à farmácia.`,`Vou à pé.`,`Começou à chover.`,`Falei à você.`],dica:`Troque por masculino: vou ao mercado.`,p:`"Vou à farmácia" → "vou ao mercado": tem crase.`},
+   {q:`Na norma-padrão, o certo é`,al:[`"Assisti ao filme."`,`"Assisti o filme."`,`"Assisti no filme."`,`"Assisti pelo filme."`],dica:`Assistir (ver) pede a preposição "a".`,p:`Assistir, no sentido de ver, pede "a": assistir ao filme.`},
+   {q:`Complete: "A reunião começa ___ 14h."`,al:[`às`,`as`,`a`,`há`],dica:`Hora marcada leva crase.`,p:`Com hora marcada usa-se "às": às 14h.`}]},
+ {id:'port7',t:'Pronomes e colocação pronominal',frase:`Pronomes substituem ou acompanham nomes. Os pronomes me, te, se, o, a, lhe podem vir antes ou depois do verbo, conforme a regra.`,
+  ess:[`Retos (sujeito): eu, tu, ele, nós, vós, eles.`,`Oblíquos (complemento): me, te, se, o, a, lhe, nos.`,`Na norma-padrão, a frase não começa com pronome oblíquo: "Me ajude" → "Ajude-me".`,`Palavras como "não", "nunca" e "que" puxam o pronome para antes: "Não me ligue".`],
+  mais:`Pronome antes do verbo se chama próclise ("Não me ligue"). Depois do verbo, com hífen, se chama ênclise ("Ajude-me").\n\nPalavras que "atraem" o pronome para antes do verbo: negativas (não, nunca, ninguém), pronomes relativos (que, quem), alguns advérbios (sempre, já, aqui) e conjunções (quando, se, porque). Exemplo: "Quando me chamaram, eu fui."\n\nNa fala do dia a dia, "Me empresta?" é comum e aceito, mas na prova vale a norma-padrão.`,
+  ex:`Certo na norma-padrão: "Avise-me quando chegar." / "Ele não me avisou."`,
+  qs:[{q:`Qual frase segue a norma-padrão?`,al:[`Ajude-me com os documentos.`,`Me ajude com os documentos.`,`Ajude me com os documentos.`,`Me ajude-me com os documentos.`],dica:`Na norma-padrão, a frase não começa com pronome oblíquo.`,p:`Começando pelo verbo, o pronome vai depois, com hífen: ajude-me.`},
+   {q:`Em "Não me ligue agora", o pronome está antes do verbo porque`,al:[`a palavra "não" atrai o pronome.`,`ele sempre vem antes.`,`a frase é uma pergunta.`,`o verbo está no passado.`],dica:`Palavras negativas puxam o pronome.`,p:`"Não" é palavra atrativa: o pronome vem antes.`},
+   {q:`Em "Ana chegou e ela trouxe os papéis", "ela" retoma`,al:[`Ana.`,`os papéis.`,`a chegada.`,`ninguém.`],dica:`O pronome substitui um nome já dito.`,p:`"Ela" substitui Ana, para não repetir o nome.`}]},
+ {id:'port8',t:'Conectivos: palavras que ligam ideias',frase:`Conectivos ligam partes do texto e mostram a relação entre elas: oposição, causa, consequência, condição, adição.`,
+  ess:[`Oposição: mas, porém, contudo, no entanto.`,`Causa: porque, pois, já que.`,`Consequência ou conclusão: por isso, portanto, logo.`,`Condição: se, caso. Adição: e, além disso, também.`],
+  mais:`Na prova aparece: "a palavra X estabelece relação de…" ou "X pode ser substituída, sem mudar o sentido, por…". Teste trocando por outra palavra do mesmo grupo.\n\nExemplo: "Estudou muito, porém não passou." Troque "porém" por "mas": "Estudou muito, mas não passou." O sentido continua: é oposição.\n\nCuidado com "pois": antes do verbo, geralmente indica causa ("Saí cedo, pois tinha prova"); depois do verbo e entre vírgulas, indica conclusão ("Estudou muito; passará, pois, na prova").`,
+  ex:`"O sistema caiu; por isso, o atendimento foi feito em papel." (por isso = consequência)`,
+  qs:[{q:`Em "Choveu muito, porém o evento aconteceu", "porém" indica`,al:[`oposição.`,`causa.`,`condição.`,`tempo.`],dica:`Troque por "mas".`,p:`"Porém" = "mas": oposição.`},
+   {q:`Qual destas palavras indica causa?`,al:[`porque`,`mas`,`portanto`,`se`],dica:`Ela responde à pergunta "por quê?".`,p:`"Porque" introduz a causa.`},
+   {q:`Em "Se chover, a feira será adiada", "se" indica`,al:[`condição.`,`oposição.`,`causa.`,`adição.`],dica:`A feira só será adiada caso chova.`,p:`"Se" = "caso": condição.`}]}
+]},
+mat:{nome:'Matemática para o concurso',concurso:1,aulas:[
+ {id:'mat1',t:'As quatro operações e expressões',frase:`Numa expressão, resolva primeiro o que está entre parênteses, depois multiplicação e divisão e, por último, soma e subtração.`,
+  ess:[`Ordem: parênteses → multiplicação e divisão → soma e subtração.`,`Exemplo: 2 + 3 × 4 = 2 + 12 = 14 (e não 20).`,`Multiplicação e divisão: da esquerda para a direita.`,`Confira com a operação inversa: 12 ÷ 3 = 4 porque 4 × 3 = 12.`],
+  mais:`Muita gente erra 2 + 3 × 4 fazendo 2 + 3 = 5 e 5 × 4 = 20. Mas a multiplicação vem antes: 3 × 4 = 12, e 2 + 12 = 14.\n\nCom parênteses: (2 + 3) × 4 = 5 × 4 = 20. Os parênteses mudam a ordem.\n\nNa prova não pode usar calculadora, então treine contas à mão: arme a conta com unidade embaixo de unidade e confira com a operação inversa.\n\nPalavras que viram conta: "dobro" = × 2; "triplo" = × 3; "metade" = ÷ 2; "terça parte" = ÷ 3.`,
+  ex:`(10 − 4) × 2 + 6 ÷ 3 = 6 × 2 + 2 = 12 + 2 = 14`,
+  qs:[{q:`Quanto é 5 + 2 × 3?`,al:[`11`,`21`,`10`,`13`],dica:`A multiplicação vem antes da soma.`,p:`2 × 3 = 6; 5 + 6 = 11.`},
+   {q:`Quanto é (5 + 2) × 3?`,al:[`21`,`11`,`10`,`17`],dica:`Os parênteses vêm primeiro.`,p:`5 + 2 = 7; 7 × 3 = 21.`},
+   {q:`O dobro de 15 mais a metade de 10 é`,al:[`35`,`25`,`30`,`40`],dica:`Dobro = × 2; metade = ÷ 2.`,p:`15 × 2 = 30; 10 ÷ 2 = 5; 30 + 5 = 35.`}]},
+ {id:'mat2',t:'Frações e números decimais',frase:`Fração é parte de um todo: o número de baixo diz em quantas partes o todo foi dividido, e o de cima, quantas partes foram pegas.`,
+  ess:[`3/4: o todo foi dividido em 4 partes e pegamos 3.`,`Fração de uma quantidade: divida pelo de baixo e multiplique pelo de cima. 3/4 de 20 = 20 ÷ 4 × 3 = 15.`,`Decimais: 0,5 = metade = 1/2; 0,25 = 1/4; 0,1 = 1/10.`,`Para somar decimais, alinhe as vírgulas.`],
+  mais:`O número de cima é o numerador; o de baixo, o denominador. Quanto maior o denominador, menor cada pedaço: 1/8 de pizza é menor que 1/4.\n\nPara somar frações com o mesmo denominador, some só os de cima: 1/5 + 2/5 = 3/5. Com denominadores diferentes, é preciso deixar todos iguais antes (é aí que entra o MMC).\n\nDecimais aparecem em dinheiro: R$ 2,50 + R$ 1,75. Alinhe as vírgulas: 2,50 + 1,75 = 4,25.\n\nConversões úteis: 1/2 = 0,5 = 50%; 1/4 = 0,25 = 25%; 3/4 = 0,75 = 75%; 1/10 = 0,1 = 10%.`,
+  ex:`Um setor tem 30 funcionários, e 2/3 deles fizeram o curso: 30 ÷ 3 = 10; 10 × 2 = 20 funcionários.`,
+  qs:[{q:`Quanto é 2/5 de 50?`,al:[`20`,`10`,`25`,`40`],dica:`Divida 50 por 5 e multiplique por 2.`,p:`50 ÷ 5 = 10; 10 × 2 = 20.`},
+   {q:`0,25 é o mesmo que`,al:[`1/4`,`1/2`,`2/5`,`1/25`],dica:`Pense em 25 centavos de 1 real.`,p:`0,25 = 25 centavos = um quarto do real.`},
+   {q:`Quanto é R$ 3,50 + R$ 2,75?`,al:[`R$ 6,25`,`R$ 5,25`,`R$ 6,75`,`R$ 5,75`],dica:`Some os centavos primeiro: 50 + 75.`,p:`50 + 75 = 125 centavos = R$ 1,25. Então 3 + 2 + 1,25 = R$ 6,25.`}]},
+ {id:'mat3',t:'Porcentagem',frase:`Porcentagem é uma parte de 100: 30% quer dizer 30 de cada 100.`,
+  ess:[`10%: divida por 10. 10% de 250 = 25.`,`50% é a metade. 25%: divida por 4.`,`Para 30%: faça 10% e multiplique por 3.`,`Desconto de 10%: tire 10% do valor. Aumento de 10%: some 10% ao valor.`],
+  mais:`Quase toda porcentagem sai do 10%: ache 10% e vá montando. 15% = 10% + 5% (a metade do 10%). 20% = 10% × 2.\n\nExemplo: 15% de 80. 10% de 80 = 8; 5% = 4; 15% = 8 + 4 = 12.\n\nDesconto: um produto de R$ 200 com 10% de desconto. 10% de 200 = 20; 200 − 20 = R$ 180.\n\nCuidado: aumentar 10% e depois descontar 10% não volta ao valor inicial, porque o desconto é calculado sobre o valor já aumentado.`,
+  ex:`Salário de R$ 2.000 com aumento de 5%: 10% = 200; 5% = 100; novo salário = R$ 2.100.`,
+  qs:[{q:`Quanto é 10% de 350?`,al:[`35`,`3,5`,`350`,`70`],dica:`Para 10%, divida por 10.`,p:`350 ÷ 10 = 35.`},
+   {q:`Quanto é 25% de 80?`,al:[`20`,`25`,`40`,`8`],dica:`25% é um quarto: divida por 4.`,p:`80 ÷ 4 = 20.`},
+   {q:`Um produto de R$ 100 teve desconto de 20%. Quanto passou a custar?`,al:[`R$ 80`,`R$ 120`,`R$ 20`,`R$ 98`],dica:`Calcule 20% de 100 e tire do preço.`,p:`20% de 100 = 20; 100 − 20 = R$ 80.`}]},
+ {id:'mat4',t:'Razão, proporção e regra de três',frase:`Regra de três resolve problemas em que duas grandezas mudam juntas, sempre na mesma proporção.`,
+  ess:[`Diretamente proporcional: uma aumenta e a outra também (mais horas, mais páginas).`,`Inversamente proporcional: uma aumenta e a outra diminui (mais pessoas, menos tempo).`,`Truque: ache quanto vale 1 unidade e multiplique.`,`Confira se o resultado faz sentido.`],
+  mais:`Exemplo direto: 3 cadernos custam R$ 15. Quanto custam 5? 1 caderno = 15 ÷ 3 = R$ 5. Então 5 cadernos = 5 × 5 = R$ 25.\n\nExemplo inverso: 4 pessoas pintam uma sala em 6 horas. Quanto tempo 8 pessoas levam? Com o dobro de pessoas, o tempo cai pela metade: 3 horas. Pergunte sempre: mais disso dá mais ou menos daquilo?\n\nRazão é uma divisão que compara: numa turma com 10 meninas e 20 meninos, a razão de meninas para meninos é 10/20 = 1/2 (uma menina para cada dois meninos).`,
+  ex:`Um carro faz 12 km com 1 litro. Para 60 km: 60 ÷ 12 = 5 litros.`,
+  qs:[{q:`4 canetas custam R$ 8. Quanto custam 10 canetas?`,al:[`R$ 20`,`R$ 16`,`R$ 18`,`R$ 40`],dica:`Quanto custa 1 caneta?`,p:`1 caneta = 8 ÷ 4 = R$ 2; 10 canetas = R$ 20.`},
+   {q:`2 pessoas fazem um trabalho em 6 horas. No mesmo ritmo, 4 pessoas fazem em`,al:[`3 horas.`,`12 horas.`,`6 horas.`,`8 horas.`],dica:`Mais pessoas, menos tempo.`,p:`Dobrando as pessoas, o tempo cai pela metade: 3 horas.`},
+   {q:`Numa sala há 6 mulheres e 12 homens. A razão de mulheres para homens é`,al:[`1/2`,`2`,`1/3`,`1/6`],dica:`Mulheres ÷ homens = 6 ÷ 12.`,p:`6/12 = 1/2: uma mulher para cada dois homens. (1/3 seria mulheres em relação ao total.)`}]},
+ {id:'mat5',t:'MMC e MDC',frase:`MMC é o menor número que aparece na tabuada de todos; MDC é o maior número que divide todos ao mesmo tempo.`,
+  ess:[`MMC: quando as coisas "voltam a se encontrar", como ônibus que passam juntos de novo.`,`MDC: quando se quer dividir em partes iguais, do maior tamanho possível.`,`MMC de 4 e 6: tabuada do 4 (4, 8, 12…) e do 6 (6, 12…) → 12.`,`MDC de 12 e 18: divisores comuns 1, 2, 3 e 6 → o maior é 6.`],
+  mais:`Como saber qual usar? Se a pergunta fala de algo que se repete e volta a coincidir (remédios em horários, luzes que piscam, ônibus), é MMC. Se fala de cortar, dividir ou montar grupos iguais, sem sobrar e do maior tamanho possível, é MDC.\n\nExemplo de MDC: há 12 canetas azuis e 18 pretas para montar kits iguais, sem sobrar nenhuma, com o maior número de kits. MDC(12, 18) = 6 kits, cada um com 2 azuis e 3 pretas.\n\nCom números pequenos, listar a tabuada (MMC) ou os divisores (MDC) é o jeito mais seguro.`,
+  ex:`Um remédio a cada 6 horas e outro a cada 8 horas, tomados juntos às 8h: MMC(6, 8) = 24, então juntos de novo às 8h do dia seguinte.`,
+  qs:[{q:`Duas luzes piscam juntas. Uma pisca a cada 4 segundos e a outra a cada 6. Depois de quantos segundos piscam juntas de novo?`,al:[`12`,`24`,`10`,`2`],dica:`Voltar a coincidir pede MMC.`,p:`MMC(4, 6) = 12 segundos.`},
+   {q:`Qual é o MDC de 12 e 18?`,al:[`6`,`3`,`36`,`2`],dica:`É o maior número que divide os dois.`,p:`Divisores comuns: 1, 2, 3 e 6. O maior é 6.`},
+   {q:`Para dividir 20 balas e 30 pirulitos em saquinhos iguais, sem sobrar e com o maior número de saquinhos possível, usa-se o`,al:[`MDC.`,`MMC.`,`porcentagem.`,`média.`],dica:`Dividir em partes iguais, o maior possível.`,p:`Divisão em grupos iguais sem sobra = MDC (aqui, 10 saquinhos).`}]},
+ {id:'mat6',t:'Equações do 1º grau',frase:`Equação é uma conta com um número escondido (x). Para achar o x, faça a mesma operação dos dois lados até ele ficar sozinho.`,
+  ess:[`x + 5 = 12 → x = 12 − 5 = 7.`,`3x = 21 → x = 21 ÷ 3 = 7.`,`O que soma de um lado passa subtraindo; o que multiplica passa dividindo.`,`Confira: troque o x pelo valor e veja se a conta fecha.`],
+  mais:`Pense numa balança equilibrada: o que você tira de um lado, tira do outro.\n\nExemplo: 2x + 4 = 18. Tire 4 dos dois lados: 2x = 14. Divida os dois lados por 2: x = 7. Conferindo: 2 × 7 + 4 = 18. Certo!\n\nProblemas com palavras: "um número", "a idade de alguém", "o preço" viram x. "O dobro de um número mais 3 é 11" → 2x + 3 = 11 → 2x = 8 → x = 4.\n\nO edital também cita equação do 2º grau e sistemas. Comece dominando a do 1º grau, que é a base de tudo.`,
+  ex:`Ana tinha x reais. Ganhou R$ 20 e ficou com R$ 50: x + 20 = 50 → x = 30.`,
+  qs:[{q:`Se x + 8 = 15, então x vale`,al:[`7`,`23`,`8`,`15`],dica:`Passe o 8 para o outro lado, subtraindo.`,p:`x = 15 − 8 = 7.`},
+   {q:`Se 4x = 28, então x vale`,al:[`7`,`24`,`32`,`112`],dica:`O 4 multiplica: passa dividindo.`,p:`x = 28 ÷ 4 = 7.`},
+   {q:`"O dobro de um número mais 6 é 20." Esse número é`,al:[`7`,`13`,`14`,`10`],dica:`Monte: 2x + 6 = 20.`,p:`2x = 14 → x = 7.`}]},
+ {id:'mat7',t:'Medidas, área e perímetro',frase:`Perímetro é o contorno (soma dos lados). Área é o espaço de dentro (no retângulo, base × altura).`,
+  ess:[`Perímetro de um retângulo de 5 m × 3 m: 5 + 3 + 5 + 3 = 16 m.`,`Área do mesmo retângulo: 5 × 3 = 15 m².`,`Triângulo: área = base × altura ÷ 2.`,`Medidas: 1 m = 100 cm; 1 km = 1.000 m; 1 kg = 1.000 g; 1 L = 1.000 mL.`],
+  mais:`Use perímetro para cerca, rodapé e moldura. Use área para piso, pintura, grama e carpete.\n\nÁrea do quadrado: lado × lado. Área do círculo: π × raio × raio (com π ≈ 3,14).\n\nVolume é o espaço que cabe dentro (caixa, piscina): comprimento × largura × altura, em m³. 1 m³ = 1.000 litros.\n\nTeorema de Pitágoras (triângulo retângulo): o lado maior ao quadrado é igual à soma dos quadrados dos outros dois. Exemplo: 3² + 4² = 5² (9 + 16 = 25).`,
+  ex:`Uma sala de 4 m × 3 m: piso = 12 m²; rodapé = 4 + 3 + 4 + 3 = 14 m.`,
+  qs:[{q:`Quantos metros de cerca são necessários para contornar um terreno retangular de 10 m × 6 m?`,al:[`32 m`,`60 m`,`16 m`,`26 m`],dica:`Contorno = soma de todos os lados.`,p:`10 + 6 + 10 + 6 = 32 m.`},
+   {q:`Qual é a área de uma sala de 6 m × 4 m?`,al:[`24 m²`,`20 m²`,`10 m²`,`48 m²`],dica:`Área do retângulo = base × altura.`,p:`6 × 4 = 24 m².`},
+   {q:`Quantos metros há em 2,5 km?`,al:[`2.500 m`,`250 m`,`25 m`,`25.000 m`],dica:`1 km = 1.000 m.`,p:`2,5 × 1.000 = 2.500 m.`}]},
+ {id:'mat8',t:'Tabelas, gráficos e média',frase:`Para ler um gráfico, comece pelo título, veja o que cada eixo mostra e só então compare os valores.`,
+  ess:[`Leia o título, a legenda e a unidade (pessoas, R$, %).`,`Colunas comparam; linha mostra evolução; pizza mostra partes de um todo.`,`Média: some tudo e divida pela quantidade.`,`Exemplo: média de 6, 8 e 10 = 24 ÷ 3 = 8.`],
+  mais:`Muitas questões de gráfico são de leitura: "em qual mês houve mais atendimentos?" Basta olhar a coluna mais alta. Outras pedem uma conta simples: diferença entre dois meses, soma ou porcentagem.\n\nAtenção à unidade: "em milhares" quer dizer que 5 significa 5.000.\n\nMédia aritmética: some todos os valores e divida pela quantidade. Se um setor atendeu 20, 30 e 40 pessoas, a média é (20 + 30 + 40) ÷ 3 = 30.\n\nPara descobrir quanto falta para alcançar uma média: média × quantidade = soma necessária.`,
+  ex:`Atendimentos: segunda 40, terça 60, quarta 50. Média = 150 ÷ 3 = 50 por dia. O maior foi na terça.`,
+  qs:[{q:`Qual é a média de 4, 6 e 8?`,al:[`6`,`18`,`5`,`7`],dica:`Some e divida por 3.`,p:`(4 + 6 + 8) ÷ 3 = 18 ÷ 3 = 6.`},
+   {q:`Para mostrar como o número de atendimentos mudou mês a mês, o gráfico mais indicado é o de`,al:[`linha.`,`pizza.`,`nenhum, só texto.`,`setores com um só valor.`],dica:`É uma evolução no tempo.`,p:`O gráfico de linha mostra evolução ao longo do tempo.`},
+   {q:`Num gráfico "em milhares de pessoas", a coluna marca 3. Isso significa`,al:[`3.000 pessoas.`,`3 pessoas.`,`300 pessoas.`,`30 pessoas.`],dica:`Milhares = vezes 1.000.`,p:`3 milhares = 3.000.`}]}
+]},
 adm:{nome:'Administração e Secretariado',aulas:[
  {id:'adm1',t:'O papel do secretário',frase:`O secretário organiza a rotina, cuida das informações e faz a ponte entre as pessoas do trabalho.`,
   ess:[`Organiza agenda, documentos e reuniões.`,`Atende pessoas, por telefone e pessoalmente.`,`Guarda sigilo: o que se sabe no trabalho fica no trabalho.`,`Precisa de organização, educação e iniciativa.`],
@@ -566,14 +682,15 @@ ing:{nome:'Inglês do básico ao intermediário',aulas:[
    {q:`O superlativo de "good" é`,al:[`the best`,`the goodest`,`the better`,`the most good`],dica:`É irregular.`,p:`Good → better → the best.`},
    {q:`"You should rest" expressa`,al:[`um conselho.`,`uma proibição.`,`uma habilidade.`,`um fato do passado.`],dica:`"Should" = deveria.`,p:`"Should" dá conselho.`}]}
 ]}};
-const CURSO_KEYS = ['adm','info','ing'];
+const CURSO_KEYS = ['port','mat','adm','info','ing'];
 // perguntas dos cursos com id próprio: adm1-0, adm1-1…
 const QA = {};
 CURSO_KEYS.forEach(k => CURSOS[k].aulas.forEach(a => a.qs.forEach((q, i) => { q.id = a.id + '-' + i; q.c = 0; q.aula = a.id; q.curso = k; QA[q.id] = q; })));
 
+// Seg a sex: uma aula + 5 questões do concurso. Cada curso tem uma aula por semana.
 const PLANO = {
-  1:{curso:'adm', mat:'Português'}, 2:{curso:'info', mat:'Matemática'}, 3:{curso:'ing', mat:'Específicos'},
-  4:{curso:'adm', mat:'Português'}, 5:{curso:'info', mat:'Específicos'}
+  1:{curso:'port', mat:'Português'}, 2:{curso:'mat', mat:'Matemática'}, 3:{curso:'adm', mat:'Específicos'},
+  4:{curso:'info', mat:'Matemática'}, 5:{curso:'ing', mat:'Específicos'}
 };
 
 /* ---------- utilidades ---------- */
@@ -739,6 +856,11 @@ function viewConc(){
       : left === 0 ? '<h1>Hoje é a prova.</h1><p class="sub">Leve documento com foto e caneta azul ou preta. Leia com calma. Boa prova!</p>'
       : '<h1>A prova passou.</h1><p class="sub">Acompanhe o gabarito e o resultado no site da VUNESP.</p>'}</header>
     ${hoje}
+    <section class="card"><p class="eyebrow">Aulas para o concurso</p>
+      <p class="meta">Português e Matemática valem 20 das 50 questões. As aulas têm o mesmo jeito das outras: o essencial primeiro e a explicação completa se quiser.</p>
+      ${['port', 'mat'].map(k => { const c = CURSOS[k], f = c.aulas.filter(a => S.aulas[a.id]).length;
+        return `<button class="aula-btn" data-act="curso" data-curso="${k}"><span class="k">${f}</span><span class="t"><b>${k === 'port' ? 'Português' : 'Matemática'}</b><small>${f} de ${c.aulas.length} aulas feitas</small></span></button>`; }).join('')}
+    </section>
     <section class="card"><p class="eyebrow">Treinar por matéria · 5 questões</p>
       <p class="meta">Cada questão tem duas chances: se errar, aparece uma dica e você tenta de novo.</p>
       <div class="chips">${chips}</div>
@@ -757,8 +879,8 @@ function viewConc(){
       <p>Para passar, a nota tem que ser 50 ou mais. Na prática, acertar pelo menos metade da prova.</p>
       <p class="meta">Metade da prova é de Conhecimentos Específicos: atendimento, arquivo, protocolo, redação oficial e princípios da administração. Tudo isso está no curso de Administração deste app. Em caso de empate, ganha quem acertou mais Específicos.</p></section>
     <details class="box"><summary>O que cai em cada matéria</summary><div>
-      <p><b>Português:</b> interpretação de texto, sinônimos e antônimos, sentido próprio e figurado, pontuação, classes de palavras, concordância, regência, colocação do pronome, crase.</p>
-      <p><b>Matemática:</b> as quatro operações com frações e decimais, MMC e MDC, porcentagem, razão e proporção, regra de três, equações do 1º e 2º grau, medidas, tabelas e gráficos, média, área, perímetro, volume, Pitágoras e Tales.</p>
+      <p><b>Português:</b> interpretação de texto, sinônimos e antônimos, sentido próprio e figurado, pontuação, classes de palavras, concordância, regência, colocação do pronome, crase. São as 8 aulas de Português desta aba.</p>
+      <p><b>Matemática:</b> as quatro operações com frações e decimais, MMC e MDC, porcentagem, razão e proporção, regra de três, equações do 1º e 2º grau, medidas, tabelas e gráficos, média, área, perímetro, volume, Pitágoras e Tales. As 8 aulas de Matemática desta aba cobrem a base; equação do 2º grau, sistemas e Tales ficam para depois.</p>
       <p><b>Informática:</b> Windows 11, Word, Excel e PowerPoint 2016, e-mail, internet, Google Workspace e Microsoft Teams. É o curso de Informática deste app.</p>
       <p><b>Específicos:</b> princípios e ética da administração pública, organização administrativa, arquivo e gestão de documentos, protocolo, agenda e economia de materiais, comunicação e conflitos, hierarquia, atendimento presencial e por telefone, redação oficial (Manual da Presidência, 3ª edição). É o curso de Administração deste app.</p>
       <p class="meta">Resumo do edital publicado no Diário Oficial de Guaratinguetá de 03/11/2026. Confira sempre o edital completo.</p></div></details>
@@ -772,7 +894,7 @@ function viewCurso(k){
     return `<li><button class="aula-btn${cls}" data-act="aula" data-curso="${k}" data-id="${a.id}"><span class="k">${st === 'feita' ? '✓' : i + 1}</span>
       <span class="t"><b>${esc(a.t)}</b><small>${a.nivel ? a.nivel + ' · ' : ''}${st === 'feita' ? 'feita' : st === 'revisar' ? 'vale revisar' : 'nova'}</small></span></button></li>`;
   }).join('');
-  return `<header class="hero"><p class="eyebrow">Curso</p><h1 class="h1-sm">${c.nome}</h1>
+  return `${c.concurso ? '<button class="link" data-act="ir-conc">← Concurso</button>' : ''}<header class="hero"><p class="eyebrow">${c.concurso ? 'Aulas do concurso' : 'Curso'}</p><h1 class="h1-sm">${c.nome}</h1>
       <p class="sub">${feitas} de ${c.aulas.length} aulas feitas</p><div class="track"><i style="width:${pct(feitas, c.aulas.length)}%"></i></div></header>
     <section class="card today-card"><p class="eyebrow">Continuar</p><h2 class="h-sm">Aula ${c.aulas.indexOf(prox) + 1}: ${esc(prox.t)}</h2>
       <p class="meta">Cada aula tem o essencial em poucas linhas, uma explicação mais completa se você quiser, um exemplo e 3 perguntas. Uns 15 minutos.</p>
@@ -1010,7 +1132,8 @@ function render(){
   app.innerHTML = quiz ? (quiz.fim ? viewFimQuiz() : viewQuiz())
     : sim ? (sim.end ? viewSimEnd() : viewSim())
     : tab === 'conc' ? viewConc() : tab === 'prog' ? viewProg() : viewCurso(tab);
-  nav.querySelectorAll('[data-tab]').forEach(b => b.setAttribute('aria-current', !full && b.dataset.tab === tab ? 'page' : 'false'));
+  const navTab = CURSOS[tab] && CURSOS[tab].concurso ? 'conc' : tab;
+  nav.querySelectorAll('[data-tab]').forEach(b => b.setAttribute('aria-current', !full && b.dataset.tab === navTab ? 'page' : 'false'));
   tick();
 }
 function fmtLeft(t0, dur){ const rem = dur - Math.floor((Date.now() - t0) / 1000); return rem <= 0 ? 'tempo ✓' : Math.floor(rem / 60) + ':' + pad(rem % 60); }
@@ -1026,6 +1149,8 @@ document.addEventListener('click', ev => {
   if (act === 'aula'){
     quiz = null; tab = b.dataset.curso; aulaSel = {curso:b.dataset.curso, id:b.dataset.id, mais:S.modo === 'completo'}; render(); scrollTo(0, 0);
   } else if (act === 'voltar-curso'){ aulaSel = null; render(); scrollTo(0, 0);
+  } else if (act === 'curso'){ quiz = null; aulaSel = null; tab = b.dataset.curso; render(); scrollTo(0, 0);
+  } else if (act === 'ir-conc'){ aulaSel = null; tab = 'conc'; render(); scrollTo(0, 0);
   } else if (act === 'mais'){ aulaSel.mais = !aulaSel.mais; render();
   } else if (act === 'praticar'){
     const a = CURSOS[aulaSel.curso].aulas.find(x => x.id === aulaSel.id);
