@@ -11,7 +11,7 @@
 <meta name="theme-color" content="#0c1316" media="(prefers-color-scheme: dark)">
 <link rel="apple-touch-icon" href="icon-180.png">
 <link rel="icon" type="image/png" href="icon-180.png">
-<style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}.appswitch{max-width:560px;margin:0 auto;padding-top:12px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;gap:6px}.appswitch a{font:600 .82rem var(--f-ui);text-decoration:none;color:var(--muted);border:1px solid var(--line);border-radius:99px;padding:6px 16px;min-height:34px;display:inline-flex;align-items:center}.appswitch a[aria-current="page"]{background:var(--pen);border-color:var(--pen);color:var(--on-pen)}body:has(#nav[hidden]) .appswitch{display:none}</style>
+<style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}.appswitch{max-width:560px;margin:0 auto;padding-top:12px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;flex-wrap:wrap;gap:6px}.appswitch a{font:600 .82rem var(--f-ui);text-decoration:none;color:var(--muted);border:1px solid var(--line);border-radius:99px;padding:6px 16px;min-height:34px;display:inline-flex;align-items:center}.appswitch a[aria-current="page"]{background:var(--pen);border-color:var(--pen);color:var(--on-pen)}body:has(#nav[hidden]) .appswitch{display:none}</style>
 <title>Estudo Guará</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -158,21 +158,24 @@ mark{color:var(--mark-ink);background:var(--mark);padding:0 .12em;border-radius:
 
 /* navegação */
 .nav{position:fixed;left:0;right:0;bottom:0;z-index:6;background:var(--card);border-top:1px solid var(--line);padding-top:8px;padding-bottom:calc(8px + env(safe-area-inset-bottom,0px));padding-left:max(8px, env(safe-area-inset-left,0px));padding-right:max(8px, env(safe-area-inset-right,0px))}
-.nav .in{max-width:560px;margin:0 auto;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:2px}
-.nav button{appearance:none;border:0;background:transparent;color:var(--muted);font:600 .8rem var(--f-ui);padding:10px 2px;border-radius:10px;cursor:pointer;min-height:46px}
+.nav .in{max-width:560px;margin:0 auto;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px}
+.nav button{appearance:none;border:0;background:transparent;color:var(--muted);font:600 .95rem var(--f-ui);padding:10px 4px;border-radius:10px;cursor:pointer;min-height:48px}
+.segs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.seg{appearance:none;border:1.5px solid var(--line);background:var(--card);color:var(--ink);border-radius:12px;padding:10px 6px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font:inherit;cursor:pointer;min-height:62px;text-align:center}
+.seg b{font-size:.92rem;font-weight:700}
+.seg.on{border-color:var(--pen);background:var(--pen-soft);color:var(--pen)}
+.seg.on small{color:var(--pen)}
 .nav button[aria-current="page"]{background:var(--pen-soft);color:var(--pen)}
 </style>
 
 </head>
 <body>
-<nav class="appswitch" aria-label="Escolher app"><a href="../">Fatec</a><a href="../prf/">PRF</a><a href="./" aria-current="page">Guará</a></nav>
+<nav class="appswitch" aria-label="Escolher app"><a href="../">Fatec</a><a href="../prf/">PRF</a><a href="./" aria-current="page">Guará: concurso e cursos</a></nav>
 <main id="app" class="wrap"></main>
 <nav id="nav" class="nav" aria-label="Seções">
   <div class="in">
     <button data-tab="conc">Concurso</button>
-    <button data-tab="adm">Adm</button>
-    <button data-tab="info">Info</button>
-    <button data-tab="ing">Inglês</button>
+    <button data-tab="cursos">Cursos</button>
     <button data-tab="prog">Progresso</button>
   </div>
 </nav>
@@ -444,6 +447,13 @@ mat:{nome:'Matemática para o concurso',concurso:1,aulas:[
   qs:[{q:`Quanto é 5 + 2 × 3?`,al:[`11`,`21`,`10`,`13`],dica:`A multiplicação vem antes da soma.`,p:`2 × 3 = 6; 5 + 6 = 11.`},
    {q:`Quanto é (5 + 2) × 3?`,al:[`21`,`11`,`10`,`17`],dica:`Os parênteses vêm primeiro.`,p:`5 + 2 = 7; 7 × 3 = 21.`},
    {q:`O dobro de 15 mais a metade de 10 é`,al:[`35`,`25`,`30`,`40`],dica:`Dobro = × 2; metade = ÷ 2.`,p:`15 × 2 = 30; 10 ÷ 2 = 5; 30 + 5 = 35.`}]},
+ {id:'mat12',t:'Potências e raízes',frase:`Potência é multiplicar um número por ele mesmo várias vezes; raiz quadrada é o caminho de volta.`,
+  ess:[`2³ = 2 × 2 × 2 = 8 (o 3 diz quantas vezes o 2 aparece).`,`Quadrado: 5² = 25. Raiz quadrada: √25 = 5.`,`Qualquer número elevado a 1 é ele mesmo; elevado a 0 dá 1.`,`Raízes que mais caem: √4 = 2, √9 = 3, √16 = 4, √25 = 5, √36 = 6, √49 = 7, √64 = 8, √81 = 9, √100 = 10.`],
+  mais:`Cuidado com o erro clássico: 2³ não é 2 × 3 = 6. É 2 × 2 × 2 = 8.\n\nPotências de 10: 10² = 100 e 10³ = 1.000. O número de cima diz quantos zeros.\n\nNúmero negativo ao quadrado fica positivo: (−3)² = 9. Mas −3², sem parênteses, é −9, porque o sinal fica de fora.\n\nNa ordem das operações, potências e raízes vêm antes da multiplicação e da soma: 2 + 3² = 2 + 9 = 11.\n\nPara a raiz quadrada, pergunte: "que número vezes ele mesmo dá isso?". √49: 7 × 7 = 49, então √49 = 7.`,
+  ex:`3² + √16 = 9 + 4 = 13`,
+  qs:[{q:`Quanto é 2⁴ (2 elevado a 4)?`,al:[`16`,`8`,`6`,`24`],dica:`Multiplique o 2 por ele mesmo, 4 vezes.`,p:`2 × 2 × 2 × 2 = 16.`},
+   {q:`Quanto é √81?`,al:[`9`,`8`,`40,5`,`18`],dica:`Que número vezes ele mesmo dá 81?`,p:`9 × 9 = 81, então √81 = 9.`},
+   {q:`Quanto é 5 + 2²?`,al:[`9`,`49`,`14`,`7`],dica:`A potência vem antes da soma.`,p:`2² = 4; 5 + 4 = 9.`}]},
  {id:'mat2',t:'Frações e números decimais',frase:`Fração é parte de um todo: o número de baixo diz em quantas partes o todo foi dividido, e o de cima, quantas partes foram pegas.`,
   ess:[`3/4: o todo foi dividido em 4 partes e pegamos 3.`,`Fração de uma quantidade: divida pelo de baixo e multiplique pelo de cima. 3/4 de 20 = 20 ÷ 4 × 3 = 15.`,`Decimais: 0,5 = metade = 1/2; 0,25 = 1/4; 0,1 = 1/10.`,`Para somar decimais, alinhe as vírgulas.`],
   mais:`O número de cima é o numerador; o de baixo, o denominador. Quanto maior o denominador, menor cada pedaço: 1/8 de pizza é menor que 1/4.\n\nPara somar frações com o mesmo denominador, some só os de cima: 1/5 + 2/5 = 3/5. Com denominadores diferentes, é preciso deixar todos iguais antes (é aí que entra o MMC).\n\nDecimais aparecem em dinheiro: R$ 2,50 + R$ 1,75. Alinhe as vírgulas: 2,50 + 1,75 = 4,25.\n\nConversões úteis: 1/2 = 0,5 = 50%; 1/4 = 0,25 = 25%; 3/4 = 0,75 = 75%; 1/10 = 0,1 = 10%.`,
@@ -479,6 +489,20 @@ mat:{nome:'Matemática para o concurso',concurso:1,aulas:[
   qs:[{q:`Se x + 8 = 15, então x vale`,al:[`7`,`23`,`8`,`15`],dica:`Passe o 8 para o outro lado, subtraindo.`,p:`x = 15 − 8 = 7.`},
    {q:`Se 4x = 28, então x vale`,al:[`7`,`24`,`32`,`112`],dica:`O 4 multiplica: passa dividindo.`,p:`x = 28 ÷ 4 = 7.`},
    {q:`"O dobro de um número mais 6 é 20." Esse número é`,al:[`7`,`13`,`14`,`10`],dica:`Monte: 2x + 6 = 20.`,p:`2x = 14 → x = 7.`}]},
+ {id:'mat9',t:'Equação do 2º grau',frase:`A equação do 2º grau tem x² (x ao quadrado) e pode ter até duas respostas. Para achá-las, usa-se a fórmula de Bhaskara.`,
+  ess:[`Forma: ax² + bx + c = 0. Exemplo: x² − 5x + 6 = 0 (a = 1, b = −5, c = 6).`,`Delta: Δ = b² − 4 · a · c.`,`x = (−b ± √Δ) ÷ (2 · a): uma resposta com o +, outra com o −.`,`Δ negativo: não há resposta real. Δ = 0: uma resposta só.`],
+  mais:`Passo a passo com x² − 5x + 6 = 0:\n\n1) Ache a, b e c: a = 1, b = −5, c = 6.\n2) Calcule o delta: Δ = (−5)² − 4 × 1 × 6 = 25 − 24 = 1.\n3) Tire a raiz do delta: √1 = 1.\n4) x = (5 ± 1) ÷ 2. Com o +: 6 ÷ 2 = 3. Com o −: 4 ÷ 2 = 2.\n\nConfira: 3² − 5 × 3 + 6 = 9 − 15 + 6 = 0. Certo!\n\nAtalho quando falta o c (x² − 4x = 0): coloque o x em evidência: x · (x − 4) = 0, então x = 0 ou x = 4.\n\nAtalho quando falta o b (x² − 9 = 0): x² = 9, então x = 3 ou x = −3.\n\nCuidado com os sinais: (−5)² = 25 (positivo), e −b, quando b = −5, vira +5.`,
+  ex:`x² − 9 = 0 → x² = 9 → x = 3 ou x = −3 (porque 3 × 3 = 9 e (−3) × (−3) = 9).`,
+  qs:[{q:`Na equação x² − 7x + 10 = 0, os valores de a, b e c são`,al:[`a = 1, b = −7, c = 10.`,`a = 0, b = 7, c = 10.`,`a = 1, b = 7, c = −10.`,`a = 2, b = −7, c = 10.`],dica:`"a" acompanha o x², "b" acompanha o x e "c" é o número sozinho. Olhe os sinais.`,p:`x² tem o número 1 na frente; −7x dá b = −7; o número sozinho é 10.`},
+   {q:`Quais são as soluções de x² − 16 = 0?`,al:[`4 e −4`,`16 e −16`,`8 e −8`,`só o 4`],dica:`x² = 16. Que número vezes ele mesmo dá 16?`,p:`x² = 16 → x = 4 ou x = −4, porque (−4) × (−4) também dá 16.`},
+   {q:`Em x² − 5x + 6 = 0, o valor de Δ (b² − 4ac) é`,al:[`1`,`49`,`−1`,`11`],dica:`b = −5, então b² = 25. Depois tire 4 × 1 × 6.`,p:`Δ = 25 − 24 = 1.`}]},
+ {id:'mat10',t:'Sistemas de equações',frase:`Sistema é quando há duas equações com duas letras (x e y) ao mesmo tempo. A resposta é o par de números que serve nas duas.`,
+  ess:[`Exemplo: x + y = 10 e x − y = 2.`,`Método da soma: some as equações para uma letra sumir: 2x = 12 → x = 6.`,`Depois volte numa das equações: 6 + y = 10 → y = 4.`,`Confira nas duas: 6 + 4 = 10 e 6 − 4 = 2.`],
+  mais:`Os sistemas aparecem em problemas com duas coisas desconhecidas. Exemplo: "Numa garagem há 10 veículos, entre carros e motos, e 32 rodas. Quantos são os carros?"\n\nMonte: c + m = 10 (veículos) e 4c + 2m = 32 (rodas).\n\nMétodo da substituição: da primeira, m = 10 − c. Coloque na segunda: 4c + 2 · (10 − c) = 32 → 4c + 20 − 2c = 32 → 2c = 12 → c = 6 carros. Então m = 4 motos.\n\nO método da soma funciona bem quando uma letra aparece com sinais opostos, como +y e −y: somando as equações, ela some.\n\nSempre confira o par nas duas equações.`,
+  ex:`Ingressos: 3 inteiras e 1 meia custam R$ 70; 1 inteira e 1 meia custam R$ 30. Subtraindo uma da outra: 2 inteiras = R$ 40, então a inteira custa R$ 20 e a meia, R$ 10.`,
+  qs:[{q:`No sistema x + y = 8 e x − y = 2, quanto vale x?`,al:[`5`,`3`,`4`,`6`],dica:`Some as duas equações: o y some.`,p:`2x = 10 → x = 5 (e y = 3).`},
+   {q:`Num estacionamento há 12 veículos, entre carros e motos. Sendo c o número de carros e m o de motos, a primeira equação é`,al:[`c + m = 12`,`c − m = 12`,`4c + 2m = 12`,`c × m = 12`],dica:`Juntando carros e motos, dá o total de veículos.`,p:`Carros + motos = 12 veículos.`},
+   {q:`O par x = 3 e y = 2 é a solução de qual sistema?`,al:[`x + y = 5 e x − y = 1`,`x + y = 6 e x − y = 1`,`x + y = 5 e x − y = 2`,`x + y = 1 e x − y = 5`],dica:`Troque x por 3 e y por 2 nas duas equações.`,p:`3 + 2 = 5 e 3 − 2 = 1: as duas fecham.`}]},
  {id:'mat7',t:'Medidas, área e perímetro',frase:`Perímetro é o contorno (soma dos lados). Área é o espaço de dentro (no retângulo, base × altura).`,
   ess:[`Perímetro de um retângulo de 5 m × 3 m: 5 + 3 + 5 + 3 = 16 m.`,`Área do mesmo retângulo: 5 × 3 = 15 m².`,`Triângulo: área = base × altura ÷ 2.`,`Medidas: 1 m = 100 cm; 1 km = 1.000 m; 1 kg = 1.000 g; 1 L = 1.000 mL.`],
   mais:`Use perímetro para cerca, rodapé e moldura. Use área para piso, pintura, grama e carpete.\n\nÁrea do quadrado: lado × lado. Área do círculo: π × raio × raio (com π ≈ 3,14).\n\nVolume é o espaço que cabe dentro (caixa, piscina): comprimento × largura × altura, em m³. 1 m³ = 1.000 litros.\n\nTeorema de Pitágoras (triângulo retângulo): o lado maior ao quadrado é igual à soma dos quadrados dos outros dois. Exemplo: 3² + 4² = 5² (9 + 16 = 25).`,
@@ -486,6 +510,13 @@ mat:{nome:'Matemática para o concurso',concurso:1,aulas:[
   qs:[{q:`Quantos metros de cerca são necessários para contornar um terreno retangular de 10 m × 6 m?`,al:[`32 m`,`60 m`,`16 m`,`26 m`],dica:`Contorno = soma de todos os lados.`,p:`10 + 6 + 10 + 6 = 32 m.`},
    {q:`Qual é a área de uma sala de 6 m × 4 m?`,al:[`24 m²`,`20 m²`,`10 m²`,`48 m²`],dica:`Área do retângulo = base × altura.`,p:`6 × 4 = 24 m².`},
    {q:`Quantos metros há em 2,5 km?`,al:[`2.500 m`,`250 m`,`25 m`,`25.000 m`],dica:`1 km = 1.000 m.`,p:`2,5 × 1.000 = 2.500 m.`}]},
+ {id:'mat11',t:'Teoremas de Pitágoras e de Tales',frase:`Pitágoras calcula um lado do triângulo retângulo. Tales diz que retas paralelas cortam outras retas em pedaços proporcionais.`,
+  ess:[`Triângulo retângulo: tem um ângulo de 90° (um "canto" reto).`,`Pitágoras: hipotenusa² = cateto² + cateto². Exemplo: 5² = 3² + 4².`,`A hipotenusa é o lado maior, de frente para o ângulo reto.`,`Tales: com retas paralelas cortando duas outras retas, os pedaços são proporcionais.`],
+  mais:`Pitágoras na prática: uma escada de 5 m está encostada num muro, com o pé a 3 m dele. Até que altura ela chega? 5² = 3² + h² → 25 = 9 + h² → h² = 16 → h = 4 m.\n\nTrincas famosas que poupam conta: 3, 4, 5; 6, 8, 10 (o dobro); 5, 12, 13.\n\nTales: imagine três ruas paralelas cortadas por duas avenidas. Numa avenida, os quarteirões medem 2 e 4; na outra, o primeiro mede 3 e o segundo mede x. Então 2/4 = 3/x → 2x = 12 → x = 6. É uma proporção, resolvida como regra de três.\n\nTales também explica a sombra: um poste e uma pessoa ao sol formam triângulos parecidos. Se uma pessoa de 1,5 m faz sombra de 2 m e o poste faz sombra de 8 m (4 vezes maior), o poste mede 1,5 × 4 = 6 m.`,
+  ex:`Triângulo retângulo com catetos 6 e 8: hipotenusa² = 36 + 64 = 100, então a hipotenusa mede 10.`,
+  qs:[{q:`Num triângulo retângulo, os catetos medem 3 cm e 4 cm. A hipotenusa mede`,al:[`5 cm`,`7 cm`,`12 cm`,`25 cm`],dica:`Hipotenusa² = 3² + 4² = 9 + 16.`,p:`9 + 16 = 25; √25 = 5 cm.`},
+   {q:`Uma escada de 10 m está encostada num muro, com o pé a 6 m dele. A que altura ela toca o muro?`,al:[`8 m`,`4 m`,`16 m`,`12 m`],dica:`A escada é a hipotenusa: 10² = 6² + h².`,p:`100 = 36 + h² → h² = 64 → h = 8 m.`},
+   {q:`Pelo teorema de Tales, se 2/4 = 3/x, então x vale`,al:[`6`,`5`,`8`,`1,5`],dica:`Multiplique cruzado: 2 · x = 4 · 3.`,p:`2x = 12 → x = 6.`}]},
  {id:'mat8',t:'Tabelas, gráficos e média',frase:`Para ler um gráfico, comece pelo título, veja o que cada eixo mostra e só então compare os valores.`,
   ess:[`Leia o título, a legenda e a unidade (pessoas, R$, %).`,`Colunas comparam; linha mostra evolução; pizza mostra partes de um todo.`,`Média: some tudo e divida pela quantidade.`,`Exemplo: média de 6, 8 e 10 = 24 ÷ 3 = 8.`],
   mais:`Muitas questões de gráfico são de leitura: "em qual mês houve mais atendimentos?" Basta olhar a coluna mais alta. Outras pedem uma conta simples: diferença entre dois meses, soma ou porcentagem.\n\nAtenção à unidade: "em milhares" quer dizer que 5 significa 5.000.\n\nMédia aritmética: some todos os valores e divida pela quantidade. Se um setor atendeu 20, 30 e 40 pessoas, a média é (20 + 30 + 40) ÷ 3 = 30.\n\nPara descobrir quanto falta para alcançar uma média: média × quantidade = soma necessária.`,
@@ -734,7 +765,8 @@ function registrar(id, res, ch, kind){
 }
 
 /* ---------- estado das telas ---------- */
-let tab = 'conc', aulaSel = null, quiz = null, sim = null, resetArm = false;
+// tab: conc | cursos | prog. cursoAtual: aulas de Português/Matemática abertas dentro do Concurso. cursoTab: curso escolhido na aba Cursos.
+let tab = 'conc', cursoAtual = null, cursoTab = 'adm', aulaSel = null, quiz = null, sim = null, resetArm = false;
 
 // quiz: perguntas de uma aula ou treino do concurso, com segunda chance e dica
 function novoQuiz(ids, tipo, extra){
@@ -861,6 +893,11 @@ function viewConc(){
       ${['port', 'mat'].map(k => { const c = CURSOS[k], f = c.aulas.filter(a => S.aulas[a.id]).length;
         return `<button class="aula-btn" data-act="curso" data-curso="${k}"><span class="k">${f}</span><span class="t"><b>${k === 'port' ? 'Português' : 'Matemática'}</b><small>${f} de ${c.aulas.length} aulas feitas</small></span></button>`; }).join('')}
     </section>
+    <section class="card"><p class="eyebrow">Seus cursos</p>
+      <p class="meta">Os cursos de Secretariado, Informática e Inglês ficam na aba <b>Cursos</b>, na barra de baixo. Também dá para abrir por aqui.</p>
+      ${['adm', 'info', 'ing'].map(k => { const c = CURSOS[k], f = c.aulas.filter(a => S.aulas[a.id]).length;
+        return `<button class="aula-btn" data-act="abrir-curso" data-curso="${k}"><span class="k">${f}</span><span class="t"><b>${c.nome}</b><small>${f} de ${c.aulas.length} aulas feitas</small></span></button>`; }).join('')}
+    </section>
     <section class="card"><p class="eyebrow">Treinar por matéria · 5 questões</p>
       <p class="meta">Cada questão tem duas chances: se errar, aparece uma dica e você tenta de novo.</p>
       <div class="chips">${chips}</div>
@@ -880,11 +917,20 @@ function viewConc(){
       <p class="meta">Metade da prova é de Conhecimentos Específicos: atendimento, arquivo, protocolo, redação oficial e princípios da administração. Tudo isso está no curso de Administração deste app. Em caso de empate, ganha quem acertou mais Específicos.</p></section>
     <details class="box"><summary>O que cai em cada matéria</summary><div>
       <p><b>Português:</b> interpretação de texto, sinônimos e antônimos, sentido próprio e figurado, pontuação, classes de palavras, concordância, regência, colocação do pronome, crase. São as 8 aulas de Português desta aba.</p>
-      <p><b>Matemática:</b> as quatro operações com frações e decimais, MMC e MDC, porcentagem, razão e proporção, regra de três, equações do 1º e 2º grau, medidas, tabelas e gráficos, média, área, perímetro, volume, Pitágoras e Tales. As 8 aulas de Matemática desta aba cobrem a base; equação do 2º grau, sistemas e Tales ficam para depois.</p>
+      <p><b>Matemática:</b> as quatro operações com frações e decimais, MMC e MDC, porcentagem, razão e proporção, regra de três, equações do 1º e 2º grau, medidas, tabelas e gráficos, média, área, perímetro, volume, Pitágoras e Tales. As 12 aulas de Matemática desta aba cobrem todo esse conteúdo.</p>
       <p><b>Informática:</b> Windows 11, Word, Excel e PowerPoint 2016, e-mail, internet, Google Workspace e Microsoft Teams. É o curso de Informática deste app.</p>
       <p><b>Específicos:</b> princípios e ética da administração pública, organização administrativa, arquivo e gestão de documentos, protocolo, agenda e economia de materiais, comunicação e conflitos, hierarquia, atendimento presencial e por telefone, redação oficial (Manual da Presidência, 3ª edição). É o curso de Administração deste app.</p>
       <p class="meta">Resumo do edital publicado no Diário Oficial de Guaratinguetá de 03/11/2026. Confira sempre o edital completo.</p></div></details>
     <p class="meta">Material de estudo independente, sem vínculo com a Prefeitura ou com a VUNESP.</p>`;
+}
+function viewCursos(){
+  const nomes = {adm:'Secretariado', info:'Informática', ing:'Inglês'};
+  if (aulaSel) return viewCurso(cursoTab);
+  const seg = ['adm', 'info', 'ing'].map(k => { const c = CURSOS[k], f = c.aulas.filter(a => S.aulas[a.id]).length;
+    return `<button class="seg${k === cursoTab ? ' on' : ''}" data-act="abrir-curso" data-curso="${k}" aria-pressed="${k === cursoTab}"><b>${nomes[k]}</b><small>${f} de ${c.aulas.length} aulas</small></button>`; }).join('');
+  return `<header class="hero"><p class="eyebrow">Cursos</p><h1 class="h1-sm">Seus 3 cursos</h1><p class="sub">Toque no curso para ver as aulas. Cada aula leva uns 15 minutos.</p></header>
+    <div class="segs" role="group" aria-label="Escolha o curso">${seg}</div>
+    ${viewCurso(cursoTab)}`;
 }
 function viewCurso(k){
   if (aulaSel && aulaSel.curso === k) return viewAula();
@@ -1131,9 +1177,8 @@ function render(){
   nav.hidden = full;
   app.innerHTML = quiz ? (quiz.fim ? viewFimQuiz() : viewQuiz())
     : sim ? (sim.end ? viewSimEnd() : viewSim())
-    : tab === 'conc' ? viewConc() : tab === 'prog' ? viewProg() : viewCurso(tab);
-  const navTab = CURSOS[tab] && CURSOS[tab].concurso ? 'conc' : tab;
-  nav.querySelectorAll('[data-tab]').forEach(b => b.setAttribute('aria-current', !full && b.dataset.tab === navTab ? 'page' : 'false'));
+    : tab === 'conc' ? (cursoAtual ? viewCurso(cursoAtual) : viewConc()) : tab === 'cursos' ? viewCursos() : viewProg();
+  nav.querySelectorAll('[data-tab]').forEach(b => b.setAttribute('aria-current', !full && b.dataset.tab === tab ? 'page' : 'false'));
   tick();
 }
 function fmtLeft(t0, dur){ const rem = dur - Math.floor((Date.now() - t0) / 1000); return rem <= 0 ? 'tempo ✓' : Math.floor(rem / 60) + ':' + pad(rem % 60); }
@@ -1143,14 +1188,17 @@ function tick(){
 }
 document.addEventListener('click', ev => {
   const tb = ev.target.closest('[data-tab]');
-  if (tb){ tab = tb.dataset.tab; aulaSel = null; resetArm = false; render(); scrollTo(0, 0); return; }
+  if (tb){ tab = tb.dataset.tab; aulaSel = null; cursoAtual = null; resetArm = false; render(); scrollTo(0, 0); return; }
   const b = ev.target.closest('[data-act]'); if (!b) return;
   const act = b.dataset.act;
   if (act === 'aula'){
-    quiz = null; tab = b.dataset.curso; aulaSel = {curso:b.dataset.curso, id:b.dataset.id, mais:S.modo === 'completo'}; render(); scrollTo(0, 0);
+    const k = b.dataset.curso; quiz = null; aulaSel = {curso:k, id:b.dataset.id, mais:S.modo === 'completo'};
+    if (CURSOS[k].concurso){ tab = 'conc'; cursoAtual = k; } else { tab = 'cursos'; cursoTab = k; cursoAtual = null; }
+    render(); scrollTo(0, 0);
   } else if (act === 'voltar-curso'){ aulaSel = null; render(); scrollTo(0, 0);
-  } else if (act === 'curso'){ quiz = null; aulaSel = null; tab = b.dataset.curso; render(); scrollTo(0, 0);
-  } else if (act === 'ir-conc'){ aulaSel = null; tab = 'conc'; render(); scrollTo(0, 0);
+  } else if (act === 'curso'){ quiz = null; aulaSel = null; tab = 'conc'; cursoAtual = b.dataset.curso; render(); scrollTo(0, 0);
+  } else if (act === 'abrir-curso'){ quiz = null; aulaSel = null; cursoAtual = null; tab = 'cursos'; cursoTab = b.dataset.curso; render(); scrollTo(0, 0);
+  } else if (act === 'ir-conc'){ aulaSel = null; cursoAtual = null; tab = 'conc'; render(); scrollTo(0, 0);
   } else if (act === 'mais'){ aulaSel.mais = !aulaSel.mais; render();
   } else if (act === 'praticar'){
     const a = CURSOS[aulaSel.curso].aulas.find(x => x.id === aulaSel.id);
