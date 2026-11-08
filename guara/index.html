@@ -118,6 +118,24 @@ details.box > div{padding-bottom:14px;display:flex;flex-direction:column;gap:8px
 .ess li::marker{color:var(--pen)}
 .mais{display:flex;flex-direction:column;gap:10px;background:var(--pen-soft);border-radius:12px;padding:14px 16px}
 .exemplo{font-family:var(--f-read);background:var(--card);border:1px dashed var(--pen);border-radius:12px;padding:14px 16px}
+/* imagens das aulas (SVG desenhado na página, com as cores do tema) */
+.fig{margin:0;display:flex;flex-direction:column;gap:6px}
+.fig figcaption{font-size:.88rem;color:var(--muted);text-align:center;text-wrap:balance}
+.ill{width:100%;max-width:440px;margin:0 auto;height:auto;display:block;background:var(--card);border:1px solid var(--line);border-radius:12px}
+.ill text{font-family:var(--f-ui);fill:var(--ink)} .ill .mono{font-family:var(--f-mono)}
+.ill .fd{fill:var(--mark);stroke:var(--mark-ink);stroke-width:1;stroke-opacity:.45} .ill .mtf{fill:var(--muted)}
+.ill .lm{stroke:var(--muted);stroke-width:1.5;fill:none;stroke-linecap:round} .ill .lt{stroke:var(--pen);stroke-width:1.6;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.ill .lbad{stroke:var(--bad);stroke-width:2;stroke-linecap:round} .ill .ldk{stroke:var(--ink);stroke-width:1.5;stroke-dasharray:6 4}
+.ill .tri{fill:var(--card);stroke:var(--pen);stroke-width:2;stroke-linejoin:round} .ill .none{fill:none;stroke:none}
+.ill .bx{fill:var(--card);stroke:var(--line);stroke-width:1.5} .ill .bg{fill:var(--paper)}
+.ill .pn{fill:var(--pen)} .ill .sf{fill:var(--pen-soft);stroke:var(--pen);stroke-width:1.5} .ill .mk{fill:var(--mark)}
+.ill .okf{fill:var(--ok-soft);stroke:var(--ok);stroke-width:1.5} .ill .badf{fill:var(--bad-soft);stroke:var(--bad);stroke-width:1.5}
+.ill .gl{fill:var(--line)} .ill .cell{fill:var(--card);stroke:var(--line);stroke-width:1} .ill .cell2{fill:var(--pen-soft);stroke:var(--pen);stroke-width:1}
+.ill .ln{stroke:var(--line);stroke-width:1.5;fill:none} .ill .lp{stroke:var(--pen);stroke-width:2.5;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.ill .ld{stroke:var(--pen);stroke-width:1.5;stroke-dasharray:5 4;fill:none} .ill .ar{stroke:var(--pen);stroke-width:2} .ill .arh{fill:var(--pen)}
+.ill .kb{fill:var(--card);stroke:var(--muted);stroke-width:1.5} .ill .kbs{fill:var(--line)} .ill .sep{stroke:var(--card);stroke-width:2.5}
+.ill .mkr{fill:var(--mark);stroke:var(--pen);stroke-width:2} .ill .lpb{fill:none;stroke:var(--pen);stroke-width:3}
+.ill .tx{fill:var(--ink)} .ill .mt{fill:var(--muted)} .ill .tw{fill:var(--on-pen)} .ill .tp{fill:var(--pen)} .ill .tm{fill:var(--mark-ink)} .ill .tbad{fill:var(--bad)}
 
 /* pergunta */
 .qbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--paper);display:flex;align-items:center;gap:12px;padding-block:10px;border-bottom:1px solid var(--line)}
@@ -736,6 +754,388 @@ const today = () => key(new Date());
 function shuffle(a){ a = a.slice(); for (let i = a.length - 1; i > 0; i--){ const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
 function esc(s){ return String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
 function rich(s){ return esc(s).replace(/\n/g, '<br>'); }
+
+// ===== Imagens das aulas: desenhos em SVG feitos aqui mesmo, com as cores do tema (claro e escuro) =====
+const FIGS = (() => { // tudo aqui dentro para os nomes curtos não colidirem com o resto do app
+const _r = v => Math.round(v * 10) / 10;
+const SV = (w, h, label, body) => `<svg class="ill" viewBox="0 0 ${w} ${h}" role="img" aria-label="${esc(label)}">${body}</svg>`;
+const R = (x, y, w, h, c = 'bx', rx = 8) => `<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="${rx}" class="${c}"/>`;
+const L = (x1, y1, x2, y2, c = 'ln') => `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" class="${c}"/>`;
+const C = (cx, cy, r, c = 'bx') => `<circle cx="${cx}" cy="${cy}" r="${r}" class="${c}"/>`;
+const P = (d, c = 'lp') => `<path d="${d}" class="${c}"/>`;
+// texto. o = {c: cor, s: tamanho, a: start|middle|end, w: peso, m: mono, i: itálico, u: sublinhado}; h = conteúdo pronto (com <tspan>)
+function T(x, y, s, o = {}, h){
+  return `<text x="${x}" y="${y}" class="${o.c || 'tx'}${o.m ? ' mono' : ''}" font-size="${o.s || 13}" text-anchor="${o.a || 'middle'}"${o.w ? ` font-weight="${o.w}"` : ''}${o.i ? ' font-style="italic"' : ''}${o.u ? ' text-decoration="underline"' : ''}>${h ?? esc(s)}</text>`;
+}
+const HL = (s, c = 'tp') => `<tspan class="${c}" font-weight="800">${esc(s)}</tspan>`;
+// ponta de seta em (x, y), vindo da direção de (fx, fy)
+function AH(x, y, fx, fy, s = 7){
+  const a = Math.atan2(y - fy, x - fx), bx = x - s * Math.cos(a), by = y - s * Math.sin(a), k = s * .55;
+  return `<polygon points="${_r(x)},${_r(y)} ${_r(bx + k * Math.sin(a))},${_r(by - k * Math.cos(a))} ${_r(bx - k * Math.sin(a))},${_r(by + k * Math.cos(a))}" class="arh"/>`;
+}
+function A(x1, y1, x2, y2){ const a = Math.atan2(y2 - y1, x2 - x1); return L(x1, y1, _r(x2 - 5 * Math.cos(a)), _r(y2 - 5 * Math.sin(a)), 'ar') + AH(x2, y2, x1, y1); }
+// caixa com texto centralizado (s pode ter várias linhas com \n)
+function B(x, y, w, h, s, c = 'bx', o = {}){
+  const ls = String(s).split('\n'), fs = o.s || 13, lh = fs * 1.3, y0 = y + h / 2 - (ls.length - 1) * lh / 2 + fs * .35;
+  return R(x, y, w, h, c, o.rx ?? 8) + ls.map((l, i) => T(_r(x + w / 2), _r(y0 + i * lh), l, {...o, s: fs})).join('');
+}
+// caixa com título + explicação menor
+function B2(x, y, w, h, t1, t2, c = 'bx', o1 = {}, o2 = {}){
+  const s2 = o2.s || 11, cy = y + h / 2;
+  return R(x, y, w, h, c, 8) + T(_r(x + w / 2), _r(cy - 2), t1, {w: 700, s: 14, ...o1}) + T(_r(x + w / 2), _r(cy + s2 + 2), t2, {c: 'mt', ...o2, s: s2});
+}
+// tecla do teclado
+const K = (x, y, s, w = 34) => R(x, y + 3, w, 30, 'kbs', 7) + R(x, y, w, 30, 'kb', 7) + T(x + w / 2, y + 20, s, {s: 13, w: 700});
+// pizza: frações que somam 1, começando no alto
+function PIE(cx, cy, r, fr, cls){
+  let a0 = -Math.PI / 2, out = '';
+  fr.forEach((f, i) => {
+    const a1 = a0 + f * 2 * Math.PI;
+    out += `<path d="M${cx} ${cy}L${_r(cx + r * Math.cos(a0))} ${_r(cy + r * Math.sin(a0))}A${r} ${r} 0 ${f > .5 ? 1 : 0} 1 ${_r(cx + r * Math.cos(a1))} ${_r(cy + r * Math.sin(a1))}Z" class="${cls[i]} sep"/>`;
+    a0 = a1;
+  });
+  return out;
+}
+const FD = (x, y) => P(`M${x} ${y + 2}q0-2 2-2h6l3 3h9q2 0 2 2v10q0 2-2 2H${x + 2}q-2 0-2-2z`, 'fd'); // pasta
+const FL = (x, y) => P(`M${x} ${y}h11l5 5v15H${x}z`, 'bx') + P(`M${x + 11} ${y}v5h5`, 'ln');      // arquivo
+const linhas = (arr, f) => arr.map(f).join('');
+
+return {
+// ---------- Matemática ----------
+mat1: {cap: 'Ordem das contas: primeiro os parênteses, depois × e ÷, por último + e −.', d: () => {
+  const cw = 10.8, x0 = 104, linha = (y, s, a, n, o = {}) => (n ? R(_r(x0 + a * cw - 3), y - 18, _r(n * cw + 6), 25, 'mk', 5) : '') + T(x0, y, s, {a: 'start', s: 18, m: 1, w: 600, ...o});
+  return SV(340, 200, 'Ordem das operações e o exemplo 2 + 3 × 4 = 14',
+    linhas([['1º', '( )'], ['2º', '× ÷'], ['3º', '+ −']], ([n, s], i) => { const x = 10 + i * 112, on = i === 0;
+      return R(x, 10, 96, 52, on ? 'pn' : 'sf', 10) + T(x + 48, 28, n, {s: 11, w: 700, c: on ? 'tw' : 'mt'}) + T(x + 48, 53, s, {s: 20, w: 800, c: on ? 'tw' : 'tp'}) + (i < 2 ? A(x + 98, 36, x + 110, 36) : ''); }) +
+    linha(98, '2 + 3 × 4', 4, 5) + T(330, 98, '× primeiro', {a: 'end', s: 11, c: 'mt'}) + T(150, 120, '↓', {s: 14, c: 'mt'}) +
+    linha(144, '2 + 12', 0, 6) + T(330, 144, 'depois o +', {a: 'end', s: 11, c: 'mt'}) + T(150, 166, '↓', {s: 14, c: 'mt'}) +
+    linha(190, '14', 0, 0, {c: 'tp', w: 800}) + T(330, 190, '(e não 20)', {a: 'end', s: 11, w: 700, c: 'tbad'}));
+}},
+mat12: {cap: '5² é um quadrado de lado 5: são 25 quadradinhos. A raiz faz o caminho de volta: √25 = 5.', d: () => {
+  let g = ''; for (let i = 0; i < 25; i++) g += R(24 + (i % 5) * 16, 18 + Math.floor(i / 5) * 16, 14, 14, 'cell2', 2);
+  return SV(340, 196, 'Quadrado de 5 por 5 com 25 quadradinhos, 5 ao quadrado e raiz de 25',
+    g + T(63, 116, '5', {s: 13, w: 800, c: 'tp'}) + T(12, 62, '5', {s: 13, w: 800, c: 'tp'}) +
+    T(130, 40, '5² = 5 × 5 = 25', {a: 'start', s: 16, m: 1, w: 700}) + T(130, 58, 'potência: multiplica', {a: 'start', s: 11, c: 'mt'}) +
+    T(130, 92, '√25 = 5', {a: 'start', s: 16, m: 1, w: 700, c: 'tp'}) + T(130, 110, 'raiz: o lado do quadrado', {a: 'start', s: 11, c: 'mt'}) +
+    B2(10, 132, 320, 54, '2³ = 2 × 2 × 2 = 8', 'o 3 diz quantas vezes o 2 aparece', 'sf', {s: 16, m: 1}, {s: 11}));
+}},
+mat2: {cap: '3/4: a pizza foi cortada em 4 partes e pegamos 3. Embaixo, frações que viram decimais.', d: () => SV(340, 188, 'Pizza dividida em 4 partes com 3 pintadas, a fração 3/4 e equivalências com decimais',
+  PIE(72, 74, 56, [.25, .25, .25, .25], ['pn', 'pn', 'pn', 'bg']) + C(72, 74, 56, 'ln') +
+  T(170, 64, '3', {s: 32, w: 800, c: 'tp'}) + L(154, 74, 186, 74, 'lp') + T(170, 106, '4', {s: 32, w: 800}) +
+  T(198, 58, '← partes que pegamos', {a: 'start', s: 12}) + T(198, 100, '← partes do todo', {a: 'start', s: 12}) +
+  B(10, 146, 100, 30, '1/2 = 0,5', 'bx', {s: 13, m: 1}) + B(120, 146, 100, 30, '1/4 = 0,25', 'bx', {s: 13, m: 1}) + B(230, 146, 100, 30, '1/10 = 0,1', 'bx', {s: 13, m: 1}))},
+mat3: {cap: '30% são 30 quadradinhos pintados de 100. Os atalhos ajudam a fazer a conta de cabeça.', d: () => {
+  let g = ''; for (let i = 0; i < 100; i++) g += R(12 + (i % 10) * 15, 12 + Math.floor(i / 10) * 15, 13, 13, i < 30 ? 'pn' : 'cell', 2);
+  return SV(340, 172, 'Quadro de 100 quadradinhos com 30 pintados e atalhos de porcentagem',
+    g + T(254, 40, '30%', {s: 28, w: 800, c: 'tp'}) + T(254, 60, '30 de cada 100', {s: 12, c: 'mt'}) +
+    B(176, 74, 156, 26, '10% → divida por 10', 'sf', {s: 12}) + B(176, 106, 156, 26, '50% → metade', 'sf', {s: 12}) + B(176, 138, 156, 26, '25% → divida por 4', 'sf', {s: 12}));
+}},
+mat4: {cap: 'Regra de três direta: se os km aumentam 5 vezes, os litros também. Na inversa, um sobe e o outro desce.', d: () => SV(340, 202, 'Tabela de regra de três com km e litros e setas de vezes 5',
+  B(44, 12, 70, 28, 'km', 'pn', {s: 13, w: 700, c: 'tw'}) + B(120, 12, 70, 28, 'litros', 'pn', {s: 13, w: 700, c: 'tw'}) +
+  B(44, 46, 70, 34, '12', 'bx', {s: 15, m: 1}) + B(120, 46, 70, 34, '1', 'bx', {s: 15, m: 1}) +
+  B(44, 86, 70, 34, '60', 'bx', {s: 15, m: 1}) + B(120, 86, 70, 34, '5', 'mkr', {s: 15, m: 1, w: 800, c: 'tm'}) +
+  P('M40 60C22 70 22 96 38 104', 'lt') + AH(40, 105, 26, 97) + T(18, 87, '×5', {s: 12, w: 800, c: 'tp'}) +
+  P('M194 60C212 70 212 96 196 104', 'lt') + AH(194, 105, 208, 97) + T(214, 87, '×5', {a: 'start', s: 12, w: 800, c: 'tp'}) +
+  R(246, 40, 86, 80, 'sf', 10) + T(289, 30, 'a conta', {s: 11, c: 'mt'}) + T(289, 72, '60 ÷ 12', {s: 14, m: 1, w: 700}) + T(289, 96, '= 5 litros', {s: 13, w: 800, c: 'tp'}) +
+  B2(10, 138, 158, 54, 'Direta ↑↑', 'mais horas, mais páginas', 'bx', {s: 13, c: 'tp'}, {s: 10.5}) + B2(174, 138, 158, 54, 'Inversa ↑↓', 'mais pessoas, menos tempo', 'bx', {s: 13, c: 'tp'}, {s: 10.5}))},
+mat5: {cap: 'MMC: as bolinhas de 6 em 6 e de 8 em 8 voltam a se encontrar no 24. MDC: o maior pedaço que divide 12 e 18 por igual é 6.', d: () => {
+  const X = n => 20 + n * 12.5;
+  let s = T(10, 16, 'MMC: quando voltam a se encontrar', {a: 'start', s: 12, w: 800}) + L(X(0), 52, X(24), 52);
+  for (let n = 0; n <= 24; n++) s += L(X(n), 49, X(n), 55);
+  [0, 6, 12, 18, 24].forEach(n => s += C(X(n), 36, 6, 'pn'));
+  [0, 8, 16, 24].forEach(n => s += C(X(n), 68, 6, 'mkr'));
+  [0, 6, 8, 12, 16, 18, 24].forEach(n => s += T(X(n), 92, n, {s: 11, w: n === 24 ? 800 : 400, c: n === 24 ? 'tp' : 'mt'}));
+  s += R(X(24) - 12, 25, 24, 74, 'ld', 12) + C(26, 108, 5, 'pn') + T(36, 112, 'a cada 6 h', {a: 'start', s: 11}) + C(116, 108, 5, 'mkr') + T(126, 112, 'a cada 8 h', {a: 'start', s: 11}) +
+    T(330, 112, 'juntos de novo: 24 h', {a: 'end', s: 11, w: 800, c: 'tp'});
+  s += T(10, 140, 'MDC: dividir em partes iguais, do maior tamanho', {a: 'start', s: 12, w: 800}) +
+    T(32, 166, '12', {a: 'end', s: 12, w: 700}) + linhas([0, 1], i => R(40 + i * 60, 150, 60, 22, 'pn sep', 3) + T(70 + i * 60, 166, '6', {s: 12, w: 800, c: 'tw'})) +
+    T(32, 194, '18', {a: 'end', s: 12, w: 700}) + linhas([0, 1, 2], i => R(40 + i * 60, 178, 60, 22, 'pn sep', 3) + T(70 + i * 60, 194, '6', {s: 12, w: 800, c: 'tw'})) +
+    T(176, 166, 'MDC(12, 18) = 6', {a: 'start', s: 13, w: 800, c: 'tp'});
+  return SV(340, 208, 'Linha do tempo de 0 a 24 com encontros de 6 em 6 e de 8 em 8, e barras de 12 e 18 cortadas em pedaços de 6', s);
+}},
+mat6: {cap: 'A equação é uma balança equilibrada: o que você tira de um lado, tira do outro. Assim o x fica sozinho.', d: () => SV(340, 214, 'Balança equilibrada com x + 5 de um lado e 12 do outro, e os passos até x = 7',
+  L(170, 30, 170, 124, 'lp') + R(140, 124, 60, 8, 'pn', 3) + L(60, 30, 280, 30, 'lp') + C(170, 30, 5, 'pn') +
+  L(80, 30, 40, 86) + L(80, 30, 120, 86) + L(260, 30, 220, 86) + L(260, 30, 300, 86) +
+  P('M34 86h92a46 12 0 0 1-92 0z', 'sf') + P('M214 86h92a46 12 0 0 1-92 0z', 'sf') +
+  B(50, 58, 60, 28, 'x + 5', 'bx', {s: 15, m: 1, w: 700}) + B(230, 58, 60, 28, '12', 'bx', {s: 15, m: 1, w: 700}) +
+  B(8, 150, 98, 32, 'x + 5 = 12', 'bx', {s: 13, m: 1}) + A(108, 166, 122, 166) +
+  B(124, 150, 98, 32, 'x = 12 − 5', 'bx', {s: 13, m: 1}) + A(224, 166, 238, 166) +
+  B(240, 150, 92, 32, 'x = 7', 'mk', {s: 14, m: 1, w: 800, c: 'tm'}) +
+  T(170, 204, '−5 dos dois lados: a balança continua equilibrada', {s: 11, c: 'mt'}))},
+mat9: {cap: 'O gráfico de x² − 9 corta a linha do meio em −3 e em 3: as duas respostas. O delta (Δ) diz quantas respostas existem.', d: () => {
+  const mini = (x, py, t) => R(x, 144, 102, 58, 'bx', 8) + L(x + 8, 172, x + 94, 172) + P(`M${x + 24} 150Q${x + 51} ${py} ${x + 78} 150`, 'lp') + T(x + 51, 196, t, {s: 11, w: 700});
+  return SV(340, 210, 'Parábola de x ao quadrado menos 9 cortando o eixo em menos 3 e 3, e os três casos do delta',
+    L(10, 74, 162, 74) + L(85, 24, 85, 134) + P('M17 32Q85 224 153 32', 'lp') +
+    C(34, 74, 5, 'mkr') + C(136, 74, 5, 'mkr') + T(28, 92, '−3', {a: 'end', s: 12, w: 800, c: 'tp'}) + T(142, 92, '3', {a: 'start', s: 12, w: 800, c: 'tp'}) +
+    T(176, 32, 'x² − 9 = 0', {a: 'start', s: 14, m: 1, w: 700}) + T(176, 54, 'x² = 9', {a: 'start', s: 14, m: 1}) + T(176, 76, 'x = 3 ou −3', {a: 'start', s: 14, m: 1, w: 700, c: 'tp'}) +
+    T(176, 104, 'Δ = b² − 4·a·c', {a: 'start', s: 12, m: 1}) + T(176, 124, 'x = (−b ± √Δ) ÷ 2a', {a: 'start', s: 12, m: 1}) +
+    mini(10, 214, 'Δ > 0: duas') + mini(119, 194, 'Δ = 0: uma') + mini(228, 174, 'Δ < 0: nenhuma'));
+}},
+mat10: {cap: 'Somando as duas equações, o +y e o −y se anulam e sobra 2x = 12. No gráfico, a resposta é o ponto onde as retas se cruzam.', d: () => {
+  const X = v => 196 + v * 11, Y = v => 150 - v * 11;
+  return SV(340, 196, 'Sistema x + y = 10 e x − y = 2 resolvido pela soma e o gráfico das duas retas se cruzando no ponto 6, 4',
+    T(36, 34, 'x + y = 10', {a: 'start', s: 15, m: 1}) + T(20, 60, '+', {a: 'start', s: 15, m: 1, w: 800, c: 'tp'}) + T(36, 60, 'x − y = 2', {a: 'start', s: 15, m: 1}) +
+    L(52, 33, 83, 23, 'lbad') + L(52, 59, 83, 49, 'lbad') + L(18, 70, 150, 70, 'lp') +
+    T(36, 92, '2x', {a: 'start', s: 15, m: 1, w: 700}) + T(90, 92, '= 12', {a: 'start', s: 15, m: 1, w: 700}) +
+    T(36, 118, 'x = 6', {a: 'start', s: 15, m: 1, w: 800, c: 'tp'}) + T(20, 146, '6 + y = 10 → y = 4', {a: 'start', s: 12.5, m: 1}) +
+    L(X(0), Y(0), X(12), Y(0)) + L(X(0), Y(0), X(0), Y(12)) +
+    L(X(0), Y(10), X(10), Y(0), 'lp') + L(X(2), Y(0), X(12), Y(10), 'ld') +
+    C(X(6), Y(4), 6, 'mkr') + T(X(6) + 10, Y(4) + 4, '(6, 4)', {a: 'start', s: 12, w: 800}) +
+    T(X(0) + 6, Y(10) - 6, 'x + y = 10', {a: 'start', s: 10.5, w: 700, c: 'tp'}) + T(X(12), Y(10) - 8, 'x − y = 2', {a: 'end', s: 10.5, w: 700, c: 'tp'}) +
+    T(170, 186, 'A resposta serve nas duas equações ao mesmo tempo.', {s: 11, c: 'mt'}));
+}},
+mat7: {cap: 'Perímetro é o contorno (a linha grossa). Área é o espaço de dentro (os quadradinhos).', d: () => {
+  let g = ''; for (let i = 0; i < 15; i++) g += R(20 + (i % 5) * 26, 20 + Math.floor(i / 5) * 26, 26, 26, 'cell2', 0);
+  return SV(340, 220, 'Retângulo de 5 por 3 com 15 quadradinhos e contorno destacado, e um triângulo com base e altura',
+    g + R(20, 20, 130, 78, 'lpb', 2) + T(85, 116, '5 m', {s: 12, w: 800}) + T(158, 64, '3 m', {a: 'start', s: 12, w: 800}) +
+    B2(190, 16, 142, 46, 'Perímetro = contorno', '5 + 3 + 5 + 3 = 16 m', 'bx', {s: 11.5, c: 'tp'}, {s: 11, c: 'tx'}) +
+    B2(190, 70, 142, 46, 'Área = dentro', '5 × 3 = 15 m²', 'sf', {s: 11.5, c: 'tp'}, {s: 11, c: 'tx'}) +
+    P('M30 200L130 200L66 144Z', 'tri') + L(66, 144, 66, 200, 'ld') + P('M66 192h8v8', 'lt') +
+    T(72, 180, 'altura', {a: 'start', s: 10.5, c: 'mt'}) + T(80, 214, 'base', {s: 10.5, c: 'mt'}) +
+    T(160, 168, 'Triângulo:', {a: 'start', s: 12, w: 800}) + T(160, 188, 'base × altura ÷ 2', {a: 'start', s: 12.5, m: 1}));
+}},
+mat11: {cap: 'Pitágoras: o quadrado da hipotenusa (25) é igual à soma dos quadrados dos catetos (9 + 16). Tales: retas paralelas cortam em partes proporcionais.', d: () => SV(340, 212, 'Triângulo retângulo 3, 4 e 5 com quadrados nos lados e o teorema de Tales',
+  P('M22 76H70V124H22Z', 'sf') + P('M70 124H134V188H70Z', 'sf') + P('M134 124L70 76L118 12L182 60Z', 'mk') +
+  P('M70 76L134 124H70Z', 'tri') + P('M70 116h8v8', 'lt') +
+  T(46, 104, '3² = 9', {s: 11.5, w: 700}) + T(102, 160, '4² = 16', {s: 11.5, w: 700}) + T(126, 72, '5² = 25', {s: 11.5, w: 800, c: 'tm'}) +
+  T(200, 26, 'Pitágoras', {a: 'start', s: 13, w: 800, c: 'tp'}) + T(200, 46, 'hipotenusa² =', {a: 'start', s: 11.5}) + T(200, 62, 'cateto² + cateto²', {a: 'start', s: 11.5}) +
+  T(200, 86, '25 = 9 + 16', {a: 'start', s: 13, m: 1, w: 700}) +
+  T(200, 118, 'Tales', {a: 'start', s: 13, w: 800, c: 'tp'}) +
+  L(196, 130, 332, 130) + L(196, 150, 332, 150) + L(196, 180, 332, 180) + L(214, 124, 236, 190, 'lp') + L(262, 124, 322, 190, 'lp') +
+  T(214, 144, '2', {a: 'end', s: 11.5, w: 800}) + T(222, 170, '3', {a: 'end', s: 11.5, w: 800}) + T(284, 143, '4', {a: 'start', s: 11.5, w: 800}) + T(306, 168, '6', {a: 'start', s: 11.5, w: 800}) +
+  T(264, 204, '2/3 = 4/6', {s: 12, m: 1, w: 700}))},
+mat8: {cap: 'Leia o título e a unidade antes dos números. A linha tracejada é a média: (40 + 60 + 50) ÷ 3 = 50.', d: () => {
+  const base = 152, k = 1.6, my = base - 50 * k;
+  const tipo = (y, ic, t1, t2) => ic + T(252, y + 12, t1, {a: 'start', s: 12, w: 800}) + T(252, y + 26, t2, {a: 'start', s: 10.5, c: 'mt'});
+  return SV(340, 214, 'Gráfico de colunas de atendimentos por dia com a linha da média em 50, e os tipos de gráfico',
+    T(104, 18, 'Atendimentos por dia', {s: 12.5, w: 800}) + T(104, 33, '(número de pessoas)', {s: 10.5, c: 'mt'}) + L(24, base, 190, base) +
+    linhas([['seg', 40], ['ter', 60], ['qua', 50]], ([d, v], i) => { const x = 44 + i * 50, h = v * k; return R(x, base - h, 36, h, 'pn', 3) + T(x + 18, base - h - 5, v, {s: 11.5, w: 800}) + T(x + 18, base + 15, d, {s: 11.5, c: 'mt'}); }) +
+    L(28, my, 190, my, 'ldk') + T(26, my - 6, 'média 50', {a: 'start', s: 11, w: 800}) +
+    T(272, 26, 'Tipos de gráfico', {s: 11.5, w: 800, c: 'mt'}) +
+    tipo(40, R(214, 52, 6, 16, 'pn', 1) + R(223, 58, 6, 10, 'pn', 1) + R(232, 46, 6, 22, 'pn', 1), 'Colunas', 'comparar') +
+    tipo(82, P('M212 104L222 96L230 100L242 86', 'lp'), 'Linha', 'evolução') +
+    tipo(124, PIE(227, 138, 12, [.6, .4], ['pn', 'mk']), 'Pizza', 'partes do todo') +
+    B(10, 176, 320, 30, 'Média = (40 + 60 + 50) ÷ 3 = 50', 'sf', {s: 12.5, w: 700}));
+}},
+// ---------- Administração e Secretariado ----------
+adm1: {cap: 'O secretariado fica no centro da rotina: organiza, atende e faz a ponte entre as pessoas, sempre com sigilo.', d: () => SV(340, 208, 'Secretariado no centro, ligado a agenda, documentos, atendimento e reuniões',
+  L(100, 48, 150, 72) + L(240, 48, 190, 72) + L(100, 118, 150, 102) + L(240, 118, 190, 102) +
+  B(12, 14, 116, 34, 'Agenda', 'bx', {s: 13, w: 700}) + B(212, 14, 116, 34, 'Documentos', 'bx', {s: 13, w: 700}) +
+  B(12, 118, 116, 34, 'Atendimento', 'bx', {s: 13, w: 700}) + B(212, 118, 116, 34, 'Reuniões', 'bx', {s: 13, w: 700}) +
+  B(110, 66, 120, 42, 'Secretariado', 'pn', {s: 13.5, w: 800, c: 'tw', rx: 21}) +
+  B(12, 166, 316, 32, 'Sigilo: o que é do trabalho fica no trabalho', 'mk', {s: 12, w: 700, c: 'tm', rx: 16}))},
+adm2: {cap: 'Ao atender o telefone: setor, seu nome, cumprimento e oferta de ajuda. Depois, escute até o fim.', d: () => SV(340, 186, 'Balão de fala com o jeito certo de atender o telefone e os três passos do bom atendimento',
+  C(32, 28, 12, 'sf') + P('M12 70a20 20 0 0 1 40 0z', 'sf') + T(32, 86, 'você', {s: 11, c: 'mt'}) +
+  P('M67 32L56 42l11 4', 'sf') + R(66, 8, 264, 68, 'sf', 14) +
+  T(80, 28, '', {a: 'start', s: 13}, `${HL('Secretaria de Educação')},`) + T(80, 46, '', {a: 'start', s: 13}, `${HL('Ana')}, ${HL('bom dia')}.`) + T(80, 64, '', {a: 'start', s: 13}, HL('Em que posso ajudar?')) +
+  linhas([['1 setor', 50], ['2 seu nome', 72], ['3 bom dia', 66], ['4 ajuda', 56]], ([t, w], i, a) => { const x = 66 + a.slice(0, i).reduce((s, [, ww]) => s + ww + 6, 0); return B(x, 84, w, 20, t, 'bx', {s: 11, rx: 10}); }) +
+  B(10, 124, 98, 50, 'Cumprimente\npelo nome', 'bx', {s: 11.5}) + A(110, 149, 120, 149) +
+  B(122, 124, 98, 50, 'Escute\naté o fim', 'bx', {s: 11.5}) + A(222, 149, 232, 149) +
+  B(234, 124, 98, 50, 'Não sabe?\nDê retorno', 'bx', {s: 11.5}))},
+adm3: {cap: 'Diante de alguém nervoso: calma, ouvir sem interromper e buscar a solução.', d: () => SV(340, 196, 'Conversa entre um cidadão irritado e um atendente calmo, e os três passos para resolver conflitos',
+  C(28, 26, 11, 'badf') + P('M10 62a18 18 0 0 1 36 0z', 'badf') + T(28, 76, 'cidadão', {s: 10, c: 'mt'}) +
+  P('M60 24l-9 6 9 4', 'badf') + R(58, 10, 226, 34, 'badf', 14) + T(72, 32, 'Estou esperando há uma hora!', {a: 'start', s: 12.5}) +
+  C(314, 88, 11, 'okf') + P('M296 124a18 18 0 0 1 36 0z', 'okf') + T(314, 138, 'você', {s: 10.5, c: 'mt'}) +
+  P('M280 82l9 6-9 4', 'okf') + R(54, 60, 228, 50, 'okf', 14) + T(66, 80, 'Entendo, o senhor esperou muito.', {a: 'start', s: 12}) + T(66, 98, 'Vou ver agora o seu pedido.', {a: 'start', s: 12}) +
+  B2(10, 146, 98, 42, '1 Calma', 'voz tranquila', 'sf', {s: 12.5, c: 'tp'}, {s: 10.5}) + A(110, 167, 120, 167) +
+  B2(122, 146, 98, 42, '2 Ouvir', 'sem interromper', 'sf', {s: 12.5, c: 'tp'}, {s: 10.5}) + A(222, 167, 232, 167) +
+  B2(234, 146, 98, 42, '3 Resolver', 'busque a solução', 'sf', {s: 12.5, c: 'tp'}, {s: 10.5}))},
+adm4: {cap: 'As três idades do arquivo (com o tempo, o documento passa de uma para a outra) e os métodos para ordenar.', d: () => {
+  const col = (x, ic, t, d1, d2) => R(x, 10, 100, 120, 'bx', 10) + ic + T(x + 50, 86, t, {s: 12, w: 800, c: 'tp'}) + T(x + 50, 104, d1, {s: 10.5, c: 'mt'}) + T(x + 50, 118, d2, {s: 10.5, c: 'mt'});
+  const gaveta = x => R(x + 34, 20, 32, 46, 'sf', 3) + L(x + 34, 35, x + 66, 35, 'lt') + L(x + 34, 50, x + 66, 50, 'lt') + linhas([27, 42, 57], y => L(x + 46, y, x + 54, y, 'lt'));
+  const caixa = x => R(x + 30, 34, 40, 30, 'sf', 2) + R(x + 27, 25, 46, 11, 'sf', 2) + L(x + 44, 46, x + 56, 46, 'lt');
+  const predio = x => P(`M${x + 27} 34L${x + 50} 19L${x + 73} 34Z`, 'sf') + R(x + 28, 58, 44, 7, 'sf', 1) + linhas([33, 47.5, 62], dx => R(x + dx, 36, 5, 22, 'pn', 1));
+  const met = [['Alfabético', 'por nome (A a Z)'], ['Numérico', 'por número'], ['Cronológico', 'por data'], ['Geográfico', 'por lugar (cidade, bairro)'], ['Por assunto', 'por tema']];
+  return SV(340, 272, 'As três idades do arquivo: corrente, intermediário e permanente, e os cinco métodos de arquivamento',
+    col(8, gaveta(8), 'Corrente', 'uso frequente', 'fica no setor') + A(109, 70, 119, 70) +
+    col(120, caixa(120), 'Intermediário', 'usado às vezes', 'aguarda prazo') + A(221, 70, 231, 70) +
+    col(232, predio(232), 'Permanente', 'valor histórico', 'guardado sempre') +
+    T(10, 152, 'Métodos para ordenar', {a: 'start', s: 11.5, w: 800, c: 'mt'}) +
+    linhas(met, ([m, d], i) => { const y = 160 + i * 22; return (i % 2 === 0 ? R(8, y, 324, 22, 'bg', 5) : '') + T(18, y + 15, m, {a: 'start', s: 12, w: 800, c: 'tp'}) + T(118, y + 15, d, {a: 'start', s: 12}); }));
+}},
+adm5: {cap: 'O caminho do documento no protocolo. Com o número do comprovante, qualquer servidor descobre onde o pedido está.', d: () => SV(340, 206, 'Os quatro passos do protocolo e um comprovante com número',
+  linhas(['Recebe e confere', 'Registra (nº e data)', 'Distribui ao setor', 'Acompanha o caminho'], (t, i) => { const y = 10 + i * 50;
+    return R(8, y, 200, 36, i === 1 ? 'sf' : 'bx', 8) + C(28, y + 18, 11, 'pn') + T(28, y + 23, i + 1, {s: 12.5, w: 800, c: 'tw'}) + T(46, y + 23, t, {a: 'start', s: 12.5, w: 700}) + (i < 3 ? A(108, y + 37, 108, y + 49) : ''); }) +
+  A(209, 78, 222, 78) +
+  R(224, 34, 108, 136, 'bx', 6) + T(278, 54, 'COMPROVANTE', {s: 9.5, w: 800, c: 'mt'}) + T(278, 80, '2026/0457', {s: 15, w: 700, m: 1, c: 'tp'}) + L(232, 92, 324, 92, 'ld') +
+  T(234, 112, 'Assunto', {a: 'start', s: 10, c: 'mt'}) + T(234, 127, 'Alvará', {a: 'start', s: 12}) +
+  T(234, 147, 'Está agora em', {a: 'start', s: 10, c: 'mt'}) + T(234, 162, 'Obras', {a: 'start', s: 12, w: 800}))},
+adm6: {cap: 'Um compromisso bem anotado tem data, hora, local e assunto. E pequenas atitudes evitam desperdício.', d: () => {
+  const dica = (x, ic, t) => R(x, 134, 100, 74, 'bx', 10) + ic + B(x, 176, 100, 30, t, 'none', {s: 11});
+  return SV(340, 216, 'Anotação de agenda com data, hora, local e assunto, e três dicas de economia',
+    R(8, 8, 324, 116, 'bx', 10) + R(18, 18, 62, 96, 'pn', 8) +
+    T(49, 38, 'DATA', {s: 9.5, w: 800, c: 'tw'}) + T(49, 76, '10', {s: 30, w: 800, c: 'tw'}) + T(49, 98, 'nov', {s: 12, c: 'tw'}) +
+    linhas([['Hora', '09:00'], ['Local', 'Sala de reuniões 2'], ['Assunto', 'Orçamento 2027']], ([l, v], i) => T(94, 34 + i * 22, l, {a: 'start', s: 11, c: 'mt', w: 700}) + T(150, 34 + i * 22, v, {a: 'start', s: 13})) +
+    B(94, 92, 164, 22, 'Confirme um dia antes', 'mk', {s: 11.5, w: 800, c: 'tm', rx: 11}) +
+    dica(8, R(40, 150, 20, 8, 'bx', 1) + R(32, 156, 36, 14, 'pn', 3) + R(40, 164, 20, 9, 'bx', 1), 'Imprima só o\nnecessário') +
+    dica(120, R(156, 142, 20, 26, 'bx', 2) + R(164, 147, 20, 26, 'sf', 2), 'Use frente\ne verso') +
+    dica(232, P('M273.6 148.6A11 11 0 1 0 290.4 148.6', 'lp') + L(282, 140, 282, 154, 'lp'), 'Desligue no\nfim do dia'));
+}},
+adm7: {cap: 'Partes de um ofício. O fecho muda: "Respeitosamente" para autoridade superior, "Atenciosamente" para o mesmo nível ou abaixo.', d: () => {
+  const lab = (y, t) => L(204, y, 218, y, 'ld') + T(222, y + 4, t, {a: 'start', s: 11.5, w: 700, c: 'tp'});
+  return SV(340, 312, 'Modelo de ofício com número, local e data, destinatário, assunto, texto, fecho e assinatura',
+    R(10, 8, 192, 240, 'bx', 4) + T(106, 28, 'ÓRGÃO PÚBLICO', {s: 9.5, w: 800, c: 'mt'}) +
+    T(22, 50, 'Ofício nº 12/2026', {a: 'start', s: 11.5, w: 800}) + lab(46, 'número e ano') +
+    T(190, 70, 'Cidade, 10/3/2026.', {a: 'end', s: 10.5}) + lab(66, 'local e data') +
+    T(22, 92, 'Ao Senhor Diretor', {a: 'start', s: 10.5}) + lab(88, 'destinatário') +
+    T(22, 112, 'Assunto: materiais', {a: 'start', s: 10.5, w: 800}) + lab(108, 'assunto') +
+    linhas([124, 134, 144, 154], (y, i) => R(22, y, [168, 160, 168, 110][i], 5, 'gl', 2)) + lab(140, 'texto claro') +
+    R(19, 168, 110, 20, 'mk', 3) + T(24, 182, 'Atenciosamente,', {a: 'start', s: 11.5, w: 800, c: 'tm'}) + lab(178, 'fecho') +
+    L(56, 214, 156, 214) + T(106, 230, 'Nome · Cargo', {s: 10, c: 'mt'}) + lab(214, 'assinatura') +
+    B(10, 258, 320, 46, 'Respeitosamente: para autoridade superior\nAtenciosamente: mesmo nível ou abaixo', 'sf', {s: 12}));
+}},
+adm8: {cap: 'LIMPE: as cinco letras dos princípios da administração pública.', d: () => SV(340, 210, 'LIMPE: legalidade, impessoalidade, moralidade, publicidade e eficiência',
+  linhas([['L', 'Legalidade', 'só faz o que a lei permite'], ['I', 'Impessoalidade', 'trata todos igual, sem favor'], ['M', 'Moralidade', 'honestidade sempre'], ['P', 'Publicidade', 'transparência: tudo às claras'], ['E', 'Eficiência', 'bom resultado, sem desperdício']],
+    ([l, t, d], i) => { const y = 8 + i * 40; return B(10, y, 34, 34, l, 'pn', {s: 19, w: 800, c: 'tw', rx: 8}) + T(56, y + 15, t, {a: 'start', s: 13.5, w: 800}) + T(56, y + 30, d, {a: 'start', s: 11.5, c: 'mt'}); }))},
+// ---------- Informática ----------
+inf1: {cap: 'Explorador de Arquivos: à esquerda ficam as pastas; à direita, os arquivos da pasta aberta. "Concurso" é uma pasta dentro de "Documentos".', d: () => SV(340, 206, 'Janela do Explorador de Arquivos com pastas e arquivos',
+  R(8, 8, 324, 190, 'bx', 10) + P('M8 34V18q0-10 10-10h304q10 0 10 10v16z', 'gl') +
+  T(20, 26, 'Explorador de Arquivos', {a: 'start', s: 12, c: 'mt', w: 700}) +
+  L(270, 21, 280, 21, 'lm') + R(290, 16, 10, 10, 'lm', 1) + L(310, 16, 320, 26, 'lm') + L(320, 16, 310, 26, 'lm') +
+  R(18, 44, 304, 24, 'bg', 6) + T(28, 60, 'Documentos  ›  Concurso', {a: 'start', s: 12}) +
+  T(22, 90, 'PASTAS', {a: 'start', s: 10, c: 'tp', w: 800}) + T(140, 90, 'ARQUIVOS', {a: 'start', s: 10, c: 'tp', w: 800}) + L(128, 78, 128, 188) +
+  FD(22, 100) + T(50, 113, 'Documentos', {a: 'start', s: 12}) +
+  L(32, 120, 32, 136, 'ln') + L(32, 136, 36, 136, 'ln') + R(36, 126, 92, 22, 'sf', 6) + FD(40, 129) + T(66, 142, 'Concurso', {a: 'start', s: 12, w: 800}) +
+  FD(22, 160) + T(50, 173, 'Imagens', {a: 'start', s: 12}) +
+  FL(142, 100) + T(166, 115, 'edital.pdf', {a: 'start', s: 12}) +
+  FL(142, 130) + T(166, 145, 'resumo.docx', {a: 'start', s: 12}) +
+  FL(142, 160) + T(166, 175, 'gastos.xlsx', {a: 'start', s: 12}))},
+inf2: {cap: 'Os atalhos mais cobrados: segure a primeira tecla e toque na segunda.', d: () => SV(340, 222, 'Teclas de atalho: Ctrl+C, Ctrl+X, Ctrl+V, Ctrl+Z, Win+E e Alt+Tab',
+  linhas([['Ctrl', 'C', 'copiar'], ['Ctrl', 'X', 'recortar'], ['Ctrl', 'V', 'colar'], ['Ctrl', 'Z', 'desfazer'], ['Win', 'E', 'abrir o Explorador'], ['Alt', 'Tab', 'trocar de janela']], ([a, b, t], i) => {
+    const x = 14 + (i % 2) * 166, y = 12 + Math.floor(i / 2) * 70, wa = 46, wb = b.length > 1 ? 44 : 34;
+    return K(x, y, a, wa) + T(x + wa + 10, y + 20, '+', {s: 15, c: 'mt', w: 800}) + K(x + wa + 20, y, b, wb) + T(x, y + 54, t, {a: 'start', s: 12.5});
+  }))},
+inf3: {cap: 'No Word em português: N = negrito, I = itálico, S = sublinhado. Cuidado: Ctrl + B salva o arquivo.', d: () => SV(340, 238, 'Barra do Word com negrito, itálico e sublinhado e uma página com título em negrito e rodapé',
+  T(16, 22, 'Página Inicial', {a: 'start', s: 12, w: 800, c: 'tp'}) + L(16, 29, 100, 29, 'lp') +
+  T(120, 22, 'Inserir', {a: 'start', s: 12, c: 'mt'}) + T(180, 22, 'Layout', {a: 'start', s: 12, c: 'mt'}) + T(240, 22, 'Revisão', {a: 'start', s: 12, c: 'mt'}) +
+  R(8, 34, 324, 40, 'bg', 8) + R(16, 42, 76, 24, 'bx', 5) + T(24, 58, 'Calibri', {a: 'start', s: 12}) + T(84, 57, '▾', {s: 10, c: 'mt'}) +
+  R(98, 42, 36, 24, 'bx', 5) + T(116, 58, '11', {s: 12}) +
+  B(142, 42, 26, 24, 'N', 'sf', {s: 14, w: 800, c: 'tp', rx: 5}) + B(172, 42, 26, 24, 'I', 'bx', {s: 14, i: 1, rx: 5}) + B(202, 42, 26, 24, 'S', 'bx', {s: 14, u: 1, rx: 5}) +
+  linhas([238, 266, 294], (x, k) => linhas([18, 12, 18, 12], (w, j) => { const dx = k === 0 ? 0 : k === 1 ? (18 - w) / 2 : 18 - w; return L(x + 4 + dx, 47 + j * 5, x + 4 + dx + w, 47 + j * 5, 'lm'); })) +
+  R(44, 84, 252, 112, 'bx', 4) + R(58, 94, 134, 22, 'mk', 3) + T(63, 110, 'Relatório mensal', {a: 'start', s: 14, w: 800, c: 'tm'}) +
+  linhas([126, 136, 146], (y, i) => R(60, y, [220, 200, 210][i], 5, 'gl', 2)) + linhas([158, 168], y => C(64, y + 2.5, 2.5, 'pn') + R(72, y, 120, 5, 'gl', 2)) +
+  L(52, 180, 288, 180, 'ld') + T(170, 191, 'rodapé: página 1', {s: 9.5, c: 'mt'}) +
+  B(14, 206, 152, 26, 'Ctrl + N = negrito', 'sf', {s: 12, w: 800, c: 'tp', rx: 13}) + B(174, 206, 152, 26, 'Ctrl + B = salvar!', 'badf', {s: 12, w: 800, c: 'tbad', rx: 13}))},
+inf4: {cap: 'Coluna é letra, linha é número. A fórmula =SOMA(A1:A3) soma de A1 até A3 e mostra 180 na célula A4.', d: () => {
+  const x0 = 20, cw = 90, rh = 26, y0 = 46, yr = j => y0 + 22 + j * rh;
+  let g = R(x0, y0, 30, 22, 'cell', 0) + linhas(['A', 'B', 'C'], (c, i) => R(x0 + 30 + i * cw, y0, cw, 22, 'cell', 0) + T(x0 + 30 + i * cw + cw / 2, y0 + 15, c, {s: 12, c: 'mt', w: 800}));
+  [1, 2, 3, 4].forEach((n, j) => { g += R(x0, yr(j), 30, rh, 'cell', 0) + T(x0 + 15, yr(j) + 17, n, {s: 12, c: 'mt', w: 800}) + linhas([0, 1, 2], i => R(x0 + 30 + i * cw, yr(j), cw, rh, j < 3 && i === 0 ? 'cell2' : 'cell', 0)); });
+  g += linhas([100, 50, 30], (n, j) => T(x0 + 30 + cw - 8, yr(j) + 18, n, {a: 'end', s: 13, m: 1}));
+  g += R(x0 + 30, yr(3), cw, rh, 'mkr', 0) + T(x0 + 30 + cw - 8, yr(3) + 18, '180', {a: 'end', s: 13, m: 1, w: 800, c: 'tm'}) + T(x0 + 30 + cw * 1.5, yr(2) + 17, 'célula B3', {s: 11, c: 'mt'});
+  return SV(340, 182, 'Planilha do Excel com valores em A1, A2 e A3 e a fórmula =SOMA(A1:A3) na célula A4',
+    R(10, 10, 50, 26, 'bx', 5) + T(35, 28, 'A4', {s: 13, m: 1, w: 700}) + T(76, 28, 'fx', {s: 13, i: 1, c: 'mt'}) +
+    R(92, 10, 238, 26, 'bx', 5) + T(102, 28, '=SOMA(A1:A3)', {a: 'start', s: 14, m: 1, w: 800, c: 'tp'}) + g);
+}},
+inf5: {cap: 'Colunas servem para comparar valores; pizza mostra as partes de um todo.', d: () => {
+  const base = 150;
+  return SV(340, 206, 'Gráfico de colunas comparando meses e gráfico de pizza com partes de um orçamento',
+    T(88, 18, 'Colunas: comparar', {s: 12, w: 800}) + T(256, 18, 'Pizza: partes do todo', {s: 12, w: 800}) + L(18, base, 160, base) +
+    linhas([['jan', 40], ['fev', 60], ['mar', 50], ['abr', 70]], ([m, v], i) => { const x = 26 + i * 34, h = v * 1.6; return R(x, base - h, 24, h, 'pn', 3) + T(x + 12, base - h - 5, v, {s: 11, w: 700}) + T(x + 12, base + 15, m, {s: 11, c: 'mt'}); }) +
+    PIE(256, 84, 52, [.5, .3, .2], ['pn', 'mk', 'mtf']) +
+    linhas([['pn', 'Saúde 50%'], ['mk', 'Educação 30%'], ['mtf', 'Obras 20%']], ([c, t], i) => R(206, 150 + i * 18, 11, 11, c, 2) + T(222, 160 + i * 18, t, {a: 'start', s: 11.5})));
+}},
+inf6: {cap: 'Transição acontece entre um slide e outro; animação é um efeito num item dentro do slide. F5 começa a apresentação.', d: () => {
+  const sl = (x, n, body) => R(x, 14, 92, 62, 'bx', 5) + T(x + 7, 27, n, {a: 'start', s: 9, c: 'mt'}) + body;
+  return SV(340, 204, 'Três slides com transição entre eles e uma animação no terceiro',
+    sl(14, '1', R(26, 38, 68, 8, 'pn', 2) + R(34, 54, 52, 5, 'gl', 2)) +
+    sl(124, '2', R(136, 32, 50, 6, 'pn', 2) + linhas([44, 54, 64], y => C(140, y + 2, 2, 'pn') + R(146, y, 52, 4, 'gl', 2))) +
+    sl(234, '3', R(246, 32, 50, 6, 'pn', 2) + R(262, 48, 48, 16, 'mk', 3) + L(242, 52, 256, 52, 'lt') + L(246, 60, 257, 60, 'lt')) +
+    A(108, 45, 122, 45) + A(218, 45, 232, 45) + L(115, 52, 115, 98, 'ld') + L(286, 66, 286, 98, 'ld') +
+    B2(14, 98, 150, 46, 'Transição', 'entre um slide e outro', 'sf', {c: 'tp'}, {s: 11.5}) +
+    B2(176, 98, 150, 46, 'Animação', 'um item dentro do slide', 'sf', {c: 'tp'}, {s: 11.5}) +
+    K(14, 160, 'F5', 40) + T(66, 180, 'começa a apresentação no 1º slide', {a: 'start', s: 12.5}));
+}},
+inf7: {cap: 'Para: quem recebe. Cc: cópia que todos veem. Cco: cópia oculta, ninguém vê os outros endereços. O clipe é o anexo.', d: () => SV(340, 236, 'Barra de endereço com URL e tela de novo e-mail com Para, Cc, Cco, assunto e anexo',
+  R(8, 8, 324, 30, 'bg', 15) + C(26, 23, 6, 'lm') + T(40, 28, 'www.vunesp.com.br', {a: 'start', s: 12.5, m: 1}) + B(276, 13, 48, 20, 'URL', 'mk', {s: 11, w: 800, c: 'tm', rx: 10}) +
+  R(8, 48, 324, 180, 'bx', 10) + P('M8 74V58q0-10 10-10h304q10 0 10 10v16z', 'gl') + T(20, 66, 'Nova mensagem', {a: 'start', s: 12, w: 800, c: 'mt'}) +
+  linhas([['Para', 'chefe@email.com', 'principal'], ['Cc', 'colega@email.com', 'todos veem'], ['Cco', '30 candidatos', 'ninguém vê'], ['Assunto', 'Edital do concurso', '']], ([l, v, n], i) => { const y = 74 + i * 28;
+    return (i === 2 ? R(9, y, 322, 28, 'sf', 0) : '') + T(20, y + 18, l, {a: 'start', s: 12, w: 800, c: 'mt'}) + T(84, y + 18, v, {a: 'start', s: 12.5}) + (n ? T(322, y + 18, n, {a: 'end', s: 11.5, w: 700, c: 'tp'}) : '') + L(8, y + 28, 332, y + 28); }) +
+  R(18, 194, 124, 24, 'bg', 12) + P('M31 212v-9a3 3 0 0 1 6 0v8a5 5 0 0 1-10 0v-8', 'lt') + T(46, 210, 'edital.pdf', {a: 'start', s: 12}) + T(150, 210, '← anexo', {a: 'start', s: 11.5, c: 'mt'}) +
+  B(262, 194, 62, 24, 'Enviar', 'pn', {s: 12, w: 800, c: 'tw', rx: 12}))},
+inf8: {cap: 'Na nuvem, o arquivo fica guardado na internet e abre em qualquer aparelho. Cada ferramenta tem uma função.', d: () => {
+  const tile = (x, ic, t1, t2) => R(x, 104, 76, 92, 'bx', 10) + ic + T(x + 38, 166, t1, {s: 10.5, w: 800}) + T(x + 38, 182, t2, {s: 10.5, c: 'mt'});
+  return SV(340, 206, 'Nuvem do Drive ligada a computador e celular, e os ícones de Documentos, Planilhas, Meet e Teams e Formulários',
+    P('M135 76a18 18 0 0 1-2-36a24 24 0 0 1 44-12a20 20 0 0 1 36 14a17 17 0 0 1 2 34z', 'sf') + T(174, 56, 'Drive', {s: 14, w: 800, c: 'tp'}) + T(174, 70, 'nuvem', {s: 10.5, c: 'mt'}) +
+    R(30, 30, 56, 36, 'bx', 4) + R(36, 36, 44, 24, 'sf', 2) + P('M22 72h72l-6-6H28z', 'bx') + R(266, 24, 28, 48, 'bx', 5) + R(270, 30, 20, 34, 'sf', 2) +
+    L(98, 56, 116, 58, 'ld') + L(234, 58, 262, 50, 'ld') +
+    tile(10, P('M36 116h18l8 8v26H36z', 'bx') + R(40, 128, 18, 3, 'pn', 1) + R(40, 135, 18, 3, 'gl', 1) + R(40, 142, 13, 3, 'gl', 1), 'Documentos', 'como o Word') +
+    tile(90, R(112, 118, 32, 30, 'bx', 3) + R(112, 118, 32, 10, 'sf', 3) + L(123, 118, 123, 148) + L(133, 118, 133, 148) + L(112, 128, 144, 128) + L(112, 138, 144, 138), 'Planilhas', 'como o Excel') +
+    tile(170, R(188, 122, 28, 22, 'pn', 4) + P('M218 129l10-6v20l-10-6z', 'pn'), 'Meet / Teams', 'reuniões') +
+    tile(250, R(274, 116, 28, 34, 'bx', 3) + P('M279 125l3 3 5-6', 'lt') + R(290, 124, 8, 3, 'gl', 1) + P('M279 138l3 3 5-6', 'lt') + R(290, 137, 8, 3, 'gl', 1), 'Formulários', 'pesquisas'));
+}},
+// ---------- Inglês ----------
+ing1: {cap: 'O cumprimento muda com a hora do dia. Good evening é para quem chega à noite; para se despedir, Good night.', d: () => {
+  const sol = (x, y) => linhas([0, 45, 90, 135, 180, 225, 270, 315], a => { const r = a * Math.PI / 180; return L(_r(x + 14 * Math.cos(r)), _r(y + 14 * Math.sin(r)), _r(x + 19 * Math.cos(r)), _r(y + 19 * Math.sin(r)), 'lt'); }) + C(x, y, 10, 'mkr');
+  return SV(340, 236, 'Sol nascendo, sol alto e lua: good morning, good afternoon e good evening, e um diálogo de apresentação',
+    P('M20 92Q170 -20 320 92', 'ld') + L(10, 92, 330, 92) + sol(71, 59) + sol(170, 36) + P('M275 47a12 12 0 0 0 0 24a14 14 0 0 1 0-24z', 'mkr') +
+    linhas([[71, 'Good morning', 'bom dia'], [170, 'Good afternoon', 'boa tarde'], [269, 'Good evening', 'boa noite (chegando)']], ([x, t, d]) => T(x, 112, t, {s: 12, w: 800}) + T(x, 127, d, {s: 10.5, c: 'mt'})) +
+    P('M28 176l-6 12 16-8', 'sf') + R(14, 144, 186, 34, 'sf', 14) + T(28, 166, 'Hi! My name is Carlos.', {a: 'start', s: 12.5}) +
+    P('M312 218l8 10-16-6', 'bx') + R(150, 186, 176, 34, 'bx', 14) + T(164, 208, 'Nice to meet you!', {a: 'start', s: 12.5}));
+}},
+ing2: {cap: 'O verbo to be muda com a pessoa: I am; he, she, it is; you, we, they are.', d: () => SV(340, 214, 'Tabela do verbo to be: I am, he she it is, you we they are',
+  linhas([['I', 'eu', 'am'], ['He · She · It', 'ele · ela · isso', 'is'], ['You · We · They', 'você(s) · nós · eles', 'are']], ([p, t, v], i) => { const y = 10 + i * 52;
+    return B2(10, y, 176, 44, p, t, 'bx', {s: 14}, {s: 11}) + A(192, y + 22, 214, y + 22) + B(218, y, 112, 44, v, 'pn', {s: 20, w: 800, c: 'tw'}); }) +
+  B(10, 170, 320, 36, "Negativa: I am not · she isn't · they aren't", 'sf', {s: 12.5}))},
+ing3: {cap: '"A" antes de som de consoante, "an" antes de som de vogal, "the" para algo específico. No plural, quase sempre entra ‑s.', d: () => SV(340, 218, 'A e an com exemplos, the, e o plural de book, box e city',
+  B2(10, 10, 155, 46, 'a', 'antes de som de consoante', 'sf', {s: 20, c: 'tp'}, {s: 10.5}) + B2(175, 10, 155, 46, 'an', 'antes de som de vogal', 'sf', {s: 20, c: 'tp'}, {s: 10.5}) +
+  T(87, 78, 'a book · a car', {s: 13}) + T(252, 78, 'an apple · an hour', {s: 13}) +
+  B(10, 92, 320, 30, 'the = o, a, os, as (algo específico)', 'bx', {s: 12.5}) + T(10, 146, 'Plural', {a: 'start', s: 11.5, w: 800, c: 'mt'}) +
+  linhas([['book', 'book', 's', '+ s'], ['box', 'box', 'es', '+ es'], ['city', 'cit', 'ies', 'y → ies']], ([w, r, e, d], i) => { const x = 10 + i * 110;
+    return R(x, 154, 100, 56, 'bx', 8) + T(x + 50, 178, '', {s: 13}, `${esc(w)} → ${esc(r)}${HL(e)}`) + T(x + 50, 198, d, {s: 11, c: 'mt'}); }))},
+ing4: {cap: 'Cada pronome tem o seu possessivo: I → my, he → his, she → her, they → their...', d: () => SV(340, 196, 'Pares de pronome e possessivo em inglês',
+  linhas([['I', 'eu', 'my', 'meu'], ['you', 'você', 'your', 'seu'], ['he', 'ele', 'his', 'dele'], ['she', 'ela', 'her', 'dela'], ['we', 'nós', 'our', 'nosso'], ['they', 'eles', 'their', 'deles'], ['it', 'coisa', 'its', 'dele(a)']], ([a, b, c, d], i) => {
+    const x = i < 4 ? 10 : 178, y = 10 + (i % 4) * 46;
+    return B2(x, y, 60, 38, a, b, 'bx', {s: 14}, {s: 10.5}) + A(x + 64, y + 19, x + 84, y + 19) + B2(x + 88, y, 64, 38, c, d, 'sf', {s: 14, c: 'tp'}, {s: 10.5}); }) +
+  B2(178, 148, 152, 38, 'her office', 'o escritório dela', 'mk', {s: 13, c: 'tm'}, {s: 10.5, c: 'tm'}))},
+ing5: {cap: 'Presente simples: com he, she e it o verbo ganha ‑s, e a negativa e a pergunta usam does.', d: () => SV(340, 170, 'Tabela do presente simples com I work, she works, do e does',
+  R(84, 10, 122, 34, 'bx', 8) + T(145, 32, 'I · you · we · they', {s: 11, w: 800}) +
+  R(212, 10, 120, 34, 'sf', 8) + T(272, 25, 'he · she · it', {s: 11, w: 800, c: 'tp'}) + T(272, 38, 'ganha -s / does', {s: 10, c: 'mt'}) +
+  linhas([['afirma', 'I work.', `She work${HL('s')}.`], ['nega', `I ${HL("don't")} work.`, `She ${HL("doesn't")} work.`], ['pergunta', `${HL('Do')} you work?`, `${HL('Does')} she work?`]], ([l, a, b], i) => { const y = 52 + i * 38;
+    return (i % 2 === 0 ? R(8, y, 324, 34, 'bg', 6) : '') + T(14, y + 22, l, {a: 'start', s: 11, c: 'mt', w: 800}) + T(145, y + 22, '', {s: 12.5}, a) + T(272, y + 22, '', {s: 12.5}, b); }))},
+ing6: {cap: 'Onde está a bolinha? in = dentro, on = em cima, under = embaixo, next to = ao lado.', d: () => {
+  const bola = (cx, cy) => C(cx, cy, 8, 'mkr');
+  const quadro = (x, k, w, pt) => {
+    let s = R(x, 8, 76, 124, 'bx', 10) + L(x + 8, 96, x + 68, 96);
+    if (k === 0) s += R(x + 18, 54, 40, 42, 'sf', 3) + bola(x + 38, 80);
+    if (k === 1) s += R(x + 18, 54, 40, 42, 'sf', 3) + bola(x + 38, 46);
+    if (k === 2) s += R(x + 14, 46, 48, 18, 'sf', 3) + L(x + 18, 64, x + 18, 96, 'lp') + L(x + 58, 64, x + 58, 96, 'lp') + bola(x + 38, 88);
+    if (k === 3) s += R(x + 8, 54, 40, 42, 'sf', 3) + bola(x + 60, 88);
+    return s + T(x + 38, 114, w, {s: 13, w: 800, c: 'tp'}) + T(x + 38, 127, pt, {s: 10.5, c: 'mt'});
+  };
+  return SV(340, 200, 'Bolinha dentro, em cima, embaixo e ao lado de uma caixa: in, on, under e next to; there is e there are',
+    linhas([['in', 'dentro'], ['on', 'em cima'], ['under', 'embaixo'], ['next to', 'ao lado']], ([w, pt], k) => quadro(10 + k * 82, k, w, pt)) +
+    B2(10, 142, 156, 50, 'There is a printer.', 'há uma (1 coisa)', 'bx', {s: 12}, {s: 10.5}) +
+    B2(174, 142, 156, 50, 'There are 2 printers.', 'há várias (2 ou mais)', 'bx', {s: 12}, {s: 10.5}));
+}},
+ing7: {cap: 'Presente contínuo = am, is ou are + verbo com ‑ing. Serve para o que está acontecendo agora.', d: () => SV(340, 200, 'Fórmula am, is, are mais verbo com ing, com três exemplos',
+  B(10, 12, 130, 40, 'am · is · are', 'sf', {s: 14, w: 800, c: 'tp'}) + T(160, 39, '+', {s: 20, w: 800, c: 'mt'}) + B(180, 12, 150, 40, 'verbo + -ing', 'pn', {s: 14, w: 800, c: 'tw'}) +
+  linhas([[`I ${HL('am')} work${HL('ing')} now.`, 'estou trabalhando'], [`She ${HL('is')} talk${HL('ing')}.`, 'ela está falando'], [`They ${HL('are')} wait${HL('ing')}.`, 'eles estão esperando']], ([e, p], i) => { const y = 64 + i * 34;
+    return (i % 2 === 0 ? R(8, y, 324, 30, 'bg', 6) : '') + T(18, y + 20, '', {a: 'start', s: 13}, e) + T(322, y + 20, p, {a: 'end', s: 11, c: 'mt'}); }) +
+  C(30, 180, 12, 'sf') + L(30, 180, 30, 172, 'lp') + L(30, 180, 36, 184, 'lp') + T(52, 185, 'Use para o que está acontecendo AGORA.', {a: 'start', s: 12.5, w: 700}))},
+ing8: {cap: 'Passado simples: regulares ganham ‑ed; irregulares têm forma própria (essas é preciso decorar).', d: () => SV(340, 246, 'Linha do tempo com passado e agora, e listas de verbos regulares e irregulares',
+  R(12, 16, 214, 24, 'sf', 12) + T(119, 32, 'passado: yesterday, last week', {s: 11.5, w: 700, c: 'tp'}) + A(12, 50, 330, 50) + C(280, 50, 6, 'pn') + T(280, 34, 'agora', {s: 11.5, w: 800}) +
+  R(10, 66, 155, 132, 'bx', 10) + T(87, 88, 'Regulares: + ed', {s: 12.5, w: 800, c: 'tp'}) +
+  linhas([['work', 'work'], ['call', 'call'], ['start', 'start']], ([a, b], i) => T(87, 114 + i * 22, '', {s: 13}, `${esc(a)} → ${esc(b)}${HL('ed')}`)) +
+  R(175, 66, 155, 132, 'bx', 10) + T(252, 88, 'Irregulares', {s: 12.5, w: 800, c: 'tp'}) +
+  linhas([['go', 'went'], ['have', 'had'], ['see', 'saw'], ['buy', 'bought']], ([a, b], i) => T(252, 112 + i * 22, '', {s: 13}, `${esc(a)} → ${HL(b)}`)) +
+  B(10, 208, 320, 30, "Negativa: I didn't go · Pergunta: Did you go?", 'sf', {s: 12}))},
+ing9: {cap: 'Will: decisão na hora ou previsão. Going to: plano que já estava decidido.', d: () => {
+  const card = (x, ic, t, d1, d2, e1, e2) => R(x, 8, 155, 200, 'bx', 12) + ic + T(x + 77.5, 92, t, {s: 18, w: 800, c: 'tp'}) + T(x + 77.5, 112, d1, {s: 11.5, c: 'mt'}) + T(x + 77.5, 127, d2, {s: 11.5, c: 'mt'}) +
+    R(x + 8, 140, 139, 60, 'bg', 8) + T(x + 77.5, 165, e1, {s: 12.5}) + T(x + 77.5, 186, e2, {s: 12.5});
+  const lampada = x => linhas([[-24, 22, -29, 17], [0, 14, 0, 7], [24, 22, 29, 17]], ([a, b, c, d]) => L(x + a, b, x + c, d, 'lt')) + C(x, 40, 16, 'mkr') + R(x - 7, 57, 14, 9, 'pn', 2);
+  const agenda = x => R(x - 22, 24, 44, 42, 'bx', 5) + R(x - 22, 24, 44, 12, 'pn', 4) + L(x - 10, 19, x - 10, 28, 'lp') + L(x + 10, 19, x + 10, 28, 'lp') + P(`M${x - 9} 50l6 6 12-12`, 'lp');
+  return SV(340, 216, 'Dois cartões: will para decisão na hora e previsão, going to para plano já decidido',
+    card(10, lampada(87.5), 'will', 'decisão na hora', 'ou previsão', 'I will help you.', 'It will rain.') +
+    card(175, agenda(252.5), 'going to', 'plano já decidido', '(já tinha combinado)', "I'm going to", 'study tonight.'));
+}},
+ing10: {cap: 'Comparar: ‑er ou more (mais) e ‑est ou most (o mais). Modais: can = pode, should = deveria, must = precisa.', d: () => SV(340, 212, 'Barras crescentes big, bigger, the biggest; modais can, should, must; e os irregulares good, better, the best',
+  T(88, 20, 'Comparar', {s: 12, w: 800, c: 'mt'}) + L(10, 122, 166, 122) +
+  linhas([[16, 30, 'big'], [62, 56, 'bigger'], [116, 84, 'the biggest']], ([x, h, t], i) => R(x, 122 - h, 34, h, i === 2 ? 'mk' : 'pn', 3) + T(x + 17, 138, t, {s: 11, w: 700})) +
+  T(255, 20, 'Modais', {s: 12, w: 800, c: 'mt'}) +
+  B(180, 30, 150, 28, 'can = pode', 'sf', {s: 12.5, w: 700}) + B(180, 64, 150, 28, 'should = deveria', 'sf', {s: 12.5, w: 700}) + B(180, 98, 150, 28, 'must = precisa', 'pn', {s: 12.5, w: 800, c: 'tw'}) +
+  B(10, 154, 320, 50, 'good → better → the best\nimportant → more important → the most important', 'bx', {s: 11.5}))},
+};
+})();
 function texto(s, rev){ return esc(s).replace(/\n/g, '<br>').replace(/⟦(.+?)⟧/g, rev ? '<mark>$1</mark>' : '$1'); }
 const paras = s => s.split('\n\n').map(p => `<p>${rich(p)}</p>`).join('');
 const fmtD = k => { const d = parseKey(k); return d.getDate() + '/' + (d.getMonth() + 1); };
@@ -955,6 +1355,7 @@ function viewAula(){
     <p class="eyebrow">Em uma frase</p>
     <p class="frase">${rich(a.frase)}</p>
     <section class="card"><p class="eyebrow">O essencial</p><ul class="ess">${a.ess.map(e => `<li>${rich(e)}</li>`).join('')}</ul></section>
+    ${FIGS[a.id] ? `<figure class="fig">${FIGS[a.id].d()}<figcaption>${esc(FIGS[a.id].cap)}</figcaption></figure>` : ''}
     ${aberto ? `<section class="mais"><p class="eyebrow">Explicação completa</p>${paras(a.mais)}</section><button class="link" data-act="mais">Esconder a explicação</button>`
       : '<button class="ghost" data-act="mais">Quero entender melhor</button>'}
     <section><p class="eyebrow">Exemplo</p><p class="exemplo">${rich(a.ex)}</p></section>
