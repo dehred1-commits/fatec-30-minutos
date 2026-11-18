@@ -159,6 +159,25 @@ mark{color:var(--mark-ink);background-color:transparent;background-image:linear-
 .chip-btn{appearance:none;border:1px solid var(--line);background:var(--card);color:var(--ink);font:600 .85rem var(--f-mono);padding:8px 12px;border-radius:99px;cursor:pointer;min-height:40px}
 .chip-btn.done{color:var(--ok)}
 .chip-btn.on{background:var(--pen);border-color:var(--pen);color:var(--on-pen)}
+/* escolher a matéria do dia */
+.picker{display:flex;flex-direction:column;gap:8px}
+.pick{appearance:none;display:flex;align-items:center;gap:10px;width:100%;text-align:left;border:1.5px solid var(--line);background:var(--card);color:var(--ink);border-radius:12px;padding:10px 12px;font:inherit;cursor:pointer;min-height:54px}
+.pick .t{flex:1;min-width:0;display:flex;flex-direction:column;gap:1px}
+.pick .t b{font-size:.98rem;line-height:1.25}
+.pick .t small{color:var(--muted);font-size:.8rem}
+.pick.on{border-color:var(--pen);background:var(--pen-soft)}
+.pick.on .t b{color:var(--pen)}
+.pick .rd{width:20px;height:20px;border-radius:50%;border:2px solid var(--line);flex:none;display:grid;place-items:center}
+.pick.on .rd{border-color:var(--pen)}
+.pick.on .rd::after{content:"";width:10px;height:10px;border-radius:50%;background:var(--pen)}
+.flags{display:flex;flex-direction:column;align-items:flex-end;gap:4px;flex:none}
+.flag{display:inline-block;font:700 .62rem var(--f-mono);letter-spacing:.06em;padding:3px 6px;border-radius:4px;flex:none;vertical-align:2px}
+.flag.foco{background:var(--pen);color:var(--on-pen)}
+.flag.sug{background:var(--mark);color:var(--mark-ink)}
+.foco-card{border:1.5px solid var(--mark);box-shadow:inset 5px 0 0 var(--mark)}
+.dica-dia{background:var(--pen-soft);border-radius:10px;padding:10px 12px;margin:0}
+details.mais-mat summary{cursor:pointer;font-weight:600;color:var(--pen);padding:6px 0}
+details.mais-mat[open] summary{margin-bottom:8px}
 .cartao-head{display:flex;justify-content:space-between;align-items:center;gap:10px}
 .crows{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
 .crow{display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid var(--line);flex-wrap:wrap}
@@ -232,7 +251,7 @@ document.documentElement.lang = 'pt-BR';
 const CDN = 'https://cdn.cebraspe.org.br/concursos/';
 const DIAS = ['domingo','segunda-feira','terça-feira','quarta-feira','quinta-feira','sexta-feira','sábado'];
 const MES = ['jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez'];
-const MAT = {T:'Legislação de trânsito',P:'Português',R:'Raciocínio lógico',N:'Informática',F:'Física',E:'Ética',G:'Geopolítica',I:'Língua estrangeira',
+const MAT = {T:'Legislação de trânsito',P:'Português',R:'Matemática e Raciocínio lógico',N:'Informática',F:'Física',E:'Ética',G:'Geopolítica',I:'Língua estrangeira',
   A:'Direito Administrativo',C:'Direito Constitucional',D:'Direito Penal',K:'Processo Penal',L:'Legislação especial',H:'Direitos Humanos'};
 const ABR = {T:'Trân',P:'Port',R:'RLM',N:'Info',F:'Fís',E:'Ética',G:'Geo',I:'Ing',A:'Adm',C:'Const',D:'Penal',K:'PPen',L:'Esp',H:'DH'};
 const ORDEM = ['T','P','R','N','F','E','G','I','A','C','D','K','L','H'];
@@ -262,9 +281,9 @@ EDS.forEach(e => { e.s = ''; for (let q = 1; q <= 120; q++){ const f = e.faixas.
 const DICA_MAT = {
   T:'Revise os números do CTB: velocidades por tipo de via, pontos para suspensão, prazos e natureza das infrações. A banca troca um número e o item vira Errado.',
   P:'Volte ao texto antes de julgar. Em reescrita, confira duas coisas separadas: a correção gramatical e o sentido.',
-  R:'Escreva a estrutura lógica (p → q, "todo", "algum") antes de julgar. Negação de "todo" é "algum não".',
+  R:'Na lógica, escreva a estrutura (p → q, "todo", "algum") antes de julgar; negação de "todo" é "algum não". Nas contas, ache primeiro o valor de 1 unidade e confira a resposta voltando ao enunciado.',
   N:'Segurança da informação é o tema que mais volta: tipos de malware, firewall, nuvem e navegação.',
-  F:'Separe as componentes do movimento e lembre que, sem resistência do ar, a aceleração é sempre g.',
+  F:'Anote os dados com unidade e converta antes de calcular (km/h ÷ 3,6 = m/s). Sem resistência do ar, a aceleração é sempre g; energia cinética e distância de frenagem crescem com o quadrado da velocidade.',
   E:'O Código de Ética do servidor federal (Decreto 1.171/1994) responde a maioria dos itens.',
   G:'Pense em transporte e território: rodovias, cargas, metrópoles e integração regional.',
   I:'Os itens vêm em inglês, mas são de interpretação. Procure no texto o trecho exato que o item cita.',
@@ -319,13 +338,27 @@ const TEMAS = [
   {t:'Excesso de peso e transporte irregular de cargas nas rodovias federais', a:['os riscos para a segurança viária e para o pavimento','a atuação da PRF na fiscalização','medidas de prevenção junto ao setor de transporte']}
 ];
 
-const FOCO = {
-  1:{nome:'Trânsito e Português',areas:['T','P']},
-  2:{nome:'Direito Administrativo, Constitucional e Ética',areas:['A','C','E']},
-  3:{nome:'Trânsito, lógica e Física',areas:['T','R','F']},
-  4:{nome:'Penal, Processo Penal, Legislação especial e Direitos Humanos',areas:['D','K','L','H']},
-  5:{nome:'Trânsito, Informática, Geopolítica e Inglês',areas:['T','N','G','I']}
-};
+// Foco principal: as matérias em que ela tem mais dificuldade e que mais vão ser trabalhadas nas aulas.
+// Ganham 3 dos 5 dias de sugestão e mais itens no app.
+const FOCO_AREAS = ['R', 'F'];
+// Opções para escolher a matéria do dia. A sugestão é só uma dica: quem decide é quem está estudando (ou dando a aula).
+const OPC = [
+  {k:'R', nome:'Matemática e Raciocínio lógico', areas:['R'], foco:1},
+  {k:'F', nome:'Física', areas:['F'], foco:1},
+  {k:'RF', nome:'Matemática, Raciocínio e Física juntos', areas:['R', 'F'], foco:1, dica:'Alterne: um item de conta, um de lógica, um de Física. Em todos, escreva os dados antes de calcular e confira a unidade pedida.'},
+  {k:'T', nome:'Legislação de trânsito', areas:['T']},
+  {k:'P', nome:'Português', areas:['P']},
+  {k:'DIR', nome:'Direito e Direitos Humanos', areas:['A', 'C', 'D', 'K', 'L', 'H'], dica:'Estude em pares parecidos: anular × revogar, concussão × corrupção, flagrante próprio × impróprio. A banca troca um pelo outro.'},
+  {k:'N', nome:'Informática', areas:['N']},
+  {k:'EGI', nome:'Ética, Geopolítica e Inglês', areas:['E', 'G', 'I'], dica:'Itens curtos e de leitura: volte ao texto ou à regra antes de julgar.'},
+  {k:'MIX', nome:'Um pouco de tudo, com revisões', areas:ORDEM.slice(), dica:'Comece pelas revisões (os itens que você errou) e depois faça os novos.'}
+];
+const OPCM = Object.fromEntries(OPC.map(o => [o.k, o]));
+// Sugestão da semana: segunda, quarta e quinta são de foco. Sexta alterna Português e Direito.
+const SUGESTAO = {1:'R', 2:'T', 3:'F', 4:'RF', 5:'P', 6:'RF', 0:'RF'};
+const MOTIVO = {R:'Dia de foco: é uma das matérias em que você tem mais dificuldade.', F:'Dia de foco: é uma das matérias em que você tem mais dificuldade.',
+  RF:'Dia de foco: as matérias em que você tem mais dificuldade, juntas.', T:'Legislação de trânsito é o maior bloco da prova (30 itens em 2021).',
+  P:'Português teve 18 itens em 2021.', DIR:'O bloco III, de Direito, teve 35 itens em 2021.'};
 
 // Itens inéditos no estilo Cebraspe. ⟦…⟧ marca a palavra que decide o item; ela aparece grifada depois da resposta.
 const TX_ESTRADA = 'A rodovia não perdoa a pressa. Quem viaja à noite conhece o cansaço que chega sem aviso: os olhos pesam, as faixas se confundem e, por alguns segundos, o motorista deixa de estar ali. Esses segundos bastam para que um carro cruze a pista contrária. Por isso, especialistas recomendam parar a cada duas horas de viagem, ainda que o destino pareça próximo.';
@@ -608,6 +641,26 @@ const Q = [
  p:`Consumo: 240 ÷ 20 = 12 km por litro. Com 25 litros: 12 × 25 = 300 km.`,pi:`Ache o consumo por litro primeiro.`,d:`Na regra de três, encontre a taxa por unidade (km por litro) e só depois multiplique.`},
 {id:'r10',a:'R',t:'Contagem',q:`Numa equipe de 5 policiais, o número de maneiras de escolher 2 para uma patrulha, sem importar a ordem, é ⟦10⟧.`,g:'C',
  p:`Combinação de 5 tomados 2 a 2: (5 × 4) ÷ 2 = 10.`,pi:`"Sem importar a ordem" = combinação: divide pela troca de posições.`,d:`Ordem importa (cargos diferentes) = arranjo. Ordem não importa (grupo) = combinação.`},
+{id:'r11',a:'R',t:'Porcentagem',q:`Se o número de acidentes em um trecho aumentou 10% em um ano e mais 10% no ano seguinte, o aumento total nos dois anos foi de ⟦20%⟧.`,g:'E',
+ p:`Partindo de 100 acidentes: +10% dá 110; +10% de 110 dá 121. O aumento total foi de 21%, e não de 20%.`,pi:`O segundo aumento é sobre 110, e não sobre 100.`,d:`Aumentos e descontos sucessivos não se somam: multiplique os fatores (1,1 × 1,1 = 1,21).`},
+{id:'r12',a:'R',t:'Regra de três inversa',q:`Se 6 policiais fiscalizam um trecho em 8 horas, então 4 policiais, no mesmo ritmo, fiscalizarão o mesmo trecho em ⟦12 horas⟧.`,g:'C',
+ p:`Menos policiais levam mais tempo (grandezas inversas). Trabalho total: 6 × 8 = 48 horas-policial. Com 4: 48 ÷ 4 = 12 horas.`,pi:`Menos gente, mais tempo: é inversa.`,d:`Na regra de três inversa, multiplique (pessoas × tempo) e divida pelo novo número de pessoas. Confira se o resultado faz sentido.`},
+{id:'r13',a:'R',t:'Equação do 1º grau',q:`Numa operação, foram multados 50 veículos, entre carros e motos. Se havia 14 carros a mais que motos, então ⟦32⟧ dos veículos multados eram carros.`,g:'C',
+ p:`Motos = m; carros = m + 14. m + m + 14 = 50 → 2m = 36 → m = 18 motos. Carros: 18 + 14 = 32.`,pi:`"14 a mais que" vira soma: carros = motos + 14.`,d:`Monte a equação com uma letra só e confira no fim: 32 + 18 = 50 e 32 − 18 = 14.`},
+{id:'r14',a:'R',t:'Sequências',q:`Na sequência 3, 7, 11, 15, …, o 20º termo é ⟦83⟧.`,g:'E',
+ p:`É uma progressão aritmética de razão 4. Do 1º ao 20º termo há 19 saltos: 3 + 19 × 4 = 3 + 76 = 79.`,pi:`83 sai de multiplicar 4 por 20; o certo é por 19.`,d:`Termo geral da PA: aₙ = a₁ + (n − 1) · r. O erro mais comum é usar n no lugar de n − 1.`},
+{id:'r15',a:'R',t:'Negação',q:`A negação de "Algum motorista estava sem cinto" é ⟦"Nenhum motorista estava sem cinto"⟧.`,g:'C',
+ p:`Para negar "algum é", basta dizer que nenhum é. Se nenhum estava sem cinto, a frase original fica falsa.`,pi:`Algum ↔ nenhum.`,d:`Pares de negação: "todo" ↔ "algum… não"; "algum" ↔ "nenhum".`},
+{id:'r16',a:'R',t:'Condicional',q:`A proposição "Se o veículo está acima do peso, então ele é autuado" é falsa quando o veículo está acima do peso e ⟦não é autuado⟧.`,g:'C',
+ p:`A condicional "se p, então q" só é falsa quando p é verdadeira e q é falsa: estava acima do peso (p verdadeira) e não foi autuado (q falsa).`,pi:`Verdadeiro → falso é o único caso falso.`,d:`Se a primeira parte for falsa, a condicional é sempre verdadeira, qualquer que seja a segunda.`},
+{id:'r17',a:'R',t:'Função afim',q:`Uma empresa de guincho cobra R$ 80 fixos mais R$ 4 por quilômetro. Para levar um veículo por 25 km, o valor cobrado é ⟦R$ 200⟧.`,g:'E',
+ p:`Valor = 80 + 4 × 25 = 80 + 100 = R$ 180.`,pi:`4 × 25 = 100; somando o fixo, 180.`,d:`Função afim: valor = fixo + taxa × quantidade. Faça a multiplicação antes da soma.`},
+{id:'r18',a:'R',t:'Probabilidade',q:`Em um pátio há 10 veículos apreendidos, dos quais 4 são motos. Escolhendo-se um ao acaso, a probabilidade de ⟦não ser moto⟧ é de 40%.`,g:'E',
+ p:`Os que não são motos são 6 de 10: probabilidade de 60%. Os 40% são a chance de ser moto.`,pi:`"Não ser moto" são os outros 6.`,d:`Probabilidade do contrário: P(não A) = 1 − P(A). Leia com atenção se o item pede o evento ou o contrário dele.`},
+{id:'r19',a:'R',t:'Média ponderada',q:`Um candidato tirou 6 na prova objetiva, que tem peso 2, e 9 na discursiva, que tem peso 1. A média ponderada dele é ⟦7,5⟧.`,g:'E',
+ p:`(6 × 2 + 9 × 1) ÷ (2 + 1) = 21 ÷ 3 = 7. O 7,5 seria a média simples, (6 + 9) ÷ 2.`,pi:`Com pesos, divide-se pela soma dos pesos (3).`,d:`Média ponderada: some (nota × peso) e divida pela soma dos pesos.`},
+{id:'r20',a:'R',t:'Equivalência',q:`A proposição "Não é verdade que o motorista bebeu e dirigiu" é equivalente a ⟦"O motorista não bebeu ou não dirigiu"⟧.`,g:'C',
+ p:`Negar "p e q" dá "não p ou não q" (lei de De Morgan).`,pi:`Ao negar, o "e" vira "ou".`,d:`De Morgan: negação de "p e q" = "não p ou não q"; negação de "p ou q" = "não p e não q".`},
 
 {id:'n6',a:'N',t:'Segurança',q:`Phishing é uma técnica que busca ⟦enganar o usuário⟧, geralmente por mensagens ou páginas falsas, para obter senhas e dados pessoais.`,g:'C',
  p:`É a definição de phishing: "pescar" dados com iscas falsas, como e-mails de bancos que não existem.`,pi:`Engenharia social com mensagem falsa.`,d:`Phishing depende de enganar a pessoa, e não de invadir o sistema. A melhor defesa é desconfiar de links e pedidos de dados.`},
@@ -629,6 +682,26 @@ const Q = [
  pi:`Quantidade de movimento se conserva; energia cinética, não.`,d:`Colisão inelástica (seguem juntos): conserva quantidade de movimento, perde energia cinética.`},
 {id:'f7',a:'F',t:'Unidades',q:`Um carro a 72 km/h percorre ⟦72 metros⟧ a cada segundo.`,g:'E',
  p:`Para passar de km/h para m/s, divida por 3,6: 72 ÷ 3,6 = 20 m/s.`,pi:`km/h ÷ 3,6 = m/s.`,d:`Conversões que mais caem: km/h ÷ 3,6 = m/s; m/s × 3,6 = km/h.`},
+{id:'f8',a:'F',t:'Velocidade média',q:`Um veículo a 90 km/h constantes percorre 45 km em ⟦30 minutos⟧.`,g:'C',
+ p:`t = d ÷ v = 45 ÷ 90 = 0,5 h = 30 minutos.`,pi:`45 km é metade do que ele anda em 1 hora.`,d:`v = d ÷ t. Cuidado: 0,5 h são 30 minutos, e não 50.`},
+{id:'f9',a:'F',t:'Frenagem',q:`Mantidas as condições da pista e dos freios, se a velocidade de um carro dobra, a distância necessária para pará-lo também ⟦dobra⟧.`,g:'E',
+ p:`Pela equação de Torricelli, a distância de frenagem é proporcional ao quadrado da velocidade: dobrar a velocidade multiplica a distância por 4.`,pi:`A distância depende de v², e não de v.`,d:`Velocidade × 2 → distância de frenagem × 4; velocidade × 3 → × 9. É um dos motivos dos limites de velocidade.`},
+{id:'f10',a:'F',t:'2ª lei de Newton',q:`Para que um veículo de 1.200 kg acelere a 2 m/s², a força resultante sobre ele deve ser de ⟦2.400 N⟧.`,g:'C',
+ p:`F = m · a = 1.200 × 2 = 2.400 N.`,pi:`Força resultante = massa × aceleração.`,d:`2ª lei de Newton: F = m · a. Com massa em kg e aceleração em m/s², a força sai em newtons (N).`},
+{id:'f11',a:'F',t:'Aceleração',q:`Um carro passa de 0 a 108 km/h em 10 segundos. Sua aceleração média é de ⟦10,8 m/s²⟧.`,g:'E',
+ p:`Primeiro converta: 108 km/h ÷ 3,6 = 30 m/s. Aceleração = 30 ÷ 10 = 3 m/s². O 10,8 sai de não converter km/h para m/s.`,pi:`km/h precisa virar m/s antes da divisão.`,d:`Aceleração = variação da velocidade ÷ tempo. Com tempo em segundos, a velocidade tem que estar em m/s.`},
+{id:'f12',a:'F',t:'Lançamento horizontal',q:`Duas pedras são soltas da mesma altura no mesmo instante: uma é apenas largada e a outra é lançada na horizontal. Desprezada a resistência do ar, a pedra lançada chega ao chão ⟦depois⟧ da outra.`,g:'E',
+ p:`As duas começam com velocidade vertical zero e caem com a mesma aceleração g. Por isso chegam juntas. A velocidade horizontal só muda o lugar onde a pedra cai.`,pi:`O movimento na horizontal não interfere na queda.`,d:`No lançamento horizontal, o tempo de queda depende só da altura.`},
+{id:'f13',a:'F',t:'Peso e massa',q:`Um policial de 80 kg tem, na Terra (g = 10 m/s²), peso de ⟦800 N⟧.`,g:'C',
+ p:`Peso = massa × gravidade = 80 × 10 = 800 N.`,pi:`P = m · g.`,d:`Massa (kg) é a mesma em qualquer lugar; peso (N) depende da gravidade do local.`},
+{id:'f14',a:'F',t:'Potência',q:`Um motor que realiza um trabalho de 60.000 J em 20 segundos desenvolve potência de ⟦3.000 W⟧.`,g:'C',
+ p:`Potência = trabalho ÷ tempo = 60.000 ÷ 20 = 3.000 W, ou 3 kW.`,pi:`Potência é energia por segundo.`,d:`1 W = 1 J por segundo. Mais potência é a mesma energia em menos tempo.`},
+{id:'f15',a:'F',t:'Inércia',q:`O uso do cinto de segurança se explica pela ⟦inércia⟧: numa freada brusca, o corpo tende a continuar em movimento.`,g:'C',
+ p:`É a 1ª lei de Newton: sem uma força que o segure, o corpo mantém o movimento que tinha. O cinto é essa força.`,pi:`Inércia = tendência de manter o movimento.`,d:`1ª lei (inércia): sem força resultante, o corpo fica parado ou segue em linha reta com velocidade constante.`},
+{id:'f16',a:'F',t:'Ação e reação',q:`Na colisão entre um caminhão e um carro, a força que o caminhão faz no carro é ⟦maior que⟧ a força que o carro faz no caminhão.`,g:'E',
+ p:`Pela 3ª lei de Newton, as duas forças têm a mesma intensidade e sentidos opostos. O carro sofre mais porque tem menos massa e, por isso, maior aceleração (a = F ÷ m).`,pi:`Ação e reação são sempre iguais em intensidade.`,d:`3ª lei: forças iguais e opostas, em corpos diferentes. O que muda com a massa é o efeito (a aceleração).`},
+{id:'f17',a:'F',t:'Curvas',q:`Um veículo faz uma curva de raio 50 m a 20 m/s. Sua aceleração centrípeta é de ⟦8 m/s²⟧.`,g:'C',
+ p:`a = v² ÷ R = 20² ÷ 50 = 400 ÷ 50 = 8 m/s².`,pi:`Aceleração centrípeta = v² ÷ R.`,d:`Na curva, dobrar a velocidade quadruplica a aceleração centrípeta, e o atrito pode não dar conta.`},
 
 {id:'e3',a:'E',t:'Código de Ética',q:`Segundo o Código de Ética do servidor federal, é vedado ao servidor ⟦usar o cargo⟧ para obter favorecimento para si ou para outrem.`,g:'C',
  p:`É uma das vedações do Decreto 1.171/1994.`,pi:`Usar o cargo em benefício próprio é vedado.`,d:`As vedações do Código de Ética giram em torno de não usar a função para vantagem pessoal e não prejudicar o cidadão.`},
@@ -707,6 +780,7 @@ const Q = [
  pi:`Primeira geração = liberdade.`,d:`Gerações seguem o lema da Revolução Francesa: liberdade, igualdade, fraternidade.`}
 ];
 const QM = Object.fromEntries(Q.map(q => [q.id, q]));
+const QG = Q;
 
 /* ---------- utilidades ---------- */
 const $ = s => document.querySelector(s);
@@ -727,7 +801,7 @@ const NOME_G = {C:'CERTO', E:'ERRADO'};
 /* ---------- progresso salvo neste aparelho ---------- */
 const KEY = 'prf30-v1';
 // log: cada resposta [data, id, acertou 1/0, marcou C/E/B, origem dia/sim, chute 1/0]; ses: resumo de cada sessão. Usados no relatório.
-const fresh = () => ({v:1, start:today(), exam:'', days:{}, qs:{}, ar:{}, red:{}, pr:{}, sims:[], log:[], ses:[], autoEnd:true, nome:''});
+const fresh = () => ({v:1, start:today(), exam:'', days:{}, qs:{}, ar:{}, red:{}, pr:{}, sims:[], log:[], ses:[], autoEnd:true, nome:'', hoje:null});
 function load(){ try { const s = JSON.parse(localStorage.getItem(KEY)); if (s && s.v === 1) return Object.assign(fresh(), s); } catch (e) {} return fresh(); }
 let S = load();
 function save(){ try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
@@ -768,8 +842,8 @@ function prStats(id){
 /* ---------- sessões ---------- */
 let tab = 'hoje', sess = null, sim = null, provaSel = null, resetArm = false;
 
-function pickDaily(areas, n, rev){
-  const t = today(), pick = [];
+function pickDaily(areas, n, rev, so){
+  const t = today(), pick = [], Q = so ? QG.filter(q => areas.includes(q.a)) : QG;
   const add = list => { for (const q of list){ if (pick.length >= n) break; if (!pick.includes(q.id)) pick.push(q.id); } };
   add(shuffle(Q.filter(q => { const r = S.qs[q.id]; return r && r.due && r.due <= t; })).slice(0, rev ? n : 4));
   const seen = Q.filter(q => S.qs[q.id]).sort((x, y) => {
@@ -784,9 +858,9 @@ function pickDaily(areas, n, rev){
   (rev ? [seen, novos] : [novosFoco, novos, seen]).forEach(add);
   return shuffle(pick);
 }
-function startDaily(n, areas, rev){
-  const t = today(), ids = pickDaily(areas, n, rev);
-  sess = {ids, i:0, res:[], chosen:null, revealed:false, t0:Date.now(), end:false, rev:!!rev,
+function startDaily(n, areas, rev, so, m){
+  const t = today(), ids = pickDaily(areas, n, rev, so);
+  sess = {ids, i:0, res:[], chosen:null, revealed:false, t0:Date.now(), end:false, rev:!!rev, m:m || '',
     tags: ids.map(id => { const r = S.qs[id]; return r && r.due && r.due <= t ? 'REVISÃO' : r ? 'REPETIDO' : ''; })};
   render(); scrollTo(0, 0);
 }
@@ -840,24 +914,62 @@ function viewHome(){
       <p class="sub">O edital ainda não saiu. A previsão dos cursinhos é edital no fim de 2026 e prova no início de 2027, de novo com o Cebraspe. Estudar agora é largar na frente.</p></header>`;
   }
   let card;
-  if (wd === 6) card = cardSabado(t);
-  else if (wd === 0) card = cardDomingo(t);
-  else card = cardDia(t, wd);
+  if (wd === 6) card = cardSabado(t) + cardEscolha(t, wd, true);
+  else if (wd === 0) card = cardDomingo(t) + cardEscolha(t, wd, true);
+  else card = cardEscolha(t, wd, false);
+  card += cardFoco();
   const tip = TIPS[((diffDays('2026-01-01', t) % TIPS.length) + TIPS.length) % TIPS.length];
   const dataCard = `<section class="card"><p class="eyebrow">Data da prova</p>
     <p class="meta">${S.exam ? 'Data marcada. Se o edital mudar, é só trocar.' : 'Quando o edital sair, marque aqui a data da prova objetiva e o app passa a contar os dias.'}</p>
     <div class="row"><label for="exam-date" class="meta">Prova objetiva:</label><input type="date" id="exam-date" value="${S.exam || ''}"></div></section>`;
   return hero + card + calendario() + `<section class="card tip"><p class="eyebrow">Dica do dia · tirada das 3 últimas provas</p><p class="tiptx">${esc(tip)}</p></section>` + dataCard;
 }
-function cardDia(t, wd){
-  const f = FOCO[wd], d = S.days[t], done = studied(t);
+// matéria do dia: a sugestão é uma dica; a escolha fica com quem estuda ou dá a aula
+function sugestao(t){
+  const wd = parseKey(t).getDay();
+  if (wd === 5) return Math.floor(diffDays('2026-11-02', t) / 7) % 2 ? 'DIR' : 'P';
+  return SUGESTAO[wd];
+}
+function escolhaHoje(t){ return S.hoje && S.hoje.d === t && OPCM[S.hoje.k] ? S.hoje.k : sugestao(t); }
+function itensDe(o){ return o.k === 'MIX' ? Q.length : Q.filter(q => o.areas.includes(q.a)).length; }
+function dicaDe(o){ return o.dica || DICA_MAT[o.areas[0]]; }
+// acerto somando os itens do app e as provas oficiais corrigidas
+function acertoDe(areas){
+  let n = 0, ok = 0;
+  areas.forEach(c => { const a = S.ar[c]; if (a){ n += a.n; ok += a.ok; } });
+  EDS.forEach(e => { const st = S.pr[e.id]; if (!st) return; for (const q in st.c){ const a = st.a[q], k = e.k[+q - 1]; if (!areas.includes(e.s[+q - 1]) || !a || k === 'X') continue; n++; if (a === k) ok++; } });
+  return {n, ok, p:n ? pct(ok, n) : null};
+}
+function cardEscolha(t, wd, fds){
+  const sug = sugestao(t), k = escolhaHoje(t), o = OPCM[k], d = S.days[t], done = studied(t), n = Math.min(12, itensDe(o));
+  const opt = x => `<button class="pick${x.k === k ? ' on' : ''}" data-act="escolher" data-k="${x.k}" aria-pressed="${x.k === k}"><span class="rd" aria-hidden="true"></span>
+    <span class="t"><b>${esc(x.nome)}</b><small>${x.k === 'MIX' ? 'revisões e matérias variadas' : itensDe(x) + ' itens no app'}</small></span>
+    <span class="flags">${x.foco ? '<span class="flag foco">FOCO</span>' : ''}${x.k === sug ? '<span class="flag sug">SUGESTÃO</span>' : ''}</span></button>`;
+  const r = acertoDe(['R']), f = acertoDe(['F']);
+  const fraca = r.n >= 4 && f.n >= 4 && r.p !== f.p ? (r.p < f.p ? `Pelo seu acerto, a mais fraca agora é Matemática e Raciocínio lógico (${r.p}%, contra ${f.p}% em Física).` : `Pelo seu acerto, a mais fraca agora é Física (${f.p}%, contra ${r.p}% em Matemática e Raciocínio lógico).`) : '';
   return `<section class="card today-card">
-    <p class="eyebrow">Hoje · ${DIAS[wd]}</p>
-    <h2>${f.nome}</h2>
-    <p class="meta">12 itens de certo ou errado no estilo Cebraspe. Depois de cada um, a palavra que decide o item aparece grifada. Cerca de 30 minutos; os que você errar voltam amanhã.</p>
-    ${done && d ? `<p class="done-line">✓ Sessão de hoje feita${d.q ? `: ${d.ok} de ${d.q} certos` : ''}.</p>` : ''}
-    <button class="primary" data-act="start" data-n="12">${done ? 'Fazer mais 12 itens' : 'Começar sessão de 30 min'}</button>
+    <p class="eyebrow">${fds ? 'Ou estude uma matéria hoje' : `Hoje · ${DIAS[wd]} · você escolhe a matéria`}</p>
+    <h2>${esc(o.nome)}</h2>
+    <p class="meta"><b>Sugestão de hoje: ${esc(OPCM[sug].nome)}.</b> ${MOTIVO[sug] || ''} ${fraca} A escolha é sua: troque abaixo de acordo com o que a aula de hoje vai trabalhar.</p>
+    <p class="dica-dia"><b>Dica para estudar ${esc(o.nome)}:</b> ${esc(dicaDe(o))}</p>
+    <p class="eyebrow">Foco · maior dificuldade</p>
+    <div class="picker" role="group" aria-label="Matérias de foco">${OPC.filter(x => x.foco).map(opt).join('')}</div>
+    <details class="mais-mat"${o.foco ? '' : ' open'}><summary>Outras matérias</summary><div class="picker" role="group" aria-label="Outras matérias">${OPC.filter(x => !x.foco).map(opt).join('')}</div></details>
+    <p class="meta">${n} itens de certo ou errado no estilo Cebraspe${o.k === 'MIX' ? '' : ', só desta matéria'}. Depois de cada um, a palavra que decide o item aparece grifada. Cerca de 30 minutos; os que você errar voltam amanhã.</p>
+    ${!fds && done && d ? `<p class="done-line">✓ Sessão de hoje feita${d.q ? `: ${d.ok} de ${d.q} certos` : ''}.</p>` : ''}
+    <button class="primary" data-act="start" data-n="12">${done && !fds ? `Fazer mais ${n} itens` : `Começar: ${n} itens`}</button>
   </section>`;
+}
+function barraFoco(nome, areas){
+  const a = acertoDe(areas);
+  return `<div><div class="bar-top"><span>${nome}</span><span class="num">${a.p == null ? 'sem dados ainda' : `${a.p}% · ${a.ok}/${a.n}`}</span></div><div class="track"><i style="width:${a.p || 0}%"></i></div></div>`;
+}
+function cardFoco(){
+  return `<section class="card foco-card"><p class="eyebrow">Foco principal · maior dificuldade</p>
+    <h2 class="h-sm">Matemática, Raciocínio lógico e Física</h2>
+    <p>São as matérias em que você tem <b>mais dificuldade</b> e as que mais vão ser trabalhadas nas aulas. Por isso o app sugere essas matérias em 3 dos 5 dias da semana e tem mais itens delas: ${itensDe(OPCM.R)} de Matemática e Raciocínio lógico e ${itensDe(OPCM.F)} de Física.</p>
+    <div class="bars">${barraFoco('Matemática e Raciocínio lógico', ['R'])}${barraFoco('Física', ['F'])}</div>
+    <p class="meta">Na prova de 2021 foram 12 itens dessas matérias (6 de cada). No Cebraspe cada erro tira um ponto: errar menos vale tanto quanto acertar mais.</p></section>`;
 }
 function cardSabado(t){
   const tema = TEMAS[((Math.floor(diffDays('2026-11-07', t) / 7) % TEMAS.length) + TEMAS.length) % TEMAS.length];
@@ -1086,7 +1198,7 @@ function viewPadroes(){
   const tot = ed.reduce((s, x) => ({C:s.C + x.cnt.C, E:s.E + x.cnt.E, X:s.X + x.cnt.X}), {C:0, E:0, X:0});
   const gabRows = ed.map(({e, cnt, run}) => `<tr><td>${e.nome}</td><td class="n">${cnt.C}</td><td class="n">${cnt.E}</td><td class="n">${cnt.X}</td><td class="n">${run}</td></tr>`).join('');
   const peso = ORDEM.map(c => `<tr><td>${MAT[c]}</td>${['2013', '2019', '2021'].map(id => `<td class="n">${[...edById(id).s].filter(x => x === c).length || '—'}</td>`).join('')}</tr>`).join('');
-  const mats = PADROES.map(([c, itens]) => `<details class="mat"><summary><span>${MAT[c]}</span><small>${[...edById('2021').s].filter(x => x === c).length} em 2021</small></summary><ul>${itens.map(i => `<li>${esc(i)}</li>`).join('')}</ul></details>`).join('');
+  const mats = PADROES.map(([c, itens]) => `<details class="mat"><summary><span>${MAT[c]}${FOCO_AREAS.includes(c) ? ' <span class="flag foco">FOCO</span>' : ''}</span><small>${[...edById('2021').s].filter(x => x === c).length} em 2021</small></summary><ul>${itens.map(i => `<li>${esc(i)}</li>`).join('')}</ul></details>`).join('');
   return `<header class="hero"><p class="eyebrow">Padrões · 3 provas · 360 itens</p><h1 class="h1-sm">O que o Cebraspe repete na PRF</h1>
       <p class="sub">Analisei as provas de 2013, 2019 e 2021, com os gabaritos definitivos, as discursivas e o edital de 2021.</p></header>
     <section class="card"><p class="eyebrow">Como é a prova (modelo 2021)</p><h2 class="h-sm">120 itens de certo ou errado e uma discursiva</h2>
@@ -1123,7 +1235,7 @@ function viewProgresso(){
   for (const c in S.ar) if (by[c]){ by[c].n += S.ar[c].n; by[c].ok += S.ar[c].ok; }
   EDS.forEach(e => { const st = S.pr[e.id]; if (!st) return; for (const q in st.c){ const a = st.a[q], k = e.k[+q - 1], b = by[e.s[+q - 1]]; if (!b || !a || k === 'X') continue; b.n++; if (a === k) b.ok++; } });
   const rows = ORDEM.map(c => { const b = by[c], p = b.n ? pct(b.ok, b.n) : null;
-    return `<div><div class="bar-top"><span>${MAT[c]}</span><span class="num">${p == null ? 'sem dados' : `${p}% · ${b.ok}/${b.n}`}</span></div><div class="track"><i style="width:${p || 0}%"></i></div></div>`; }).join('');
+    return `<div><div class="bar-top"><span>${MAT[c]}${FOCO_AREAS.includes(c) ? ' <span class="flag foco">FOCO</span>' : ''}</span><span class="num">${p == null ? 'sem dados' : `${p}% · ${b.ok}/${b.n}`}</span></div><div class="track"><i style="width:${p || 0}%"></i></div></div>`; }).join('');
   let w = null; ORDEM.forEach(c => { const b = by[c]; if (b.n >= 3){ const p = b.ok / b.n; if (!w || p < w.p) w = {c, p}; } });
   const sims = S.sims.slice(0, 10).map(s => `<li><span>${fmtD(s.date)} · ${s.n} itens · ${s.c}C ${s.w}E ${s.b}Br</span><b>${s.net}</b></li>`).join('');
   const eds = EDS.map(e => { const p = prStats(e.id); return p.n ? `<li><span>${e.nome} · ${p.n} itens</span><b>${p.net}</b></li>` : ''; }).join('');
@@ -1134,6 +1246,7 @@ function viewProgresso(){
       <div class="tile"><b>${tq ? pct(tok, tq) + '%' : '—'}</b><span>de acerto no app</span></div>
       <div class="tile"><b>${rev}</b><span>para revisar</span></div>
     </div>
+    ${cardFoco()}
     ${cardRelatorio()}
     ${w ? `<section class="card"><p class="eyebrow">Ponto para reforçar</p><p><b>${MAT[w.c]}</b>: ${Math.round(w.p * 100)}% de acerto. ${esc(DICA_MAT[w.c])}</p></section>` : ''}
     <section class="card"><h2 class="h-sm">Acerto por matéria (app + provas oficiais)</h2><div class="bars">${rows}</div></section>
@@ -1146,7 +1259,7 @@ function viewProgresso(){
 /* ---------- relatório para quem está ajudando ---------- */
 function closeSess(){
   if (!sess || sess.saved || !sess.res.length) return;
-  S.ses.push({d:today(), k:sess.rev ? 'rev' : 'dia', n:sess.res.length, ok:sess.res.filter(r => r.ok).length, min:Math.max(1, Math.round((Date.now() - sess.t0) / 60000))});
+  S.ses.push({d:today(), k:sess.rev ? 'rev' : 'dia', m:sess.m, n:sess.res.length, ok:sess.res.filter(r => r.ok).length, min:Math.max(1, Math.round((Date.now() - sess.t0) / 60000))});
   if (S.ses.length > 300) S.ses = S.ses.slice(-300);
   sess.saved = true; save();
 }
@@ -1194,7 +1307,8 @@ function relDados(){
     diasEst:[...dias].filter(studied).length, seq:streak(), rev:Object.values(S.qs).filter(r => r.due).length, left:S.exam ? diffDays(t, S.exam) : null};
 }
 function relLeitura(D){
-  const L = [];
+  const L = [], fr = acertoDe(['R']), ff = acertoDe(['F']), txt = a => a.p == null ? 'sem dados ainda' : `${a.p}% de acerto em ${a.n} itens`;
+  L.push(`Foco das aulas (maior dificuldade): Matemática e Raciocínio lógico, ${txt(fr)}; Física, ${txt(ff)}.`);
   const mats = ORDEM.map(c => { const b = D.by[c], n = b.an + b.pn; return {c, n, p:acc(b.aok + b.pok, n)}; }).filter(x => x.n >= 4).sort((x, y) => x.p - y.p);
   if (mats.length) L.push(`Matéria mais fraca: ${MAT[mats[0].c]}, com ${mats[0].p}% de acerto em ${mats[0].n} itens.`);
   if (mats.length > 1){ const m = mats[mats.length - 1]; L.push(`Matéria mais forte: ${MAT[m.c]}, com ${m.p}% em ${m.n} itens.`); }
@@ -1253,7 +1367,7 @@ function relHTML(){
   const provas = D.provas.map(p => `<h3>${p.nome}</h3><p>Nota líquida <b>${p.net}</b> em ${p.n} itens corrigidos: ${p.c} certos, ${p.w} errados, ${p.br} em branco.</p>
     ${tabela('<th>Bloco</th><th class="n">Corrigidos</th><th class="n">Nota</th><th class="n">Mínimo</th>', p.blocos.map(b => `<tr><td>${b.nome} <small>(itens ${b.a}–${b.b})</small></td><td class="n">${b.m}</td><td class="n">${b.m ? b.s : '—'}</td><td class="n">${b.min != null ? b.min : '—'}</td></tr>`).join(''), '')}
     ${p.errs.length ? `<div class="chips">${p.errs.map(x => `<span>Item ${x.q} · ${esc(x.mat)} · marcou ${x.marcou}, gabarito ${x.certa}</span>`).join('')}</div>` : '<p class="ok">Nenhum erro nos itens corrigidos.</p>'}`).join('');
-  const sessoes = S.ses.slice(-25).reverse().map(s => `<tr><td>${fmtD(s.d)}</td><td>${s.k === 'sim' ? 'Simulado' : s.k === 'rev' ? 'Revisão' : 'Sessão do dia'}</td><td class="n">${s.n}</td><td class="n">${s.ok}</td><td class="n">${s.k === 'sim' ? s.net : '—'}</td><td class="n">${s.min} min</td></tr>`).join('');
+  const sessoes = S.ses.slice(-25).reverse().map(s => `<tr><td>${fmtD(s.d)}</td><td>${s.k === 'sim' ? 'Simulado' : s.k === 'rev' ? 'Revisão' : 'Sessão do dia'}${s.m && OPCM[s.m] ? ': ' + esc(OPCM[s.m].nome) : ''}</td><td class="n">${s.n}</td><td class="n">${s.ok}</td><td class="n">${s.k === 'sim' ? s.net : '—'}</td><td class="n">${s.min} min</td></tr>`).join('');
   const dados = JSON.stringify({app:'PRF em 30 minutos', versao:1, gerado:agora.toISOString(), nome:S.nome || '', estado:S}).replace(/</g, '\\u003c');
   const ultSim = S.sims[0];
   const totProvas = D.provas.reduce((s, p) => ({n:s.n + p.n, net:s.net + p.net}), {n:0, net:0});
@@ -1353,8 +1467,10 @@ document.addEventListener('click', ev => {
   const b = ev.target.closest('[data-act]'); if (!b) return;
   const act = b.dataset.act;
   if (act === 'start'){
-    const f = FOCO[parseKey(today()).getDay()];
-    startDaily(+b.dataset.n || 12, f ? f.areas : [], !!b.dataset.rev);
+    const o = OPCM[escolhaHoje(today())], rev = !!b.dataset.rev;
+    startDaily(+b.dataset.n || 12, o.areas, rev, !rev && o.k !== 'MIX', rev ? 'rev' : o.k);
+  } else if (act === 'escolher'){
+    S.hoje = {d:today(), k:b.dataset.k}; save(); render();
   } else if (act === 'ce'){
     const v = b.dataset.v;
     if (sess && !sess.revealed){

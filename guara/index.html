@@ -86,6 +86,25 @@ input[type="text"]{font:500 16px var(--f-ui);color:var(--ink);background:var(--c
 .plain li{display:flex;justify-content:space-between;gap:10px}
 .chips{display:flex;flex-wrap:wrap;gap:8px}
 .chip-btn{appearance:none;border:1px solid var(--line);background:var(--card);color:var(--ink);font:600 .9rem var(--f-ui);padding:9px 14px;border-radius:99px;cursor:pointer;min-height:42px}
+/* escolher a matéria do dia */
+.picker{display:flex;flex-direction:column;gap:8px}
+.pick{appearance:none;display:flex;align-items:center;gap:10px;width:100%;text-align:left;border:1.5px solid var(--line);background:var(--card);color:var(--ink);border-radius:12px;padding:10px 12px;font:inherit;cursor:pointer;min-height:54px}
+.pick .t{flex:1;min-width:0;display:flex;flex-direction:column;gap:1px}
+.pick .t b{font-size:.98rem;line-height:1.25}
+.pick .t small{color:var(--muted);font-size:.8rem}
+.pick.on{border-color:var(--pen);background:var(--pen-soft)}
+.pick.on .t b{color:var(--pen)}
+.pick .rd{width:20px;height:20px;border-radius:50%;border:2px solid var(--line);flex:none;display:grid;place-items:center}
+.pick.on .rd{border-color:var(--pen)}
+.pick.on .rd::after{content:"";width:10px;height:10px;border-radius:50%;background:var(--pen)}
+.flags{display:flex;flex-direction:column;align-items:flex-end;gap:4px;flex:none}
+.flag{display:inline-block;font:700 .62rem var(--f-mono);letter-spacing:.06em;padding:3px 6px;border-radius:4px;flex:none;vertical-align:2px}
+.flag.foco{background:var(--pen);color:var(--on-pen)}
+.flag.sug{background:var(--mark);color:var(--mark-ink)}
+.foco-card{border:1.5px solid var(--mark);box-shadow:inset 5px 0 0 var(--mark)}
+.dica-dia{background:var(--pen-soft);border-radius:10px;padding:10px 12px;margin:0}
+details.mais-mat summary{cursor:pointer;font-weight:600;color:var(--pen);padding:6px 0}
+details.mais-mat[open] summary{margin-bottom:8px}
 .tbl-wrap{overflow-x:auto}
 .tbl{width:100%;border-collapse:collapse;font-size:.9rem}
 .tbl th{font:600 .68rem var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);text-align:left;padding:6px 4px;border-bottom:1px solid var(--line)}
@@ -296,6 +315,66 @@ const CONC = [
  dica:`Some os três dias e divida por 3.`,
  p:`(30 + 40 + 50) ÷ 3 = 120 ÷ 3 = 40 atendimentos por dia.`,
  mais:`Média aritmética: soma tudo e divide pela quantidade. 120 é a soma, não a média.`},
+{id:'mt8',a:'Matemática',o:1,x:``,
+ q:`Uma cadeira custava R$ 250,00 e foi comprada com 20% de desconto. Quanto foi pago por ela?`,
+ al:[`R$ 50,00`,`R$ 200,00`,`R$ 210,00`,`R$ 230,00`,`R$ 270,00`],c:1,
+ dica:`Calcule 20% de 250 (10% e depois o dobro) e tire esse valor do preço.`,
+ p:`10% de 250 = 25; 20% = 50. Preço pago: 250 − 50 = R$ 200,00.`,
+ mais:`R$ 50,00 é o valor do desconto, e não o preço pago: é a pegadinha. Atalho: com 20% de desconto você paga 80% do preço (250 × 0,8 = 200).`},
+{id:'mt9',a:'Matemática',o:1,x:``,
+ q:`Quatro funcionários arquivam um lote de documentos em 6 dias. Com 8 funcionários, trabalhando no mesmo ritmo, em quantos dias o lote seria arquivado?`,
+ al:[`2`,`3`,`4`,`8`,`12`],c:1,
+ dica:`Mais funcionários, menos dias. O dobro de pessoas faz o trabalho em metade do tempo.`,
+ p:`4 × 6 = 24 dias de trabalho no total. Com 8 funcionários: 24 ÷ 8 = 3 dias.`,
+ mais:`É regra de três inversa: uma grandeza sobe e a outra desce. Multiplique (pessoas × dias) e divida pelo novo número de pessoas. 12 seria o erro de fazer a regra de três direta.`},
+{id:'mt10',a:'Matemática',o:1,x:``,
+ q:`Um terreno quadrado tem 144 m² de área. Quanto mede cada lado do terreno?`,
+ al:[`12 m`,`14 m`,`24 m`,`36 m`,`72 m`],c:0,
+ dica:`Que número multiplicado por ele mesmo dá 144?`,
+ p:`Área do quadrado = lado × lado. 12 × 12 = 144, então o lado mede 12 m.`,
+ mais:`Para achar o lado do quadrado a partir da área, tire a raiz quadrada: √144 = 12. 36 seria dividir 144 por 4, o que confunde área com perímetro.`},
+{id:'mt11',a:'Matemática',x:``,
+ q:`Quais são as soluções da equação x² − 7x + 10 = 0?`,
+ al:[`2 e 5`,`−2 e −5`,`1 e 10`,`3 e 4`,`7 e 10`],c:0,
+ dica:`Procure dois números que somados dão 7 e multiplicados dão 10.`,
+ p:`2 + 5 = 7 e 2 × 5 = 10. Conferindo: 2² − 7 × 2 + 10 = 4 − 14 + 10 = 0 e 5² − 7 × 5 + 10 = 25 − 35 + 10 = 0.`,
+ mais:`Também sai por Bhaskara: Δ = (−7)² − 4 × 1 × 10 = 49 − 40 = 9; x = (7 ± 3) ÷ 2, ou seja, 5 ou 2. Testar as alternativas na equação também funciona.`},
+{id:'mt12',a:'Matemática',o:1,x:``,
+ q:`Numa papelaria, 2 cadernos e 1 caneta custam R$ 23,00, e 1 caderno e 1 caneta custam R$ 13,00. Quanto custa um caderno?`,
+ al:[`R$ 3,00`,`R$ 8,00`,`R$ 10,00`,`R$ 11,00`,`R$ 13,00`],c:2,
+ dica:`Compare as duas compras: a diferença entre elas é exatamente um caderno.`,
+ p:`(2 cadernos + 1 caneta) − (1 caderno + 1 caneta) = 23 − 13. Sobra 1 caderno = R$ 10,00. A caneta custa 13 − 10 = R$ 3,00.`,
+ mais:`É um sistema de equações. Subtrair uma compra da outra faz a caneta "sumir". Depois, volte numa das compras para achar o outro preço.`},
+{id:'mt13',a:'Matemática',o:1,x:``,
+ q:`Uma escada de 5 m está apoiada num muro, com o pé a 3 m da base do muro. A que altura do chão a escada encosta no muro?`,
+ al:[`2 m`,`3 m`,`4 m`,`6 m`,`8 m`],c:2,
+ dica:`Muro, chão e escada formam um triângulo retângulo. A escada é o lado maior.`,
+ p:`Pitágoras: 5² = 3² + h² → 25 = 9 + h² → h² = 16 → h = 4 m.`,
+ mais:`O trio 3, 4 e 5 (e os dobros 6, 8 e 10) cai muito. 8 seria somar 5 + 3, e 2 seria subtrair: nenhum dos dois é Pitágoras.`},
+{id:'mt14',a:'Matemática',o:1,x:``,
+ q:`Uma caixa-d'água tem formato de bloco retangular, com 2 m de comprimento, 1 m de largura e 1 m de altura. Quantos litros cabem nela? (1 m³ = 1.000 litros)`,
+ al:[`2 litros`,`20 litros`,`200 litros`,`2.000 litros`,`20.000 litros`],c:3,
+ dica:`Volume = comprimento × largura × altura. Depois troque m³ por litros.`,
+ p:`2 × 1 × 1 = 2 m³. Como 1 m³ = 1.000 litros, cabem 2 × 1.000 = 2.000 litros.`,
+ mais:`Volume de bloco retangular: multiplique as três medidas. Lembre: 1 m³ = 1.000 L e 1 dm³ = 1 L.`},
+{id:'mt15',a:'Matemática',o:1,x:``,
+ q:`Na sequência 2, 6, 18, 54, …, qual é o próximo número?`,
+ al:[`60`,`72`,`108`,`162`,`216`],c:3,
+ dica:`De um número para o próximo, soma-se sempre o mesmo valor ou multiplica-se pelo mesmo valor?`,
+ p:`Cada número é o anterior vezes 3: 2 × 3 = 6, 6 × 3 = 18, 18 × 3 = 54. O próximo é 54 × 3 = 162.`,
+ mais:`Em sequências, teste primeiro a diferença entre os números (aqui 4, 12, 36, que não é constante) e depois a multiplicação. 108 seria multiplicar por 2.`},
+{id:'mt16',a:'Matemática',x:``,
+ q:`Numa reunião, 1/3 dos servidores chegou de manhã e 1/4 chegou à tarde. Que fração dos servidores chegou nesses dois períodos juntos?`,
+ al:[`2/7`,`1/12`,`5/12`,`7/12`,`1/2`],c:3,
+ dica:`Para somar frações, deixe as duas com o mesmo número embaixo (use 12).`,
+ p:`1/3 = 4/12 e 1/4 = 3/12. Somando: 4/12 + 3/12 = 7/12.`,
+ mais:`O erro mais comum é somar em cima e embaixo: (1 + 1)/(3 + 4) = 2/7. Isso está errado. Primeiro iguale os denominadores (o MMC de 3 e 4 é 12) e só depois some os de cima.`},
+{id:'mt17',a:'Matemática',o:1,x:``,
+ q:`Uma reunião começou às 9h40 e durou 1 hora e 35 minutos. A que horas ela terminou?`,
+ al:[`10h55`,`11h05`,`11h15`,`11h25`,`12h15`],c:2,
+ dica:`Some as horas com as horas e os minutos com os minutos. 60 minutos viram 1 hora.`,
+ p:`9h + 1h = 10h. 40 min + 35 min = 75 min = 1h15. 10h + 1h15 = 11h15.`,
+ mais:`Tempo não é número decimal: quando os minutos passam de 60, tire 60 e some 1 hora. E 1,5 hora são 1h30, e não 1h50.`},
 
 {id:'in1',a:'Informática',x:``,
  q:`No Windows 11, o atalho Ctrl + C serve para`,
@@ -736,12 +815,6 @@ const CURSO_KEYS = ['port','mat','adm','info','ing'];
 const QA = {};
 CURSO_KEYS.forEach(k => CURSOS[k].aulas.forEach(a => a.qs.forEach((q, i) => { q.id = a.id + '-' + i; q.c = 0; q.aula = a.id; q.curso = k; QA[q.id] = q; })));
 
-// Seg a sex: uma aula + 5 questões do concurso. Cada curso tem uma aula por semana.
-const PLANO = {
-  1:{curso:'port', mat:'Português'}, 2:{curso:'mat', mat:'Matemática'}, 3:{curso:'adm', mat:'Específicos'},
-  4:{curso:'info', mat:'Matemática'}, 5:{curso:'ing', mat:'Específicos'}
-};
-
 /* ---------- utilidades ---------- */
 const $ = s => document.querySelector(s);
 const app = $('#app'), nav = $('#nav');
@@ -1144,7 +1217,7 @@ const pct = (a, b) => b ? Math.round(a / b * 100) : 0;
 /* ---------- progresso salvo neste aparelho ---------- */
 const KEY = 'guara-v1';
 // log: [data, id, resultado (1 de primeira, 2 com dica, 0 errou), alternativa marcada, origem]
-const fresh = () => ({v:1, start:today(), days:{}, aulas:{}, qs:{}, log:[], sims:[], ses:[], modo:'simples', big:false, autoEnd:true, nome:''});
+const fresh = () => ({v:1, start:today(), days:{}, aulas:{}, qs:{}, log:[], sims:[], ses:[], modo:'simples', big:false, autoEnd:true, nome:'', hoje:null});
 function load(){ try { const s = JSON.parse(localStorage.getItem(KEY)); if (s && s.v === 1) return Object.assign(fresh(), s); } catch (e) {} return fresh(); }
 let S = load();
 function save(){ try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
@@ -1257,31 +1330,69 @@ function statusAula(a){
   if (!s) return 'nova';
   return s.wrong >= 2 ? 'revisar' : 'feita';
 }
+// Matéria do dia no concurso: a sugestão é uma dica; quem decide é quem estuda ou dá a aula.
+// Matemática é o foco principal (maior dificuldade): sugerida em 3 dos 5 dias e com mais questões.
+const OPC_CONC = [
+  {m:'Matemática', curso:'mat', foco:1, dica:'Escreva os dados antes da conta, ache o valor de 1 unidade quando der e confira a resposta voltando ao enunciado. Faça as contas no papel: na prova não pode calculadora.'},
+  {m:'Português', curso:'port', dica:'Volte ao texto antes de responder: a resposta certa diz o que o texto diz, com outras palavras.'},
+  {m:'Específicos', curso:'adm', dica:'É metade da prova. Pense no bom atendimento ao cidadão: educação, sigilo, tratar todos igual e seguir a regra.'},
+  {m:'Informática', curso:'info', dica:'Decore os atalhos que mais caem (Ctrl + C, X, V e Z). No Word em português, Ctrl + N é negrito e Ctrl + B salva.'}
+];
+const OPCC = Object.fromEntries(OPC_CONC.map(o => [o.m, o]));
+const SUG_CONC = {1:'Matemática', 2:'Português', 3:'Matemática', 4:'Específicos', 5:'Matemática', 6:'Matemática', 0:'Matemática'};
+const MOTIVO_CONC = {'Matemática':'Dia de foco: é a matéria em que você tem mais dificuldade.', 'Português':'São 10 das 50 questões da prova.', 'Específicos':'É metade da prova: 25 das 50 questões.'};
+function escolhaConc(t){ return S.hoje && S.hoje.d === t && OPCC[S.hoje.m] ? S.hoje.m : SUG_CONC[parseKey(t).getDay()]; }
+// acerto de primeira em Matemática: questões do concurso + perguntas das aulas de Matemática
+function acertoMat(){
+  let n = 0, ok = 0;
+  [...CONC.filter(q => q.a === 'Matemática').map(q => q.id), ...Object.keys(QA).filter(id => QA[id].curso === 'mat')].forEach(id => { const r = S.qs[id]; if (r){ n += r.n; ok += r.ok; } });
+  return {n, ok, p:n ? pct(ok, n) : null};
+}
+function cardHojeConc(t, wd, fds){
+  const m = escolhaConc(t), o = OPCC[m], sug = SUG_CONC[wd], a = proximaAula(o.curso);
+  const aulaHoje = S.aulas[a.id] && S.aulas[a.id].last === t, feitosConc = S.ses.some(s => s.d === t && s.k === 'treino');
+  const opt = x => `<button class="pick${x.m === m ? ' on' : ''}" data-act="escolher" data-m="${x.m}" aria-pressed="${x.m === m}"><span class="rd" aria-hidden="true"></span>
+    <span class="t"><b>${x.m}</b><small>${NA_PROVA[x.m]} questões na prova · ${CONC.filter(q => q.a === x.m).length} no app</small></span>
+    <span class="flags">${x.foco ? '<span class="flag foco">FOCO</span>' : ''}${x.m === sug ? '<span class="flag sug">SUGESTÃO</span>' : ''}</span></button>`;
+  return `<section class="card today-card"><p class="eyebrow">${fds ? 'Ou estude uma matéria hoje' : `Hoje · ${DIAS[wd]} · você escolhe a matéria`}</p>
+    <h2 class="h-sm">${m}</h2>
+    <p class="meta"><b>Sugestão de hoje: ${sug}.</b> ${MOTIVO_CONC[sug] || ''} A escolha é sua: troque abaixo de acordo com o que a aula de hoje vai trabalhar.</p>
+    <p class="dica-dia"><b>Dica para estudar ${m}:</b> ${esc(o.dica)}</p>
+    <div class="picker" role="group" aria-label="Matéria de hoje">${OPC_CONC.map(opt).join('')}</div>
+    <div class="passo${aulaHoje ? ' ok' : ''}"><span class="num">${aulaHoje ? '✓' : '1'}</span><div class="txt">
+      <p><b>Aula de ${CURSOS[o.curso].nome}</b><br><span class="meta">${esc(a.t)} · uns 15 minutos</span></p>
+      <button class="ghost" data-act="aula" data-curso="${o.curso}" data-id="${a.id}">Abrir a aula</button></div></div>
+    <div class="passo${feitosConc && !fds ? ' ok' : ''}"><span class="num">${feitosConc && !fds ? '✓' : '2'}</span><div class="txt">
+      <p><b>5 questões de ${m}</b><br><span class="meta">no estilo da prova · uns 15 minutos</span></p>
+      <button class="primary" data-act="treino" data-mat="${m}">Treinar ${m}</button></div></div>
+  </section>`;
+}
+function cardFocoConc(){
+  const a = acertoMat(), n = CURSOS.mat.aulas.length, feitas = CURSOS.mat.aulas.filter(x => S.aulas[x.id]).length;
+  return `<section class="card foco-card"><p class="eyebrow">Foco principal · maior dificuldade</p>
+    <h2 class="h-sm">Matemática</h2>
+    <p>É a matéria em que você tem <b>mais dificuldade</b> e a que mais vai ser trabalhada nas aulas. Por isso o app sugere Matemática em 3 dos 5 dias da semana e tem ${CONC.filter(q => q.a === 'Matemática').length} questões no estilo da prova, mais ${n} aulas, do básico às equações.</p>
+    <div class="bars"><div><div class="bar-top"><span>Acerto de primeira</span><span class="num">${a.p == null ? 'sem dados ainda' : `${a.p}% · ${a.ok}/${a.n}`}</span></div><div class="track"><i style="width:${a.p || 0}%"></i></div></div>
+      <div><div class="bar-top"><span>Aulas de Matemática feitas</span><span class="num">${feitas}/${n}</span></div><div class="track"><i style="width:${pct(feitas, n)}%"></i></div></div></div>
+    <p class="meta">Na prova são 10 das 50 questões. Muitas são situações do dia a dia (compras, prazos, medidas): ler com calma e montar a conta é metade do caminho.</p></section>`;
+}
 function viewConc(){
   const t = today(), left = diffDays(t, EXAM_KEY), wd = parseKey(t).getDay(), st = streak();
-  const plano = PLANO[wd];
   let hoje;
-  if (plano){
-    const a = proximaAula(plano.curso), aulaHoje = S.aulas[a.id] && S.aulas[a.id].last === t;
-    const feitosConc = S.ses.some(s => s.d === t && s.k === 'treino');
-    hoje = `<section class="card today-card"><p class="eyebrow">Hoje · ${DIAS[wd]} · cerca de 30 minutos</p>
-      <div class="passo${aulaHoje ? ' ok' : ''}"><span class="num">${aulaHoje ? '✓' : '1'}</span><div class="txt">
-        <p><b>Aula de ${CURSOS[plano.curso].nome}</b><br><span class="meta">${esc(a.t)} · uns 15 minutos</span></p>
-        <button class="ghost" data-act="aula" data-curso="${plano.curso}" data-id="${a.id}">Abrir a aula</button></div></div>
-      <div class="passo${feitosConc ? ' ok' : ''}"><span class="num">${feitosConc ? '✓' : '2'}</span><div class="txt">
-        <p><b>5 questões de ${plano.mat}</b><br><span class="meta">no estilo da prova · uns 15 minutos</span></p>
-        <button class="primary" data-act="treino" data-mat="${plano.mat}">Treinar ${plano.mat}</button></div></div>
-    </section>`;
-  } else if (wd === 6){
+  if (wd >= 1 && wd <= 5) hoje = cardHojeConc(t, wd, false);
+  else if (wd === 6){
     hoje = `<section class="card today-card"><p class="eyebrow">Hoje · sábado</p><h2 class="h-sm">Simulado curto: 10 questões</h2>
       <p class="meta">2 de Português, 2 de Matemática, 1 de Informática e 5 de Conhecimentos Específicos, a mesma proporção da prova. Uns 36 minutos. A correção aparece no fim.</p>
       <button class="primary" data-act="sim" data-n="10">Começar simulado</button></section>`;
+    hoje += cardHojeConc(t, wd, true);
   } else {
     hoje = `<section class="card today-card"><p class="eyebrow">Hoje · domingo</p><h2 class="h-sm">Dia de descanso</h2>
       <p class="meta">Descansar também faz parte. Se quiser, faça uma aula leve de Inglês.</p>
       <button class="ghost" data-act="aula" data-curso="ing" data-id="${proximaAula('ing').id}">Aula leve de Inglês</button></section>`;
+    hoje += cardHojeConc(t, wd, true);
   }
-  const chips = MATS.map(m => `<button class="chip-btn" data-act="treino" data-mat="${m}">${m}</button>`).join('');
+  hoje += cardFocoConc();
+  const chips = MATS.map(m => `<button class="chip-btn" data-act="treino" data-mat="${m}">${m}${m === 'Matemática' ? ' <span class="flag foco">FOCO</span>' : ''}</button>`).join('');
   const hist = S.sims.slice(0, 4).map(s => `<li><span>${fmtD(s.date)} · ${s.n} questões${s.timeout ? ' · tempo esgotado' : ''}</span><b>${s.c}/${s.n}</b></li>`).join('');
   return `<header class="hero"><p class="eyebrow">Concurso Prefeitura de Guaratinguetá · VUNESP</p>
       ${left > 0 ? `<h1><span class="n">${left}</span> ${left === 1 ? 'dia' : 'dias'}</h1><p class="sub">até a prova, prevista para 21 de fevereiro de 2027.${st ? ` <b>${st} ${st === 1 ? 'dia seguido' : 'dias seguidos'}</b> de estudo.` : ''}</p>`
@@ -1451,10 +1562,11 @@ function viewProg(){
   const cursos = CURSO_KEYS.map(k => { const c = CURSOS[k], f = c.aulas.filter(a => S.aulas[a.id]).length;
     return `<div><div class="bar-top"><span>${c.nome}</span><span class="num">${f}/${c.aulas.length} aulas</span></div><div class="track"><i style="width:${pct(f, c.aulas.length)}%"></i></div></div>`; }).join('');
   const conc = MATS.map(m => { let n = 0, ok = 0; CONC.filter(q => q.a === m).forEach(q => { const r = S.qs[q.id]; if (r){ n += r.n; ok += r.ok; } });
-    return `<div><div class="bar-top"><span>${m} <small>· ${NA_PROVA[m]} na prova</small></span><span class="num">${n ? `${pct(ok, n)}% de primeira · ${n}` : 'sem dados'}</span></div><div class="track"><i style="width:${n ? pct(ok, n) : 0}%"></i></div></div>`; }).join('');
+    return `<div><div class="bar-top"><span>${m}${m === 'Matemática' ? ' <span class="flag foco">FOCO</span>' : ''} <small>· ${NA_PROVA[m]} na prova</small></span><span class="num">${n ? `${pct(ok, n)}% de primeira · ${n}` : 'sem dados'}</span></div><div class="track"><i style="width:${n ? pct(ok, n) : 0}%"></i></div></div>`; }).join('');
   return `<header class="hero"><p class="eyebrow">Progresso</p><h1 class="h1-sm">Como você está indo</h1></header>
     <div class="tiles"><div class="tile"><b>${dias}</b><span>dias estudados</span></div><div class="tile"><b>${streak()}</b><span>dias seguidos</span></div>
       <div class="tile"><b>${tq}</b><span>perguntas respondidas</span></div><div class="tile"><b>${tq ? pct(tok, tq) + '%' : '—'}</b><span>certas de primeira</span></div></div>
+    ${cardFocoConc()}
     <section class="card"><h2 class="h-sm">Cursos</h2><div class="bars">${cursos}</div></section>
     <section class="card"><h2 class="h-sm">Concurso por matéria</h2><div class="bars">${conc}</div></section>
     <section class="card"><p class="eyebrow">Do seu jeito</p><h2 class="h-sm">Preferências</h2>
@@ -1483,7 +1595,8 @@ function relDados(){
   return {t, semanas:Object.keys(sem).sort().map(w => ({w, ...sem[w]})), conc, erros, ult7, tq, tok, comDica, left:diffDays(t, EXAM_KEY)};
 }
 function relLeitura(D){
-  const L2 = [];
+  const L2 = [], am = acertoMat();
+  L2.push(`Foco das aulas (maior dificuldade): Matemática, ${am.p == null ? 'sem dados ainda' : `${am.p}% de acerto de primeira em ${am.n} respostas`}; ${CURSOS.mat.aulas.filter(a => S.aulas[a.id]).length} de ${CURSOS.mat.aulas.length} aulas de Matemática feitas.`);
   CURSO_KEYS.forEach(k => { const c = CURSOS[k], f = c.aulas.filter(a => S.aulas[a.id]).length, rv = c.aulas.filter(a => statusAula(a) === 'revisar').map(a => a.t);
     L2.push(`${c.nome}: ${f} de ${c.aulas.length} aulas feitas${rv.length ? `; vale revisar: ${rv.join(', ')}` : ''}.`); });
   const cm = D.conc.filter(x => x.n >= 3).sort((a, b) => a.ok / a.n - b.ok / b.n);
@@ -1604,6 +1717,8 @@ document.addEventListener('click', ev => {
   } else if (act === 'praticar'){
     const a = CURSOS[aulaSel.curso].aulas.find(x => x.id === aulaSel.id);
     novoQuiz(a.qs.map(q => q.id), 'aula', {aula:a.id, curso:aulaSel.curso});
+  } else if (act === 'escolher'){
+    S.hoje = {d:today(), m:b.dataset.m}; save(); render();
   } else if (act === 'treino'){
     const mat = b.dataset.mat; quiz = null;
     novoQuiz(mat ? pickConc(mat, 5) : pickMisto(MISTO10), 'conc', {mat});
